@@ -71,7 +71,7 @@ jobs:
           cp index.html _site/
 
           # Logo, favicon y assets compartidos
-          cp -r assets _site/assets
+          rm -rf _site/assets && cp -r assets _site/assets
 
           # Evita que GitHub intente procesar con Jekyll
           touch _site/.nojekyll

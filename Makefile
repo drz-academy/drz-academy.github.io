@@ -30,7 +30,7 @@ demos:
 sync-site:
 	@mkdir -p $(SITE)
 	@cp index.html $(SITE)/
-	@cp -r assets $(SITE)/assets
+	@rm -rf $(SITE)/assets && cp -r assets $(SITE)/assets
 	@rm -rf $(SITE)/pages && cp -r pages $(SITE)/pages
 	@rm -rf $(SITE)/demos && cp -r demos $(SITE)/demos
 	@touch $(SITE)/.nojekyll
