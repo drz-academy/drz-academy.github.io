@@ -42,6 +42,10 @@ activo: true
 
 **Jorge I. Zuluaga** es **Doctor en Física**, **profesor titular e investigador en la Universidad de Antioquia**. Su trabajo integra investigación en ciencias planetarias y astrobiología, computación científica y formación avanzada en física y astronomía. Ha liderado grupos y programas académicos; es cofundador del **programa de pregrado en astronomía en la Universidad de Antioquia** y de la **Asociación Multidisciplinaria en Biología y Astrobiología, AMEBA** que reune a profesionales y entusiastas de la astrobiología de Colombia y otros lugares del mundo desde hace más de una década. Cuenta con una destacada trayectoria de investigación en astrobiología teórica respaldada por varias decenas de publicaciones y por la participación en iniciativas como el **Arecibo Wow!**. Actualmente dirige la cátedra de astrobiología de la Facultad de Ciencias Exactas y Naturales de la Universidad de Antioquia y ha dirigido tesis de pregrado, maestría y doctorado en la materia. Su hoja de vida completa puede consultarse en [https://jorgezuluaga.github.io](https://jorgezuluaga.github.io).
 
+## A quién va dirigida esta actividad
+
+Esta *Master Class* está dirigida a entusiastas, estudiantes, profesionales, pensionados, que se dediquen a cualquier actividad o disciplina. **No se necesitan conocimientos previos** de matemáticas, física,  astronomía o de otras ciencias relacionadas con el tema, pero un conocimiento previo de estos temas pueden ayudar para profundizar en las discusiones. Pueden participar niños y jóvenes preferiblemente con una edad igual o mayor 12 años. 
+
 ## Metodología
 
 Las *Master Class* de la [Dr. Z Academy](https://www.drz.academy) son **espacios de formación e interacción académica con expertos o expertas en disciplinas específicas**. Tienen una duración máxima de 4 sesiones de 2 horas cada una. Este evento no es gratuito. Puedes consultar el valor y las formas de pago en el [enlace de inscripción](<!--inscripcion_url-->)
