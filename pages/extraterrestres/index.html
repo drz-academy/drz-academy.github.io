@@ -92,7 +92,15 @@
     }
 
     /* Photo grid */
-    .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+    .photo-grid { display: grid; gap: 1rem; margin: 1.5rem 0; width: 100%; }
+    .photo-grid--single {
+      grid-template-columns: minmax(0, 400px);
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .photo-grid--pair { grid-template-columns: 1fr 1fr; }
+    .photo-grid--many { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
     .photo-grid img { width: 100%; height: auto; border-radius: var(--r); display: block; object-fit: cover; }
 
     /* Checklist */
@@ -149,7 +157,7 @@
     /* Mobile */
     @media (max-width: 600px) {
       main { padding: 2rem 1rem 4rem; }
-      .photo-grid { grid-template-columns: 1fr; }
+      .photo-grid--pair { grid-template-columns: 1fr; }
       .enroll-section { padding: 1.25rem 1rem; }
     }
   </style>
@@ -161,72 +169,59 @@
   </div>
 
   <nav class="topbar" aria-label="Breadcrumb">
-    <a href="https://drz.academy">Dr. Z Academy</a>
+    <a href="https://drz-academy.github.io/">Dr. Z Academy</a>
     <span class="sep">Cursos</span>
     <span class="sep" aria-current="page">Extraterrestres</span>
   </nav>
 
   <main>
     <h1 class="section-title">Presentación</h1>
-    <div class="section-body"><p>Desde que nacimos en el universo ha sido un lugar violento y hostil. O bueno, al menos eso es lo que nos parece a los humanos que andamos por el mundo asustándonos con impactos de asteroides y explosiones de estrellas. ¡Deberíamos madurar!</p>
-<p><strong>Este es un curso para aproximarnos al universo en su faceta más corriente, es decir, a través de las catástrofes</strong>: estrellas devoradas por agujeros negros, protoplanetas que chocan como condición inicial para que se cuezan planetas más grandes, sistemas planetarios desbaratados por el paso de un agujero negro al garete, estrellas que chocan contra otras estrellas o que se devoran mutuamente, agujeros negros microscópicos que atraviesan como agujas hipodérmicas a planetas y estrellas por igual, planetas consumidos por el plasma calcinante de sus estrellas envejecidas, estrellas que se hacen añicos por la aniquilación de antimateria (¡así como lo oyen!) y otras que desaparecen sin dejar rastros al ser devoradas por su propio núcleo oscuro.</p>
-<p><strong>Sé que todo suena bastante raro, pero hay que acostumbrarse.</strong> Es el Universo en el que nos tocó vivir. En lugar de andar asustándonos, usemos estos curiosos fenómenos para aprender de astrofísica.</p></div>
+    <div class="section-body"><p><strong>Los extraterrestres están de moda</strong>. Los estamos viendo cada vez más frecuentemente en series, en el cine. Aparecen en las noticias, en redes sociales y sobre ellos se están escribiendo libros y artículos en todas partes. <strong>Sin embargo, a la fecha, no se tiene evidencia definitiva de la existencia de ninguno de ellos</strong>. La casi totalidad de lo que consumimos sobre extraterrestres es producto de la imaginación de artistas (literatura y cine), y en algunos casos de profesionales de la ciencia que investigan teóricamente el fenómeno de la vida en un contexto astronómico (astrobiología). En no pocas ocasiones, los extraterrestres son también el producto de ensoñaciones culturales, materia de teorías conspirativas o de trucos que se revelan a la larga como engaños.</p>
+<p><strong>Aún así, aquí estamos. Hablando todavía de extraterrestres</strong>. En esta <em>Master Class</em>, el profesor e investigador en astrobiología, Jorge I. Zuluaga, realiza una radiografía del <em>fenómeno Extraterrestre</em>. Desde su historia, que se remonta a más de un siglo atrás, pasando por su apogeo con el inicio de la era espacial, y su lugar privilegiado en la literatura y el cine, hasta llegar a lo que tiene que decir la ciencia sobre las verdaderas posibilidades de que existan extraterrestres.</p></div>
 
-    <h2 class="section-title">¿Quién es el profe?</h2>
-    <div class="section-body"><p><strong>Jhon Fredy Cardona Peña</strong> es <strong>Magíster en Astrofísica por la Universidad Internacional de Valencia (España)</strong>, con estudios de maestría en Tecnologías de Información para el Negocio (MBIT); ingeniero de Sistemas con Énfasis en Software. <strong>Socio fundador de la Doctor Z Academy</strong> y de la organización <em>Astroñoños</em> que reúne a entusiastas de todo el país alrededor de la pasión por las ciencias y la tecnología. Ñoño de tiempo completo y, en este curso, traductor de los misterios del universo a herramientas prácticas para la comunidad.</p></div>
+    <h2 class="section-title">¿Quién es el experto?</h2>
+    <div class="section-body"><p><div class="photo-grid photo-grid--single">
+      <img src="images/jorge-zuluaga-master-class-medellin-2026-07-02-2.webp" alt="Foto del curso" loading="lazy">
+    </div></p>
+<p><strong>Jorge I. Zuluaga</strong> es <strong>Doctor en Física</strong>, <strong>profesor titular e investigador en la Universidad de Antioquia</strong>. Su trabajo integra investigación en ciencias planetarias y astrobiología, computación científica y formación avanzada en física y astronomía. Ha liderado grupos y programas académicos; es cofundador del <strong>programa de pregrado en astronomía en la Universidad de Antioquia</strong> y de la <strong>Asociación Multidisciplinaria en Biología y Astrobiología, AMEBA</strong> que reune a profesionales y entusiastas de la astrobiología de Colombia y otros lugares del mundo desde hace más de una década. Cuenta con una destacada trayectoria de investigación en astrobiología teórica respaldada por varias decenas de publicaciones y por la participación en iniciativas como el <strong>Arecibo Wow!</strong>. Actualmente dirige la cátedra de astrobiología de la Facultad de Ciencias Exactas y Naturales de la Universidad de Antioquia y ha dirigido tesis de pregrado, maestría y doctorado en la materia. Su hoja de vida completa puede consultarse en <a href="https://jorgezuluaga.github.io">https://jorgezuluaga.github.io</a>.</p></div>
 
-    <h2 class="section-title">¿Puedes mencionar algunos temas?</h2>
-    <div class="section-body"><p>La astrofísica es una ciencia con muchos perendengues, pero aquí no hay tiempo para profundizar en todo. Abarcaremos algunos conceptos importantes que nos permitirán entender las catástrofes más espectaculares del cosmos. Aquí les van unos títulos que pueden servir de abrebocas para lo que veremos en el curso:</p>
-<div class="topics-list">
-<p>Mil maneras de morir siendo una estrella.<br />
-No es divertido estar cerca de una estrella que muere.<br />
-Agujeros negros vagabundos ¡sálvense quien pueda!<br />
-Pinchados por un agujero negro primordial.<br />
-La Tierra contra Marte ¿quién gana?<br />
-Veo estrellas que chocaron.</p>
-</div>
-<p>¿Susto o emoción? ¡Nada de ñervios que esto es con el Dr. Z!</p></div>
-
-    <h2 class="section-title">¿Cómo lo vamos a hacer?</h2>
-    <div class="section-body"><p>¡Ojalá tuviéramos tiempo! Vamos a intentar hablar en <strong>4 sesiones</strong> (más sería abusar de su goma y paciencia) de las catástrofes cósmicas más extrañas que hemos descubierto y estamos estudiando en el Universo.</p>
-<p>Las sesiones de clase se realizarán presencialmente en las instalaciones del <strong>Colegio La Enseñanza</strong> en la ciudad de Medellín (Colombia), ubicado en la Cra. 43 No. 9 Sur 195, El Poblado. Transmitiremos en vivo las sesiones por <strong>Zoom</strong> para quienes no puedan atender las clases presenciales pero puedan seguirlas de forma sincrónica desde cualquier lugar del mundo. Estas clases serán también grabadas en video en caso de que quieran repetirlas después o en la comodidad del desierto de Gobi a una hora más decente.</p>
-<p><div class="photo-grid">
+    <h2 class="section-title">Metodología</h2>
+    <div class="section-body"><p>Las <em>Master Class</em> de la <a href="https://www.drz.academy">Dr. Z Academy</a> son <strong>espacios de formación e interacción académica con expertos o expertas en disciplinas específicas</strong>. Tienen una duración máxima de 4 sesiones de 2 horas cada una. Este evento no es gratuito. Puedes consultar el valor y las formas de pago en el <a href="https://tinyurl.com/jzx4jyya">enlace de inscripción</a></p>
+<p>Si bien <strong>las Master Class son virtuales</strong>, con sesiones sincrónicas (asistencia a la clase mientras se graba), que pueden seguirse también en diferido (las clases son grabadas y puestas a disposición de todas las personas inscritas), hemos preparado espacios de interacción presencial (grabación de las clases) que se habilitaran dependiendo de la disponibilidad de un número suficiente de personas en la ciudad de la grabación.</p>
+<p>Estas sesiones de grabación presenciales se realizan en la ciudad de Medellín (Colombia) en las instalaciones del <strong>Colegio La Enseñanza</strong>, ubicado en la Cra. 43 No. 9 Sur 195, El Poblado. </p>
+<p><div class="photo-grid photo-grid--pair">
       <img src="images/foto1.jpg" alt="Foto del curso" loading="lazy">
       <img src="images/foto2.jpg" alt="Foto del curso" loading="lazy">
     </div></p>
-<p>¿Sabes por qué es más chévere asistir presencialmente o conectarse a las sesiones en vivo? ¡Por las preguntas y los comentarios que las personas que se inscriben hacen! (además, soy más charrito en persona, je, je). Si crees que tus preguntas pueden ser tontas, te aseguro que lo que sería una tontería sería inscribirse y no poder preguntar nada.</p>
-<p>Todo el material del curso, presentaciones, lecturas y videos <strong>serán compartidos oportunamente con todas las personas del curso</strong> en la <a href="https://classroom.google.com/">plataforma Google Classroom</a> (¡necesitas una cuenta de Google para acceder a ella! ¡consíguela ya!).</p></div>
+<p>Todo el material de la <em>Master Class</em>, presentaciones, lecturas recomendadas y por supuesto la totalidad de los videos grabados, serán compartidos como material exclusivo con las personas inscritas. Para ello se usa la <a href="https://classroom.google.com/">plataforma Google Classroom</a> (¡necesitas una cuenta de Google para acceder a ella! ¡consíguela ya!).</p></div>
 
     <h2 class="section-title">Certificación</h2>
-    <div class="section-body"><p>¡Pero claro que por supuesto que sí! Al terminar el curso recibirás un <strong>certificado de participación</strong> ¡ni más faltaba!. Pero debes hacer algo primero.</p>
-<p>Por cada sesión grabada o publicada te pasaremos <strong>un formulario para que llenes cuando hayas visto la sesión</strong>. En el formulario, además de contarnos si te pareció clara la explicación, o si quieres sugerirnos algo, incluiremos también unas 5 preguntas sobre el tema de la sesión para que pongas a prueba lo que aprendiste. No es necesario acertar en las preguntas, solo presentarlas. Cuando completes los 4 formularios ¡podrás avisarnos y te enviaremos tu certificado!</p></div>
+    <div class="section-body"><p>Al terminar la <em>Master Class</em> recibiras un <strong>certificado de participación</strong> firmado por el o la experta respectiva. <strong>Para obtener el certificado se debería demostrar la asistencia o reproducción de por lo menos el 75% de las sesiones</strong> (3 sesiones) dentro del plazo del evento. </p>
+<p>En el caso de la <em>Master Class Extraterrestres</em>, el plazo para demostrar la asistencia será el <em>1 de septiembre de 2026</em>.</p></div>
 
-    <h2 class="section-title">¿De qué no me puedo olvidar?</h2>
-    <div class="section-body"><p>Estos son los datos que no puedes olvidar sobre el curso:</p>
+    <h2 class="section-title">Datos para no olvidar</h2>
+    <div class="section-body"><p>Estos son los datos que no puedes olvidar sobre la <em>Master Class</em>:</p>
 <ul class="checklist">
-<li>Este curso es para aprender de astrofísica a través de catástrofes (¡las peores!)</li>
-<li>El curso tiene <strong>4 sesiones de 2 horas</strong> cada una.</li>
-<li>Las sesiones se realizan los <strong>miércoles de 6:30 pm a 8:30 pm</strong>.</li>
-<li>Todas las personas están invitadas a asistir presencialmente a las clases.</li>
+<li>En esta <em>Master Class</em> hablaremos de <strong>extraterrestres como fenómeno cultural y científico</strong>.</li>
+<li>Nuestro experto invitado es un reconocido investigador y docente en astrobiología, el profesor <strong>Jorge I. Zuluaga</strong>.</li>
+<li>La <em>Master Class</em> se realiza en <strong>4 sesiones de 2 horas</strong> cada una.</li>
+<li>Las sesiones se graban los <strong>lunes de 6:30 pm a 8:30 pm</strong>.</li>
+<li>Todas las personas están invitadas a asistir presencialmente a las grabaciones.</li>
 <li>Nos encontramos en el <strong>Colegio La Enseñanza</strong> en Medellín (Colombia).</li>
 <li>La dirección del colegio es: <strong>Cra. 43 No. 9 Sur 195</strong></li>
-<li>Puedes ver las clases en vivo a través de la plataforma <strong>Zoom</strong>.</li>
-<li>Nos comunicamos por <a href="https://classroom.google.com/">Google Classroom</a>. Necesitas una cuenta en Google.</li>
-<li>Para obtener el certificado debes llenar un formulario por cada sesión del curso.</li>
-<li>El formulario de cada sesión incluye preguntas del tema visto.</li>
-<li>No tienes que acertar todas las preguntas, solo presentarlas.</li>
-</ul>
-<p>No estamos todo el tiempo pegados del correo o el WhatsApp, pero si escribes a <a href="mailto:SoyDoctorZ@gmail.com">SoyDoctorZ@gmail.com</a> o al número de atención <a href="https://wa.me/573022871135">+57 302 287 1135</a> te responderemos lo más rápido que podemos.</p></div>
+<li>Las grabaciones se transmitirán en vivo a través de la plataforma <strong>Google Meet</strong>.</li>
+<li>Todo el material (videos, presentaciones, material complementario) se comparte por <a href="https://classroom.google.com/">Google Classroom</a>. <strong>Necesitas una cuenta personal en Google</strong>.</li>
+<li>Para obtener el certificado debes asistir o reproducir el 75% de las sesiones.</li>
+</ul></div>
 
 
     <div class="enroll-section">
-      <p>¡Inscríbete ya!</p>
       <a class="enroll-btn" href="https://tinyurl.com/jzx4jyya" target="_blank" rel="noopener">
-        Inscribirme ahora →
+        Inscribete ahora →
       </a>
       <div class="qr-wrap">
         <img src="images/qr-inscripcion.png" alt="Código QR para inscripción">
-        <span>Escanea para inscribirte</span>
+        <span>Comparte el enlace de inscripción con este QR</span>
       </div>
       <div class="contact-links" style="margin-top:1.5rem;">
         <a href="mailto:SoyDoctorZ@gmail.com">SoyDoctorZ@gmail.com</a>

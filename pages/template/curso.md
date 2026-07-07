@@ -42,11 +42,14 @@ imagen_og: "images/og-preview.jpg"           # banner para WhatsApp/redes (gener
 imagen_qr_curso: "images/qr-curso.png"         # afiche → hoja del curso (generado)
 imagen_qr: "images/qr-inscripcion.png"         # página → inscripción (generado)
 
-# Fotos que aparecen en la sección "¿Cómo lo vamos a hacer?" (opcional)
-# Se insertan donde se coloque el marcador <!-- fotos --> en el cuerpo
+# Conjuntos de fotos (opcional). Insertar con <!-- fotos -->, <!-- fotos1 -->, etc.
 fotos:
   - "images/foto1.jpg"
   - "images/foto2.jpg"
+# fotos1:
+#   - "images/experto1.jpg"
+# fotos2:
+#   - "images/metodologia1.jpg"
 
 # Etiquetas para la tarjeta del índice
 etiquetas:

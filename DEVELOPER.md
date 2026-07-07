@@ -83,7 +83,15 @@ Campos importantes:
 | `imagen_og` | Previsualización en redes (`images/og-preview.jpg`, generado) |
 | `imagen_qr_curso` | QR de afiche → hoja del curso (generado) |
 | `imagen_qr` | QR de inscripción en la página (generado) |
+| `fotos`, `fotos1`, `fotos2`… | Listas de imágenes; insertar con `<!-- fotos -->`, `<!-- fotos1 -->`, etc. |
 | `activo` | `true` para mostrar en el índice y mostrar bloque de inscripción |
+
+En el cuerpo del markdown puedes usar cualquier campo escalar del frontmatter con `<!--campo-->`, por ejemplo:
+
+```markdown
+[enlace de inscripción](<!--inscripcion_url-->)
+Las sesiones son los **<!--dia-->** de <!--horario-->.
+```
 
 ### 3. Añadir imágenes
 

@@ -8,15 +8,17 @@ sesiones: 4
 duracion_sesion: "2 horas"
 dia: "lunes"
 horario: "6:30 pm a 8:30 pm"
-lugar: "Virtual y Colegio La Enseñanza, Medellín (Colombia)"
+lugar: "Hibrido (virtual y presencial) con Transmisión desde el Colegio La Enseñanza, Medellín (Colombia)"
 direccion: "Cra. 43 No. 9 Sur 195"
 tiene_zoom: false
-tiene_classroom: false
+tiene_classroom: true
 inscripcion_url: "https://tinyurl.com/jzx4jyya"
 imagen_header: "images/header.png"
 imagen_qr_curso: "images/qr-curso.png"
 imagen_qr: "images/qr-inscripcion.png"
-fotos:
+fotos1:
+  - "images/jorge-zuluaga-master-class-medellin-2026-07-02-2.webp"
+fotos2:
   - "images/foto1.jpg"
   - "images/foto2.jpg"
 etiquetas:
@@ -30,45 +32,45 @@ activo: true
 
 ## Presentación
 
+**Los extraterrestres están de moda**. Los estamos viendo cada vez más frecuentemente en series, en el cine. Aparecen en las noticias, en redes sociales y sobre ellos se están escribiendo libros y artículos en todas partes. **Sin embargo, a la fecha, no se tiene evidencia definitiva de la existencia de ninguno de ellos**. La casi totalidad de lo que consumimos sobre extraterrestres es producto de la imaginación de artistas (literatura y cine), y en algunos casos de profesionales de la ciencia que investigan teóricamente el fenómeno de la vida en un contexto astronómico (astrobiología). En no pocas ocasiones, los extraterrestres son también el producto de ensoñaciones culturales, materia de teorías conspirativas o de trucos que se revelan a la larga como engaños.
 
+**Aún así, aquí estamos. Hablando todavía de extraterrestres**. En esta *Master Class*, el profesor e investigador en astrobiología, Jorge I. Zuluaga, realiza una radiografía del *fenómeno Extraterrestre*. Desde su historia, que se remonta a más de un siglo atrás, pasando por su apogeo con el inicio de la era espacial, y su lugar privilegiado en la literatura y el cine, hasta llegar a lo que tiene que decir la ciencia sobre las verdaderas posibilidades de que existan extraterrestres. 
 
-## ¿Quién es el profe?
+## ¿Quién es el experto?
 
-**Jorge I. Zuluaga** es **Doctor en Física**, profesor titular e investigador en la Universidad de Antioquia. Su trabajo integra investigación en ciencias planetarias y astrobiología, computación científica de alto desempeño y formación avanzada en física y astronomía. Ha liderado grupos y programas académicos, y cuenta con una trayectoria de publicaciones en exoplanetas, exolunas, campos magnéticos planetarios, dinámica orbital y meteoroides, junto con una labor sostenida de divulgación científica en escenarios académicos y públicos.
+<!-- fotos1 -->
 
-## ¿Cómo lo vamos a hacer?
+**Jorge I. Zuluaga** es **Doctor en Física**, **profesor titular e investigador en la Universidad de Antioquia**. Su trabajo integra investigación en ciencias planetarias y astrobiología, computación científica y formación avanzada en física y astronomía. Ha liderado grupos y programas académicos; es cofundador del **programa de pregrado en astronomía en la Universidad de Antioquia** y de la **Asociación Multidisciplinaria en Biología y Astrobiología, AMEBA** que reune a profesionales y entusiastas de la astrobiología de Colombia y otros lugares del mundo desde hace más de una década. Cuenta con una destacada trayectoria de investigación en astrobiología teórica respaldada por varias decenas de publicaciones y por la participación en iniciativas como el **Arecibo Wow!**. Actualmente dirige la cátedra de astrobiología de la Facultad de Ciencias Exactas y Naturales de la Universidad de Antioquia y ha dirigido tesis de pregrado, maestría y doctorado en la materia. Su hoja de vida completa puede consultarse en [https://jorgezuluaga.github.io](https://jorgezuluaga.github.io).
 
-¡Ojalá tuviéramos tiempo! Vamos a intentar hablar en **4 sesiones** (más sería abusar de su goma y paciencia) de las catástrofes cósmicas más extrañas que hemos descubierto y estamos estudiando en el Universo.
+## Metodología
 
-Las sesiones de clase se realizarán presencialmente en las instalaciones del **Colegio La Enseñanza** en la ciudad de Medellín (Colombia), ubicado en la Cra. 43 No. 9 Sur 195, El Poblado. Transmitiremos en vivo las sesiones por **Zoom** para quienes no puedan atender las clases presenciales pero puedan seguirlas de forma sincrónica desde cualquier lugar del mundo. Estas clases serán también grabadas en video en caso de que quieran repetirlas después o en la comodidad del desierto de Gobi a una hora más decente.
+Las *Master Class* de la [Dr. Z Academy](https://www.drz.academy) son **espacios de formación e interacción académica con expertos o expertas en disciplinas específicas**. Tienen una duración máxima de 4 sesiones de 2 horas cada una. Este evento no es gratuito. Puedes consultar el valor y las formas de pago en el [enlace de inscripción](<!--inscripcion_url-->)
 
-<!-- fotos -->
+Si bien **las Master Class son virtuales**, con sesiones sincrónicas (asistencia a la clase mientras se graba), que pueden seguirse también en diferido (las clases son grabadas y puestas a disposición de todas las personas inscritas), hemos preparado espacios de interacción presencial (grabación de las clases) que se habilitaran dependiendo de la disponibilidad de un número suficiente de personas en la ciudad de la grabación.
 
-¿Sabes por qué es más chévere asistir presencialmente o conectarse a las sesiones en vivo? ¡Por las preguntas y los comentarios que las personas que se inscriben hacen! (además, soy más charrito en persona, je, je). Si crees que tus preguntas pueden ser tontas, te aseguro que lo que sería una tontería sería inscribirse y no poder preguntar nada.
+Estas sesiones de grabación presenciales se realizan en la ciudad de Medellín (Colombia) en las instalaciones del **Colegio La Enseñanza**, ubicado en la Cra. 43 No. 9 Sur 195, El Poblado. 
 
-Todo el material del curso, presentaciones, lecturas y videos **serán compartidos oportunamente con todas las personas del curso** en la [plataforma Google Classroom](https://classroom.google.com/) (¡necesitas una cuenta de Google para acceder a ella! ¡consíguela ya!).
+<!-- fotos2 -->
+
+Todo el material de la *Master Class*, presentaciones, lecturas recomendadas y por supuesto la totalidad de los videos grabados, serán compartidos como material exclusivo con las personas inscritas. Para ello se usa la [plataforma Google Classroom](https://classroom.google.com/) (¡necesitas una cuenta de Google para acceder a ella! ¡consíguela ya!).
 
 ## Certificación
 
-¡Pero claro que por supuesto que sí! Al terminar el curso recibirás un **certificado de participación** ¡ni más faltaba!. Pero debes hacer algo primero.
+Al terminar la *Master Class* recibiras un **certificado de participación** firmado por el o la experta respectiva. **Para obtener el certificado se debería demostrar la asistencia o reproducción de por lo menos el 75% de las sesiones** (3 sesiones) dentro del plazo del evento. 
 
-Por cada sesión grabada o publicada te pasaremos **un formulario para que llenes cuando hayas visto la sesión**. En el formulario, además de contarnos si te pareció clara la explicación, o si quieres sugerirnos algo, incluiremos también unas 5 preguntas sobre el tema de la sesión para que pongas a prueba lo que aprendiste. No es necesario acertar en las preguntas, solo presentarlas. Cuando completes los 4 formularios ¡podrás avisarnos y te enviaremos tu certificado!
+En el caso de la *Master Class Extraterrestres*, el plazo para demostrar la asistencia será el *1 de septiembre de 2026*. 
 
-## ¿De qué no me puedo olvidar?
+## Datos para no olvidar
 
-Estos son los datos que no puedes olvidar sobre el curso:
+Estos son los datos que no puedes olvidar sobre la *Master Class*:
 
-- Este curso es para aprender de astrofísica a través de catástrofes (¡las peores!)
-- El curso tiene **4 sesiones de 2 horas** cada una.
-- Las sesiones se realizan los **miércoles de 6:30 pm a 8:30 pm**.
-- Todas las personas están invitadas a asistir presencialmente a las clases.
+- En esta *Master Class* hablaremos de **extraterrestres como fenómeno cultural y científico**.
+- Nuestro experto invitado es un reconocido investigador y docente en astrobiología, el profesor **Jorge I. Zuluaga**.
+- La *Master Class* se realiza en **4 sesiones de 2 horas** cada una.
+- Las sesiones se graban los **lunes de 6:30 pm a 8:30 pm**.
+- Todas las personas están invitadas a asistir presencialmente a las grabaciones.
 - Nos encontramos en el **Colegio La Enseñanza** en Medellín (Colombia).
 - La dirección del colegio es: **Cra. 43 No. 9 Sur 195**
-- Puedes ver las clases en vivo a través de la plataforma **Zoom**.
-- Nos comunicamos por [Google Classroom](https://classroom.google.com/). Necesitas una cuenta en Google.
-- Para obtener el certificado debes llenar un formulario por cada sesión del curso.
-- El formulario de cada sesión incluye preguntas del tema visto.
-- No tienes que acertar todas las preguntas, solo presentarlas.
-
-No estamos todo el tiempo pegados del correo o el WhatsApp, pero si escribes a [SoyDoctorZ@gmail.com](mailto:SoyDoctorZ@gmail.com) o al número de atención [+57 302 287 1135](https://wa.me/573022871135) te responderemos lo más rápido que podemos.
-
+- Las grabaciones se transmitirán en vivo a través de la plataforma **Google Meet**.
+- Todo el material (videos, presentaciones, material complementario) se comparte por [Google Classroom](https://classroom.google.com/). **Necesitas una cuenta personal en Google**.
+- Para obtener el certificado debes asistir o reproducir el 75% de las sesiones.

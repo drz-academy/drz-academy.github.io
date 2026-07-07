@@ -136,31 +136,88 @@ def photo_grid_html(fotos: list[str]) -> str:
     """Genera el HTML de la cuadrícula de fotos."""
     if not fotos:
         return ""
+    n = len(fotos)
+    if n == 1:
+        cls = "photo-grid photo-grid--single"
+    elif n == 2:
+        cls = "photo-grid photo-grid--pair"
+    else:
+        cls = "photo-grid photo-grid--many"
     imgs = "\n".join(
         f'      <img src="{f}" alt="Foto del curso" loading="lazy">'
         for f in fotos
     )
-    return f'<div class="photo-grid">\n{imgs}\n    </div>'
+    return f'<div class="{cls}">\n{imgs}\n    </div>'
 
 
-def render_section_content(content: str, fotos: list[str]) -> str:
+PHOTO_MARKER_RE = re.compile(r"<!--\s*fotos(\d*)\s*-->")
+META_VAR_RE = re.compile(r"<!--([a-zA-Z_][a-zA-Z0-9_]*)-->")
+
+
+def substitute_meta_vars(content: str, meta: dict) -> str:
+    """Reemplaza <!--campo--> por el valor escalar del frontmatter."""
+    skip_keys = {"fotos"} | {k for k in meta if re.fullmatch(r"fotos\d+", k)}
+
+    def replacer(match: re.Match) -> str:
+        key = match.group(1)
+        if key in skip_keys:
+            return match.group(0)
+        if key not in meta:
+            print(f"⚠️  Variable de metadatos desconocida: <!--{key}-->")
+            return match.group(0)
+        value = meta[key]
+        if isinstance(value, (list, dict, bool)) or value is None:
+            print(f"⚠️  <!--{key}--> no es un valor escalar sustituible")
+            return match.group(0)
+        return str(value)
+
+    return META_VAR_RE.sub(replacer, content)
+
+
+def collect_photo_sets(meta: dict) -> dict[str, list[str]]:
+    """Recoge fotos, fotos1, fotos2… del frontmatter."""
+    sets: dict[str, list[str]] = {}
+    for key, value in meta.items():
+        if key == "fotos" or re.fullmatch(r"fotos\d+", key):
+            sets[key] = value or []
+    return sets
+
+
+def render_section_content(content: str, photo_sets: dict[str, list[str]], meta: dict) -> str:
     """
     Convierte el contenido de una sección markdown a HTML limpio,
-    reemplazando el marcador <!-- fotos --> con la cuadrícula de imágenes.
+    reemplazando marcadores <!-- fotos -->, <!-- fotos1 -->, etc.
+    con la cuadrícula correspondiente del frontmatter.
+    Sustituye <!--campo--> por valores del frontmatter (p. ej. inscripcion_url).
     """
-    # Reemplazar marcador antes de convertir
-    photo_placeholder = "FOTOS_PLACEHOLDER_XYZ"
-    has_fotos = "<!-- fotos -->" in content
-    content = content.replace("<!-- fotos -->", photo_placeholder)
+    content = substitute_meta_vars(content, meta)
+
+    placeholders: dict[str, str] = {}
+
+    def marker_replacer(match: re.Match) -> str:
+        suffix = match.group(1)
+        key = f"fotos{suffix}" if suffix else "fotos"
+        placeholder = f"FOTOS_PLACEHOLDER_{key.upper()}_{len(placeholders)}"
+        fotos = photo_sets.get(key, [])
+        placeholders[placeholder] = photo_grid_html(fotos)
+        return placeholder
+
+    content = PHOTO_MARKER_RE.sub(marker_replacer, content)
 
     html = md_to_html(content)
     html = render_blockquote_as_topics(html)
     html = render_ul_as_checklist(html)
 
-    if has_fotos:
-        html = html.replace(photo_placeholder, photo_grid_html(fotos))
-    else:
-        html = html.replace(photo_placeholder, "")
+    for placeholder, grid in placeholders.items():
+        html = html.replace(placeholder, grid)
+
+    # Evitar <p><div class="photo-grid">…</div></p> inválido
+    html = re.sub(
+        r"<p>\s*(<div class=\"photo-grid\">.*?</div>)\s*</p>",
+        r"\1",
+        html,
+        flags=re.S,
+    )
 
     return html
 
@@ -296,7 +353,7 @@ def cta_block(meta: dict) -> str:
         qr_html = f'''
       <div class="qr-wrap">
         <img src="{qr}" alt="Código QR para inscripción">
-        <span>Escanea para inscribirte</span>
+        <span>Comparte el enlace de inscripción con este QR</span>
       </div>'''
 
     wa_html = ""
@@ -305,9 +362,8 @@ def cta_block(meta: dict) -> str:
 
     return f'''
     <div class="enroll-section">
-      <p>¡Inscríbete ya!</p>
       <a class="enroll-btn" href="{url}" target="_blank" rel="noopener">
-        Inscribirme ahora →
+        Inscribete ahora →
       </a>{qr_html}
       <div class="contact-links" style="margin-top:1.5rem;">
         <a href="mailto:{email}">{email}</a>
@@ -374,7 +430,7 @@ def render_html(meta: dict, sections: list[tuple[str, str]]) -> str:
     tagline     = meta.get("tagline", "")
     instructor  = meta.get("instructor", "")
     header_img  = meta.get("imagen_header", "images/header.png")
-    fotos       = meta.get("fotos", [])
+    fotos       = collect_photo_sets(meta)
     activo      = meta.get("activo", False)
     course_id   = meta.get("id", "curso")
     page_url    = f"{SITE_URL}/pages/{course_id}/"
@@ -393,7 +449,7 @@ def render_html(meta: dict, sections: list[tuple[str, str]]) -> str:
     for heading, content in sections:
         if not content and not heading:
             continue
-        html_content = render_section_content(content, fotos)
+        html_content = render_section_content(content, fotos, meta)
         if heading:
             tag = "h1" if first else "h2"
             body_html_parts.append(
@@ -484,7 +540,15 @@ def render_html(meta: dict, sections: list[tuple[str, str]]) -> str:
     }}
 
     /* Photo grid */
-    .photo-grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }}
+    .photo-grid {{ display: grid; gap: 1rem; margin: 1.5rem 0; width: 100%; }}
+    .photo-grid--single {{
+      grid-template-columns: minmax(0, 400px);
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+    }}
+    .photo-grid--pair {{ grid-template-columns: 1fr 1fr; }}
+    .photo-grid--many {{ grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }}
     .photo-grid img {{ width: 100%; height: auto; border-radius: var(--r); display: block; object-fit: cover; }}
 
     /* Checklist */
@@ -541,7 +605,7 @@ def render_html(meta: dict, sections: list[tuple[str, str]]) -> str:
     /* Mobile */
     @media (max-width: 600px) {{
       main {{ padding: 2rem 1rem 4rem; }}
-      .photo-grid {{ grid-template-columns: 1fr; }}
+      .photo-grid--pair {{ grid-template-columns: 1fr; }}
       .enroll-section {{ padding: 1.25rem 1rem; }}
     }}
   </style>
@@ -553,7 +617,7 @@ def render_html(meta: dict, sections: list[tuple[str, str]]) -> str:
   </div>
 
   <nav class="topbar" aria-label="Breadcrumb">
-    <a href="https://drz.academy">Dr. Z Academy</a>
+    <a href="{SITE_URL}/">Dr. Z Academy</a>
     <span class="sep">Cursos</span>
     <span class="sep" aria-current="page">{titulo}</span>
   </nav>
