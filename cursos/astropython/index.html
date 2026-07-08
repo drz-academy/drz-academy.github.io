@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AstroPython – Dr. Z Academy</title>
+  <meta name="description" content="Aprende Python usando la astronomía como excusa">
+  <link rel="icon" href="https://drz-academy.github.io/assets/favicon.ico" sizes="any">
+  <link rel="icon" href="https://drz-academy.github.io/assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="https://drz-academy.github.io/assets/favicon-16.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="https://drz-academy.github.io/assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dr. Z Academy">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:title" content="AstroPython – Dr. Z Academy">
+  <meta property="og:description" content="Aprende Python usando la astronomía como excusa">
+  <meta property="og:url" content="https://drz-academy.github.io/cursos/astropython/">
+  <meta property="og:image" content="https://drz-academy.github.io/cursos/astropython/images/og-preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="338">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AstroPython – Dr. Z Academy">
+  <meta name="twitter:description" content="Aprende Python usando la astronomía como excusa">
+  <meta name="twitter:image" content="https://drz-academy.github.io/cursos/astropython/images/og-preview.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #F3D361;
+      --teal: #0d7693;
+      --link: #1155cc;
+      --text: #1a1a1a;
+      --text-light: #444;
+      --bg: #ffffff;
+      --bg-alt: #f8f9fa;
+      --border: #e0e0e0;
+      --gap: 2.5rem;
+      --width: 740px;
+      --r: 10px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'Nunito', sans-serif; font-size: 1.0625rem; line-height: 1.8;
+    }
+    a { color: var(--link); } a:hover { text-decoration: underline; }
+
+    /* Header banner */
+    .page-header { width: 100%; line-height: 0; background: #000; }
+    .page-header img { width: 100%; height: auto; display: block; }
+
+    /* Breadcrumb */
+    .topbar {
+      background: #fff; border-bottom: 1px solid var(--border);
+      padding: 0.6rem 1.5rem; display: flex; align-items: center;
+      gap: 0.5rem; font-size: 0.8rem; color: #888;
+    }
+    .topbar a { color: #555; text-decoration: none; }
+    .topbar a:hover { color: var(--teal); }
+    .topbar .sep::before { content: "›"; margin: 0 0.3rem; }
+
+    /* Content */
+    main { max-width: var(--width); margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+
+    /* Section titles (Pacifico) */
+    h1.section-title, h2.section-title {
+      font-family: 'Pacifico', cursive; font-weight: 400;
+      font-size: clamp(1.6rem, 5vw, 2.25rem); line-height: 1.2;
+      color: var(--text); margin-top: var(--gap); margin-bottom: 1.25rem;
+    }
+    h1.section-title { margin-top: 0; }
+
+    /* Section body */
+    .section-body p {
+      font-family: 'Roboto', sans-serif; margin-bottom: 1.1rem;
+      text-align: justify; color: var(--text-light);
+    }
+    .section-body p:last-child { margin-bottom: 0; }
+    .section-body p strong, .section-body b { color: var(--text); font-weight: 700; }
+
+    /* Topics list (blockquote) */
+    .topics-list {
+      background: var(--bg-alt); border-left: 4px solid var(--teal);
+      border-radius: 0 var(--r) var(--r) 0; padding: 1.25rem 1.5rem; margin: 1.25rem 0;
+    }
+    .topics-list p {
+      color: #1a4fa8; font-size: 1rem; font-weight: 600;
+      text-align: center; margin: 0; line-height: 1.9;
+    }
+
+    /* Photo grid */
+    .photo-grid { display: grid; gap: 1rem; margin: 1.5rem 0; width: 100%; }
+    .photo-grid--single {
+      grid-template-columns: minmax(0, 400px);
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .photo-grid--pair { grid-template-columns: 1fr 1fr; }
+    .photo-grid--many { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .photo-grid img { width: 100%; height: auto; border-radius: var(--r); display: block; object-fit: cover; }
+
+    /* Checklist */
+    ul.checklist { list-style: none; padding: 0; margin: 1rem 0; }
+    ul.checklist li {
+      font-family: 'Nunito', sans-serif; font-size: 1rem; color: var(--text-light);
+      padding: 0.6rem 0 0.6rem 2rem; position: relative;
+      border-bottom: 1px solid var(--border); line-height: 1.6;
+    }
+    ul.checklist li:last-child { border-bottom: none; }
+    ul.checklist li::before {
+      content: "●"; position: absolute; left: 0.4rem;
+      color: var(--gold); font-size: 0.55rem; top: 0.9rem;
+    }
+
+    /* Hotmart banner (arriba del contenido) */
+    .hotmart-banner {
+      background: linear-gradient(135deg, #fff8e6 0%, #fff3cd 100%);
+      border: 2px solid #f5a623;
+      border-radius: var(--r);
+      padding: 1.75rem 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .hotmart-banner-lead {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      text-align: center;
+    }
+    .hotmart-btn {
+      display: inline-block;
+      background: #f5a623;
+      color: #1a1a1a;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      padding: 0.75rem 2rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .hotmart-btn:hover { background: #e09410; text-decoration: none; color: #1a1a1a; }
+
+    /* CTA / Enroll */
+    .enroll-section {
+      background: var(--bg-alt); border: 2px solid var(--teal);
+      border-radius: var(--r); padding: 2rem; margin-top: var(--gap); text-align: center;
+    }
+    .enroll-section p { text-align: center; font-family: 'Nunito', sans-serif; font-size: 1.1rem; color: var(--text); margin-bottom: 1.25rem; }
+    .enroll-btn {
+      display: inline-block; background: var(--teal); color: #fff;
+      font-family: 'Nunito', sans-serif; font-size: 1.1rem; font-weight: 800;
+      padding: 0.8rem 2.2rem; border-radius: 100px; text-decoration: none;
+      transition: background 0.2s; margin-bottom: 1.5rem;
+    }
+    .enroll-btn:hover { background: #0a5f77; text-decoration: none; color: #fff; }
+    .qr-wrap { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+    .qr-wrap img { width: 140px; height: 140px; border: 1px solid var(--border); border-radius: var(--r); }
+    .qr-wrap span { font-size: 0.8rem; color: #888; }
+    .contact-links { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .contact-links a { color: var(--teal); font-weight: 700; font-size: 0.9rem; }
+
+    /* Closing */
+    .closing {
+      text-align: center; font-family: 'Nunito', sans-serif;
+      font-size: 1.5rem; font-weight: 800; color: var(--teal);
+      margin-top: 2.5rem; padding-top: 2rem; border-top: 2px solid var(--border);
+    }
+
+    /* Footer */
+    footer { background: var(--bg-alt); border-top: 1px solid var(--border); padding: 1.5rem; text-align: center; font-size: 0.8rem; color: #888; }
+    footer a { color: #555; }
+
+    /* Print */
+    @media print {
+      .topbar, .enroll-section, footer { display: none; }
+      body { font-size: 11pt; }
+      .section-body p { text-align: left; color: #000; }
+      h1.section-title, h2.section-title { color: #000; }
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      main { padding: 2rem 1rem 4rem; }
+      .photo-grid--pair { grid-template-columns: 1fr; }
+      .enroll-section { padding: 1.25rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <img src="images/header.png" alt="AstroPython – Dr. Z Academy" width="2048" height="952">
+  </div>
+
+  <nav class="topbar" aria-label="Breadcrumb">
+    <a href="https://drz-academy.github.io/">Dr. Z Academy</a>
+    <span class="sep">Cursos</span>
+    <span class="sep" aria-current="page">AstroPython</span>
+  </nav>
+
+  <main>
+
+    <div class="hotmart-banner">
+      <p class="hotmart-banner-lead">Este curso se realiza en la plataforma <strong>Hotmart</strong>. En el siguiente enlace puedes adquirirlo:</p>
+      <a class="hotmart-btn" href="https://go.hotmart.com/E97526567X?dp=1" target="_blank" rel="noopener">Adquirir en Hotmart →</a>
+    </div>
+
+    <h1 class="section-title">¿De qué va este curso?</h1>
+    <div class="section-body"><p><strong>Python</strong> es el lenguaje de programación más popular de nuestro tiempo. Hoy se está utilizando en casi todas las áreas de la ciencia y la tecnología. Puedes encontrar programas escritos en Python en el corazón de sistemas de pronósticos del clima, páginas web interactivas o centros de datos de aceleradores de partículas y supertelescopios.</p>
+<p>En este curso aprenderás a “hablar” en Python; es decir, a darle instrucciones en ese idioma a una computadora para que haga tareas que serían muy dispendiosas o complicadas para nosotros. <strong>¡Es como tener un superpoder intelectual! ¡Se siente genial!</strong></p>
+<p>No es muy difícil. Para empezar solo necesitas un navegador de Internet y una persona que te ayude a romper el hielo con el lenguaje (¡ese soy yo!). Después… ¡el cielo es el límite!</p>
+<p>Hablando del cielo, como pasa con otros idiomas, la mejor manera de aprender una lengua nueva, incluso una de computadoras, es usarla para cosas concretas. En <strong>AstroPython</strong> usaremos a la astronomía como una excusa para aprender Python.</p>
+<p>Aprender Python y astronomía al mismo tiempo ¿no les pide más el cuerpo?</p></div>
+
+    <h2 class="section-title">¿Puedes mencionar algunos temas?</h2>
+    <div class="section-body"><p>No hay que hacerse ilusiones en un curso corto sobre un nuevo idioma; no es tampoco el propósito de AstroPython que termines siendo una persona experta en Python. Pero hemos pensado que podemos iniciarte, a través de las <strong>15 lecciones</strong> de este curso, en los temas más importantes de la programación en Python: los rudimentos del lenguaje, la manipulación de datos, la creación de gráficos y el uso de funciones numéricas y de simulación.</p>
+<p>Para hacerlo nos valdremos de algunos temas interesantes de astronomía y astrofísica. Así, al terminar, es posible que hayas escrito un programa en Python que calcule las fases de la Luna, que dibuje un mapa del cielo, que calcule el tamaño de un cráter de asteroide, que haga estadísticas sobre las propiedades de las estrellas, que dibuje la forma que tendrá una constelación dentro de 1000 siglos, que prediga la distancia a la que pasará un cometa o que calcule la edad del universo.</p>
+<p>Parecen cosas complicadas ¡y lo son! Pero te aseguramos que lo que haya que saber te lo explicaremos en el curso.</p></div>
+
+    <h2 class="section-title">¿Dónde entra la inteligencia artificial?</h2>
+    <div class="section-body"><p>Es un hecho que la inteligencia artificial se está metiendo en todas partes. La programación de computadoras no es la excepción. En el curso aprenderemos a usar algunas herramientas de inteligencia artificial (<strong>Copilot Visual Code, GPT Canvas, Gemini Colab</strong>) para asistirte mientras programas en Python. ¡Es divertidísimo y hace mucho más fácil programar!</p></div>
+
+    <h2 class="section-title">¿Qué necesito saber o tener para este curso?</h2>
+    <div class="section-body"><p>Para empezar <strong>no necesitas saber nada de Python o de astronomía</strong>. Claro, si ya sabes un poco (o mucho) de una cosa o la otra, pues mucho mejor. En la repetición está la clave de la maestría. Los cursos de la Dr. Z Academy están diseñados para que personas de todos los niveles, desde el más básico al más avanzado, disfruten aprendiendo.</p>
+<p>No necesitas tampoco nada especial. Puedes hacer el curso con una computadora que tenga conexión a internet y un navegador web (cualquiera sirve). No necesitas herramientas especiales de programación o de astronomía. Solo un navegador ¡te lo prometo!</p></div>
+
+    <h2 class="section-title">¿Cómo lo vamos a hacer?</h2>
+    <div class="section-body"><p>El curso es <strong>enteramente virtual</strong> y se realiza sobre la plataforma de <strong>Hotmart</strong> (debes crear una cuenta si no tienes una). Necesitarás también una cuenta de Google con acceso a Google Drive (si ya tienes una cuenta de correo de Gmail es suficiente).</p>
+<p>El curso se realiza durante <strong>15 lecciones</strong> con una duración mínima de 10 minutos y una duración máxima de 30 minutos, en las que te explico los temas, usando para ello presentaciones cortas y muchas demostraciones con el lenguaje de programación que puedes ir reproduciendo en tu computadora. Durante las lecciones se realizan también ejercicios sencillos que debes completar mientras dura la lección.</p>
+<p><div class="photo-grid photo-grid--single">
+      <img src="images/foto1.png" alt="Foto del curso" loading="lazy">
+    </div></p>
+<p>Para que pongas en práctica lo visto, te voy a asignar como mínimo <strong>3 ejercicios sencillos</strong> (¡no te imagines nada del otro mundo!). Debes subir a la plataforma del curso, sea que las hayas completado con éxito o simplemente mostrando que lo intentaste.</p></div>
+
+    <h2 class="section-title">¿Me dan algo al final?</h2>
+    <div class="section-body"><p>¡Pero claro que por supuesto que sí! Al terminar el curso recibirás un <strong>certificado de participación</strong> ¡ni más faltaba! Eso sí, para recibir el certificado debes entregar las 3 tareas asignadas.</p></div>
+
+    <h2 class="section-title">¿De qué no me puedo olvidar?</h2>
+    <div class="section-body"><p>Estos son los datos que no puedes olvidar sobre el curso:</p>
+<ul class="checklist">
+<li>Este curso es para aprender los <strong>rudimentos del lenguaje Python</strong>.</li>
+<li>Usamos ejemplos de <strong>astronomía y astrofísica</strong>.</li>
+<li>El curso tiene <strong>15 lecciones</strong> de entre 10 y 30 minutos.</li>
+<li>Las lecciones se pueden ver <strong>al ritmo que desees</strong>.</li>
+<li>Para obtener el certificado debes <strong>entregar tres ejercicios básicos</strong>.</li>
+<li>No estamos todo el tiempo pegados del correo o el WhatsApp, pero si escribes a <a href="mailto:SoyDoctorZ@gmail.com">SoyDoctorZ@gmail.com</a> o al número de atención <a href="https://wa.me/573002422052">WhatsApp</a> te responderemos lo más rápido que podemos.</li>
+</ul></div>
+
+
+    <div class="enroll-section">
+      <a class="enroll-btn" href="https://go.hotmart.com/E97526567X?dp=1" target="_blank" rel="noopener">
+        Inscribete ahora →
+      </a>
+      <div class="qr-wrap">
+        <img src="images/qr-inscripcion.png" alt="Código QR para inscripción">
+        <span>Comparte el enlace de inscripción con este QR</span>
+      </div>
+      <div class="contact-links" style="margin-top:1.5rem;">
+        <a href="mailto:SoyDoctorZ@gmail.com">SoyDoctorZ@gmail.com</a>
+        <a href="https://wa.me/573002422052" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://drz.academy" target="_blank" rel="noopener">drz.academy</a>
+      </div>
+    </div>
+    <p class="closing">¡Nos vemos!</p>
+  </main>
+
+  <footer>
+    <p>© 2026 <a href="https://drz.academy" target="_blank" rel="noopener">Dr. Z Academy</a>
+    · Medellín, Colombia
+    · <a href="mailto:SoyDoctorZ@gmail.com">SoyDoctorZ@gmail.com</a></p>
+  </footer>
+
+</body>
+</html>

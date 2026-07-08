@@ -341,6 +341,16 @@ def generate_og_preview(course_dir: Path, header_rel: str) -> tuple[int, int] | 
 # PLANTILLA HTML
 # ─────────────────────────────────────────────────────────────────────────────
 
+def hotmart_top_block(meta: dict) -> str:
+    """Banner de inscripción para cursos en Hotmart (arriba del contenido)."""
+    url = meta.get("inscripcion_url", "#")
+    return f'''
+    <div class="hotmart-banner">
+      <p class="hotmart-banner-lead">Este curso se realiza en la plataforma <strong>Hotmart</strong>. En el siguiente enlace puedes adquirirlo:</p>
+      <a class="hotmart-btn" href="{url}" target="_blank" rel="noopener">Adquirir en Hotmart →</a>
+    </div>'''
+
+
 def cta_block(meta: dict) -> str:
     """Genera el bloque de inscripción al final del contenido."""
     url    = meta.get("inscripcion_url", "#")
@@ -445,6 +455,8 @@ def render_html(meta: dict, sections: list[tuple[str, str]]) -> str:
 
     # Construir el cuerpo de secciones
     body_html_parts: list[str] = []
+    if meta.get("plataforma") == "hotmart":
+        body_html_parts.append(hotmart_top_block(meta))
     first = True
     for heading, content in sections:
         if not content and not heading:
@@ -563,6 +575,36 @@ def render_html(meta: dict, sections: list[tuple[str, str]]) -> str:
       content: "●"; position: absolute; left: 0.4rem;
       color: var(--gold); font-size: 0.55rem; top: 0.9rem;
     }}
+
+    /* Hotmart banner (arriba del contenido) */
+    .hotmart-banner {{
+      background: linear-gradient(135deg, #fff8e6 0%, #fff3cd 100%);
+      border: 2px solid #f5a623;
+      border-radius: var(--r);
+      padding: 1.75rem 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }}
+    .hotmart-banner-lead {{
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      text-align: center;
+    }}
+    .hotmart-btn {{
+      display: inline-block;
+      background: #f5a623;
+      color: #1a1a1a;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      padding: 0.75rem 2rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }}
+    .hotmart-btn:hover {{ background: #e09410; text-decoration: none; color: #1a1a1a; }}
 
     /* CTA / Enroll */
     .enroll-section {{

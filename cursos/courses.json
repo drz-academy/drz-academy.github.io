@@ -1,6 +1,38 @@
 {
   "cursos": [
     {
+      "id": "cuantica-a-pie",
+      "titulo": "Cuántica a Pie con Dr. Z",
+      "tagline": "Teoría cuántica explicada en un lenguaje sencillo, para gente de a pie",
+      "descripcion": "Curso virtual de mecánica cuántica con Dr. Z: superposición, entrelazamiento, computación cuántica e interpretaciones, sin ecuaciones complicadas.",
+      "url": "cursos/cuantica-a-pie/",
+      "imagen": "cursos/cuantica-a-pie/images/header.png",
+      "etiquetas": [
+        "Física Cuántica",
+        "Divulgación",
+        "Hotmart"
+      ],
+      "instructor": "Jorge I. Zuluaga, Dr. Z",
+      "sesiones": 6,
+      "activo": true
+    },
+    {
+      "id": "astropython",
+      "titulo": "AstroPython",
+      "tagline": "Aprende Python usando la astronomía como excusa",
+      "descripcion": "Curso virtual para iniciarte en Python con ejemplos de astronomía y astrofísica: gráficos, datos, simulaciones e inteligencia artificial.",
+      "url": "cursos/astropython/",
+      "imagen": "cursos/astropython/images/header.png",
+      "etiquetas": [
+        "Python",
+        "Astronomía",
+        "Programación"
+      ],
+      "instructor": "Jorge I. Zuluaga, Dr. Z",
+      "sesiones": 15,
+      "activo": true
+    },
+    {
       "id": "extraterrestres",
       "titulo": "Extraterrestres",
       "tagline": "",

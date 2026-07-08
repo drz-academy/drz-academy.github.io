@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuántica a Pie con Dr. Z – Dr. Z Academy</title>
+  <meta name="description" content="Teoría cuántica explicada en un lenguaje sencillo, para gente de a pie">
+  <link rel="icon" href="https://drz-academy.github.io/assets/favicon.ico" sizes="any">
+  <link rel="icon" href="https://drz-academy.github.io/assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="https://drz-academy.github.io/assets/favicon-16.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="https://drz-academy.github.io/assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dr. Z Academy">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:title" content="Cuántica a Pie con Dr. Z – Dr. Z Academy">
+  <meta property="og:description" content="Teoría cuántica explicada en un lenguaje sencillo, para gente de a pie">
+  <meta property="og:url" content="https://drz-academy.github.io/cursos/cuantica-a-pie/">
+  <meta property="og:image" content="https://drz-academy.github.io/cursos/cuantica-a-pie/images/og-preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="300">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cuántica a Pie con Dr. Z – Dr. Z Academy">
+  <meta name="twitter:description" content="Teoría cuántica explicada en un lenguaje sencillo, para gente de a pie">
+  <meta name="twitter:image" content="https://drz-academy.github.io/cursos/cuantica-a-pie/images/og-preview.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #F3D361;
+      --teal: #0d7693;
+      --link: #1155cc;
+      --text: #1a1a1a;
+      --text-light: #444;
+      --bg: #ffffff;
+      --bg-alt: #f8f9fa;
+      --border: #e0e0e0;
+      --gap: 2.5rem;
+      --width: 740px;
+      --r: 10px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'Nunito', sans-serif; font-size: 1.0625rem; line-height: 1.8;
+    }
+    a { color: var(--link); } a:hover { text-decoration: underline; }
+
+    /* Header banner */
+    .page-header { width: 100%; line-height: 0; background: #000; }
+    .page-header img { width: 100%; height: auto; display: block; }
+
+    /* Breadcrumb */
+    .topbar {
+      background: #fff; border-bottom: 1px solid var(--border);
+      padding: 0.6rem 1.5rem; display: flex; align-items: center;
+      gap: 0.5rem; font-size: 0.8rem; color: #888;
+    }
+    .topbar a { color: #555; text-decoration: none; }
+    .topbar a:hover { color: var(--teal); }
+    .topbar .sep::before { content: "›"; margin: 0 0.3rem; }
+
+    /* Content */
+    main { max-width: var(--width); margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+
+    /* Section titles (Pacifico) */
+    h1.section-title, h2.section-title {
+      font-family: 'Pacifico', cursive; font-weight: 400;
+      font-size: clamp(1.6rem, 5vw, 2.25rem); line-height: 1.2;
+      color: var(--text); margin-top: var(--gap); margin-bottom: 1.25rem;
+    }
+    h1.section-title { margin-top: 0; }
+
+    /* Section body */
+    .section-body p {
+      font-family: 'Roboto', sans-serif; margin-bottom: 1.1rem;
+      text-align: justify; color: var(--text-light);
+    }
+    .section-body p:last-child { margin-bottom: 0; }
+    .section-body p strong, .section-body b { color: var(--text); font-weight: 700; }
+
+    /* Topics list (blockquote) */
+    .topics-list {
+      background: var(--bg-alt); border-left: 4px solid var(--teal);
+      border-radius: 0 var(--r) var(--r) 0; padding: 1.25rem 1.5rem; margin: 1.25rem 0;
+    }
+    .topics-list p {
+      color: #1a4fa8; font-size: 1rem; font-weight: 600;
+      text-align: center; margin: 0; line-height: 1.9;
+    }
+
+    /* Photo grid */
+    .photo-grid { display: grid; gap: 1rem; margin: 1.5rem 0; width: 100%; }
+    .photo-grid--single {
+      grid-template-columns: minmax(0, 400px);
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .photo-grid--pair { grid-template-columns: 1fr 1fr; }
+    .photo-grid--many { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .photo-grid img { width: 100%; height: auto; border-radius: var(--r); display: block; object-fit: cover; }
+
+    /* Checklist */
+    ul.checklist { list-style: none; padding: 0; margin: 1rem 0; }
+    ul.checklist li {
+      font-family: 'Nunito', sans-serif; font-size: 1rem; color: var(--text-light);
+      padding: 0.6rem 0 0.6rem 2rem; position: relative;
+      border-bottom: 1px solid var(--border); line-height: 1.6;
+    }
+    ul.checklist li:last-child { border-bottom: none; }
+    ul.checklist li::before {
+      content: "●"; position: absolute; left: 0.4rem;
+      color: var(--gold); font-size: 0.55rem; top: 0.9rem;
+    }
+
+    /* Hotmart banner (arriba del contenido) */
+    .hotmart-banner {
+      background: linear-gradient(135deg, #fff8e6 0%, #fff3cd 100%);
+      border: 2px solid #f5a623;
+      border-radius: var(--r);
+      padding: 1.75rem 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .hotmart-banner-lead {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      text-align: center;
+    }
+    .hotmart-btn {
+      display: inline-block;
+      background: #f5a623;
+      color: #1a1a1a;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      padding: 0.75rem 2rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .hotmart-btn:hover { background: #e09410; text-decoration: none; color: #1a1a1a; }
+
+    /* CTA / Enroll */
+    .enroll-section {
+      background: var(--bg-alt); border: 2px solid var(--teal);
+      border-radius: var(--r); padding: 2rem; margin-top: var(--gap); text-align: center;
+    }
+    .enroll-section p { text-align: center; font-family: 'Nunito', sans-serif; font-size: 1.1rem; color: var(--text); margin-bottom: 1.25rem; }
+    .enroll-btn {
+      display: inline-block; background: var(--teal); color: #fff;
+      font-family: 'Nunito', sans-serif; font-size: 1.1rem; font-weight: 800;
+      padding: 0.8rem 2.2rem; border-radius: 100px; text-decoration: none;
+      transition: background 0.2s; margin-bottom: 1.5rem;
+    }
+    .enroll-btn:hover { background: #0a5f77; text-decoration: none; color: #fff; }
+    .qr-wrap { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+    .qr-wrap img { width: 140px; height: 140px; border: 1px solid var(--border); border-radius: var(--r); }
+    .qr-wrap span { font-size: 0.8rem; color: #888; }
+    .contact-links { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .contact-links a { color: var(--teal); font-weight: 700; font-size: 0.9rem; }
+
+    /* Closing */
+    .closing {
+      text-align: center; font-family: 'Nunito', sans-serif;
+      font-size: 1.5rem; font-weight: 800; color: var(--teal);
+      margin-top: 2.5rem; padding-top: 2rem; border-top: 2px solid var(--border);
+    }
+
+    /* Footer */
+    footer { background: var(--bg-alt); border-top: 1px solid var(--border); padding: 1.5rem; text-align: center; font-size: 0.8rem; color: #888; }
+    footer a { color: #555; }
+
+    /* Print */
+    @media print {
+      .topbar, .enroll-section, footer { display: none; }
+      body { font-size: 11pt; }
+      .section-body p { text-align: left; color: #000; }
+      h1.section-title, h2.section-title { color: #000; }
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      main { padding: 2rem 1rem 4rem; }
+      .photo-grid--pair { grid-template-columns: 1fr; }
+      .enroll-section { padding: 1.25rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <img src="images/header.png" alt="Cuántica a Pie con Dr. Z – Dr. Z Academy" width="2048" height="952">
+  </div>
+
+  <nav class="topbar" aria-label="Breadcrumb">
+    <a href="https://drz-academy.github.io/">Dr. Z Academy</a>
+    <span class="sep">Cursos</span>
+    <span class="sep" aria-current="page">Cuántica a Pie con Dr. Z</span>
+  </nav>
+
+  <main>
+
+    <div class="hotmart-banner">
+      <p class="hotmart-banner-lead">Este curso se realiza en la plataforma <strong>Hotmart</strong>. En el siguiente enlace puedes adquirirlo:</p>
+      <a class="hotmart-btn" href="https://go.hotmart.com/T96569602E?dp=1" target="_blank" rel="noopener">Adquirir en Hotmart →</a>
+    </div>
+
+    <h1 class="section-title">¿De qué va este curso?</h1>
+    <div class="section-body"><p>¡¿De qué más va ser?! Este es un curso de teoría cuántica, física cuántica, mecánica cuántica… El tema tiene más nombres que un directorio telefónico. Para no enredarnos te propongo que la llamemos simplemente <strong>“Cuántica”</strong> (así, con mayúscula).</p>
+<p>La Cuántica es una forma relativamente “nueva” de calcular y pensar sobre el mundo que fue descubierta haciendo investigación en física a principios del siglo 20. Aunque toda la vida la Cuántica ha estado asociada con los átomos y las cosas muy pequeñas, hoy es cada vez más claro que esta teoría científica describe fenómenos de muchos tamaños, algunos tan grandecitos como los ojos de un pájaro o una transferencia bancaria.</p>
+<p>Si todo esto te parece muy vago, creo que has llegado al lugar correcto. <strong>Para eso es este curso: para hacer de la Cuántica algo menos ajeno y extraño.</strong></p>
+<p>En <em>Cuántica a Pie con Dr. Z</em> le echaremos un ojo a los conceptos que están en el corazón de la Cuántica, muchos de los cuales conducen a situaciones aparentemente paradójicas, al menos para nuestra forma no cuántica de pensar. Hablaremos también de las formas ingeniosas que se han concebido para usar la Cuántica en la solución a problemas tecnológicos, algunos que suena a ciencia ficción como la teleportación, pero otros muy cercanos a nosotros como la criptografía y la computación.</p>
+<p>Todo lo haremos en un lenguaje sencillo, o como decimos en el mundo hispano, <strong>este es un curso para gente de a pie</strong>; de allí el nombre del curso. Nuestro guía en este proceso será el reconocido divulgador colombiano, <strong>Doctor Z</strong>, quién tiene un estilo muy coloquial de hablar incluso de las cosas más difíciles. ¡Ya lo verás!</p></div>
+
+    <h2 class="section-title">¿Cómo se organiza el curso?</h2>
+    <div class="section-body"><p>El curso de <em>Cuántica a Pie con Dr. Z</em> se organiza en <strong>6 módulos</strong>, cada uno con entre 3 y 6 lecciones. Las lecciones son vídeos de entre 5 y 20 minutos de duración que vienen acompañadas de una presentación para que puedas repasar su contenido en todo detalle.</p>
+<p>Al final de cada módulo verás una lección de recapitulación que busca resaltar los temas de los que no te puedes olvidar. Después de esa lección tienes que presentar un test con tan solo 5 preguntas sobre los temas vistos en las lecciones del módulo. ¡No te asustes! Son preguntas bastante simples que cualquier persona que haya visto con atención los videos podrá resolver.</p></div>
+
+    <h2 class="section-title">¿Cuáles son los temas del curso?</h2>
+    <div class="section-body"><p>A continuación te presentamos una lista más o menos detallada del contenido de cada uno de los módulos que conforman el curso. Para quiénes no saben nada de Cuántica, algunas cosas quizás suenen a chino, pero no te enredes con los términos: todo lo explicaremos bien. Para quiénes saben algo de Cuántica verán que la organización es bastante distinta a un curso tradicional ¡anímense a verlo!</p>
+<div class="topics-list">
+<p><strong>Módulo 1. ¿Qué es la cuántica?</strong> No parece pero es cuántico: la mecánica cuántica en la vida cotidiana. Los conceptos centrales de la Cuántica: estado cuántico, función de onda, mecánica cuántica, ecuación de Schrödinger (si no se aprende la letra se aprende la musiquita).</p>
+<p><strong>Módulo 2. Superposición cuántica.</strong> Vamos por partes: el estado cuántico, autoestados y observables. En el centro de todo está la superposición cuántica. Los estados cuánticos también evolucionan. La ecuación de Schrödinger (sin matemáticas). Ejemplos de estados cuánticos: de la radioactividad al cúbit, la maraca del príncipe (una bola en un tubo).</p>
+<p><strong>Módulo 3. Entrelazamiento y decoherencia.</strong> Una maraca cuántica con varias bolitas. Mezcla de estados. El curioso entrelazamiento cuántico. Álgebra cuántica (sin ecuaciones). La paradoja de la dinamita (o del gato de Schrödinger para quienes no quieren a los gativos). Qué pitos toca la consciencia en todo esto. El colapso del estado cuántico. ¿Cambia el mundo cuando lo medimos? ¿Qué es la realidad después de esto? Decoherencia cuántica y el límite de Heisenberg. La paradoja de la dinamita después de meterle decoherencia.</p>
+<p><strong>Módulo 4. Cuantilandia.</strong> Un mundo de mentiras para entender la Cuántica. Cuántica espeluznante: el entrelazamiento y la acción a distancia contada con hamburguesas. La paradoja de Einstein. ¿Se puede la comunicación cuántica a distancia? (respuesta corta = No). ¿Es la Cuántica completa o pura ignorancia? Un mundo de variables ocultas. La filosofía en el laboratorio. Abrebocas a lo que sigue: La información clásica y la información cuántica.</p>
+<p><strong>Módulo 5. Computación e interferencia.</strong> “Spock: teletranspórtame”. El algoritmo de teleportación cuántica. La información cuántica no se puede clonar. Circuitos cuánticos y el invento de Feynman. Computación y supremacía cuántica. Procesadores cuánticos. Interferencia cuántica en el billar de cuantilandia. Rendijas e interferencia cuántica. Cómo la interferencia revela los secretos de la materia. Interferencia cuántica en un hueco. El principio de incertidumbre de Heisenberg. Lo cuántico de la cuántica. Excitación y desexcitación de un sistema cuántico. La producción y absorción de luz por sistemas cuánticos. Aplicaciones tecnológicas: de los puntos cuánticos a los televisores.</p>
+<p><strong>Módulo 6. Historia e interpretaciones.</strong> El origen de la teoría cuántica. Las primeras ideas. De Mileva a Schrödinger. Los triunfos tempranos de la teoría cuántica. Interpretaciones hasta para botar para arriba. Cuántica, probabilidades y colapso: la interpretación de Copenhague. La interpretación de muchos mundos.</p>
+</div></div>
+
+    <h2 class="section-title">¿A quién le escribo si tengo dudas?</h2>
+    <div class="section-body"><p>No estamos todo el tiempo pegados del correo, pero si escribes a <a href="mailto:SoyDoctorZ@gmail.com">SoyDoctorZ@gmail.com</a> con seguridad te responderemos. Durante el curso, además, estaremos revelando un número de WhatsApp para que contactes a Dr. Z Academy y resuelvas dudas sobre el curso.</p></div>
+
+
+    <div class="enroll-section">
+      <a class="enroll-btn" href="https://go.hotmart.com/T96569602E?dp=1" target="_blank" rel="noopener">
+        Inscribete ahora →
+      </a>
+      <div class="qr-wrap">
+        <img src="images/qr-inscripcion.png" alt="Código QR para inscripción">
+        <span>Comparte el enlace de inscripción con este QR</span>
+      </div>
+      <div class="contact-links" style="margin-top:1.5rem;">
+        <a href="mailto:SoyDoctorZ@gmail.com">SoyDoctorZ@gmail.com</a>
+        
+        <a href="https://drz.academy" target="_blank" rel="noopener">drz.academy</a>
+      </div>
+    </div>
+    <p class="closing">¡Nos vemos!</p>
+  </main>
+
+  <footer>
+    <p>© 2026 <a href="https://drz.academy" target="_blank" rel="noopener">Dr. Z Academy</a>
+    · Medellín, Colombia
+    · <a href="mailto:SoyDoctorZ@gmail.com">SoyDoctorZ@gmail.com</a></p>
+  </footer>
+
+</body>
+</html>

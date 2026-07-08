@@ -12,7 +12,7 @@ lugar: "Hibrido (virtual y presencial) con Transmisión desde el Colegio La Ense
 direccion: "Cra. 43 No. 9 Sur 195"
 tiene_zoom: false
 tiene_classroom: true
-inscripcion_url: "https://tinyurl.com/jzx4jyya"
+inscripcion_url: "https://drz.academy/producto/extraterrestres/"
 imagen_header: "images/header.png"
 imagen_qr_curso: "images/qr-curso.png"
 imagen_qr: "images/qr-inscripcion.png"
@@ -32,7 +32,7 @@ activo: true
 
 ## Presentación
 
-**Los extraterrestres están de moda**. Los estamos viendo cada vez más frecuentemente en series, en el cine. Aparecen en las noticias, en redes sociales y sobre ellos se están escribiendo libros y artículos en todas partes. **Sin embargo, a la fecha, no se tiene evidencia definitiva de la existencia de ninguno de ellos**. La casi totalidad de lo que consumimos sobre extraterrestres es producto de la imaginación de artistas (literatura y cine), y en algunos casos de profesionales de la ciencia que investigan teóricamente el fenómeno de la vida en un contexto astronómico (astrobiología). En no pocas ocasiones, los extraterrestres son también el producto de ensoñaciones culturales, materia de teorías conspirativas o de trucos que se revelan a la larga como engaños.
+**Los extraterrestres están dando de que hablar otra vez**. Los estamos viendo cada vez más frecuentemente en series, en el cine. Aparecen en las noticias, en redes sociales y sobre ellos se están escribiendo libros y artículos en todas partes. **Sin embargo, a la fecha, no se tiene evidencia definitiva de la existencia de ninguno de ellos**. La casi totalidad de lo que consumimos sobre extraterrestres es producto de la imaginación de artistas (literatura y cine), y en algunos casos de profesionales de la ciencia que investigan teóricamente el fenómeno de la vida en un contexto astronómico (astrobiología). En no pocas ocasiones, los extraterrestres son también el producto de ensoñaciones culturales, materia de teorías conspirativas o de trucos que se revelan a la larga como engaños.
 
 **Aún así, aquí estamos. Hablando todavía de extraterrestres**. En esta *Master Class*, el profesor e investigador en astrobiología, Jorge I. Zuluaga, realiza una radiografía del *fenómeno Extraterrestre*. Desde su historia, que se remonta a más de un siglo atrás, pasando por su apogeo con el inicio de la era espacial, y su lugar privilegiado en la literatura y el cine, hasta llegar a lo que tiene que decir la ciencia sobre las verdaderas posibilidades de que existan extraterrestres. 
 
