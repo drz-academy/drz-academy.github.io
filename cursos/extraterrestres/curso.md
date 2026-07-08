@@ -14,6 +14,7 @@ tiene_zoom: false
 tiene_classroom: true
 inscripcion_url: "https://drz.academy/producto/extraterrestres/"
 imagen_header: "images/header.png"
+imagen_og: "images/Extraterrestres_Post_Instagram_1080x1350.webp"
 imagen_qr_curso: "images/qr-curso.png"
 imagen_qr: "images/qr-inscripcion.png"
 fotos1:

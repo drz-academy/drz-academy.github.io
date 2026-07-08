@@ -38,7 +38,11 @@ inscripcion_url: "https://drz.academy"
 
 # Imágenes (rutas relativas desde cursos/<id>/)
 imagen_header: "images/header.png"
-imagen_og: "images/og-preview.jpg"           # banner para WhatsApp/redes (generado)
+# Imagen para og:image (opcional). Ruta a la fuente en images/; si se omite,
+# las meta tags usan images/og-preview.jpg generado desde imagen_header.
+# Siempre se genera images/og-preview.jpg desde el banner, aunque imagen_og
+# apunte a otra imagen (p. ej. un afiche vertical para Instagram).
+# imagen_og: "images/mi-afiche.webp"
 imagen_qr_curso: "images/qr-curso.png"         # afiche → hoja del curso (generado)
 imagen_qr: "images/qr-inscripcion.png"         # página → inscripción (generado)
 

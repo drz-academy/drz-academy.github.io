@@ -55,7 +55,8 @@ TEMPLATE_DIR= CURSOS_DIR / "template"
 SITE_URL    = "https://drz-academy.github.io"
 QR_CURSO    = "images/qr-curso.png"          # afiche → hoja del curso
 QR_INSCRIPCION = "images/qr-inscripcion.png"  # página → URL de inscripción
-OG_PREVIEW  = "images/og-preview.jpg"         # banner optimizado para redes sociales
+OG_PREVIEW  = "images/og-preview.jpg"         # siempre generado desde imagen_header
+OG_SHARE    = "images/og-share.jpg"           # generado desde imagen_og cuando es custom
 OG_MAX_WIDTH = 1200
 OG_MAX_BYTES = 300_000
 INSCRIPCION_PLACEHOLDERS = {"", "#", "https://drz.academy"}
@@ -308,33 +309,64 @@ def generate_qrs(meta: dict, course_dir: Path) -> None:
     print(f"✅  QR inscripción  →  {dest_insc.relative_to(REPO_ROOT)}  ({inscripcion})")
 
 
-def generate_og_preview(course_dir: Path, header_rel: str) -> tuple[int, int] | None:
-    """Genera JPEG liviano del banner para WhatsApp, Twitter, etc. (≤300 KB)."""
+def optimize_image_for_og(source_path: Path, dest_path: Path, *, label: str) -> tuple[int, int] | None:
+    """Redimensiona y comprime una imagen a JPEG liviano para redes (≤300 KB)."""
     if not HAS_QRCODE:
         return None
 
-    header_path = course_dir / header_rel
-    if not header_path.exists():
-        print(f"⚠️  Banner no encontrado: {header_path.relative_to(REPO_ROOT)}")
+    if not source_path.exists():
+        print(f"⚠️  {label}: no se encuentra {source_path.relative_to(REPO_ROOT)}")
         return None
 
-    dest = course_dir / OG_PREVIEW
-    img = Image.open(header_path).convert("RGB")
+    img = Image.open(source_path).convert("RGB")
     w, h = img.size
     if w > OG_MAX_WIDTH:
         h = int(h * OG_MAX_WIDTH / w)
         w = OG_MAX_WIDTH
         img = img.resize((w, h), Image.LANCZOS)
 
-    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest_path.parent.mkdir(parents=True, exist_ok=True)
     for quality in (85, 75, 65, 55, 45):
-        img.save(dest, "JPEG", quality=quality, optimize=True)
-        if dest.stat().st_size <= OG_MAX_BYTES:
+        img.save(dest_path, "JPEG", quality=quality, optimize=True)
+        if dest_path.stat().st_size <= OG_MAX_BYTES:
             break
 
-    kb = dest.stat().st_size // 1024
-    print(f"✅  OG preview  →  {dest.relative_to(REPO_ROOT)}  ({w}×{h}, {kb} KB)")
+    kb = dest_path.stat().st_size // 1024
+    print(f"✅  {label}  →  {dest_path.relative_to(REPO_ROOT)}  ({w}×{h}, {kb} KB)")
     return w, h
+
+
+def generate_og_images(course_dir: Path, meta: dict) -> None:
+    """
+    Genera imágenes para compartir en redes:
+    - images/og-preview.jpg  → siempre desde imagen_header (respaldo / default)
+    - images/og-share.jpg    → desde imagen_og si se define una fuente distinta
+    """
+    header_rel = meta.get("imagen_header", "images/header.png")
+    header_dims = optimize_image_for_og(
+        course_dir / header_rel,
+        course_dir / OG_PREVIEW,
+        label="OG preview (header)",
+    )
+
+    og_source = (meta.get("imagen_og") or "").strip()
+    is_custom = bool(og_source) and og_source not in (OG_PREVIEW, header_rel.strip())
+
+    if is_custom:
+        dims = optimize_image_for_og(
+            course_dir / og_source,
+            course_dir / OG_SHARE,
+            label=f"OG share ({og_source})",
+        )
+        if dims:
+            meta["_og_meta_rel"] = OG_SHARE
+            meta["_og_width"], meta["_og_height"] = dims
+            return
+        print(f"⚠️  imagen_og ignorada; usando {OG_PREVIEW}")
+
+    meta["_og_meta_rel"] = OG_PREVIEW
+    if header_dims:
+        meta["_og_width"], meta["_og_height"] = header_dims
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -444,7 +476,7 @@ def render_html(meta: dict, sections: list[tuple[str, str]]) -> str:
     activo      = meta.get("activo", False)
     course_id   = meta.get("id", "curso")
     page_url    = f"{SITE_URL}/cursos/{course_id}/"
-    og_rel      = meta.get("imagen_og", OG_PREVIEW)
+    og_rel      = meta.get("_og_meta_rel", OG_PREVIEW)
     og_image    = absolute_asset(og_rel, course_id)
     og_width    = meta.get("_og_width")
     og_height   = meta.get("_og_height")
@@ -781,11 +813,7 @@ def cmd_build(md_path: Path, update_json: bool = True, generate_qr_code: bool = 
     if generate_qr_code:
         generate_qrs(meta, md_path.parent)
 
-    og_dims = generate_og_preview(
-        md_path.parent, meta.get("imagen_header", "images/header.png")
-    )
-    if og_dims:
-        meta["_og_width"], meta["_og_height"] = og_dims
+    generate_og_images(md_path.parent, meta)
 
     sections  = split_sections(body)
     html      = render_html(meta, sections)

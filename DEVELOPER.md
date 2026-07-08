@@ -80,7 +80,7 @@ Campos importantes:
 | `id` | Identificador único (= nombre del directorio) |
 | `inscripcion_url` | Enlace de inscripción; codifica `qr-inscripcion.png` |
 | `imagen_header` | Banner (`images/header.png`, ~2048×952 px) |
-| `imagen_og` | Previsualización en redes (`images/og-preview.jpg`, generado) |
+| `imagen_og` | Fuente opcional para `og:image` (genera `images/og-share.jpg`; siempre se crea también `images/og-preview.jpg` desde el banner) |
 | `imagen_qr_curso` | QR de afiche → hoja del curso (generado) |
 | `imagen_qr` | QR de inscripción en la página (generado) |
 | `fotos`, `fotos1`, `fotos2`… | Listas de imágenes; insertar con `<!-- fotos -->`, `<!-- fotos1 -->`, etc. |
@@ -170,7 +170,9 @@ python3 cursos/build_course.py cursos/mi-curso/curso.md
 
 ### Previsualización en WhatsApp / redes
 
-WhatsApp no acepta banners pesados (>300 KB). El script genera **`images/og-preview.jpg`** (≈1200 px, JPEG) a partir de `header.png` y lo usa en `og:image`.
+WhatsApp no acepta banners pesados (>300 KB). El script **siempre** genera **`images/og-preview.jpg`** (≈1200 px, JPEG) a partir de `imagen_header`.
+
+Opcionalmente, en `curso.md` puedes definir **`imagen_og`** con otra imagen fuente (p. ej. un afiche vertical). El script genera además **`images/og-share.jpg`** optimizado y lo usa en `og:image`. El `og-preview.jpg` del banner se sigue creando igual.
 
 Tras desplegar, si WhatsApp sigue mostrando la imagen vieja, borra la caché en el [Depurador de contenido compartido de Meta](https://developers.facebook.com/tools/debug/) (pega la URL del curso y pulsa «Scrape Again»).
 
