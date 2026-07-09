@@ -172,7 +172,7 @@ python3 cursos/build_course.py cursos/mi-curso/curso.md
 
 WhatsApp no acepta banners pesados (>300 KB). El script **siempre** genera **`images/og-preview.jpg`** (≈1200 px, JPEG) a partir de `imagen_header`.
 
-Opcionalmente, en `curso.md` puedes definir **`imagen_og`** con otra imagen fuente (p. ej. un afiche vertical). El script genera además **`images/og-share.jpg`** optimizado y lo usa en `og:image`. El `og-preview.jpg` del banner se sigue creando igual.
+Opcionalmente, en `curso.md` puedes definir **`imagen_og`** con otra imagen fuente (p. ej. un afiche vertical). El script genera además **`images/og-share.jpg`** en **1200×1500** (4:5, misma proporción que Instagram) comprimido a ≤300 KB para WhatsApp. El `og-preview.jpg` del banner se sigue creando igual.
 
 Tras desplegar, si WhatsApp sigue mostrando la imagen vieja, borra la caché en el [Depurador de contenido compartido de Meta](https://developers.facebook.com/tools/debug/) (pega la URL del curso y pulsa «Scrape Again»).
 

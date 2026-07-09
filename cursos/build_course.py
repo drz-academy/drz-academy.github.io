@@ -59,6 +59,8 @@ QR_INSCRIPCION = "images/qr-inscripcion.png"  # página → URL de inscripción
 OG_PREVIEW  = "images/og-preview.jpg"         # siempre generado desde imagen_header
 OG_SHARE    = "images/og-share.jpg"           # generado desde imagen_og cuando es custom
 OG_MAX_WIDTH = 1200
+OG_SHARE_WIDTH = 1200
+OG_SHARE_HEIGHT = 1500                        # 4:5 — misma proporción que afiche Instagram
 OG_MAX_BYTES = 300_000
 INSCRIPCION_PLACEHOLDERS = {"", "#", "https://drz.academy"}
 LOGO_QR     = REPO_ROOT / "assets/DrZ-Logos/Dr_Z_Logo_Blanco_marquesina_fondo_transparente.png"
@@ -310,6 +312,24 @@ def generate_qrs(meta: dict, course_dir: Path) -> None:
     print(f"✅  QR inscripción  →  {dest_insc.relative_to(REPO_ROOT)}  ({inscripcion})")
 
 
+def crop_to_aspect(img: Image.Image, target_w: int, target_h: int) -> Image.Image:
+    """Recorta al centro y redimensiona a target_w×target_h."""
+    target_ratio = target_w / target_h
+    w, h = img.size
+    src_ratio = w / h
+
+    if src_ratio > target_ratio:
+        new_w = int(h * target_ratio)
+        left = (w - new_w) // 2
+        img = img.crop((left, 0, left + new_w, h))
+    elif src_ratio < target_ratio:
+        new_h = int(w / target_ratio)
+        top = (h - new_h) // 2
+        img = img.crop((0, top, w, top + new_h))
+
+    return img.resize((target_w, target_h), Image.LANCZOS)
+
+
 def optimize_image_for_og(source_path: Path, dest_path: Path, *, label: str) -> tuple[int, int] | None:
     """Redimensiona y comprime una imagen a JPEG liviano para redes (≤300 KB)."""
     if not HAS_QRCODE:
@@ -337,6 +357,30 @@ def optimize_image_for_og(source_path: Path, dest_path: Path, *, label: str) -> 
     return w, h
 
 
+def optimize_image_for_og_share(source_path: Path, dest_path: Path, *, label: str) -> tuple[int, int] | None:
+    """Recorta al ratio 4:5, redimensiona a 1200×1500 y comprime a ≤300 KB (WhatsApp)."""
+    if not HAS_QRCODE:
+        return None
+
+    if not source_path.exists():
+        print(f"⚠️  {label}: no se encuentra {source_path.relative_to(REPO_ROOT)}")
+        return None
+
+    img = Image.open(source_path).convert("RGB")
+    img = crop_to_aspect(img, OG_SHARE_WIDTH, OG_SHARE_HEIGHT)
+
+    dest_path.parent.mkdir(parents=True, exist_ok=True)
+    for quality in (85, 75, 65, 55, 45, 35):
+        img.save(dest_path, "JPEG", quality=quality, optimize=True)
+        if dest_path.stat().st_size <= OG_MAX_BYTES:
+            break
+
+    kb = dest_path.stat().st_size // 1024
+    w, h = img.size
+    print(f"✅  {label}  →  {dest_path.relative_to(REPO_ROOT)}  ({w}×{h}, {kb} KB)")
+    return w, h
+
+
 def generate_og_images(course_dir: Path, meta: dict) -> None:
     """
     Genera imágenes para compartir en redes:
@@ -354,7 +398,7 @@ def generate_og_images(course_dir: Path, meta: dict) -> None:
     is_custom = bool(og_source) and og_source not in (OG_PREVIEW, header_rel.strip())
 
     if is_custom:
-        dims = optimize_image_for_og(
+        dims = optimize_image_for_og_share(
             course_dir / og_source,
             course_dir / OG_SHARE,
             label=f"OG share ({og_source})",
