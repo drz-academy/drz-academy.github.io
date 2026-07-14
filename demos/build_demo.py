@@ -27,14 +27,20 @@ import json
 import re
 import shutil
 import sys
+import textwrap
 from pathlib import Path
 
 try:
     import qrcode
-    from PIL import Image
     HAS_QRCODE = True
 except ImportError:
     HAS_QRCODE = False
+
+try:
+    from PIL import Image, ImageDraw, ImageFont
+    HAS_PIL = True
+except ImportError:
+    HAS_PIL = False
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEMOS_DIR = REPO_ROOT / "demos"
@@ -43,9 +49,11 @@ DEMOS_JSON = DEMOS_DIR / "demos.json"
 SITE_URL = "https://drz-academy.github.io"
 ANALYTICS_LOG_URL = "https://drz-academy-visitor-log.drz-academy.workers.dev/log"
 LOGO_QR = REPO_ROOT / "assets/DrZ-Logos/Dr_Z_Logo_Blanco_marquesina_fondo_transparente.png"
+LOGO_OG = REPO_ROOT / "assets/DrZ-Logos/Dr_Z_Logo_Blanco_marquesina_fondo_transparente.png"
 QR_SIZE = 512
 LOGO_RATIO = 0.28
 QR_DEMO = "images/qr-demo.png"
+OG_DEMO = "images/og-preview.jpg"
 
 PAGE_TEMPLATE = """<!DOCTYPE html>
 <html lang="es">
@@ -164,12 +172,11 @@ def generate_qr(meta: dict, demo_dir: Path) -> None:
     print(f"✅  QR demo  →  {dest.relative_to(REPO_ROOT)}  ({url})")
 
 
-def head_meta(meta: dict, page_url: str) -> str:
+def head_meta(meta: dict, page_url: str, og_image: str) -> str:
     titulo = meta.get("titulo", "Demo")
     destacado = meta.get("titulo_destacado", "")
     full_title = f"{titulo} {destacado}".strip() + " – Dr. Z Academy"
     desc = meta.get("descripcion", meta.get("descripcion_corta", ""))
-    og_image = f"{SITE_URL}/assets/og-drz.png"
     return f"""  <title>{escape_attr(full_title)}</title>
   <meta name="description" content="{escape_attr(desc)}">
   <link rel="icon" href="{SITE_URL}/assets/favicon.ico" sizes="any">
@@ -211,6 +218,171 @@ def sanitize_widget_content(raw: str) -> str:
     return content
 
 
+def plain_text_from_html(raw: str) -> str:
+    text = re.sub(r"<script[^>]*>.*?</script>", " ", raw, flags=re.S | re.I)
+    text = re.sub(r"<style[^>]*>.*?</style>", " ", text, flags=re.S | re.I)
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = html.unescape(text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+
+def get_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
+    candidates = [
+        "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",
+        "/System/Library/Fonts/Supplemental/Arial Bold.ttf" if bold else "/System/Library/Fonts/Supplemental/Arial.ttf",
+        "/System/Library/Fonts/SFNS.ttf",
+    ]
+    for path in candidates:
+        try:
+            return ImageFont.truetype(path, size)
+        except OSError:
+            continue
+    return ImageFont.load_default()
+
+
+def wrap_text_to_width(
+    draw: ImageDraw.ImageDraw,
+    text: str,
+    font: ImageFont.FreeTypeFont | ImageFont.ImageFont,
+    max_width: int,
+    max_lines: int,
+) -> list[str]:
+    words = text.split()
+    if not words:
+        return []
+
+    lines: list[str] = []
+    current = words[0]
+
+    for word in words[1:]:
+        test = f"{current} {word}"
+        w = draw.textbbox((0, 0), test, font=font)[2]
+        if w <= max_width:
+            current = test
+            continue
+
+        lines.append(current)
+        current = word
+        if len(lines) >= max_lines:
+            break
+
+    if len(lines) < max_lines:
+        lines.append(current)
+
+    if len(lines) > max_lines:
+        lines = lines[:max_lines]
+
+    # Si recortamos contenido, ajustamos la última línea con ellipsis respetando el ancho.
+    consumed = sum(len(line.split()) for line in lines)
+    if consumed < len(words):
+        last = lines[-1].rstrip(" .,:;")
+        while last:
+            candidate = last + "…"
+            w = draw.textbbox((0, 0), candidate, font=font)[2]
+            if w <= max_width:
+                lines[-1] = candidate
+                break
+            last = last[:-1]
+        if not last:
+            lines[-1] = "…"
+
+    return lines
+
+
+def generate_og_preview(meta: dict, demo_dir: Path, content: str) -> Path | None:
+    if not HAS_PIL:
+        print("⚠️  PIL no disponible. Omitiendo OG preview del demo")
+        return None
+
+    rel = meta.get("imagen_og", OG_DEMO)
+    if rel.startswith("http://") or rel.startswith("https://"):
+        return None
+
+    out = demo_dir / rel
+    out.parent.mkdir(parents=True, exist_ok=True)
+
+    w, h = 1200, 630
+    img = Image.new("RGB", (w, h), "#0c0c0c")
+    draw = ImageDraw.Draw(img)
+
+    # Fondo base + panel para mantener legibilidad del texto.
+    draw.rectangle((0, 0, w, h), fill="#0b1020")
+    draw.rectangle((0, 0, w, int(h * 0.35)), fill="#111a34")
+    draw.ellipse((820, -180, 1360, 360), fill="#1b2c5a")
+    draw.rectangle((50, 70, w - 50, h - 70), fill="#0f172d")
+    draw.rectangle((50, 70, w - 50, h - 70), outline="#2f457f", width=2)
+
+    # Logo academia en la esquina superior derecha del panel.
+    logo_reserved_left: int | None = None
+    if LOGO_OG.exists():
+        try:
+            logo = Image.open(LOGO_OG).convert("RGBA")
+            max_logo_w = 250
+            ratio = max_logo_w / max(logo.width, 1)
+            logo_h = int(logo.height * ratio)
+            logo = logo.resize((max_logo_w, logo_h), Image.LANCZOS)
+            lx = w - 70 - max_logo_w
+            ly = 92
+            img.paste(logo, (lx, ly), logo)
+            logo_reserved_left = lx - 28
+        except OSError:
+            pass
+
+    label_font = get_font(26, bold=True)
+    title_font = get_font(64, bold=True)
+    body_font = get_font(30, bold=False)
+    meta_font = get_font(22, bold=False)
+
+    label = f"Demo interactivo · {meta.get('categoria', 'Ciencia')}"
+    title = f"{meta.get('titulo', 'Demo')} {meta.get('titulo_destacado', '').strip()}".strip()
+    desc = meta.get("descripcion", "")
+    body_text = plain_text_from_html(content)
+    snippet = f"Contenido: {body_text}"
+
+    x = 86
+    max_text_w = w - x - 86
+    if logo_reserved_left is not None:
+        max_text_w = min(max_text_w, logo_reserved_left - x)
+    max_text_w = max(max_text_w, 520)
+    y = 110
+    draw.text((x, y), label, fill="#f3d361", font=label_font)
+    y += 52
+
+    title_lines = wrap_text_to_width(draw, title, title_font, max_text_w, 2)
+    for line in title_lines:
+        draw.text((x, y), line, fill="#f5f7ff", font=title_font)
+        y += 70
+
+    y += 8
+    desc_lines = wrap_text_to_width(draw, desc, body_font, max_text_w, 3)
+    for line in desc_lines:
+        draw.text((x, y), line, fill="#d8def0", font=body_font)
+        y += 40
+
+    y = max(y + 12, 482)
+    snippet_lines = wrap_text_to_width(draw, snippet, meta_font, max_text_w, 2)
+    for line in snippet_lines:
+        draw.text((x, y), line, fill="#9fb0dd", font=meta_font)
+        y += 30
+
+    draw.text((x, h - 70), "drz-academy.github.io", fill="#6f84bd", font=meta_font)
+
+    img.save(out, format="JPEG", quality=88, optimize=True)
+    print(f"✅  OG preview demo  →  {out.relative_to(REPO_ROOT)}")
+    return out
+
+
+def resolve_og_image_url(meta: dict, demo_dir: Path) -> str:
+    rel = meta.get("imagen_og", OG_DEMO)
+    if rel.startswith("http://") or rel.startswith("https://"):
+        return rel
+    if (demo_dir / rel).exists():
+        demo_id = meta.get("id", demo_dir.name)
+        return f"{SITE_URL}/demos/{demo_id}/{rel}"
+    return f"{SITE_URL}/assets/og-drz.png"
+
+
 def load_teoria(demo_dir: Path, meta: dict) -> str:
     teoria_file = demo_dir / "teoria.html"
     if teoria_file.exists():
@@ -240,6 +412,7 @@ def extract_from_contrib(html_path: Path) -> str:
 
 
 def load_demo_meta(path: Path) -> tuple[dict, Path]:
+    path = path.resolve()
     if path.is_dir():
         json_path = path / "demo.json"
         demo_dir = path
@@ -268,8 +441,11 @@ def build_demo(path: Path, *, no_qr: bool = False, no_json: bool = False) -> dic
     demo_id = meta["id"]
     page_url = demo_page_url(demo_id)
 
+    generate_og_preview(meta, demo_dir, content)
+    og_image = resolve_og_image_url(meta, demo_dir)
+
     page = PAGE_TEMPLATE.format(
-        meta_tags=head_meta(meta, page_url),
+        meta_tags=head_meta(meta, page_url, og_image),
         analytics_log_url=ANALYTICS_LOG_URL,
         demo_id=escape_attr(demo_id),
         demo_name_attr=escape_attr(meta.get("titulo", demo_id)),
