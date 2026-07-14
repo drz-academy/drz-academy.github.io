@@ -1,0 +1,18 @@
+{
+  "id": "campo-vision",
+  "titulo": "Campo de visión",
+  "titulo_destacado": "del telescopio",
+  "categoria": "Astronomía",
+  "descripcion": "Calculadora interactiva para explorar cómo cambian el campo de visión, la escala de imagen y la visibilidad de objetos astronómicos según tu telescopio y sensor.",
+  "descripcion_corta": "Simula el campo de visión de tu configuración telescopio+cámara y verifica si objetos como la Luna, M42 o M31 caben en el encuadre.",
+  "icono": "🔭",
+  "etiquetas": [
+    "Astronomía",
+    "Telescopios",
+    "Cámaras",
+    "Óptica"
+  ],
+  "activo": true,
+  "teoria_titulo": "¿Cómo interpretar este demo?",
+  "qr_imagen": "images/qr-demo.png"
+}

@@ -1,0 +1,386 @@
+<style>
+:root{--y:#FAD246;--dk:#0c0c0c;--mid:#111;--brd:#1e1e1e;--gray:#888;
+      --green:#4ade80;--orange:#fb923c;--red:#f87171}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--dk);color:#ddd;font-family:system-ui,-apple-system,sans-serif;font-size:13px}
+.widget{max-width:760px;margin:0 auto;padding:18px 14px}
+h1{font-size:14px;font-weight:500;color:var(--y);text-align:center;margin-bottom:3px;letter-spacing:.03em}
+.sub{font-size:10.5px;color:var(--gray);text-align:center;margin-bottom:16px}
+.layout{display:flex;gap:14px;align-items:flex-start}
+.left{flex:0 0 248px;display:flex;flex-direction:column;gap:10px}
+.right{flex:1;display:flex;flex-direction:column;gap:8px}
+
+/* Secciones de control */
+.sec{background:var(--mid);border:1px solid var(--brd);border-radius:6px;padding:11px 12px}
+.sec h3{font-size:10px;font-weight:700;color:var(--y);text-transform:uppercase;
+         letter-spacing:.06em;margin-bottom:9px}
+label{display:block;font-size:11px;color:#999;margin-bottom:4px}
+label b{color:var(--y)}
+input[type=range]{width:100%;accent-color:var(--y);cursor:pointer;margin-bottom:5px}
+
+.presets{display:flex;flex-wrap:wrap;gap:3px;margin-top:2px}
+.pb{background:#181818;border:1px solid #2a2a2a;color:#666;font-size:9.5px;
+    padding:2px 7px;border-radius:3px;cursor:pointer;transition:all .12s}
+.pb:hover,.pb.on{background:#1f1c00;border-color:var(--y);color:var(--y)}
+
+select,input[type=number]{width:100%;background:#181818;border:1px solid #2a2a2a;
+    color:#ccc;font-size:11.5px;padding:5px 7px;border-radius:4px;cursor:pointer}
+select:focus,input[type=number]:focus{outline:1px solid var(--y);border-color:var(--y)}
+.dims{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:7px 0 6px}
+.dims label{margin-bottom:3px}
+
+/* Resultados */
+.res-row{display:flex;justify-content:space-between;align-items:baseline;
+          padding:5px 0;border-bottom:1px solid #181818}
+.res-row:last-child{border:none}
+.rl{font-size:10.5px;color:#666}
+.rv{font-size:12.5px;color:var(--y);font-weight:700}
+
+/* Estado de objetos */
+.obj-row{display:flex;align-items:center;gap:7px;padding:4px 0;font-size:11px}
+.oi{width:18px;font-size:13px}
+.on{flex:1;color:#999}
+.os{font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:10px}
+.s-full{background:rgba(74,222,128,.15);color:var(--green)}
+.s-part{background:rgba(251,146,60,.15);color:var(--orange)}
+.s-none{background:rgba(248,113,113,.12);color:var(--red)}
+
+/* Canvas */
+canvas{display:block;border-radius:4px;border:1px solid #1a1a1a}
+.cnote{font-size:9.5px;color:#333;text-align:right;margin-top:2px}
+</style>
+<div class="widget">
+  <h1>Campo de visión del telescopio</h1>
+  <p class="sub">Calculadora interactiva · Dr. Z Academy</p>
+
+  <div class="layout">
+    <div class="left">
+
+      <!-- Telescopio -->
+      <div class="sec">
+        <h3>Telescopio</h3>
+        <label>Longitud focal: <b id="fv">800</b> mm</label>
+        <input type="range" id="fs" min="200" max="2000" step="50" value="800">
+        <div class="presets" id="fpreset">
+          <button class="pb" data-f="400">400</button>
+          <button class="pb" data-f="600">600</button>
+          <button class="pb on" data-f="800">800</button>
+          <button class="pb" data-f="1000">1000</button>
+          <button class="pb" data-f="1200">1200</button>
+          <button class="pb" data-f="1500">1500</button>
+        </div>
+      </div>
+
+      <!-- Cámara -->
+      <div class="sec">
+        <h3>Cámara / Sensor</h3>
+        <label>Sensor preconfigurado:</label>
+        <select id="ss" style="margin-bottom:7px">
+          <option value="0">Sony IMX294 (19.1×13.0 mm)</option>
+          <option value="1">Sony IMX571 (23.5×15.7 mm)</option>
+          <option value="2">Sony IMX455 (36.0×24.0 mm)</option>
+          <option value="m">Tamaño manual…</option>
+        </select>
+        <div class="dims">
+          <div><label>Ancho (mm)</label>
+               <input type="number" id="sw" value="19.1" min="1" max="100" step="0.1"></div>
+          <div><label>Alto (mm)</label>
+               <input type="number" id="sh" value="13.0" min="1" max="100" step="0.1"></div>
+        </div>
+        <label>Tamaño de píxel (µm):</label>
+        <input type="number" id="px" value="4.63" min="0.1" max="30" step="0.01">
+      </div>
+
+      <!-- Resultados numéricos -->
+      <div class="sec">
+        <div class="res-row"><span class="rl">Campo de visión</span>
+                             <span class="rv" id="rFov">—</span></div>
+        <div class="res-row"><span class="rl">Escala de imagen</span>
+                             <span class="rv" id="rScale">—</span></div>
+        <div class="res-row"><span class="rl">Resolución / píxel</span>
+                             <span class="rv" id="rReso">—</span></div>
+      </div>
+
+      <!-- Estado de objetos -->
+      <div class="sec">
+        <h3>¿Cabe en el campo?</h3>
+        <div class="obj-row">
+          <span class="oi">🌕</span>
+          <span class="on">Luna (0.5°)</span>
+          <span class="os" id="sMoon">—</span>
+        </div>
+        <div class="obj-row">
+          <span class="oi">🌌</span>
+          <span class="on">M42 Orión (1°×1°)</span>
+          <span class="os" id="sOrion">—</span>
+        </div>
+        <div class="obj-row">
+          <span class="oi">🌀</span>
+          <span class="on">M31 Andrómeda (3°×1°)</span>
+          <span class="os" id="sM31">—</span>
+        </div>
+      </div>
+
+    </div><!-- .left -->
+
+    <div class="right">
+      <canvas id="sky" width="468" height="344"></canvas>
+      <p class="cnote">Vista de referencia: 8.1° × 6°  ·  El rectángulo amarillo muestra el campo real del sensor</p>
+    </div>
+
+  </div>
+</div>
+<script>
+// ══════════════════════════════════════════════════════════
+//  Constantes del canvas y del cielo de referencia
+// ══════════════════════════════════════════════════════════
+const C   = document.getElementById('sky');
+const ctx = C.getContext('2d');
+const CW  = C.width,  CH  = C.height;      // 468 × 344 px
+const PPD = CW / 8.1;                       // píxeles por grado ≈ 57.8
+const HW  = CW / 2,   HH  = CH / 2;        // centro del canvas
+
+// Sensores predefinidos
+const SENS = [
+  {w:19.1, h:13.0, p:4.63},   // IMX294 — área activa real (4144×2822 px × 4.63 µm)
+  {w:23.5, h:15.7, p:3.76},   // IMX571 ✓
+  {w:36.0, h:24.0, p:3.76},   // IMX455 — área activa real (9576×6388 px × 3.76 µm)
+];
+
+// Objetos de referencia (RA°, Dec° desde el centro del canvas)
+// Dec+ = arriba = canvas-y menor
+const OBJ = {
+  m31  : {ra:0,    dec:0,    w:3.0, h:1.0, label:'M31 Andrómeda'},
+  moon : {ra:-1.8, dec:1.2,  w:0.5, h:0.5, label:'Luna'},
+  orion: {ra:1.5,  dec:-1.2, w:1.0, h:1.0, label:'M42 Orión'},
+};
+
+// Seeded RNG para estrellas reproducibles
+function sr(seed){ const x=Math.sin(seed+1)*43758.5453; return x-Math.floor(x); }
+function deg2px(ra,dec){ return {x:HW+ra*PPD, y:HH-dec*PPD}; }
+
+// ══════════════════════════════════════════════════════════
+//  Dibujo del cielo
+// ══════════════════════════════════════════════════════════
+function drawBg(){
+  const g=ctx.createRadialGradient(HW,HH,0,HW,HH,CW*.75);
+  g.addColorStop(0,'#04040f'); g.addColorStop(1,'#010108');
+  ctx.fillStyle=g; ctx.fillRect(0,0,CW,CH);
+}
+
+function drawStars(){
+  for(let i=0;i<240;i++){
+    const x=sr(i*7+1)*CW, y=sr(i*7+2)*CH;
+    const r=sr(i*7+3)*1.4+0.2, a=0.2+sr(i*7+4)*0.8;
+    ctx.beginPath(); ctx.arc(x,y,r,0,2*Math.PI);
+    ctx.fillStyle=`rgba(255,255,255,${a.toFixed(2)})`; ctx.fill();
+  }
+}
+
+function drawAndromeda(p,wPx,hPx){
+  ctx.save(); ctx.translate(p.x,p.y); ctx.scale(1,hPx/wPx);
+  const g=ctx.createRadialGradient(0,0,0,0,0,wPx/2);
+  g.addColorStop(0,'rgba(170,195,255,.85)');
+  g.addColorStop(.2,'rgba(140,170,255,.55)');
+  g.addColorStop(.5,'rgba(100,140,235,.22)');
+  g.addColorStop(1,'rgba(0,0,20,0)');
+  ctx.beginPath(); ctx.arc(0,0,wPx/2,0,2*Math.PI);
+  ctx.fillStyle=g; ctx.fill();
+  // Núcleo
+  const n=ctx.createRadialGradient(0,0,0,0,0,wPx*.065);
+  n.addColorStop(0,'rgba(230,240,255,.95)'); n.addColorStop(1,'rgba(180,205,255,0)');
+  ctx.beginPath(); ctx.arc(0,0,wPx*.065,0,2*Math.PI);
+  ctx.fillStyle=n; ctx.fill();
+  ctx.restore();
+  lbl(p.x, p.y+hPx/2*(wPx/hPx)+11, 'M31 Andrómeda', 'rgba(150,185,255,.6)');
+}
+
+function drawMoon(p,rPx){
+  const gh=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,rPx*2.8);
+  gh.addColorStop(0,'rgba(255,255,190,.28)'); gh.addColorStop(1,'rgba(255,255,80,0)');
+  ctx.beginPath(); ctx.arc(p.x,p.y,rPx*2.8,0,2*Math.PI);
+  ctx.fillStyle=gh; ctx.fill();
+  const gm=ctx.createRadialGradient(p.x-rPx*.25,p.y-rPx*.25,0,p.x,p.y,rPx);
+  gm.addColorStop(0,'rgba(255,255,245,1)');
+  gm.addColorStop(.7,'rgba(235,235,210,.95)');
+  gm.addColorStop(1,'rgba(210,205,180,.6)');
+  ctx.beginPath(); ctx.arc(p.x,p.y,rPx,0,2*Math.PI);
+  ctx.fillStyle=gm; ctx.fill();
+  lbl(p.x, p.y-rPx-5, 'Luna', 'rgba(255,255,200,.6)');
+}
+
+function drawOrion(p,wPx,hPx){
+  ctx.save(); ctx.translate(p.x,p.y);
+  const g=ctx.createRadialGradient(-wPx*.08,hPx*.06,0,0,0,wPx*.6);
+  g.addColorStop(0,'rgba(210,145,255,.8)');
+  g.addColorStop(.28,'rgba(165,105,250,.45)');
+  g.addColorStop(.6,'rgba(110,70,200,.18)');
+  g.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.beginPath(); ctx.arc(0,0,wPx*.6,0,2*Math.PI);
+  ctx.fillStyle=g; ctx.fill();
+  // Trapecio de Orión (Theta1)
+  const gs=ctx.createRadialGradient(-wPx*.09,wPx*.06,0,0,0,wPx*.11);
+  gs.addColorStop(0,'rgba(255,245,255,.92)'); gs.addColorStop(1,'rgba(190,130,255,0)');
+  ctx.beginPath(); ctx.arc(-wPx*.09,wPx*.06,wPx*.11,0,2*Math.PI);
+  ctx.fillStyle=gs; ctx.fill();
+  ctx.restore();
+  lbl(p.x, p.y+hPx*.65+11, 'M42 Orión', 'rgba(200,150,255,.6)');
+}
+
+function lbl(x,y,text,color){
+  ctx.fillStyle=color; ctx.font='9.5px system-ui';
+  ctx.textAlign='center'; ctx.fillText(text,x,y);
+}
+
+function drawFOV(fovX,fovY){
+  const rw = Math.min(fovX, CW/PPD);   // limitar al ancho del canvas
+  const rh = Math.min(fovY, CH/PPD);
+  const wpx = rw*PPD, hpx = rh*PPD;
+  const rx = HW-wpx/2, ry = HH-hpx/2;
+  const clipped = fovX>CW/PPD || fovY>CH/PPD;
+
+  // Relleno sutil
+  ctx.fillStyle='rgba(250,210,70,.04)';
+  ctx.fillRect(rx,ry,wpx,hpx);
+
+  // Borde
+  ctx.strokeStyle='#FAD246'; ctx.lineWidth=1.8; ctx.setLineDash([]);
+  ctx.strokeRect(rx,ry,wpx,hpx);
+
+  // Esquinas en L
+  const co=Math.min(wpx,hpx)*.13;
+  ctx.lineWidth=2.5;
+  [[rx,ry,[1,1]],[rx+wpx,ry,[-1,1]],[rx+wpx,ry+hpx,[-1,-1]],[rx,ry+hpx,[1,-1]]].forEach(
+    ([cx_,cy_,[dx,dy]])=>{
+      ctx.beginPath();
+      ctx.moveTo(cx_+dx*co,cy_); ctx.lineTo(cx_,cy_); ctx.lineTo(cx_,cy_+dy*co);
+      ctx.stroke();
+    }
+  );
+
+  // Etiqueta FOV
+  ctx.fillStyle='#FAD246'; ctx.font='bold 10px system-ui'; ctx.textAlign='center';
+  const tag = `${fovX.toFixed(2)}°×${fovY.toFixed(2)}°${clipped?' (recortado)':''}`;
+  ctx.fillText(tag, HW, Math.max(ry-6,10));
+
+  // Si el campo excede el canvas, indicador
+  if(clipped){
+    ctx.strokeStyle='rgba(250,210,70,.35)'; ctx.lineWidth=1; ctx.setLineDash([4,4]);
+    ctx.strokeRect(3,3,CW-6,CH-6); ctx.setLineDash([]);
+    ctx.fillStyle='rgba(250,210,70,.6)'; ctx.font='9px system-ui'; ctx.textAlign='left';
+    ctx.fillText('← Campo real más amplio que la referencia', 8, CH-8);
+  }
+}
+
+function drawScaleBar(){
+  const bDeg=1, bPx=bDeg*PPD;
+  const bx=CW-18-bPx, by=CH-13;
+  ctx.strokeStyle='rgba(255,255,255,.45)'; ctx.lineWidth=1.2; ctx.setLineDash([]);
+  ctx.beginPath();
+  ctx.moveTo(bx,by); ctx.lineTo(bx+bPx,by);
+  ctx.moveTo(bx,by-4); ctx.lineTo(bx,by+4);
+  ctx.moveTo(bx+bPx,by-4); ctx.lineTo(bx+bPx,by+4);
+  ctx.stroke();
+  ctx.fillStyle='rgba(255,255,255,.45)'; ctx.font='9px system-ui';
+  ctx.textAlign='center'; ctx.fillText('1°',bx+bPx/2,by-6);
+}
+
+function drawSky(fovX,fovY){
+  ctx.clearRect(0,0,CW,CH);
+  drawBg(); drawStars();
+  const pA=deg2px(OBJ.m31.ra,  OBJ.m31.dec);
+  const pM=deg2px(OBJ.moon.ra, OBJ.moon.dec);
+  const pO=deg2px(OBJ.orion.ra,OBJ.orion.dec);
+  drawAndromeda(pA, OBJ.m31.w*PPD,   OBJ.m31.h*PPD);
+  drawMoon(pM, OBJ.moon.w*0.5*PPD);   // w=diámetro → radio=w/2
+  drawOrion(pO, OBJ.orion.w*PPD,     OBJ.orion.h*PPD);
+  drawFOV(fovX,fovY);
+  drawScaleBar();
+}
+
+// ══════════════════════════════════════════════════════════
+//  Cálculos
+// ══════════════════════════════════════════════════════════
+function calc(fmm,sw,sh,pum){
+  const fovX = sw/fmm*(180/Math.PI);
+  const fovY = sh/fmm*(180/Math.PI);
+  const scale = 206265/fmm;
+  const reso  = pum ? pum*206.265/fmm : null;
+  return {fovX,fovY,scale,reso};
+}
+
+function fits(fovX,fovY){
+  const hx=fovX/2, hy=fovY/2;
+  // Andrómeda en (0°,0°), 3°×1°
+  const m31F  = hx>=1.5 && hy>=0.5;
+  // Luna en (-1.8°,1.2°), radio 0.25°
+  const moonF = hx>=2.05 && hy>=1.45;
+  const moonP = hx>=1.55 && hy>=0.95;
+  // Orión en (1.5°,-1.2°), 1°×1°
+  const orF   = hx>=2.0  && hy>=1.7;
+  const orP   = hx>=1.0  && hy>=0.7;
+  return {
+    m31  : m31F  ? 'full' : 'part',
+    moon : moonF ? 'full' : moonP ? 'part' : 'none',
+    orion: orF   ? 'full' : orP   ? 'part' : 'none',
+  };
+}
+
+function setStatus(id,st){
+  const el=document.getElementById(id);
+  const T={full:'Cabe completa',part:'Parcialmente visible',none:'Fuera del campo'};
+  const K={full:'s-full',part:'s-part',none:'s-none'};
+  el.textContent=T[st]; el.className='os '+K[st];
+}
+
+// ══════════════════════════════════════════════════════════
+//  Actualización principal
+// ══════════════════════════════════════════════════════════
+function update(){
+  const f =+document.getElementById('fs').value;
+  const sw=+document.getElementById('sw').value;
+  const sh=+document.getElementById('sh').value;
+  const px=+document.getElementById('px').value||null;
+  if(!f||!sw||!sh) return;
+  const {fovX,fovY,scale,reso}=calc(f,sw,sh,px);
+  document.getElementById('rFov').textContent  =`${fovX.toFixed(2)}° × ${fovY.toFixed(2)}°`;
+  document.getElementById('rScale').textContent=`${scale.toFixed(1)} ''/mm`;
+  document.getElementById('rReso').textContent =reso?`${reso.toFixed(2)} ''/píxel`:'—';
+  const F=fits(fovX,fovY);
+  setStatus('sM31',  F.m31);
+  setStatus('sMoon', F.moon);
+  setStatus('sOrion',F.orion);
+  drawSky(fovX,fovY);
+}
+
+// ══════════════════════════════════════════════════════════
+//  Eventos
+// ══════════════════════════════════════════════════════════
+document.getElementById('fs').addEventListener('input',function(){
+  document.getElementById('fv').textContent=this.value;
+  document.querySelectorAll('.pb').forEach(b=>b.classList.toggle('on',+b.dataset.f===+this.value));
+  update();
+});
+
+document.getElementById('fpreset').addEventListener('click',function(e){
+  if(!e.target.classList.contains('pb')) return;
+  const f=+e.target.dataset.f;
+  document.getElementById('fs').value=f;
+  document.getElementById('fv').textContent=f;
+  document.querySelectorAll('.pb').forEach(b=>b.classList.toggle('on',+b.dataset.f===f));
+  update();
+});
+
+document.getElementById('ss').addEventListener('change',function(){
+  if(this.value==='m') return;
+  const s=SENS[+this.value];
+  document.getElementById('sw').value=s.w;
+  document.getElementById('sh').value=s.h;
+  document.getElementById('px').value=s.p;
+  update();
+});
+
+['sw','sh','px'].forEach(id=>document.getElementById(id).addEventListener('input',update));
+
+update();
+</script>

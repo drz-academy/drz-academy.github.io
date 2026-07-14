@@ -1,6 +1,21 @@
 {
   "demos": [
     {
+      "id": "campo-vision",
+      "titulo": "Campo de visión del telescopio",
+      "descripcion": "Simula el campo de visión de tu configuración telescopio+cámara y verifica si objetos como la Luna, M42 o M31 caben en el encuadre.",
+      "url": "demos/campo-vision/",
+      "icono": "🔭",
+      "etiquetas": [
+        "Astronomía",
+        "Telescopios",
+        "Cámaras",
+        "Óptica"
+      ],
+      "categoria": "Astronomía",
+      "activo": true
+    },
+    {
       "id": "difraccion",
       "titulo": "Difracción y criterio de Rayleigh",
       "descripcion": "Explora cómo el diámetro de un telescopio y la longitud de onda determinan el límite de resolución angular. Visualiza los frentes de onda y el disco de Airy en tiempo real.",
