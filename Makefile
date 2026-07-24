@@ -15,6 +15,10 @@ help:
 	@echo "  make stop       - Detiene el servidor en el puerto $(PORT)"
 	@echo ""
 	@echo "  make worker-deploy - Despliega el Worker de analytics en Cloudflare"
+	@echo "  make notify-worker-deploy - Despliega el Worker de notificaciones en Cloudflare"
+	@echo "  make notify-import-csv CSV=contrib/contacts-test.csv - Importa suscriptores desde CSV a KV"
+	@echo "  make notify-list - Consulta la lista de suscriptores actualmente guardados"
+	@echo "  make notify-send-newsletter FILE=cursos/extraterrestres/newsletter.md SUBJECT=\"Mi Asunto\" - Envía un newsletter"
 	@echo ""
 	@echo "  PORT=3000 make start   - Usar otro puerto"
 
@@ -82,3 +86,26 @@ stop:
 worker-deploy:
 	@echo "▶  Deploying analytics worker…"
 	@cd analytics/worker && npx wrangler deploy
+
+notify-worker-deploy:
+	@echo "▶  Deploying notify worker…"
+	@cd notify/worker && npx wrangler deploy
+
+notify-import-csv:
+	@if [ -z "$(CSV)" ]; then \
+		echo "Debes indicar el archivo CSV, ej: make notify-import-csv CSV=contrib/contacts-test.csv"; \
+		exit 1; \
+	fi
+	@echo "▶  Importing subscribers from $(CSV)…"
+	@python3 notify/client/import_subscribers_from_csv.py "$(CSV)"
+
+notify-list:
+	@python3 notify/client/course_notify_client.py list-emails
+
+notify-send-newsletter:
+	@if [ -z "$(FILE)" ] || [ -z "$(SUBJECT)" ]; then \
+		echo "Debes indicar FILE y SUBJECT. Ej: make notify-send-newsletter FILE=cursos/extraterrestres/newsletter.md SUBJECT=\"Nuevo Curso\""; \
+		exit 1; \
+	fi
+	@python3 notify/client/send_newsletter.py "$(FILE)" --subject "$(SUBJECT)" $(if $(TEST_LIMIT),--test-limit "$(TEST_LIMIT)",) $(if $(DRY_RUN),--dry-run,)
+

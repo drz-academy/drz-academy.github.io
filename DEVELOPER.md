@@ -178,6 +178,59 @@ Tras desplegar, si WhatsApp sigue mostrando la imagen vieja, borra la caché en 
 
 ---
 
+## Sistema de Suscripciones y Newsletters
+
+El sitio incluye un sistema básico para manejar suscriptores de cursos (guardados en Cloudflare KV) y enviarles newsletters en formato Markdown usando Gmail SMTP. El código vive en `notify/`.
+
+### Configuración de Secretos
+
+Crea el directorio `.secrets/` en la raíz (ignorado por Git) y añade los siguientes archivos:
+- `notify-token`: Contraseña secreta para comunicarse con el Worker.
+- `notify-worker-url`: URL del worker desplegado en Cloudflare (ej. `https://drz-course-notify-worker.tu-dominio.workers.dev`).
+- `gmail-smtp-user`: Tu correo de envío (ej. `tucorreo@gmail.com`).
+- `gmail-app-password`: [Contraseña de aplicación de Gmail](https://myaccount.google.com/apppasswords).
+
+### 1. Desplegar el Worker de notificaciones
+
+Para manejar la lista de correos y los links de desuscripción de forma segura, primero debes desplegar el backend:
+
+```bash
+# 1. Crear el KV namespace (solo la primera vez)
+cd notify/worker
+npx wrangler kv namespace create DRZ_NOTIFY
+# (copiar el ID devuelto al wrangler.toml)
+
+# 2. Configurar el token de seguridad
+npx wrangler secret put NOTIFY_TOKEN
+
+# 3. Desplegar el worker
+make notify-worker-deploy
+```
+
+### 2. Importar y consultar suscriptores
+
+```bash
+# Importar desde un CSV (debe tener una columna 'email' o correo válido)
+make notify-import-csv CSV=contrib/contacts-test.csv
+
+# Consultar lista de correos suscritos
+make notify-list
+```
+
+### 3. Enviar un Newsletter
+
+El script convierte un archivo Markdown a HTML compatible con correo electrónico, agregando en el pie de página un enlace para cancelar la suscripción.
+
+```bash
+# Prueba enviando solo a los primeros 2 suscriptores de la lista
+make notify-send-newsletter FILE=cursos/extraterrestres/newsletter.md SUBJECT="🛸 Nuevo Curso" TEST_LIMIT=2
+
+# Envío completo a toda la lista
+make notify-send-newsletter FILE=cursos/extraterrestres/newsletter.md SUBJECT="🛸 Nuevo Curso"
+```
+
+---
+
 ## Estadísticas de clicks
 
 El sitio registra interacciones (apps, demos, cursos, botón «Inscribete ahora») en un **Cloudflare Worker** con KV. Ver [`analytics/README.md`](../analytics/README.md) para desplegar el worker y abrir el panel en `/stats.html`.
@@ -375,6 +428,9 @@ demos/
   demos.json            Índice de demos (generado)
   template/demo.json    Plantilla para demos nuevos
   <id>/                 Un directorio por demo
+notify/
+  worker/               Backend en Cloudflare Workers + KV (suscripciones)
+  client/               Scripts Python para importar contactos y enviar correos
 apps/
   cloud_academy/        Cámara de burbujas (Next.js)
   lighting-black-holes/ Simulación agujeros negros (Next.js)

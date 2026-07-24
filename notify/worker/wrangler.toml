@@ -1,0 +1,14 @@
+name = "drz-course-notify-worker"
+main = "course-notify-worker.js"
+compatibility_date = "2026-04-22"
+
+# Crear namespace: npx wrangler kv namespace create DRZ_NOTIFY --config wrangler.toml
+# Pegar el id devuelto abajo.
+[[kv_namespaces]]
+binding = "DRZ_NOTIFY"
+id = "296cd20799db4dcda77ddcc93a125c98"
+
+[vars]
+SITE_BASE_URL = "https://drz-academy.github.io"
+
+# Secreto (no commitear): npx wrangler secret put NOTIFY_TOKEN --config wrangler.toml
