@@ -18,3 +18,7 @@ _site/
 
 contrib
 
+
+# Secrets
+.secrets/*
+!.secrets/.keep

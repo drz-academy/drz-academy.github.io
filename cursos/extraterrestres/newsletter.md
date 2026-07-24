@@ -1,3 +1,7 @@
+---
+subject: "🛸 Extraterrestres: de la cultura a la ciencia - Inscríbete a la nueva Master Class"
+---
+
 <div align="center">
   <a href="https://drz-academy.github.io/cursos/extraterrestres/">
     <img src="https://drz-academy.github.io/cursos/extraterrestres/images/poster.webp" alt="Afiche Master Class Extraterrestres" style="max-width: 600px; width: 100%; height: auto; border-radius: 8px;">
@@ -39,9 +43,12 @@ Por eso, te invitamos a participar en la **Master Class: Extraterrestres**. Un e
 
 <br>
 
-Cualquier duda adicional, puedes escribirnos respondiendo a este correo o contactarnos por nuestro WhatsApp: [wa.me/573022871135](https://wa.me/573022871135).
+Cualquier duda adicional, puedes escribirnos respondiendo a este correo o contactarnos por nuestro WhatsApp: [wa.me/573002422052](https://wa.me/573002422052).
 
 ¡Te esperamos para explorar juntos las fronteras de la vida en el Universo!
 
 Saludos,<br>
-**El equipo de Dr. Z Academy**
+**El equipo de Dr. Z Academy**<br>
+<img src="https://drz-academy.github.io/assets/DrZ-Logos/logo-firma.webp" alt="Dr. Z Academy" style="max-width: 180px; height: auto; margin-top: 15px;">
+<br>
+<a href="https://www.instagram.com/dr.zacademy/" style="color: #555; text-decoration: none; font-size: 14px;">📸 @dr.zacademy</a>

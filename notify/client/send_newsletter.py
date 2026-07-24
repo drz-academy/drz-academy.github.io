@@ -35,7 +35,7 @@ def wrap_html(html_content: str) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Enviar una newsletter desde un archivo Markdown.")
     parser.add_argument("markdown_file", type=Path, help="Ruta al archivo .md (ej. cursos/extraterrestres/newsletter.md)")
-    parser.add_argument("--subject", required=True, help="Asunto del correo electrónico")
+    parser.add_argument("--subject", required=False, help="Asunto del correo electrónico (sobrescribe el del markdown)")
     parser.add_argument("--test-limit", type=int, default=0, help="Enviar solo a las primeras N personas (como test)")
     parser.add_argument("--dry-run", action="store_true", help="Solo muestra a quiénes se enviaría, no envía nada")
 
@@ -46,6 +46,25 @@ def main() -> int:
         return 1
 
     md_content = args.markdown_file.read_text(encoding="utf-8")
+    subject = args.subject
+
+    # Extraer frontmatter si existe
+    if md_content.startswith("---"):
+        import yaml
+        parts = md_content.split("---", 2)
+        if len(parts) >= 3:
+            try:
+                frontmatter = yaml.safe_load(parts[1])
+                if isinstance(frontmatter, dict) and "subject" in frontmatter:
+                    if not subject:  # Solo usar el del archivo si no se pasó por CLI
+                        subject = frontmatter["subject"]
+                    md_content = parts[2].strip()
+            except Exception as e:
+                print(f"Error parseando frontmatter: {e}", file=sys.stderr)
+
+    if not subject:
+        print("Error: No se proporcionó asunto. Especifica --subject en el comando o añade 'subject: ...' en el encabezado YAML del archivo Markdown.", file=sys.stderr)
+        return 1
     
     # Convertir Markdown a HTML
     raw_html = markdown.markdown(md_content, extensions=['extra', 'nl2br'])
@@ -74,7 +93,7 @@ def main() -> int:
             print(f"  - {e}")
         return 0
 
-    print(f"\nSe enviará el correo a {len(emails)} personas. Asunto: '{args.subject}'")
+    print(f"\nSe enviará el correo a {len(emails)} personas. Asunto: '{subject}'")
     confirm = input("¿Deseas continuar? (y/N): ")
     if confirm.lower() != 'y':
         print("Envío cancelado.")
@@ -97,7 +116,7 @@ def main() -> int:
         try:
             send_gmail(
                 to_addrs=[email],
-                subject=args.subject,
+                subject=subject,
                 html_body=final_html,
                 unsubscribe_url=unsub,
                 delay_sec=1.5 # Un breve delay entre correos para evitar bloqueos
