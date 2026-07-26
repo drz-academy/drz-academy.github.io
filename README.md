@@ -55,3 +55,12 @@ Allí encontrarás instrucciones sobre:
 - **Espacio de experimentación (este sitio):** [drz-academy.github.io](https://drz-academy.github.io)
 - **Instagram:** [@dr.zacademy](https://instagram.com/dr.zacademy)
 - **Atención por WhatsApp:** [+57 300 2422052](https://wa.me/573002422052)
+
+---
+
+## 🤖 Aclaración sobre el uso de Inteligencia Artificial
+
+Las ideas, el diseño pedagógico y el deseo de innovar en este sitio **nacen exclusivamente de la creatividad de los humanos detrás de la Dr. Z Academy**, quienes constantemente buscamos nuevas formas de mejorar la experiencia de quienes pasan por nuestros cursos. Sin embargo, reconocemos abiertamente que materializar estas visiones a la velocidad y con el nivel técnico de hoy no habría sido posible sin la asistencia de modelos de Inteligencia Artificial.
+
+Utilizamos la IA como una poderosa herramienta que nos asiste en el desarrollo y despliegue eficiente de las aplicaciones (nuestros *pair programmers*). Aún así, **declaramos firmemente que el núcleo de cada proyecto —el *qué* queremos enseñar y *cómo* queremos que lo experimentes— surge puramente de la creatividad humana**, alimentada día a día por las preguntas, la curiosidad y la interacción personal con estudiantes y entusiastas que se acercan a nuestras actividades.
+
