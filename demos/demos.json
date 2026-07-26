@@ -30,6 +30,20 @@
       "activo": true
     },
     {
+      "id": "rejilla-difraccion",
+      "titulo": "Rejilla de difracción",
+      "descripcion": "Simula cómo una rejilla de difracción descompone la luz y genera distintos órdenes espectrales.",
+      "url": "demos/rejilla-difraccion/",
+      "icono": "🌈",
+      "etiquetas": [
+        "Óptica",
+        "Difracción",
+        "Interactivo"
+      ],
+      "categoria": "Óptica",
+      "activo": true
+    },
+    {
       "id": "optica-activa",
       "titulo": "Óptica activa — Espejo segmentado James Webb",
       "descripcion": "Desalinea los 18 segmentos del espejo del JWST y corrígelos con actuadores. Visualiza el efecto en la imagen focal y la calidad óptica.",

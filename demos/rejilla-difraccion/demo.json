@@ -1,0 +1,17 @@
+{
+  "id": "rejilla-difraccion",
+  "titulo": "Rejilla de",
+  "titulo_destacado": "difracción",
+  "categoria": "Óptica",
+  "descripcion": "Explora de forma interactiva cómo una rejilla de difracción separa la luz según su longitud de onda y produce patrones de interferencia.",
+  "descripcion_corta": "Simula cómo una rejilla de difracción descompone la luz y genera distintos órdenes espectrales.",
+  "icono": "🌈",
+  "etiquetas": [
+    "Óptica",
+    "Difracción",
+    "Interactivo"
+  ],
+  "activo": true,
+  "teoria_titulo": "¿Cómo funciona una rejilla de difracción?",
+  "qr_imagen": "images/qr-demo.png"
+}

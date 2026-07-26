@@ -1,0 +1,497 @@
+<style>
+.demo-widget{--y:#FAD246;--dk:#0c0c0c;--mid:#0f0f0f;--brd:#1e1e1e;--gray:#777}
+.demo-widget, .demo-widget *{box-sizing:border-box;margin:0;padding:0}
+.demo-widget{background:var(--dk);color:#ddd;font-family:system-ui,-apple-system,sans-serif;font-size:13px}
+.demo-widget .widget{max-width:760px;margin:0 auto;padding:16px 12px}
+.demo-widget h1{font-size:14px;font-weight:500;color:var(--y);text-align:center;margin-bottom:3px;letter-spacing:.03em}
+.demo-widget .sub{font-size:10px;color:var(--gray);text-align:center;margin-bottom:12px}
+.demo-widget canvas{display:block;border-radius:4px;border:1px solid #181818;width:100%;max-width:720px}
+
+/* CONTROLES */
+.demo-widget .ctrls{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;align-items:flex-start}
+.demo-widget .ctrl-sec{background:var(--mid);border:1px solid var(--brd);border-radius:5px;padding:10px 12px;flex:1;min-width:180px}
+.demo-widget .ctrl-sec h3{font-size:9.5px;font-weight:700;color:var(--y);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px}
+.demo-widget label.row{display:flex;align-items:center;justify-content:space-between;font-size:11px;color:#999;margin-bottom:5px}
+.demo-widget label.row b{color:var(--y)}
+.demo-widget input[type=range]{width:100%;accent-color:var(--y);cursor:pointer;margin-bottom:3px}
+
+.demo-widget .tick-row{display:flex;justify-content:space-between;font-size:9px;color:#555;margin-bottom:4px}
+.demo-widget .pb{background:#181818;border:1px solid #2a2a2a;color:#666;font-size:9.5px;padding:2px 8px;
+    border-radius:3px;cursor:pointer;transition:all .12s}
+.demo-widget .pb:hover, .demo-widget .pb.on{background:#1e1b00;border-color:var(--y);color:var(--y)}
+.demo-widget .pb-row{display:flex;gap:4px}
+
+.demo-widget .radio-row{display:flex;flex-direction:column;gap:5px}
+.demo-widget .radio-row label{display:flex;align-items:center;gap:6px;font-size:11px;color:#aaa;cursor:pointer}
+.demo-widget input[type=radio]{accent-color:var(--y);cursor:pointer}
+
+.demo-widget button#wfBtn{width:100%;padding:8px;background:#181818;border:1px solid #2a2a2a;color:#888;
+    font-size:11px;border-radius:4px;cursor:pointer;transition:all .15s;margin-top:4px}
+.demo-widget button#wfBtn.on{background:#1a1a00;border-color:var(--y);color:var(--y)}
+.demo-widget button#wfBtn:hover{filter:brightness(1.2)}
+
+/* INFO */
+.demo-widget .info-row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.demo-widget .info-box{background:var(--mid);border:1px solid var(--brd);border-radius:5px;
+          padding:9px 12px;flex:1;min-width:180px}
+.demo-widget .info-box h4{font-size:9px;color:var(--gray);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.demo-widget .info-val{font-size:13px;color:var(--y);font-weight:700;margin-bottom:2px}
+.demo-widget .info-sub{font-size:10px;color:#555}
+.demo-widget .angle-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-top:4px}
+.demo-widget .angle-item{text-align:center}
+.demo-widget .angle-lbl{font-size:9.5px;color:#666;display:block}
+.demo-widget .angle-num{font-size:12px;font-weight:700}
+</style>
+
+<div class="widget">
+  <h1>Rejilla de difracción</h1>
+  <p class="sub">Separación de la luz blanca en espectro de colores · Dr. Z Academy</p>
+  <canvas id="c" width="720" height="450"></canvas>
+
+  <div class="ctrls">
+    <!-- SLIDER -->
+    <div class="ctrl-sec" style="flex:2;min-width:240px">
+      <h3>Densidad de la rejilla</h3>
+      <label class="row">Líneas/mm: <b id="lpmV">600</b></label>
+      <input type="range" id="lpmS" min="100" max="1200" value="600" step="10">
+      <div class="tick-row">
+        <span>100</span><span>300</span><span>600</span><span>900</span><span>1200</span>
+      </div>
+      <div class="pb-row">
+        <button class="pb" data-v="300">300 l/mm</button>
+        <button class="pb on" data-v="600">600 l/mm</button>
+        <button class="pb" data-v="1200">1200 l/mm</button>
+      </div>
+      <div style="margin-top:9px;border-top:1px solid #1a1a1a;padding-top:9px">
+        <label class="row">Ancho del haz iluminado: <b id="bwV">10</b> mm</label>
+        <input type="range" id="bwS" min="5" max="50" value="10" step="1">
+        <div class="tick-row"><span>5</span><span>10</span><span>20</span><span>30</span><span>50</span></div>
+      </div>
+    </div>
+
+    <!-- WAVELENGTH -->
+    <div class="ctrl-sec">
+      <h3>Luz incidente</h3>
+      <div class="radio-row">
+        <label><input type="radio" name="wl" value="white" checked> Luz blanca</label>
+        <label><input type="radio" name="wl" value="380"> Violeta (380 nm)</label>
+        <label><input type="radio" name="wl" value="450"> Azul (450 nm)</label>
+        <label><input type="radio" name="wl" value="550"> Verde (550 nm)</label>
+        <label><input type="radio" name="wl" value="620"> Naranja (620 nm)</label>
+        <label><input type="radio" name="wl" value="700"> Rojo (700 nm)</label>
+        <label><input type="radio" name="wl" value="850"> <span style="color:#664">Infrarrojo cercano (850 nm)</span></label>
+      </div>
+    </div>
+
+    <!-- WAVEFRONTS -->
+    <div class="ctrl-sec" style="min-width:150px">
+      <h3>Visualización</h3>
+      <button id="wfBtn">Mostrar frentes de onda</button>
+      <p style="font-size:9.5px;color:#444;margin-top:8px;line-height:1.5">
+        Los frentes circulares (principio de Huygens) muestran cómo la interferencia entre rendijas produce el espectro.
+      </p>
+    </div>
+  </div>
+
+  <!-- INFO BOXES -->
+  <div class="info-row">
+    <div class="info-box">
+      <h4>Período de la rejilla (d)</h4>
+      <div class="info-val" id="iD">—</div>
+      <div class="info-sub">d [µm] = 1 000 / (líneas/mm)</div>
+    </div>
+    <div class="info-box" style="flex:2">
+      <h4>Ángulos de difracción — primer orden (m=1)</h4>
+      <div class="angle-grid" id="iAngles">
+        <div class="angle-item">
+          <span class="angle-lbl">Violeta 380 nm</span>
+          <span class="angle-num" id="aV" style="color:#9955ff">—</span>
+        </div>
+        <div class="angle-item">
+          <span class="angle-lbl">Verde 550 nm</span>
+          <span class="angle-num" id="aG" style="color:#44ff88">—</span>
+        </div>
+        <div class="angle-item">
+          <span class="angle-lbl">Rojo 700 nm</span>
+          <span class="angle-num" id="aR" style="color:#ff4422">—</span>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <h4>Poder de resolución (m=1)</h4>
+      <div class="info-val" id="iR">—</div>
+      <div class="info-sub" id="iDl">Δλ_mín ≈ — nm</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════════
+//  Constantes del canvas
+// ════════════════════════════════════════════════════════════
+const C = document.getElementById('c');
+const ctx = C.getContext('2d');
+const CW = C.width, CH = C.height;   // 720 × 450
+const GX = 252;   // posición x de la rejilla
+const CY = 225;   // centro y
+
+// Slits visibles (para frentes de onda)
+const N_SLITS   = 7;
+const SLIT_STEP = 50;   // separación visual entre rendijas [px]
+
+// ── Estado ──────────────────────────────────────────────────
+let lpm  = 600;       // líneas por mm
+let mode = 'white';   // 'white' | '700' | '550' | '450'
+let showWF = false;   // mostrar frentes de onda
+let tAnim = 0;
+let rafID;
+
+// ════════════════════════════════════════════════════════════
+//  Física
+// ════════════════════════════════════════════════════════════
+const d_nm  = () => 1e6 / lpm;               // separación en nm
+const d_um  = () => 1000 / lpm;              // separación en µm
+const theta = λ => {                          // ángulo de difracción [°]
+  const s = λ / d_nm();
+  return s > 1 ? null : Math.asin(s) * 180 / Math.PI;
+};
+
+// ════════════════════════════════════════════════════════════
+//  Longitud de onda → color CSS
+// ════════════════════════════════════════════════════════════
+function wlColor(λ, alpha=1) {
+  let r=0,g=0,b=0;
+  if      (λ<380) {r=.5;g=0;b=.5}
+  else if (λ<440) {r=(440-λ)/60;g=0;b=1}
+  else if (λ<490) {r=0;g=(λ-440)/50;b=1}
+  else if (λ<510) {r=0;g=1;b=(510-λ)/20}
+  else if (λ<580) {r=(λ-510)/70;g=1;b=0}
+  else if (λ<645) {r=1;g=(645-λ)/65;b=0}
+  else            {r=1;g=0;b=0}
+  const f = λ<380 ? 0.3 : (λ<420 ? .65+.35*(λ-380)/40 : (λ>700 ? 0.3 : (λ>680 ? .65+.35*(700-λ)/20 : 1)));
+  return `rgba(${Math.round(r*f*255)},${Math.round(g*f*255)},${Math.round(b*f*255)},${alpha})`;
+}
+
+// ════════════════════════════════════════════════════════════
+//  Punto donde el rayo sale del canvas
+// ════════════════════════════════════════════════════════════
+function rayExit(x0, y0, angleDeg) {
+  const a = angleDeg * Math.PI / 180;
+  const dx = Math.cos(a), dy = -Math.sin(a);   // dy< 0 = hacia arriba
+  let t = Infinity;
+  if (dx > 0) t = Math.min(t, (CW-x0)/dx);
+  if (dy < 0) t = Math.min(t, -y0/dy);         // borde superior (y=0)
+  if (dy > 0) t = Math.min(t, (CH-y0)/dy);     // borde inferior
+  return {x: x0+dx*t, y: y0+dy*t};
+}
+
+// ════════════════════════════════════════════════════════════
+//  DIBUJO
+// ════════════════════════════════════════════════════════════
+function drawBg() {
+  const g = ctx.createLinearGradient(0,0,CW,0);
+  g.addColorStop(0,'#020208'); g.addColorStop(1,'#060612');
+  ctx.fillStyle = g; ctx.fillRect(0,0,CW,CH);
+}
+
+function drawGrating() {
+  // Barra de la rejilla
+  ctx.fillStyle = '#0d1f3a';
+  ctx.fillRect(GX-5, 20, 10, CH-40);
+  // Líneas de rendija (líneas horizontales = estructura)
+  ctx.strokeStyle = '#1e4880';
+  ctx.lineWidth = 1;
+  for (let y=22; y<CH-22; y+=14) {
+    ctx.beginPath(); ctx.moveTo(GX-5,y); ctx.lineTo(GX+5,y); ctx.stroke();
+  }
+  // Borde de la rejilla
+  ctx.strokeStyle = '#2a5fa0';
+  ctx.lineWidth = 1.2;
+  ctx.strokeRect(GX-5, 20, 10, CH-40);
+  // Etiqueta
+  ctx.fillStyle='#2a5fa0'; ctx.font='9px system-ui'; ctx.textAlign='center';
+  ctx.fillText('REJILLA',GX,CH-8);
+  // Marcar posiciones de las rendijas (aperturas por donde pasa la luz)
+  const slitYs = Array.from({length:N_SLITS},(_,k)=>CY+(k-(N_SLITS-1)/2)*SLIT_STEP);
+  slitYs.forEach(sy=>{
+    ctx.fillStyle='rgba(120,200,255,.55)';
+    ctx.beginPath(); ctx.arc(GX, sy, 2.8, 0, 2*Math.PI); ctx.fill();
+  });
+}
+
+function drawIncidentBeam() {
+  const BEAM_H = (N_SLITS-1)*SLIT_STEP + 60;
+  const BY = CY - BEAM_H/2;
+  
+  if (mode === 'white') {
+    // Haz blanco con gradiente arcoíris sutil
+    const g = ctx.createLinearGradient(0, BY, 0, BY+BEAM_H);
+    const colors = [
+      [0,'rgba(150,80,255,.55)'],[.15,'rgba(80,100,255,.55)'],
+      [.3,'rgba(60,200,255,.55)'],[.45,'rgba(60,255,120,.55)'],
+      [.6,'rgba(255,255,60,.55)'],[.75,'rgba(255,140,30,.55)'],
+      [1,'rgba(255,50,20,.55)']
+    ];
+    colors.forEach(([s,c])=>g.addColorStop(s,c));
+    ctx.fillStyle = g;
+    ctx.fillRect(0, BY, GX-5, BEAM_H);
+    
+    // Overlay blanco general
+    const gw = ctx.createLinearGradient(0,0,GX-5,0);
+    gw.addColorStop(0,'rgba(255,255,255,0)'); gw.addColorStop(1,'rgba(255,255,255,.20)');
+    ctx.fillStyle = gw; ctx.fillRect(0, BY, GX-5, BEAM_H);
+  } else {
+    const λ = +mode;
+    const g = ctx.createLinearGradient(0,0,GX-5,0);
+    g.addColorStop(0,wlColor(λ,0)); g.addColorStop(1,wlColor(λ,.65));
+    ctx.fillStyle = g; ctx.fillRect(0, BY, GX-5, BEAM_H);
+  }
+  
+  // Flechas de dirección
+  ctx.strokeStyle = 'rgba(255,255,255,.3)'; ctx.lineWidth=1; ctx.setLineDash([]);
+  const step = BEAM_H/5;
+  for (let k=0;k<5;k++) {
+    const ay = BY + step/2 + k*step;
+    ctx.beginPath();
+    ctx.moveTo(30,ay); ctx.lineTo(GX-12,ay);
+    // punta
+    ctx.moveTo(GX-18,ay-3); ctx.lineTo(GX-12,ay); ctx.lineTo(GX-18,ay+3);
+    ctx.stroke();
+  }
+  
+  // Etiqueta del haz
+  ctx.fillStyle='rgba(255,255,255,.5)'; ctx.font='9.5px system-ui'; ctx.textAlign='center';
+  ctx.fillText(mode==='white'?'Luz blanca':`λ = ${mode} nm`, GX/2, BY-7);
+}
+
+function drawAngularScale() {
+  const R = 95;
+  ctx.setLineDash([3,4]); ctx.strokeStyle='rgba(80,120,180,.35)'; ctx.lineWidth=1;
+  ctx.beginPath();
+  ctx.arc(GX, CY, R, -Math.PI*0.9, 0, true);  // arc from 0° to ~80°
+  ctx.stroke(); ctx.setLineDash([]);
+  
+  for (let deg=0; deg<=70; deg+=10) {
+    const a = deg*Math.PI/180;
+    const co=Math.cos(a), si=Math.sin(a);
+    const tick = deg%20===0 ? 10 : 5;
+    ctx.strokeStyle='rgba(80,120,180,.5)'; ctx.lineWidth= deg%20===0?1.2:0.8;
+    ctx.beginPath();
+    ctx.moveTo(GX+R*co, CY-R*si);
+    ctx.lineTo(GX+(R+tick)*co, CY-(R+tick)*si);
+    ctx.stroke();
+    
+    if(deg%20===0 && deg>0){
+      ctx.fillStyle='rgba(100,150,220,.65)'; ctx.font='9px system-ui'; ctx.textAlign='left';
+      const lx = GX+(R+14)*co, ly=CY-(R+14)*si;
+      ctx.textAlign='center';
+      ctx.fillText(deg+'°', lx, ly+3);
+    }
+  }
+  // Etiqueta 0°
+  ctx.fillStyle='rgba(100,150,220,.65)'; ctx.font='9px system-ui'; ctx.textAlign='left';
+  ctx.fillText('0°', GX+R+14, CY+4);
+}
+
+function drawZerothOrder() {
+  // Orden 0: haz paralelo sin difractar — una raya por CADA rendija de la rejilla
+  const slitYs = Array.from({length:N_SLITS},(_,k)=>CY+(k-(N_SLITS-1)/2)*SLIT_STEP);
+  ctx.strokeStyle='rgba(255,255,255,.22)'; ctx.lineWidth=1.2; ctx.setLineDash([6,5]);
+  slitYs.forEach(sy=>{
+    ctx.beginPath(); ctx.moveTo(GX,sy); ctx.lineTo(CW,sy); ctx.stroke();
+  });
+  ctx.setLineDash([]);
+  ctx.fillStyle='rgba(255,255,255,.3)'; ctx.font='9px system-ui'; ctx.textAlign='left';
+  ctx.fillText('Orden 0 (sin difractar)', GX+8, slitYs[0]-6);
+}
+
+function drawSpectrum() {
+  // Cada rendija de la rejilla contribuye al espectro.
+  // Los rayos de TODAS las rendijas salen paralelos al mismo ángulo θ(λ)
+  // y se suman constructivamente por interferencia → haz brillante paralelo.
+  const slitYs = Array.from({length:N_SLITS},(_,k)=>CY+(k-(N_SLITS-1)/2)*SLIT_STEP);
+
+  if (mode === 'white') {
+    // Barrido: para cada λ, todas las rendijas emiten en paralelo
+    for (let λ=380; λ<=700; λ+=5) {
+      const th = theta(λ);
+      if (th===null) continue;
+      ctx.strokeStyle = wlColor(λ,.75); ctx.lineWidth=1.8;
+      slitYs.forEach(sy=>{
+        const end = rayExit(GX,sy,th);
+        ctx.beginPath(); ctx.moveTo(GX,sy); ctx.lineTo(end.x,end.y); ctx.stroke();
+      });
+    }
+    // Etiquetas al borde del canvas
+    [[380,'Violeta'],[450,'Azul'],[550,'Verde'],[620,'Naranja'],[700,'Rojo']].forEach(([λ,name])=>{
+      const th=theta(λ); if(!th) return;
+      const end=rayExit(GX, slitYs[0], th);   // raya de la rendija superior
+      ctx.fillStyle=wlColor(λ,.9); ctx.font='9px system-ui'; ctx.textAlign='left';
+      ctx.fillText(`${name} ${λ}nm`, Math.min(end.x+2,CW-70), Math.max(end.y,8));
+    });
+  } else {
+    const λ=+mode, th=theta(λ);
+    if(th===null){
+      ctx.fillStyle='#fb923c'; ctx.font='11px system-ui'; ctx.textAlign='center';
+      const msg = λ>700
+        ? `IR (${λ} nm) > d (${d_nm().toFixed(0)} nm): difracción de 1.er orden imposible`
+        : `λ > d: difracción de primer orden imposible`;
+      ctx.fillText(msg, GX+220, CY-30);
+      return;
+    }
+    const isIR = λ > 700;
+    // Haz paralelo desde todas las rendijas (punteado si es IR)
+    ctx.save();
+    ctx.shadowColor = isIR ? 'rgba(80,20,0,0.5)' : wlColor(λ, 0.8);
+    ctx.shadowBlur  = isIR ? 3 : 7;
+    ctx.strokeStyle = isIR ? 'rgba(130,50,0,0.75)' : wlColor(λ,1);
+    ctx.lineWidth   = isIR ? 1.5 : 2.2;
+    if(isIR) ctx.setLineDash([8,5]);
+    slitYs.forEach(sy=>{
+      const end=rayExit(GX,sy,th);
+      ctx.beginPath(); ctx.moveTo(GX,sy); ctx.lineTo(end.x,end.y); ctx.stroke();
+    });
+    ctx.setLineDash([]);
+    ctx.restore();
+    if(isIR){
+      ctx.fillStyle='rgba(210,150,60,.85)'; ctx.font='9px system-ui'; ctx.textAlign='center';
+      ctx.fillText('⚠ infrarrojo — no visible al ojo humano', GX+200, slitYs[0]-12);
+    }
+    // Etiqueta sobre la raya central
+    const midY=slitYs[Math.floor(N_SLITS/2)];
+    const endM=rayExit(GX,midY,th);
+    ctx.fillStyle='rgba(255,255,255,0.9)'; ctx.font='10px system-ui'; ctx.textAlign='center';
+    ctx.fillText(`λ=${λ}nm  θ=${th.toFixed(1)}°`, (GX+endM.x)/2+15, (midY+endM.y)/2-10);
+    // Arco del ángulo
+    ctx.strokeStyle=wlColor(λ,.5); ctx.lineWidth=0.8; ctx.setLineDash([3,3]);
+    ctx.beginPath(); ctx.arc(GX,CY,65,0,-th*Math.PI/180,true); ctx.stroke();
+    ctx.setLineDash([]);
+    const am=th*0.5*Math.PI/180;
+    ctx.fillStyle='rgba(255,255,255,0.8)'; ctx.font='9px system-ui'; ctx.textAlign='left';
+    ctx.fillText(`θ=${th.toFixed(1)}°`, GX+70*Math.cos(am)+2, CY-70*Math.sin(am));
+  }
+}
+
+function drawWavefronts() {
+  const LAMBDA_VIS = 44;  // longitud de onda visual [px]
+  const MAX_R = 380;
+  const SPEED  = 1.3;
+  const wfColor = mode==='white' ? [220,230,255] : (() => {
+    const λ=+mode;
+    const rgb = wlColor(λ).match(/\d+/g).map(Number);
+    return rgb;
+  })();
+  
+  for (let k=0; k<N_SLITS; k++) {
+    const sy = CY + (k-(N_SLITS-1)/2)*SLIT_STEP;
+    for (let n=0; n<9; n++) {
+      const r = ((tAnim*SPEED + n*LAMBDA_VIS) % (MAX_R + LAMBDA_VIS)) - LAMBDA_VIS;
+      if (r<1) continue;
+      const alpha = Math.max(0, 0.38*(1-r/MAX_R));
+      ctx.beginPath();
+      ctx.arc(GX, sy, r, -Math.PI/2, Math.PI/2, false);
+      ctx.strokeStyle=`rgba(${wfColor[0]},${wfColor[1]},${wfColor[2]},${alpha.toFixed(2)})`;
+      ctx.lineWidth=1;
+      ctx.stroke();
+    }
+    // Punto de rendija
+    ctx.fillStyle='rgba(100,160,255,.5)';
+    ctx.beginPath(); ctx.arc(GX, sy, 2.5, 0, 2*Math.PI); ctx.fill();
+  }
+}
+
+// ════════════════════════════════════════════════════════════
+//  Frame principal
+// ════════════════════════════════════════════════════════════
+function draw() {
+  ctx.clearRect(0,0,CW,CH);
+  drawBg();
+  drawAngularScale();
+  drawGrating();
+  drawIncidentBeam();
+  drawZerothOrder();
+  drawSpectrum();
+  if(showWF) drawWavefronts();
+  
+  // Leyenda grating equation
+  ctx.fillStyle='rgba(180,180,180,.35)'; ctx.font='italic 10px system-ui';
+  ctx.textAlign='right';
+  ctx.fillText('d·sen(θ) = m·λ  (m=1)', CW-10, CH-10);
+}
+
+function animate() {
+  tAnim++;
+  draw();
+  rafID = requestAnimationFrame(animate);
+}
+
+function startOrResume() {
+  if(showWF) {
+    if(!rafID) rafID = requestAnimationFrame(animate);
+  } else {
+    cancelAnimationFrame(rafID); rafID=null;
+    draw();
+  }
+}
+
+// ════════════════════════════════════════════════════════════
+//  Indicadores numéricos
+// ════════════════════════════════════════════════════════════
+function updateInfo() {
+  const d = d_um();
+  document.getElementById('iD').textContent = `${d.toFixed(3)} µm`;
+  
+  const labels = {V:[380,'aV'], G:[550,'aG'], R:[700,'aR']};
+  Object.entries(labels).forEach(([k,[λ,id]])=>{
+    const th=theta(λ);
+    document.getElementById(id).textContent = th===null ? 'n/a' : `${th.toFixed(1)}°`;
+  });
+  
+  const beamMM = +document.getElementById('bwS').value;
+  const N = lpm * beamMM;          // líneas iluminadas = (líneas/mm) × ancho [mm]
+  const R = 1 * N;
+  // Separador de miles: espacio (norma SI) — la coma es decimal en español
+  const Rfmt = R >= 1000 ? Math.floor(R/1000) + '\u202F' + String(R%1000).padStart(3,'0') : R;
+  document.getElementById('iR').textContent = `R ≈ ${Rfmt}`;
+  const Dlambda = 550 / R;
+  document.getElementById('iDl').textContent = `Δλ_mín ≈ ${Dlambda.toFixed(3)} nm (en 550 nm)`;
+}
+
+// ════════════════════════════════════════════════════════════
+//  Eventos
+// ════════════════════════════════════════════════════════════
+document.getElementById('lpmS').addEventListener('input', function() {
+  lpm = +this.value;
+  document.getElementById('lpmV').textContent = lpm;
+  document.querySelectorAll('.pb').forEach(b=>b.classList.toggle('on',+b.dataset.v===lpm));
+  updateInfo(); startOrResume();
+});
+
+document.querySelectorAll('.pb').forEach(b => b.addEventListener('click', function() {
+  lpm = +this.dataset.v;
+  document.getElementById('lpmS').value = lpm;
+  document.getElementById('lpmV').textContent = lpm;
+  document.querySelectorAll('.pb').forEach(x=>x.classList.toggle('on',+x.dataset.v===lpm));
+  updateInfo(); startOrResume();
+}));
+
+document.querySelectorAll('input[name=wl]').forEach(r => r.addEventListener('change', function() {
+  mode = this.value; updateInfo(); startOrResume();
+}));
+
+document.getElementById('wfBtn').addEventListener('click', function() {
+  showWF = !showWF;
+  this.textContent = showWF ? 'Ocultar frentes de onda' : 'Mostrar frentes de onda';
+  this.classList.toggle('on', showWF);
+  startOrResume();
+});
+
+document.getElementById('bwS').addEventListener('input', function() {
+  document.getElementById('bwV').textContent = this.value;
+  updateInfo();
+});
+
+// ── Inicio ──────────────────────────────────────────────────
+updateInfo();
+draw();
+</script>
