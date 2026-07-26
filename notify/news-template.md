@@ -19,13 +19,33 @@ make notify-send-newsletter FILE=notify/news-template.md
 </div>
 
 <!-- Contenido Principal -->
-<h1 style="color: #2c3e50; text-align: center;">Título de la Noticia</h1>
+<h2 style="text-align: center; color: #555; font-style: italic; margin-bottom: 30px;">Novedades del [Día] de [Mes] de [Año]</h2>
 
-<p>Hola, {Nombre}:</p>
+<!-- Novedad 1 -->
+<div style="border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; margin-bottom: 30px; background-color: #ffffff; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+  <h3 style="color: #2c3e50; margin-top: 0; font-size: 22px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; margin-bottom: 20px;">Título de la Primera Novedad Principal</h3>
 
-<p>[Aquí va el contenido de tu newsletter...]</p>
+  <p>Este es el texto principal de la primera novedad. Aquí puedes contar historias, anunciar nuevos cursos, o hablar de algún evento reciente. Puedes incluir texto en <strong>negrita</strong> y enlaces a páginas externas como <a href="https://drz-academy.github.io/" style="color: #0056b3;">drz-academy.github.io</a>.</p>
 
-<p>¡Te esperamos!</p>
+  <p>Un segundo párrafo para dar más detalles. Explica por qué es relevante y qué esperas que haga el lector a continuación.</p>
+
+  <div style="text-align: center; margin: 30px 0 10px 0;">
+    <a href="https://drz-academy.github.io/" style="background-color: #2c3e50; color: #ffffff; text-decoration: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; display: inline-block;">Llamado a la acción (Botón)</a>
+  </div>
+</div>
+
+<!-- Novedad 2 -->
+<div style="border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; margin-bottom: 30px; background-color: #ffffff; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+  <h3 style="color: #2c3e50; margin-top: 0; font-size: 22px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; margin-bottom: 20px;">Título de una Segunda Novedad</h3>
+
+  <p>Otra noticia interesante o un recordatorio sobre algo importante. Cada caja como esta separa visualmente las diferentes piezas de información que quieres compartir.</p>
+
+  <ul>
+    <li>Punto importante uno</li>
+    <li>Punto importante dos</li>
+    <li>Punto importante tres</li>
+  </ul>
+</div>
 
 <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
 
@@ -101,5 +121,10 @@ make notify-send-newsletter FILE=notify/news-template.md
     </a>
   </div>
 </div>
+</div>
+
+<p style="text-align: center; font-size: 12px; font-style: italic; color: #777; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+  Si recibiste este correo de un correo distinto a soydoctorz@gmail.com, puedes también <a href="https://drz-academy.github.io/?subscribe=open" style="color: #0056b3; text-decoration: underline;">suscribirte para recibir nuevas novedades de la Dr.Z Academy</a>
+</p>
 
 </div>

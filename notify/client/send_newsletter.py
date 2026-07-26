@@ -7,7 +7,7 @@ from pathlib import Path
 
 import markdown
 from course_notify_client import list_subscribers, worker_base
-from course_notify_gmail import send_gmail
+from course_notify_gmail import send_gmail_bulk
 
 def wrap_html(html_content: str) -> str:
     """Envuelve el contenido HTML renderizado con estilos básicos de email."""
@@ -105,6 +105,24 @@ def main() -> int:
 
     emails = [str(s.get("email") or "") for s in subscribers if s.get("email")]
     
+    # Leer el log de correos ya enviados para este archivo
+    log_file = args.markdown_file.with_name(f".{args.markdown_file.name}.sent.log")
+    already_sent = set()
+    if log_file.exists():
+        already_sent = {line.strip() for line in log_file.read_text(encoding="utf-8").splitlines() if line.strip()}
+        
+    if already_sent and not args.test_emails:
+        emails_to_send = [e for e in emails if e not in already_sent]
+        skipped = len(emails) - len(emails_to_send)
+        print(f"Nota: Se saltarán {skipped} correos que ya fueron enviados previamente según {log_file.name}.")
+        emails = emails_to_send
+        # Filtrar subscribers
+        subscribers = [s for s in subscribers if s.get("email") in emails]
+        
+    if not emails:
+        print("Todos los destinatarios ya han recibido este correo o no hay nadie a quien enviar.", file=sys.stderr)
+        return 0
+
     if args.dry_run:
         print("\nEl correo (dry-run) se enviaría a:")
         for e in emails:
@@ -117,34 +135,42 @@ def main() -> int:
         print("Envío cancelado.")
         return 0
 
-    print("Iniciando envío de correos (puede tomar un momento debido al límite de tasa de Google)...")
+    print("Iniciando envío de correos (agrupando conexiones para evitar bloqueos de Google)...")
     
     wbase = worker_base()
     
-    # Send individually to support unsubscribe tokens
-    sent_count = 0
+    messages = []
     for sub in subscribers:
         email = str(sub.get("email") or "").strip()
-        if not email:
-            continue
-            
+        if not email: continue
         token = str(sub.get("unsubscribeToken") or "").strip()
         unsub = f"{wbase}/unsubscribe?token={token}" if token else ""
+        messages.append({
+            "to": email,
+            "subject": subject,
+            "html": final_html,
+            "unsub": unsub,
+        })
         
-        try:
-            send_gmail(
-                to_addrs=[email],
-                subject=subject,
-                html_body=final_html,
-                unsubscribe_url=unsub,
-                delay_sec=1.5 # Un breve delay entre correos para evitar bloqueos
-            )
-            sent_count += 1
+    sent_count = [0]
+    
+    def on_progress(email: str, success: bool, error: str | None):
+        if success:
+            sent_count[0] += 1
             print(f"Enviado a {email}")
-        except Exception as e:
-            print(f"Error enviando a {email}: {e}", file=sys.stderr)
+            if not args.test_emails:
+                with open(log_file, "a", encoding="utf-8") as f:
+                    f.write(f"{email}\n")
+        else:
+            print(f"Error enviando a {email}: {error}", file=sys.stderr)
 
-    print(f"\nFinalizado. Correos enviados exitosamente: {sent_count}/{len(emails)}")
+    send_gmail_bulk(
+        messages=messages,
+        delay_sec=1.5,
+        progress_callback=on_progress
+    )
+
+    print(f"\nFinalizado. Correos enviados exitosamente en esta tanda: {sent_count[0]}/{len(emails)}")
     return 0
 
 

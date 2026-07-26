@@ -80,3 +80,81 @@ def send_gmail(
             smtp.send_message(msg, from_addr=user, to_addrs=[recipient])
             sent.append(recipient)
     return sent
+
+
+def send_gmail_bulk(
+    *,
+    messages: list[dict],
+    from_name: str = DEFAULT_FROM_NAME,
+    smtp_user: str = "",
+    smtp_password: str = "",
+    delay_sec: float = SEND_DELAY_SEC,
+    progress_callback = None,
+) -> list[str]:
+    """
+    Envía una lista de correos reutilizando la conexión SMTP en lotes de 40 para evitar que Google
+    cierre la conexión abruptamente, y permite callbacks para registrar el progreso.
+    """
+    user = normalize_credential(smtp_user, strip_spaces=False) if smtp_user else load_secret("gmail-smtp-user")
+    password = (
+        normalize_credential(smtp_password, strip_spaces=True)
+        if smtp_password
+        else load_secret("gmail-app-password", strip_spaces=True)
+    )
+
+    sent: list[str] = []
+    batch_size = 40
+    smtp = None
+
+    def connect():
+        nonlocal smtp
+        if smtp:
+            try: smtp.quit()
+            except: pass
+        smtp = smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=60)
+        smtp.login(user, password)
+
+    try:
+        for idx, msg_data in enumerate(messages):
+            to_addr = msg_data.get("to", "").strip()
+            if not to_addr:
+                continue
+
+            if idx % batch_size == 0:
+                connect()
+
+            if idx > 0 and delay_sec > 0:
+                time.sleep(delay_sec)
+
+            msg = build_message(
+                user=user,
+                to_addr=to_addr,
+                subject=msg_data.get("subject", ""),
+                html_body=msg_data.get("html", ""),
+                from_name=from_name,
+                unsubscribe_url=msg_data.get("unsub", ""),
+            )
+            
+            try:
+                smtp.send_message(msg, from_addr=user, to_addrs=[to_addr])
+                sent.append(to_addr)
+                if progress_callback:
+                    progress_callback(to_addr, True, None)
+            except Exception as e:
+                # Si falla, intentamos reconectar una vez y reintentar
+                try:
+                    time.sleep(1)
+                    connect()
+                    smtp.send_message(msg, from_addr=user, to_addrs=[to_addr])
+                    sent.append(to_addr)
+                    if progress_callback:
+                        progress_callback(to_addr, True, None)
+                except Exception as retry_e:
+                    if progress_callback:
+                        progress_callback(to_addr, False, str(retry_e))
+    finally:
+        if smtp:
+            try: smtp.quit()
+            except: pass
+
+    return sent

@@ -217,16 +217,42 @@ make notify-import-csv CSV=contrib/contacts-test.csv
 make notify-list
 ```
 
-### 3. Enviar un Newsletter
+### 3. Crear, Probar y Enviar un Newsletter
 
-El script convierte un archivo Markdown a HTML compatible con correo electrónico, agregando en el pie de página un enlace para cancelar la suscripción.
+Para enviar un boletín (newsletter), debes crear un archivo Markdown. El script convierte este archivo a HTML compatible con clientes de correo e inyecta un enlace único de desuscripción al final para cada destinatario.
+
+**Paso 1: Preparar la newsletter**
+Crea un archivo `.md` (p. ej. `notify/mi-newsletter.md`) con la siguiente estructura. Es importante incluir el `subject` en el frontmatter y usar HTML con CSS en línea (inline CSS) para garantizar compatibilidad con los clientes de correo:
+
+```markdown
+---
+subject: "[Novedades Dr. Z Academy] Título de mi correo"
+---
+<div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif;">
+  <!-- Aquí va tu diseño, imágenes y contenido usando etiquetas HTML y CSS inline -->
+</div>
+```
+
+**Paso 2: Previsualizar en el navegador**
+Antes de enviar correos, revisa cómo se verá la newsletter generada:
 
 ```bash
-# Prueba enviando solo a una lista específica de correos separados por comas
-make notify-send-newsletter FILE=cursos/extraterrestres/newsletter.md TEST_EMAILS=tucorreo@gmail.com,otro@gmail.com
+make notify-preview-newsletter FILE=notify/mi-newsletter.md
+```
+Esto creará un archivo `notify/preview.html` y lo abrirá en tu navegador predeterminado para que lo revises.
 
-# Envío completo a toda la lista
-make notify-send-newsletter FILE=cursos/extraterrestres/newsletter.md
+**Paso 3: Prueba de envío real**
+Envía una prueba a tu propio correo (o a varios separados por comas) para verificar cómo se ve en un cliente de correo real como Gmail:
+
+```bash
+make notify-send-newsletter FILE=notify/mi-newsletter.md TEST_EMAILS=tucorreo@gmail.com,otro@gmail.com
+```
+
+**Paso 4: Envío a todos los suscriptores**
+Cuando estés satisfecho con el resultado, ejecuta el comando final (sin `TEST_EMAILS`) para enviar la newsletter a la base de datos completa guardada en Cloudflare:
+
+```bash
+make notify-send-newsletter FILE=notify/mi-newsletter.md
 ```
 
 ---
