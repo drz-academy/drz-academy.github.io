@@ -26,3 +26,6 @@ contrib
 # Python
 __pycache__/
 *.pyc
+
+# Logs de Newsletter (Evitar subir correos)
+*.sent.log
