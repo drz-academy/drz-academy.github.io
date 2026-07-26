@@ -22,3 +22,7 @@ contrib
 # Secrets
 .secrets/*
 !.secrets/.keep
+
+# Python
+__pycache__/
+*.pyc
