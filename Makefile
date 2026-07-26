@@ -18,6 +18,7 @@ help:
 	@echo "  make notify-worker-deploy - Despliega el Worker de notificaciones en Cloudflare"
 	@echo "  make notify-import-csv CSV=contrib/archivo.csv - Importa suscriptores desde CSV (Google, MailChimp, etc) a KV"
 	@echo "  make notify-list - Consulta la lista de suscriptores actualmente guardados"
+	@echo "  make notify-number - Muestra la cantidad total de suscriptores guardados"
 	@echo "  make notify-reset - Borra la lista de todos los suscriptores guardados"
 	@echo "  make notify-send-newsletter FILE=notify/newsletter.md [TEST_EMAILS=a@b.com] - Envía un newsletter (usa TEST_EMAILS para enviar solo a esos correos de prueba)"
 	@echo "  make notify-preview-newsletter FILE=notify/newsletter.md - Previsualiza el newsletter en el navegador antes de enviarlo"
@@ -103,6 +104,10 @@ notify-import-csv:
 
 notify-list:
 	@python3 notify/client/course_notify_client.py list-emails
+
+notify-number:
+	@printf "Número total de suscriptores: "
+	@python3 notify/client/course_notify_client.py count
 
 notify-reset:
 	@echo "Borrando todos los suscriptores de la base de datos..."

@@ -111,9 +111,13 @@ def subscribe_email(email: str) -> dict:
     return api_request("POST", "/subscribe", body={"email": email})
 
 
+def get_subscriber_count() -> dict:
+    return api_request("GET", "/subscriber-count")
+
+
 def main() -> int:
     if len(sys.argv) < 2:
-        print("Uso: course_notify_client.py seed|list|list-emails|subscribe|unsubscribe|dedupe|reset EMAIL", file=sys.stderr)
+        print("Uso: course_notify_client.py seed|list|list-emails|subscribe|unsubscribe|dedupe|reset|count EMAIL", file=sys.stderr)
         return 1
     cmd = sys.argv[1]
     if cmd == "seed":
@@ -148,6 +152,14 @@ def main() -> int:
             print("Indique email.", file=sys.stderr)
             return 1
         print(json.dumps(subscribe_email(sys.argv[2]), indent=2, ensure_ascii=False))
+        return 0
+    if cmd == "count":
+        res = get_subscriber_count()
+        if res.get("ok"):
+            print(res.get("count", 0))
+        else:
+            print("Error:", json.dumps(res, ensure_ascii=False), file=sys.stderr)
+            return 1
         return 0
     print(f"Comando desconocido: {cmd}", file=sys.stderr)
     return 1
