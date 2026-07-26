@@ -19,7 +19,8 @@ help:
 	@echo "  make notify-import-csv CSV=contrib/contacts-test.csv - Importa suscriptores desde CSV a KV"
 	@echo "  make notify-list - Consulta la lista de suscriptores actualmente guardados"
 	@echo "  make notify-reset - Borra la lista de todos los suscriptores guardados"
-	@echo "  make notify-send-newsletter FILE=cursos/extraterrestres/newsletter.md - Envía un newsletter"
+	@echo "  make notify-send-newsletter FILE=notify/newsletter.md [TEST_EMAILS=a@b.com] - Envía un newsletter (usa TEST_EMAILS para enviar solo a esos correos de prueba)"
+	@echo "  make notify-preview-newsletter FILE=notify/newsletter.md - Previsualiza el newsletter en el navegador antes de enviarlo"
 	@echo ""
 	@echo "  PORT=3000 make start   - Usar otro puerto"
 
@@ -114,4 +115,9 @@ notify-send-newsletter:
 	fi
 	@python3 notify/client/send_newsletter.py "$(FILE)" $(if $(SUBJECT),--subject "$(SUBJECT)",) $(if $(TEST_EMAILS),--test-emails "$(TEST_EMAILS)",) $(if $(DRY_RUN),--dry-run,)
 
-
+notify-preview-newsletter:
+	@if [ -z "$(FILE)" ]; then \
+		echo "Debes indicar FILE. Ej: make notify-preview-newsletter FILE=notify/newsletter-sitio-web.md"; \
+		exit 1; \
+	fi
+	@python3 notify/client/send_newsletter.py "$(FILE)" --preview

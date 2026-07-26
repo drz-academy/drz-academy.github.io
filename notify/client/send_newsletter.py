@@ -38,6 +38,7 @@ def main() -> int:
     parser.add_argument("--subject", required=False, help="Asunto del correo electrónico (sobrescribe el del markdown)")
     parser.add_argument("--test-emails", type=str, default="", help="Lista de correos separados por coma (ej. a@a.com,b@b.com) para enviar una prueba")
     parser.add_argument("--dry-run", action="store_true", help="Solo muestra a quiénes se enviaría, no envía nada")
+    parser.add_argument("--preview", action="store_true", help="Genera un archivo preview.html y lo abre en el navegador sin enviar correos")
 
     args = parser.parse_args()
 
@@ -69,6 +70,15 @@ def main() -> int:
     # Convertir Markdown a HTML
     raw_html = markdown.markdown(md_content, extensions=['extra', 'nl2br'])
     final_html = wrap_html(raw_html)
+
+    if args.preview:
+        import webbrowser
+        import os
+        preview_file = Path("notify/preview.html")
+        preview_file.write_text(final_html, encoding="utf-8")
+        print(f"Previsualización generada en {preview_file.absolute()}")
+        webbrowser.open(f"file://{preview_file.absolute()}")
+        return 0
 
     print(f"Obteniendo lista de suscriptores...")
     subs_resp = list_subscribers()
