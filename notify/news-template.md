@@ -1,5 +1,5 @@
 ---
-subject: "Título del Correo"
+subject: "[Novedades Dr. Z Academy] Título principal del correo"
 ---
 <!--
 Para previsualizar este newsletter en el navegador:

@@ -1,5 +1,5 @@
 ---
-subject: "¡Bienvenidos a la nueva casa de la Dr. Z Academy!"
+subject: "[Novedades Dr. Z Academy] Nuestro nuevo espacio de experimentación en línea (y más)"
 ---
 <!--
 Para previsualizar este newsletter en el navegador:

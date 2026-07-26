@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dr. Z Academy – Recursos y Aplicaciones</title>
-  <meta name="description" content="Recursos, aplicaciones web, hojas de cursos y herramientas de Dr. Z Academy. Un espacio complementario a drz.academy.">
+  <meta name="description"
+    content="Recursos, aplicaciones web, hojas de cursos y herramientas de Dr. Z Academy. Un espacio complementario a drz.academy.">
   <link rel="icon" href="/assets/favicon.ico" sizes="any">
   <link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="/assets/favicon-16.png" type="image/png" sizes="16x16">
@@ -13,22 +15,33 @@
   <meta property="og:site_name" content="Dr. Z Academy">
   <meta property="og:locale" content="es_CO">
   <meta property="og:title" content="Dr. Z Academy – Recursos y Aplicaciones">
-  <meta property="og:description" content="Recursos, aplicaciones web, hojas de cursos y herramientas de Dr. Z Academy. Un espacio complementario a drz.academy.">
+  <meta property="og:description"
+    content="Recursos, aplicaciones web, hojas de cursos y herramientas de Dr. Z Academy. Un espacio complementario a drz.academy.">
   <meta property="og:url" content="https://drz-academy.github.io/">
   <meta property="og:image" content="https://drz-academy.github.io/assets/og-drz.png">
   <meta property="og:image:width" content="512">
   <meta property="og:image:height" content="512">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Dr. Z Academy – Recursos y Aplicaciones">
-  <meta name="twitter:description" content="Recursos, aplicaciones web, hojas de cursos y herramientas de Dr. Z Academy.">
+  <meta name="twitter:description"
+    content="Recursos, aplicaciones web, hojas de cursos y herramientas de Dr. Z Academy.">
   <meta name="twitter:image" content="https://drz-academy.github.io/assets/og-drz.png">
   <meta name="visitor-log-endpoint" content="https://drz-academy-visitor-log.drz-academy.workers.dev/log">
   <meta name="visitor-log-read-endpoint" content="https://drz-academy-visitor-log.drz-academy.workers.dev/logs">
+  <meta name="course-notify-endpoint" content="https://drz-course-notify-worker.drz-academy.workers.dev" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
       --gold: #F3D361;
@@ -44,7 +57,9 @@
       --radius: 8px;
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       background: var(--bg);
@@ -55,8 +70,15 @@
       overflow-x: hidden;
     }
 
-    a { color: var(--gold); text-decoration: none; transition: opacity 0.2s; }
-    a:hover { opacity: 0.8; }
+    a {
+      color: var(--gold);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    a:hover {
+      opacity: 0.8;
+    }
 
     /* ── HEADER ─────────────────────────────────────────────── */
     header {
@@ -88,7 +110,10 @@
       white-space: nowrap;
     }
 
-    .logo span { color: var(--text); font-weight: 300; }
+    .logo span {
+      color: var(--text);
+      font-weight: 300;
+    }
 
     nav {
       display: flex;
@@ -104,7 +129,10 @@
       transition: color 0.2s;
     }
 
-    nav a:hover { color: var(--gold); opacity: 1; }
+    nav a:hover {
+      color: var(--gold);
+      opacity: 1;
+    }
 
     nav a.nav-drz {
       background: rgba(37, 99, 235, 0.18);
@@ -140,14 +168,21 @@
       color: #0c0c0c;
     }
 
-    .btn-primary:hover { background: var(--gold-dim); opacity: 1; }
+    .btn-primary:hover {
+      background: var(--gold-dim);
+      opacity: 1;
+    }
 
     .btn-ghost {
       border: 1px solid var(--border);
       color: var(--text);
     }
 
-    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); opacity: 1; }
+    .btn-ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      opacity: 1;
+    }
 
     /* ── HERO ────────────────────────────────────────────────── */
     .hero {
@@ -261,13 +296,26 @@
     }
 
     @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(8px); }
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(8px);
+      }
     }
 
     /* ── SECTIONS ────────────────────────────────────────────── */
-    section { padding: 6rem 2rem; }
-    .section-inner { max-width: var(--max-width); margin: 0 auto; }
+    section {
+      padding: 6rem 2rem;
+    }
+
+    .section-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
 
     .section-label {
       display: block;
@@ -293,7 +341,9 @@
       line-height: 1.8;
     }
 
-    .section-header { margin-bottom: 3.5rem; }
+    .section-header {
+      margin-bottom: 3.5rem;
+    }
 
     hr.divider {
       border: none;
@@ -382,8 +432,15 @@
       align-items: center;
     }
 
-    .about-text p { color: var(--text-muted); line-height: 1.85; margin-bottom: 1rem; }
-    .about-text p:last-child { margin-bottom: 0; }
+    .about-text p {
+      color: var(--text-muted);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+
+    .about-text p:last-child {
+      margin-bottom: 0;
+    }
 
     .stat-grid {
       display: grid;
@@ -413,7 +470,11 @@
     }
 
     /* ── LINKS ───────────────────────────────────────────────── */
-    .links-bg { background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .links-bg {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
 
     .links-grid {
       display: grid;
@@ -440,7 +501,9 @@
       opacity: 1;
     }
 
-    .link-item svg { flex-shrink: 0; }
+    .link-item svg {
+      flex-shrink: 0;
+    }
 
     /* ── COURSE CARDS ───────────────────────────────────────── */
     .courses-grid {
@@ -507,7 +570,10 @@
       color: var(--text-dim);
     }
 
-    .course-card-meta .dot::before { content: "·"; margin: 0 0.1rem; }
+    .course-card-meta .dot::before {
+      content: "·";
+      margin: 0 0.1rem;
+    }
 
     .course-card-link {
       display: inline-flex;
@@ -541,8 +607,16 @@
       gap: 1.5rem;
     }
 
-    .footer-left { display: flex; flex-direction: column; gap: 0.25rem; }
-    .footer-copy { font-size: 0.8rem; color: var(--text-dim); }
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
 
     .footer-right {
       display: flex;
@@ -556,26 +630,192 @@
       transition: color 0.2s;
     }
 
-    .footer-right a:hover { color: var(--gold); opacity: 1; }
+    .footer-right a:hover {
+      color: var(--gold);
+      opacity: 1;
+    }
 
     /* ── RESPONSIVE ──────────────────────────────────────────── */
     @media (max-width: 768px) {
-      nav { display: none; }
-      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .stat-grid { grid-template-columns: 1fr 1fr; }
-      .footer-inner { flex-direction: column; align-items: flex-start; }
+      nav {
+        display: none;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .stat-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
       .hero-grid {
         grid-template-columns: 1fr;
         text-align: center;
       }
-      .hero-logo { max-width: 180px; }
-      .hero-ctas { justify-content: center; }
-      .hero-content p { margin-left: auto; margin-right: auto; }
+
+      .hero-logo {
+        max-width: 180px;
+      }
+
+      .hero-ctas {
+        justify-content: center;
+      }
+
+      .hero-content p {
+        margin-left: auto;
+        margin-right: auto;
+      }
     }
 
     @media (max-width: 480px) {
-      .stat-grid { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 2.4rem; }
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+    }
+
+    /* ── NEWSLETTER MODAL ────────────────────────────────────── */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      visibility: hidden;
+      z-index: 200;
+      pointer-events: none;
+      transition: opacity 0.3s, visibility 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+    }
+
+    .newsletter-dialog {
+      position: relative;
+      width: min(100%, 28rem);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.5);
+    }
+
+    .newsletter-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .newsletter-close:hover {
+      color: var(--gold);
+    }
+
+    .newsletter-dialog h2 {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: var(--gold);
+    }
+
+    .newsletter-dialog p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .newsletter-form label {
+      display: block;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-dim);
+    }
+
+    .newsletter-form input[type="email"] {
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      font-family: inherit;
+    }
+
+    .newsletter-form input[type="email"]:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .newsletter-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .newsletter-actions button[type="button"] {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .newsletter-actions button[type="button"]:hover {
+      color: var(--text);
+      text-decoration: underline;
+    }
+
+    .newsletter-status {
+      font-size: 0.85rem;
+      margin-top: 1rem;
+      color: var(--gold);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      z-index: 300;
+      transition: opacity 0.3s;
+      opacity: 0;
+      visibility: visible;
+    }
+
+    .toast.error {
+      border-color: #ef4444;
+      color: #fca5a5;
     }
   </style>
 </head>
@@ -595,7 +835,10 @@
       </nav>
       <a href="#apps" class="btn btn-primary">
         Explorar
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
       </a>
     </div>
   </header>
@@ -605,14 +848,8 @@
     <div class="hero-bg"></div>
     <div class="hero-inner hero-grid">
       <div class="hero-logo-wrap">
-        <img
-          src="/assets/DrZ-Logos/Dr_Z_Logo_CODE_Logo_fondo_sin_fondo%20copia.png"
-          alt="Dr. Z Academy Code"
-          class="hero-logo"
-          width="300"
-          height="300"
-          fetchpriority="high"
-        >
+        <img src="/assets/DrZ-Logos/Dr_Z_Logo_CODE_Logo_fondo_sin_fondo%20copia.png" alt="Dr. Z Academy Code"
+          class="hero-logo" width="300" height="300" fetchpriority="high">
       </div>
       <div class="hero-content">
         <span class="hero-label">drz-academy.github.io</span>
@@ -624,11 +861,13 @@
           <a href="https://drz.academy" target="_blank" rel="noopener">drz.academy</a>.
         </p>
         <div class="hero-ctas">
-          <a href="#apps" class="btn btn-primary">Aplicaciones</a>
+          <button type="button" id="newsletter-subscribe-open" class="btn btn-primary">Suscribirse al boletín</button>
+          <a href="#apps" class="btn btn-ghost">Aplicaciones</a>
           <a href="#demos" class="btn btn-ghost">Demos</a>
           <a href="#cursos" class="btn btn-ghost">Cursos</a>
           <a href="https://drz.academy/academia/" target="_blank" rel="noopener" class="btn btn-ghost">drz.academy</a>
-          <a href="https://github.com/drz-academy/drz-academy.github.io" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+          <a href="https://github.com/drz-academy/drz-academy.github.io" target="_blank" rel="noopener"
+            class="btn btn-ghost">GitHub</a>
         </div>
       </div>
     </div>
@@ -667,9 +906,13 @@
             <span class="tag">Next.js</span>
             <span class="tag">TypeScript</span>
           </div>
-          <a href="apps/cloud_academy/" class="app-card-link" data-track="app_click" data-track-id="cloud_academy" data-track-name="Cámara de Burbujas">
+          <a href="apps/cloud_academy/" class="app-card-link" data-track="app_click" data-track-id="cloud_academy"
+            data-track-name="Cámara de Burbujas">
             Abrir aplicación
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
           </a>
         </div>
 
@@ -686,9 +929,13 @@
             <span class="tag">Next.js</span>
             <span class="tag">WebGL</span>
           </div>
-          <a href="apps/lighting-black-holes/" class="app-card-link" data-track="app_click" data-track-id="lighting-black-holes" data-track-name="Iluminando Agujeros Negros">
+          <a href="apps/lighting-black-holes/" class="app-card-link" data-track="app_click"
+            data-track-id="lighting-black-holes" data-track-name="Iluminando Agujeros Negros">
             Abrir aplicación
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
           </a>
         </div>
 
@@ -739,7 +986,8 @@
         <h2 class="section-title">Cursos activos</h2>
         <p class="section-desc">
           Hojas informativas de los cursos y experiencias que están abiertos ahora mismo.
-          El registro y la tienda viven en <a href="https://drz.academy/academia/" target="_blank" rel="noopener">drz.academy</a>.
+          El registro y la tienda viven en <a href="https://drz.academy/academia/" target="_blank"
+            rel="noopener">drz.academy</a>.
         </p>
       </div>
       <div class="courses-grid" id="cursos-grid">
@@ -773,9 +1021,13 @@
             visita <a href="https://drz.academy" target="_blank" rel="noopener">drz.academy</a>.
           </p>
           <br>
-          <a href="https://github.com/drz-academy/drz-academy.github.io" target="_blank" rel="noopener" class="btn btn-ghost">
+          <a href="https://github.com/drz-academy?tab=repositories" target="_blank" rel="noopener"
+            class="btn btn-ghost">
             Ver en GitHub
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
           </a>
         </div>
 
@@ -821,27 +1073,54 @@
       </div>
       <div class="links-grid">
         <a href="https://drz.academy/academia/" target="_blank" rel="noopener" class="link-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 8v4l3 3" />
+          </svg>
           Cursos y Experiencias
         </a>
         <a href="https://drz.academy/eventos/" target="_blank" rel="noopener" class="link-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" />
+            <path d="M16 2v4M8 2v4M3 10h18" />
+          </svg>
           Agenda del Dr. Z
         </a>
         <a href="https://drz.academy/tienda/" target="_blank" rel="noopener" class="link-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <path d="M16 10a4 4 0 01-8 0" />
+          </svg>
           Tienda virtual
         </a>
         <a href="https://drz.academy/quien-es-dr-z/" target="_blank" rel="noopener" class="link-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
           Quién es el Dr. Z
         </a>
         <a href="https://drz.academy/staff/" target="_blank" rel="noopener" class="link-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+          </svg>
           Quiénes somos
         </a>
         <a href="https://www.instagram.com/dr.zacademy" target="_blank" rel="noopener" class="link-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" />
+            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+          </svg>
           Instagram
         </a>
       </div>
@@ -865,7 +1144,7 @@
 
   <script>
     (function () {
-      const grid  = document.getElementById('cursos-grid');
+      const grid = document.getElementById('cursos-grid');
       const empty = document.getElementById('cursos-grid-empty');
 
       function tagHtml(tags) {
@@ -879,7 +1158,7 @@
         const tags = tagHtml(c.etiquetas || []);
         const meta = [
           c.instructor ? `<span>${c.instructor}</span>` : '',
-          c.sesiones   ? `<span class="dot">${c.sesiones} sesiones</span>` : '',
+          c.sesiones ? `<span class="dot">${c.sesiones} sesiones</span>` : '',
         ].filter(Boolean).join('');
         return `
         <a class="course-card" href="${c.url}" rel="noopener" data-track="course_click" data-track-id="${c.id}" data-track-name="${c.titulo}">
@@ -913,7 +1192,7 @@
     })();
 
     (function () {
-      const grid  = document.getElementById('demos-grid');
+      const grid = document.getElementById('demos-grid');
       if (!grid) return;
 
       const placeholder = `
@@ -966,14 +1245,35 @@
         fetch('demos/demos.json').then(r => r.json()).catch(() => ({ demos: [] })),
       ]).then(([coursesData, demosData]) => {
         const elCursos = document.getElementById('stat-cursos');
-        const elDemos  = document.getElementById('stat-demos');
+        const elDemos = document.getElementById('stat-demos');
         if (elCursos) elCursos.textContent = (coursesData.cursos || []).length;
-        if (elDemos)  elDemos.textContent  = (demosData.demos || []).filter(d => d.activo).length;
+        if (elDemos) elDemos.textContent = (demosData.demos || []).filter(d => d.activo).length;
       });
     })();
   </script>
 
   <script type="module" src="/assets/site-analytics.js"></script>
 
+  <!-- Suscripción a novedades -->
+  <div id="newsletter-subscribe-overlay" class="overlay" aria-hidden="true">
+    <div class="newsletter-dialog" role="dialog" aria-modal="true" aria-labelledby="newsletter-subscribe-title">
+      <button type="button" class="newsletter-close" id="newsletter-subscribe-close" aria-label="Cerrar">×</button>
+      <h2 id="newsletter-subscribe-title">Suscribirse al boletín</h2>
+      <p id="newsletter-subscribe-intro">Te avisaremos por correo cuando publiquemos nuevas aplicaciones, demos o
+        cursos.</p>
+      <form id="newsletter-subscribe-form" class="newsletter-form">
+        <label for="newsletter-subscribe-email">Correo electrónico</label>
+        <input id="newsletter-subscribe-email" type="email" name="email" required autocomplete="email" />
+        <div class="newsletter-actions">
+          <button type="submit" class="btn btn-primary" id="newsletter-subscribe-submit">Suscribirme</button>
+          <button type="button" id="newsletter-subscribe-cancel">Cancelar</button>
+        </div>
+      </form>
+      <p id="newsletter-subscribe-status" class="newsletter-status" hidden aria-live="polite"></p>
+    </div>
+  </div>
+
+  <script src="/assets/newsletter-subscribe.js" type="module"></script>
 </body>
+
 </html>
