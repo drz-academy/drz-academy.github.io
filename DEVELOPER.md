@@ -226,7 +226,7 @@ El script convierte un archivo Markdown a HTML compatible con correo electrónic
 make notify-send-newsletter FILE=cursos/extraterrestres/newsletter.md TEST_EMAILS=tucorreo@gmail.com,otro@gmail.com
 
 # Envío completo a toda la lista
-make notify-send-newsletter FILE=cursos/extraterrestres/newsletter.md SUBJECT="🛸 Nuevo Curso"
+make notify-send-newsletter FILE=cursos/extraterrestres/newsletter.md
 ```
 
 ---
