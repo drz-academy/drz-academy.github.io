@@ -16,6 +16,11 @@ function endpointFromMeta() {
   return String(el?.getAttribute("content") ?? "").trim();
 }
 
+function notifyEndpointFromMeta() {
+  const el = document.querySelector('meta[name="course-notify-endpoint"]');
+  return String(el?.getAttribute("content") ?? "").trim();
+}
+
 function fmt(n) {
   return Number(n || 0).toLocaleString("es-CO");
 }
@@ -138,8 +143,19 @@ function renderChart(series) {
       ${series.map((row, idx) => {
         const n = series.length;
         const plotW = width - padX * 2;
+        const plotH = height - padTop - padBottom;
         const x = padX + (n === 1 ? plotW / 2 : (idx / (n - 1)) * plotW);
-        return `<text x="${x.toFixed(1)}" y="${height - 8}" text-anchor="middle" fill="#888" font-size="11">${escapeHtml(row.label)}</text>`;
+        const yE = padTop + (1 - row.events / maxY) * plotH;
+        const yV = padTop + (1 - row.visitors / maxY) * plotH;
+        return `
+          <text x="${x.toFixed(1)}" y="${height - 8}" text-anchor="middle" fill="#888" font-size="11">${escapeHtml(row.label)}</text>
+          <circle cx="${x.toFixed(1)}" cy="${yE.toFixed(1)}" r="5" fill="#F3D361" style="cursor: pointer; stroke: var(--bg); stroke-width: 2px;">
+            <title>${escapeHtml(row.label)}: ${fmt(row.events)} eventos</title>
+          </circle>
+          <circle cx="${x.toFixed(1)}" cy="${yV.toFixed(1)}" r="5" fill="#0d7693" style="cursor: pointer; stroke: var(--bg); stroke-width: 2px;">
+            <title>${escapeHtml(row.label)}: ${fmt(row.visitors)} IPs únicas</title>
+          </circle>
+        `;
       }).join("")}
     </svg>`;
 }
@@ -172,7 +188,19 @@ async function fetchLogs(token) {
   return data.logs || [];
 }
 
-function renderDashboard(logs) {
+async function fetchSubsCount() {
+  const base = notifyEndpointFromMeta();
+  if (!base) return 0;
+  try {
+    const res = await fetch(`${base}/subscriber-count`, { headers: { Accept: "application/json" } });
+    const data = await res.json();
+    return data.count || 0;
+  } catch {
+    return 0;
+  }
+}
+
+function renderDashboard(logs, subsCount = 0) {
   const enrollClicks = logs.filter((l) => l.eventType === "course_enroll_click");
   const appClicks = logs.filter((l) => l.eventType === "app_click");
   const demoClicks = logs.filter((l) => l.eventType === "demo_click" || l.eventType === "demo_page_view");
@@ -187,6 +215,7 @@ function renderDashboard(logs) {
       ["Demos (clicks + vistas)", demoClicks.length],
       ["Cursos (clicks + vistas)", courseViews.length],
       ["Inscripciones", enrollClicks.length],
+      ["Newsletters suscritos", subsCount],
     ]
       .map(
         ([k, v]) =>
@@ -237,6 +266,7 @@ function renderDashboard(logs) {
 }
 
 let cachedLogs = [];
+let cachedSubsCount = 0;
 
 async function loadLogs() {
   const errEl = document.getElementById("stats-error");
@@ -255,8 +285,13 @@ async function loadLogs() {
 
   if (status) status.textContent = "Cargando…";
   try {
-    cachedLogs = await fetchLogs(token);
-    renderDashboard(cachedLogs);
+    const [logs, subsCount] = await Promise.all([
+      fetchLogs(token),
+      fetchSubsCount()
+    ]);
+    cachedLogs = logs;
+    cachedSubsCount = subsCount;
+    renderDashboard(cachedLogs, cachedSubsCount);
   } catch (err) {
     if (errEl) {
       errEl.hidden = false;
