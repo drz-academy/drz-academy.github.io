@@ -88,7 +88,7 @@ make notify-send-newsletter FILE=notify/news-template.md
 <!-- Firma -->
 <div style="text-align: center; margin-top: 30px; margin-bottom: 30px;">
   <a href="https://drz-academy.github.io/">
-    <img src="https://drz-academy.github.io/assets/drz.png" alt="Dr. Z Academy" width="150" style="margin-bottom: 15px;">
+    <img src="https://drz-academy.github.io/assets/DrZ-Logos/logo-firma.webp" alt="Dr. Z Academy" width="150" style="margin-bottom: 15px;">
   </a>
   <div style="text-align: center;">
     <a href="https://instagram.com/dr.zacademy" style="text-decoration: none; color: #0056b3; display: inline-block; margin-right: 15px;">
@@ -97,7 +97,7 @@ make notify-send-newsletter FILE=notify/news-template.md
     </a>
     <a href="https://wa.me/573002422052" style="text-decoration: none; color: #0056b3; display: inline-block;">
       <img src="https://drz-academy.github.io/assets/whatsapp-25x25.png" alt="WhatsApp" width="25" style="vertical-align: middle; margin-right: 5px;">
-      <span style="vertical-align: middle; font-weight: bold;">+57 300 2422052</span>
+      <span style="vertical-align: middle; font-weight: bold;">+57 300 2422052 (@drz.academy)</span>
     </a>
   </div>
 </div>

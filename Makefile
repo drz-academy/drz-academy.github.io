@@ -16,7 +16,7 @@ help:
 	@echo ""
 	@echo "  make worker-deploy - Despliega el Worker de analytics en Cloudflare"
 	@echo "  make notify-worker-deploy - Despliega el Worker de notificaciones en Cloudflare"
-	@echo "  make notify-import-csv CSV=contrib/contacts-test.csv - Importa suscriptores desde CSV a KV"
+	@echo "  make notify-import-csv CSV=contrib/archivo.csv - Importa suscriptores desde CSV (Google, MailChimp, etc) a KV"
 	@echo "  make notify-list - Consulta la lista de suscriptores actualmente guardados"
 	@echo "  make notify-reset - Borra la lista de todos los suscriptores guardados"
 	@echo "  make notify-send-newsletter FILE=notify/newsletter.md [TEST_EMAILS=a@b.com] - Envía un newsletter (usa TEST_EMAILS para enviar solo a esos correos de prueba)"
@@ -95,7 +95,7 @@ notify-worker-deploy:
 
 notify-import-csv:
 	@if [ -z "$(CSV)" ]; then \
-		echo "Debes indicar el archivo CSV, ej: make notify-import-csv CSV=contrib/contacts-test.csv"; \
+		echo "Debes indicar el archivo CSV, ej: make notify-import-csv CSV=contrib/subscribed_email_audience_export_98cca95302.csv"; \
 		exit 1; \
 	fi
 	@echo "▶  Importing subscribers from $(CSV)…"

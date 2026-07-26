@@ -19,21 +19,21 @@ make notify-send-newsletter FILE=notify/newsletter-sitio-web.md
 </div>
 
 <!-- Contenido Principal -->
-<h1 style="color: #2c3e50; text-align: center;">¡Bienvenidos a la nueva casa de la Dr. Z Academy!</h1>
+<h2 style="text-align: center; color: #555; font-style: italic; margin-bottom: 30px;">Novedades del 26 de julio de 2026</h2>
 
-<p>Hola, {Nombre}:</p>
+<div style="border: 1px solid #e1e4e8; border-radius: 8px; padding: 25px; margin-bottom: 30px; background-color: #ffffff; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+  <h3 style="color: #2c3e50; margin-top: 0; font-size: 22px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; margin-bottom: 20px;">Dr. Z Academy Code: un nuevo sitio de experimentación en línea</h3>
 
-<p>Estamos muy emocionados de presentarte nuestro nuevo sitio web oficial: <strong><a href="https://drz-academy.github.io/" style="color: #0056b3;">drz-academy.github.io</a></strong>.</p>
+  <p>Tras años compartiendo la ciencia mediante charlas y cursos, lanzamos <strong><a href="https://drz-academy.github.io/" style="color: #0056b3;">drz-academy.github.io</a></strong>: un nuevo espacio de experimentación en línea para compartir las herramientas didácticas que hemos creado con código.</p>
 
-<p>En esta nueva plataforma podrás encontrar de manera fácil y rápida toda la información sobre nuestros cursos, estar al tanto de las últimas novedades, y acceder a recursos exclusivos diseñados para ti. Hemos construido este espacio pensando en ofrecerte una experiencia de aprendizaje aún mejor, más centralizada y moderna.</p>
+  <p>Aquí encontrarán desde <a href="https://drz-academy.github.io/apps/lighting-black-holes/" style="color: #0056b3; font-weight: bold;">simuladores de agujeros negros</a> hasta demos interactivas (ej: <a href="https://drz-academy.github.io/demos/optica-activa/" style="color: #0056b3; font-weight: bold;">¿cómo se vería el JWST desalineado?</a>). Además, hemos migrado la información completa de nuestros cursos a este formato web, ahora mucho más cómodo de leer desde el celular, como puedes ver en la <a href="https://drz-academy.github.io/cursos/extraterrestres/" style="color: #0056b3; font-weight: bold;">Masterclass "Extraterrestres"</a> y en <a href="https://drz-academy.github.io/cursos/python-fin-del-mundo/" style="color: #0056b3; font-weight: bold;">Python para el fin del mundo</a>.</p>
 
-<p>Te invitamos a visitarnos, explorar todas nuestras secciones y descubrir todo lo que hemos preparado con mucho cariño. ¡Siempre estamos buscando formas de llevar el fascinante universo de la ciencia más cerca de ti!</p>
+  <p>Recuerda que nuestro sitio oficial principal sigue siendo <strong><a href="https://drz.academy/" style="color: #0056b3;">drz.academy</a></strong> (información y tienda en línea). Este nuevo rincón está diseñado puramente para la interacción e irá sumando nuevas experiencias.</p>
 
-<div style="text-align: center; margin: 30px 0;">
-  <a href="https://drz-academy.github.io/" style="background-color: #2c3e50; color: #ffffff; text-decoration: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; display: inline-block;">Visitar el nuevo sitio web</a>
+  <div style="text-align: center; margin: 30px 0 10px 0;">
+    <a href="https://drz-academy.github.io/" style="background-color: #2c3e50; color: #ffffff; text-decoration: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; display: inline-block;">Visitar el sitio web</a>
+  </div>
 </div>
-
-<p>¡Te esperamos!</p>
 
 <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
 
@@ -96,7 +96,7 @@ make notify-send-newsletter FILE=notify/newsletter-sitio-web.md
 <!-- Firma -->
 <div style="text-align: center; margin-top: 30px; margin-bottom: 30px;">
   <a href="https://drz-academy.github.io/">
-    <img src="https://drz-academy.github.io/assets/drz.png" alt="Dr. Z Academy" width="150" style="margin-bottom: 15px;">
+    <img src="https://drz-academy.github.io/assets/DrZ-Logos/logo-firma.webp" alt="Dr. Z Academy" width="150" style="margin-bottom: 15px;">
   </a>
   <div style="text-align: center;">
     <a href="https://instagram.com/dr.zacademy" style="text-decoration: none; color: #0056b3; display: inline-block; margin-right: 15px;">
@@ -105,7 +105,7 @@ make notify-send-newsletter FILE=notify/newsletter-sitio-web.md
     </a>
     <a href="https://wa.me/573002422052" style="text-decoration: none; color: #0056b3; display: inline-block;">
       <img src="https://drz-academy.github.io/assets/whatsapp-25x25.png" alt="WhatsApp" width="25" style="vertical-align: middle; margin-right: 5px;">
-      <span style="vertical-align: middle; font-weight: bold;">+57 300 2422052</span>
+      <span style="vertical-align: middle; font-weight: bold;">+57 300 2422052 (@drz.academy)</span>
     </a>
   </div>
 </div>

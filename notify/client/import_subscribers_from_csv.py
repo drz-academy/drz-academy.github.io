@@ -33,7 +33,14 @@ def main():
             print("Error: El archivo CSV está vacío o no tiene encabezados válidos.", file=sys.stderr)
             return 1
             
-        email_fields = [fn for fn in reader.fieldnames if "E-mail" in fn and "Value" in fn]
+        # Soportar formato de Google Contacts, MailChimp y genéricos
+        email_fields = []
+        for fn in reader.fieldnames:
+            fn_lower = fn.lower()
+            if ("e-mail" in fn_lower and "value" in fn_lower) or \
+               "email" in fn_lower or \
+               "correo" in fn_lower:
+                email_fields.append(fn)
         
         for row in reader:
             for field in email_fields:
