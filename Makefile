@@ -45,6 +45,7 @@ sync-site:
 	@rm -rf $(SITE)/assets && cp -r assets $(SITE)/assets
 	@rm -rf $(SITE)/cursos && cp -r cursos $(SITE)/cursos
 	@rm -rf $(SITE)/demos && cp -r demos $(SITE)/demos
+	@rm -rf $(SITE)/analytics && cp -r analytics $(SITE)/analytics
 	@touch $(SITE)/.nojekyll
 
 build: cursos demos

@@ -139,6 +139,10 @@ function renderChart(series) {
 
   host.innerHTML = `
     <svg class="stats-chart-svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="Eventos por día">
+      <style>
+        .promo-tooltip { opacity: 0; transition: opacity 0.15s ease-in-out; pointer-events: none; }
+        .promo-group:hover .promo-tooltip { opacity: 1; }
+      </style>
       <polyline fill="none" stroke="#F3D361" stroke-width="2.5" points="${linePoints((r) => r.events)}" />
       <polyline fill="none" stroke="#0d7693" stroke-width="2.5" points="${linePoints((r) => r.visitors)}" />
       ${series.map((row, idx) => {
@@ -151,10 +155,18 @@ function renderChart(series) {
         
         const promo = cachedPromoEvents.find(e => e.date === row.key);
         const promoSvg = promo ? `
-          <line x1="${x.toFixed(1)}" y1="${padTop}" x2="${x.toFixed(1)}" y2="${height - padBottom}" stroke="#ff4757" stroke-width="2" stroke-dasharray="4" style="opacity: 0.5" />
-          <circle cx="${x.toFixed(1)}" cy="${padTop}" r="6" fill="#ff4757" style="cursor: pointer;">
-            <title>${escapeHtml(promo.name)}${promo.description ? ' - ' + escapeHtml(promo.description) : ''}</title>
-          </circle>
+          <g class="promo-group" style="cursor: pointer;">
+            <line x1="${x.toFixed(1)}" y1="6" x2="${x.toFixed(1)}" y2="${height - padBottom}" stroke="transparent" stroke-width="20" />
+            <line x1="${x.toFixed(1)}" y1="6" x2="${x.toFixed(1)}" y2="${height - padBottom}" stroke="#ff4757" stroke-width="2" stroke-dasharray="4" style="opacity: 0.7; pointer-events: none;" />
+            <circle cx="${x.toFixed(1)}" cy="6" r="4.5" fill="#ff4757" style="pointer-events: none;" />
+            
+            <foreignObject x="${x > width / 2 ? x - 260 : x + 10}" y="10" width="250" height="150" class="promo-tooltip">
+              <div xmlns="http://www.w3.org/1999/xhtml" style="background: rgba(25,25,25,0.95); border: 1px solid #444; border-radius: 6px; padding: 10px; color: #fff; font-family: system-ui, sans-serif; font-size: 13px; line-height: 1.4; box-shadow: 0 4px 12px rgba(0,0,0,0.5);">
+                <div style="font-weight: 600; color: #ff4757; margin-bottom: 4px;">${escapeHtml(promo.name)}</div>
+                <div style="color: #ccc; font-size: 12px;">${escapeHtml(promo.description || "")}</div>
+              </div>
+            </foreignObject>
+          </g>
         ` : '';
 
         return `

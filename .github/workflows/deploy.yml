@@ -83,6 +83,9 @@ jobs:
           # Demos interactivos
           cp -r demos _site/demos
 
+          # Analytics events
+          rm -rf _site/analytics && cp -r analytics _site/analytics
+
           # Apps Next.js (export estático)
           mkdir -p _site/apps
           cp -r apps/cloud_academy/out _site/apps/cloud_academy
