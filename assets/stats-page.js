@@ -86,7 +86,7 @@ function buildTimeSeries(logs, days) {
   for (let i = 0; i < safeDays; i += 1) {
     const dt = new Date(start);
     dt.setDate(start.getDate() + i);
-    byDay.set(dateKeyLocal(dt), { label: dt.toLocaleDateString("es-CO", { day: "2-digit", month: "2-digit" }), events: 0, ips: new Set() });
+    byDay.set(dateKeyLocal(dt), { key: dateKeyLocal(dt), label: dt.toLocaleDateString("es-CO", { day: "2-digit", month: "2-digit" }), events: 0, ips: new Set() });
   }
 
   for (const log of logs) {
@@ -101,6 +101,7 @@ function buildTimeSeries(logs, days) {
   }
 
   return [...byDay.values()].map((b) => ({
+    key: b.key,
     label: b.label,
     events: b.events,
     visitors: b.ips.size,
@@ -147,7 +148,17 @@ function renderChart(series) {
         const x = padX + (n === 1 ? plotW / 2 : (idx / (n - 1)) * plotW);
         const yE = padTop + (1 - row.events / maxY) * plotH;
         const yV = padTop + (1 - row.visitors / maxY) * plotH;
+        
+        const promo = cachedPromoEvents.find(e => e.date === row.key);
+        const promoSvg = promo ? `
+          <line x1="${x.toFixed(1)}" y1="${padTop}" x2="${x.toFixed(1)}" y2="${height - padBottom}" stroke="#ff4757" stroke-width="2" stroke-dasharray="4" style="opacity: 0.5" />
+          <circle cx="${x.toFixed(1)}" cy="${padTop}" r="6" fill="#ff4757" style="cursor: pointer;">
+            <title>${escapeHtml(promo.name)}${promo.description ? ' - ' + escapeHtml(promo.description) : ''}</title>
+          </circle>
+        ` : '';
+
         return `
+          ${promoSvg}
           <text x="${x.toFixed(1)}" y="${height - 8}" text-anchor="middle" fill="#888" font-size="11">${escapeHtml(row.label)}</text>
           <text x="${x.toFixed(1)}" y="${(yE - 10).toFixed(1)}" text-anchor="middle" fill="#F3D361" font-size="11" font-weight="bold">${fmt(row.events)}</text>
           <circle cx="${x.toFixed(1)}" cy="${yE.toFixed(1)}" r="5" fill="#F3D361" style="cursor: pointer; stroke: var(--bg); stroke-width: 2px;">
@@ -269,6 +280,21 @@ function renderDashboard(logs, subsCount = 0) {
 
 let cachedLogs = [];
 let cachedSubsCount = 0;
+let cachedPromoEvents = [];
+
+async function fetchPromoEvents() {
+  try {
+    const res = await fetch("/analytics/events.json", { cache: "no-store" });
+    if (!res.ok) {
+      console.error("Error fetch events.json:", res.status);
+      return [];
+    }
+    return await res.json();
+  } catch (err) {
+    console.error("Error parse events.json:", err);
+    return [];
+  }
+}
 
 async function loadLogs() {
   const errEl = document.getElementById("stats-error");
@@ -287,12 +313,14 @@ async function loadLogs() {
 
   if (status) status.textContent = "Cargando…";
   try {
-    const [logs, subsCount] = await Promise.all([
+    const [logs, subsCount, promoEvents] = await Promise.all([
       fetchLogs(token),
-      fetchSubsCount()
+      fetchSubsCount(),
+      fetchPromoEvents()
     ]);
     cachedLogs = logs;
     cachedSubsCount = subsCount;
+    cachedPromoEvents = promoEvents;
     renderDashboard(cachedLogs, cachedSubsCount);
   } catch (err) {
     if (errEl) {
