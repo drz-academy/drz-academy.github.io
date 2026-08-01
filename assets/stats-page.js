@@ -149,9 +149,11 @@ function renderChart(series) {
         const yV = padTop + (1 - row.visitors / maxY) * plotH;
         return `
           <text x="${x.toFixed(1)}" y="${height - 8}" text-anchor="middle" fill="#888" font-size="11">${escapeHtml(row.label)}</text>
+          <text x="${x.toFixed(1)}" y="${(yE - 10).toFixed(1)}" text-anchor="middle" fill="#F3D361" font-size="11" font-weight="bold">${fmt(row.events)}</text>
           <circle cx="${x.toFixed(1)}" cy="${yE.toFixed(1)}" r="5" fill="#F3D361" style="cursor: pointer; stroke: var(--bg); stroke-width: 2px;">
             <title>${escapeHtml(row.label)}: ${fmt(row.events)} eventos</title>
           </circle>
+          <text x="${x.toFixed(1)}" y="${(yV + 15).toFixed(1)}" text-anchor="middle" fill="#0d7693" font-size="11" font-weight="bold">${fmt(row.visitors)}</text>
           <circle cx="${x.toFixed(1)}" cy="${yV.toFixed(1)}" r="5" fill="#0d7693" style="cursor: pointer; stroke: var(--bg); stroke-width: 2px;">
             <title>${escapeHtml(row.label)}: ${fmt(row.visitors)} IPs únicas</title>
           </circle>
