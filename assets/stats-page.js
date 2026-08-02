@@ -208,7 +208,8 @@ async function fetchLogs(token) {
   const res = await fetch(url, { headers: { Accept: "application/json" } });
   const data = await res.json();
   if (!res.ok || !data.ok) {
-    throw new Error(data.error || `HTTP ${res.status}`);
+    const errorMsg = data.message ? `${data.error}: ${data.message}` : data.error || `HTTP ${res.status}`;
+    throw new Error(errorMsg);
   }
   return data.logs || [];
 }

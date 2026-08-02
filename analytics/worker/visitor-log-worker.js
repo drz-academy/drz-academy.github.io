@@ -130,17 +130,23 @@ export default {
         });
         const keys = await listAllKeys(env.VISITOR_LOGS);
         const selectedKeys = keys.slice(-limit);
-        const values = await Promise.all(
-          selectedKeys.map(async (k) => {
-            const raw = await env.VISITOR_LOGS.get(k.name);
-            if (!raw) return null;
-            try {
-              return JSON.parse(raw);
-            } catch {
-              return null;
-            }
-          }),
-        );
+        const values = [];
+        const chunkSize = 50;
+        for (let i = 0; i < selectedKeys.length; i += chunkSize) {
+          const chunk = selectedKeys.slice(i, i + chunkSize);
+          const chunkValues = await Promise.all(
+            chunk.map(async (k) => {
+              const raw = await env.VISITOR_LOGS.get(k.name);
+              if (!raw) return null;
+              try {
+                return JSON.parse(raw);
+              } catch {
+                return null;
+              }
+            })
+          );
+          values.push(...chunkValues);
+        }
         const logs = values
           .filter((entry) => entry && typeof entry === "object" && "eventType" in entry)
           .sort((a, b) =>
