@@ -126,7 +126,7 @@ export default {
 
         const limit = parsePositiveInt(url.searchParams.get("limit"), 500, {
           min: 1,
-          max: 2000,
+          max: 800,
         });
         const keys = await listAllKeys(env.VISITOR_LOGS);
         const selectedKeys = keys.slice(-limit);
