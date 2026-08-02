@@ -162,6 +162,44 @@ export default {
         });
       }
 
+      if (request.method === "GET" && url.pathname === "/logs-export") {
+        const token = extractReadToken(request, url);
+        if (!env.LOG_READ_TOKEN || token !== env.LOG_READ_TOKEN) {
+          return jsonResponse({ ok: false, error: "unauthorized" }, 401);
+        }
+
+        const cursor = url.searchParams.get("cursor") || undefined;
+        const page = await env.VISITOR_LOGS.list({ cursor, limit: 500 });
+        
+        const values = [];
+        const chunkSize = 50;
+        for (let i = 0; i < page.keys.length; i += chunkSize) {
+          const chunk = page.keys.slice(i, i + chunkSize);
+          const chunkValues = await Promise.all(
+            chunk.map(async (k) => {
+              const raw = await env.VISITOR_LOGS.get(k.name);
+              if (!raw) return null;
+              try {
+                return JSON.parse(raw);
+              } catch {
+                return null;
+              }
+            })
+          );
+          values.push(...chunkValues);
+        }
+
+        const logs = values.filter((entry) => entry && typeof entry === "object" && "eventType" in entry);
+
+        return jsonResponse({
+          ok: true,
+          count: logs.length,
+          logs,
+          cursor: page.cursor,
+          list_complete: page.list_complete,
+        });
+      }
+
       return jsonResponse({ ok: false, error: "not_found" }, 404);
     } catch (err) {
       const message = err instanceof Error ? err.message : "unknown_worker_error";

@@ -309,6 +309,20 @@ async function fetchPromoEvents() {
   }
 }
 
+async function fetchHistoricalLogs() {
+  try {
+    const res = await fetch("/analytics/historical-logs.json", { cache: "no-store" });
+    if (!res.ok) {
+      if (res.status !== 404) console.error("Error fetch historical-logs.json:", res.status);
+      return [];
+    }
+    return await res.json();
+  } catch (err) {
+    console.error("Error parse historical-logs.json:", err);
+    return [];
+  }
+}
+
 async function loadLogs() {
   const errEl = document.getElementById("stats-error");
   const status = document.getElementById("stats-status");
@@ -326,12 +340,25 @@ async function loadLogs() {
 
   if (status) status.textContent = "Cargando…";
   try {
-    const [logs, subsCount, promoEvents] = await Promise.all([
+    const [liveLogs, historicalLogs, subsCount, promoEvents] = await Promise.all([
       fetchLogs(token),
+      fetchHistoricalLogs(),
       fetchSubsCount(),
       fetchPromoEvents()
     ]);
-    cachedLogs = logs;
+    
+    const combinedMap = new Map();
+    for (const log of historicalLogs) {
+      if (log && log.id) combinedMap.set(log.id, log);
+    }
+    for (const log of liveLogs) {
+      if (log && log.id) combinedMap.set(log.id, log);
+    }
+    
+    cachedLogs = [...combinedMap.values()].sort((a, b) => 
+      String(b.timestampServer).localeCompare(String(a.timestampServer))
+    );
+    
     cachedSubsCount = subsCount;
     cachedPromoEvents = promoEvents;
     renderDashboard(cachedLogs, cachedSubsCount);

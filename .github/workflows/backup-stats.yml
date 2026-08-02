@@ -1,0 +1,35 @@
+name: Backup Analytics Logs
+
+on:
+  schedule:
+    # 13:00 UTC = 8:00 AM COT
+    - cron: '0 13 * * *'
+  workflow_dispatch:
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run backup script
+        env:
+          LOG_READ_TOKEN: ${{ secrets.LOG_READ_TOKEN }}
+        run: |
+          python analytics/backup_logs.py
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add analytics/historical-logs.json analytics/cursor.txt
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update historical visitor logs" && git push)
