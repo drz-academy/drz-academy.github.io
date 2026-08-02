@@ -1,5 +1,5 @@
 const TOKEN_KEY = "drzAcademyStatsToken";
-const DEFAULT_LIMIT = 500;
+const DEFAULT_LIMIT = 800;
 
 const EVENT_LABELS = {
   page_view: "Vista de página",
