@@ -186,19 +186,24 @@ function renderChart(series) {
 }
 
 function getToken() {
-  const params = new URLSearchParams(location.search);
-  const fromUrl = params.get("LOG_READ_TOKEN") || params.get("token");
-  if (fromUrl) {
-    sessionStorage.setItem(TOKEN_KEY, fromUrl);
-    if (params.has("LOG_READ_TOKEN") || params.has("token")) {
-      const clean = new URL(location.href);
-      clean.searchParams.delete("LOG_READ_TOKEN");
-      clean.searchParams.delete("token");
-      history.replaceState({}, "", clean.pathname + clean.search + clean.hash);
+  try {
+    const params = new URLSearchParams(location.search);
+    const fromUrl = params.get("LOG_READ_TOKEN") || params.get("token");
+    if (fromUrl) {
+      try { sessionStorage.setItem(TOKEN_KEY, fromUrl); } catch(e) {}
+      if (params.has("LOG_READ_TOKEN") || params.has("token")) {
+        const clean = new URL(location.href);
+        clean.searchParams.delete("LOG_READ_TOKEN");
+        clean.searchParams.delete("token");
+        history.replaceState({}, "", clean.pathname + clean.search + clean.hash);
+      }
+      return fromUrl;
     }
-    return fromUrl;
+    return sessionStorage.getItem(TOKEN_KEY) || window.__inMemoryToken || "";
+  } catch (e) {
+    console.warn("Error accediendo a token:", e);
+    return window.__inMemoryToken || "";
   }
-  return sessionStorage.getItem(TOKEN_KEY) || "";
 }
 
 async function fetchLogs(token) {
@@ -335,7 +340,8 @@ async function loadLogs() {
       if (status) status.textContent = "Sin token — no se pueden cargar los logs.";
       return;
     }
-    sessionStorage.setItem(TOKEN_KEY, token);
+    try { sessionStorage.setItem(TOKEN_KEY, token); } catch(e) {}
+    window.__inMemoryToken = token;
   }
 
   if (status) status.textContent = "Cargando…";
