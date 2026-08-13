@@ -1,5 +1,111 @@
 [
   {
+    "id": "f88b6d08-d654-4384-9e74-784957422bf6",
+    "timestampServer": "2026-08-13T03:32:57.371Z",
+    "ip": "186.155.17.143",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-08-13T03:32:56.699Z"
+  },
+  {
+    "id": "496225dc-bdfb-48b2-9d86-d1b928513aaf",
+    "timestampServer": "2026-08-13T02:54:33.107Z",
+    "ip": "38.156.230.145",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAcGRvZgJmZGlkFlDGlgmvBeVo3iVHDuOgeIOSSgzj8idleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAaevJG4TNiPhOZz5DEsHsCUTYG1O67nSZ5hhSpmNUGcyn0jUPUX2aO50gEZHGw_aem_mEgoA3NNiuvacKIgRrscdA",
+    "referrer": "https://l.instagram.com/",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_5_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/23F84 Instagram 442.0.0.22.64 (iPhone16,2; iOS 26_5_2; en_US; en; scale=3.00; 1290x2796; IABMV/1; 1035455812) Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-08-13T02:54:32.605Z"
+  },
+  {
+    "id": "8875b936-a7cc-408e-bdc6-0d1d11d25d46",
+    "timestampServer": "2026-08-12T21:56:37.007Z",
+    "ip": "190.249.248.0",
+    "country": "CO",
+    "eventType": "course_enroll_click",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "https://drz.academy/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "extraterrestres",
+      "targetName": "Extraterrestres",
+      "href": "https://drz.academy/producto/extraterrestres/",
+      "label": "Inscribete ahora →"
+    },
+    "timestampClient": "2026-08-12T21:56:35.801Z"
+  },
+  {
+    "id": "4a6cb74a-93cd-4b4d-8a87-603a4413c4d7",
+    "timestampServer": "2026-08-12T20:23:54.728Z",
+    "ip": "2a03:2880:24ff:8::",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "meta-externalads/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/crawler)",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-08-12T20:23:54.226Z"
+  },
+  {
+    "id": "7c19d5f9-cb13-4836-adee-5634d4b70464",
+    "timestampServer": "2026-08-12T15:08:15.862Z",
+    "ip": "190.249.248.0",
+    "country": "CO",
+    "eventType": "course_enroll_click",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "https://drz.academy/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "extraterrestres",
+      "targetName": "Extraterrestres",
+      "href": "https://drz.academy/producto/extraterrestres/",
+      "label": "Inscribete ahora →"
+    },
+    "timestampClient": "2026-08-12T15:08:15.703Z"
+  },
+  {
+    "id": "ef6e247b-2ce6-46e1-9bc5-113a6e658c0c",
+    "timestampServer": "2026-08-12T15:08:06.618Z",
+    "ip": "190.249.248.0",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "https://drz.academy/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-08-12T15:08:05.529Z"
+  },
+  {
     "id": "fe5fd45a-86a9-4915-aa9b-6a552367cd9e",
     "timestampServer": "2026-08-12T13:29:45.994Z",
     "ip": "181.51.32.126",
