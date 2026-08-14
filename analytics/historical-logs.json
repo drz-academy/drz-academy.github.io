@@ -1,5 +1,73 @@
 [
   {
+    "id": "b7603bdf-1c35-4012-9be0-e3ec91a3b78c",
+    "timestampServer": "2026-08-14T14:02:28.108Z",
+    "ip": "66.249.83.136",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "http://www.google.com/search",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64)  AppleWebKit/537.36 (KHTML, like Gecko; Google Web Preview)  Chrome/151.0.7922.108 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-08-14T14:02:27.910Z"
+  },
+  {
+    "id": "ee415437-b296-4439-9718-3e3a8da4eb00",
+    "timestampServer": "2026-08-14T14:02:27.204Z",
+    "ip": "66.249.83.134",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "http://www.google.com/search",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64)  AppleWebKit/537.36 (KHTML, like Gecko; Google Web Preview)  Chrome/151.0.7922.108 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-08-14T14:02:26.310Z"
+  },
+  {
+    "id": "a9cb3c67-29aa-475d-ace1-074cc47e24f4",
+    "timestampServer": "2026-08-14T13:47:56.526Z",
+    "ip": "2a03:2880:f800:29::",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/python-fin-del-mundo/",
+    "url": "https://drz-academy.github.io/cursos/python-fin-del-mundo/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 (compatible; meta-externalagent/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/crawler))",
+    "language": "es",
+    "details": {
+      "courseId": "python-fin-del-mundo",
+      "courseName": "Python para el fin del mundo"
+    },
+    "timestampClient": "2026-08-14T13:47:54.928Z"
+  },
+  {
+    "id": "e4aeb3a9-0b50-4ddf-83b0-c09188efe015",
+    "timestampServer": "2026-08-13T23:01:22.885Z",
+    "ip": "190.28.28.207",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-08-13T23:01:23.912Z"
+  },
+  {
     "id": "f88b6d08-d654-4384-9e74-784957422bf6",
     "timestampServer": "2026-08-13T03:32:57.371Z",
     "ip": "186.155.17.143",
