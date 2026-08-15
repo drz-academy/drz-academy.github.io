@@ -1,5 +1,22 @@
 [
   {
+    "id": "bce10ebc-6a93-433d-b4d9-a0340695418c",
+    "timestampServer": "2026-08-15T12:04:30.673Z",
+    "ip": "2a03:2880:f800:28::",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 (compatible; meta-externalads/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/crawler))",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-08-15T12:04:30.152Z"
+  },
+  {
     "id": "b7603bdf-1c35-4012-9be0-e3ec91a3b78c",
     "timestampServer": "2026-08-14T14:02:28.108Z",
     "ip": "66.249.83.136",
