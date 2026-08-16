@@ -1,5 +1,124 @@
 [
   {
+    "id": "1cdef0b6-1b4a-4211-b3b0-b7d2cdc2139a",
+    "timestampServer": "2026-08-15T20:35:45.249Z",
+    "ip": "181.205.169.146",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-08-15T20:35:43.191Z"
+  },
+  {
+    "id": "59705c74-a35e-42ef-92fc-30c43988888d",
+    "timestampServer": "2026-08-15T17:52:25.563Z",
+    "ip": "181.205.169.146",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-15T17:52:25.154Z"
+  },
+  {
+    "id": "d299c218-f873-4d03-8581-e08d9cfbbccb",
+    "timestampServer": "2026-08-15T17:52:10.131Z",
+    "ip": "181.205.169.146",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-08-15T17:52:04.462Z"
+  },
+  {
+    "id": "25ba2755-1e98-4e6f-9472-7bd23771939c",
+    "timestampServer": "2026-08-15T16:53:47.373Z",
+    "ip": "2800:e6:4010:7ec1:1dcc:1915:3092:2bae",
+    "country": "CO",
+    "eventType": "course_enroll_click",
+    "page": "/cursos/cuantica-a-pie/",
+    "url": "https://drz-academy.github.io/cursos/cuantica-a-pie/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "cuantica-a-pie",
+      "targetName": "Cuántica a Pie con Dr. Z",
+      "href": "https://go.hotmart.com/T96569602E?dp=1",
+      "label": "Inscribete ahora →"
+    },
+    "timestampClient": "2026-08-15T16:53:48.851Z"
+  },
+  {
+    "id": "3da23456-b4bc-4a0d-970c-e97467d7ee49",
+    "timestampServer": "2026-08-15T16:52:04.434Z",
+    "ip": "2800:e6:4010:7ec1:1dcc:1915:3092:2bae",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cuantica-a-pie/",
+    "url": "https://drz-academy.github.io/cursos/cuantica-a-pie/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cuantica-a-pie",
+      "courseName": "Cuántica a Pie con Dr. Z"
+    },
+    "timestampClient": "2026-08-15T16:52:05.578Z"
+  },
+  {
+    "id": "f8a042bd-58ed-42cf-8c1c-4cf35700173f",
+    "timestampServer": "2026-08-15T15:02:45.546Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-15T15:02:45.261Z"
+  },
+  {
+    "id": "2182292b-0110-44c9-8508-64e51d73d940",
+    "timestampServer": "2026-08-15T15:01:04.124Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cuantica-a-pie/",
+    "url": "https://drz-academy.github.io/cursos/cuantica-a-pie/",
+    "referrer": "https://drz.academy/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cuantica-a-pie",
+      "courseName": "Cuántica a Pie con Dr. Z"
+    },
+    "timestampClient": "2026-08-15T15:01:03.778Z"
+  },
+  {
     "id": "bce10ebc-6a93-433d-b4d9-a0340695418c",
     "timestampServer": "2026-08-15T12:04:30.673Z",
     "ip": "2a03:2880:f800:28::",
