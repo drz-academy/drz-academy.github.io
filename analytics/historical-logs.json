@@ -1,5 +1,40 @@
 [
   {
+    "id": "9e55f414-f599-4652-9193-d56abe91a3c7",
+    "timestampServer": "2026-08-18T01:35:52.182Z",
+    "ip": "146.70.195.75",
+    "country": "US",
+    "eventType": "app_click",
+    "page": "/",
+    "url": "https://drz-academy.github.io/#apps",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "cloud_academy",
+      "targetName": "Cámara de Burbujas",
+      "href": "apps/cloud_academy/",
+      "label": "Abrir aplicación"
+    },
+    "timestampClient": "2026-08-18T01:35:51.649Z"
+  },
+  {
+    "id": "41d5ff4d-355e-4dce-8db7-847bd026793a",
+    "timestampServer": "2026-08-18T01:35:39.840Z",
+    "ip": "146.70.195.75",
+    "country": "US",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-18T01:35:38.641Z"
+  },
+  {
     "id": "2803a293-b214-4b61-83a8-523b96ab73e6",
     "timestampServer": "2026-08-17T08:37:34.609Z",
     "ip": "115.186.234.1",
