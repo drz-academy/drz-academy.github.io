@@ -1,4 +1,4 @@
-.PHONY: help build cursos pages demos sync-site start stop worker-deploy
+.PHONY: help build cursos pages demos sync-site start stop worker-deploy update
 
 PORT ?= 8000
 HOST ?= 127.0.0.1
@@ -13,6 +13,7 @@ help:
 	@echo "  make sync-site  - Copia index, assets y cursos/ a $(SITE)/"
 	@echo "  make start      - Arranca http://$(HOST):$(PORT) (actualiza cursos si hace falta)"
 	@echo "  make stop       - Detiene el servidor en el puerto $(PORT)"
+	@echo "  make update     - Actualiza la Calculadora de Drake desde GitHub"
 	@echo ""
 	@echo "  make worker-deploy - Despliega el Worker de analytics en Cloudflare"
 	@echo "  make notify-worker-deploy - Despliega el Worker de notificaciones en Cloudflare"
@@ -53,16 +54,19 @@ build: cursos demos
 	@cd apps/cloud_academy && npm ci --legacy-peer-deps && npm run build
 	@echo "▶  Building Lighting Black Holes…"
 	@cd apps/lighting-black-holes && npm ci && npm run build
+	@echo "▶  Building Drake Calculator…"
+	@cd apps/drake-calculator && npm ci && npm run build
 	@echo "▶  Assembling $(SITE)/…"
 	@rm -rf $(SITE)
 	@mkdir -p $(SITE)/apps
 	@$(MAKE) sync-site
 	@cp -r apps/cloud_academy/out $(SITE)/apps/cloud_academy
 	@cp -r apps/lighting-black-holes/out $(SITE)/apps/lighting-black-holes
+	@cp -r apps/drake-calculator/out $(SITE)/apps/drake-calculator
 	@echo "✓  Site ready in $(SITE)/"
 
 start:
-	@test -f $(SITE)/apps/cloud_academy/index.html || $(MAKE) build
+	@if [ ! -f $(SITE)/apps/cloud_academy/index.html ] || [ ! -f $(SITE)/apps/lighting-black-holes/index.html ] || [ ! -f $(SITE)/apps/drake-calculator/index.html ]; then $(MAKE) build; fi
 	@$(MAKE) cursos demos sync-site
 	@echo "Starting server on http://$(HOST):$(PORT)"
 	@cd $(SITE) && nohup python3 -m http.server "$(PORT)" --bind "$(HOST)" >/dev/null 2>&1 &
@@ -71,6 +75,7 @@ start:
 	@echo "  Home:  http://$(HOST):$(PORT)/"
 	@echo "  Apps:  http://$(HOST):$(PORT)/apps/cloud_academy/"
 	@echo "         http://$(HOST):$(PORT)/apps/lighting-black-holes/"
+	@echo "         http://$(HOST):$(PORT)/apps/drake-calculator/"
 
 stop:
 	@echo "Stopping server on port $(PORT) (best-effort)"
@@ -86,6 +91,20 @@ stop:
 	else \
 		echo "No process listening on $(PORT)."; \
 	fi
+
+update:
+	@echo "▶  Updating Drake Calculator from GitHub…"
+	@rm -rf apps/drake-calculator
+	@mkdir -p /tmp/seap-temp
+	@curl -sL https://github.com/seap-udea/seap-udea.github.io/archive/main.tar.gz | tar xz -C /tmp/seap-temp
+	@mv /tmp/seap-temp/seap-udea.github.io-main/apps/drake-calculator apps/
+	@rm -rf /tmp/seap-temp
+	@echo "▶  Building Drake Calculator…"
+	@cd apps/drake-calculator && npm ci && npm run build
+	@mkdir -p $(SITE)/apps/drake-calculator
+	@rm -rf $(SITE)/apps/drake-calculator/*
+	@cp -r apps/drake-calculator/out/* $(SITE)/apps/drake-calculator/
+	@echo "✓  Drake Calculator updated and rebuilt."
 
 worker-deploy:
 	@echo "▶  Deploying analytics worker…"

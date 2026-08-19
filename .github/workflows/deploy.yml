@@ -51,6 +51,12 @@ jobs:
           npm ci
           npm run build
 
+      - name: Build Drake Calculator app
+        working-directory: apps/drake-calculator
+        run: |
+          npm ci
+          npm run build
+
       # Regenera el HTML de cada curso a partir de su curso.md
       # Así el markdown es la única fuente de verdad
       - name: Regenerate course pages
@@ -93,6 +99,7 @@ jobs:
           mkdir -p _site/apps
           cp -r apps/cloud_academy/out _site/apps/cloud_academy
           cp -r apps/lighting-black-holes/out _site/apps/lighting-black-holes
+          cp -r apps/drake-calculator/out _site/apps/drake-calculator
 
           echo "── Contenido del artefacto ──"
           find _site -type f | sort
