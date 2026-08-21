@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cambio Climático – Dr. Z Academy</title>
+  <meta name="description" content="La ciencia que nadie te explicó y el futuro que ya nos alcanzó">
+  <link rel="icon" href="https://drz-academy.github.io/assets/favicon.ico" sizes="any">
+  <link rel="icon" href="https://drz-academy.github.io/assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="https://drz-academy.github.io/assets/favicon-16.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="https://drz-academy.github.io/assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dr. Z Academy">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:title" content="Cambio Climático – Dr. Z Academy">
+  <meta property="og:description" content="La ciencia que nadie te explicó y el futuro que ya nos alcanzó">
+  <meta property="og:url" content="https://drz-academy.github.io/cursos/cambio-climatico/">
+  <meta property="og:image" content="https://drz-academy.github.io/cursos/cambio-climatico/images/og-share.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="1500">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cambio Climático – Dr. Z Academy">
+  <meta name="twitter:description" content="La ciencia que nadie te explicó y el futuro que ya nos alcanzó">
+  <meta name="twitter:image" content="https://drz-academy.github.io/cursos/cambio-climatico/images/og-share.jpg">
+  <meta name="visitor-log-endpoint" content="https://drz-academy-visitor-log.drz-academy.workers.dev/log">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #F3D361;
+      --teal: #0d7693;
+      --link: #1155cc;
+      --text: #1a1a1a;
+      --text-light: #444;
+      --bg: #ffffff;
+      --bg-alt: #f8f9fa;
+      --border: #e0e0e0;
+      --gap: 2.5rem;
+      --width: 740px;
+      --r: 10px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'Nunito', sans-serif; font-size: 1.0625rem; line-height: 1.8;
+    }
+    a { color: var(--link); } a:hover { text-decoration: underline; }
+
+    /* Header banner */
+    .page-header { width: 100%; line-height: 0; background: #000; }
+    .page-header img { width: 100%; height: auto; display: block; }
+
+    /* Breadcrumb */
+    .topbar {
+      background: #fff; border-bottom: 1px solid var(--border);
+      padding: 0.6rem 1.5rem; display: flex; align-items: center;
+      gap: 0.5rem; font-size: 0.8rem; color: #888;
+    }
+    .topbar a { color: #555; text-decoration: none; }
+    .topbar a:hover { color: var(--teal); }
+    .topbar .sep::before { content: "›"; margin: 0 0.3rem; }
+
+    /* Content */
+    main { max-width: var(--width); margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+
+    /* Section titles (Pacifico) */
+    h1.section-title, h2.section-title {
+      font-family: 'Pacifico', cursive; font-weight: 400;
+      font-size: clamp(1.6rem, 5vw, 2.25rem); line-height: 1.2;
+      color: var(--text); margin-top: var(--gap); margin-bottom: 1.25rem;
+    }
+    h1.section-title { margin-top: 0; }
+
+    /* Section body */
+    .section-body p {
+      font-family: 'Roboto', sans-serif; margin-bottom: 1.1rem;
+      text-align: justify; color: var(--text-light);
+    }
+    .section-body p:last-child { margin-bottom: 0; }
+    .section-body p strong, .section-body b { color: var(--text); font-weight: 700; }
+
+    /* Topics list (blockquote) */
+    .topics-list {
+      background: var(--bg-alt); border-left: 4px solid var(--teal);
+      border-radius: 0 var(--r) var(--r) 0; padding: 1.25rem 1.5rem; margin: 1.25rem 0;
+    }
+    .topics-list p {
+      color: #1a4fa8; font-size: 1rem; font-weight: 600;
+      text-align: center; margin: 0; line-height: 1.9;
+    }
+
+    /* Photo grid */
+    .photo-grid { display: grid; gap: 1rem; margin: 1.5rem 0; width: 100%; }
+    .photo-grid--single {
+      grid-template-columns: minmax(0, 400px);
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .photo-grid--pair { grid-template-columns: 1fr 1fr; }
+    .photo-grid--many { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .photo-grid img { width: 100%; height: auto; border-radius: var(--r); display: block; object-fit: cover; }
+
+    /* Checklist */
+    ul.checklist { list-style: none; padding: 0; margin: 1rem 0; }
+    ul.checklist li {
+      font-family: 'Nunito', sans-serif; font-size: 1rem; color: var(--text-light);
+      padding: 0.6rem 0 0.6rem 2rem; position: relative;
+      border-bottom: 1px solid var(--border); line-height: 1.6;
+    }
+    ul.checklist li:last-child { border-bottom: none; }
+    ul.checklist li::before {
+      content: "●"; position: absolute; left: 0.4rem;
+      color: var(--gold); font-size: 0.55rem; top: 0.9rem;
+    }
+
+    /* Hotmart banner (arriba del contenido) */
+    .hotmart-banner {
+      background: linear-gradient(135deg, #fff8e6 0%, #fff3cd 100%);
+      border: 2px solid #f5a623;
+      border-radius: var(--r);
+      padding: 1.75rem 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .hotmart-banner-lead {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      text-align: center;
+    }
+    .hotmart-btn {
+      display: inline-block;
+      background: #f5a623;
+      color: #1a1a1a;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      padding: 0.75rem 2rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .hotmart-btn:hover { background: #e09410; text-decoration: none; color: #1a1a1a; }
+
+    /* CTA / Enroll */
+    .enroll-section {
+      background: var(--bg-alt); border: 2px solid var(--teal);
+      border-radius: var(--r); padding: 2rem; margin-top: var(--gap); text-align: center;
+    }
+    .enroll-section p { text-align: center; font-family: 'Nunito', sans-serif; font-size: 1.1rem; color: var(--text); margin-bottom: 1.25rem; }
+    .enroll-btn {
+      display: inline-block; background: var(--teal); color: #fff;
+      font-family: 'Nunito', sans-serif; font-size: 1.1rem; font-weight: 800;
+      padding: 0.8rem 2.2rem; border-radius: 100px; text-decoration: none;
+      transition: background 0.2s; margin-bottom: 1.5rem;
+    }
+    .enroll-btn:hover { background: #0a5f77; text-decoration: none; color: #fff; }
+    .qr-wrap { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+    .qr-wrap img { width: 140px; height: 140px; border: 1px solid var(--border); border-radius: var(--r); }
+    .qr-wrap span { font-size: 0.8rem; color: #888; }
+    .contact-links { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .contact-links a { color: var(--teal); font-weight: 700; font-size: 0.9rem; }
+
+    /* Closing */
+    .closing {
+      text-align: center; font-family: 'Nunito', sans-serif;
+      font-size: 1.5rem; font-weight: 800; color: var(--teal);
+      margin-top: 2.5rem; padding-top: 2rem; border-top: 2px solid var(--border);
+    }
+
+    /* Footer */
+    footer { background: var(--bg-alt); border-top: 1px solid var(--border); padding: 1.5rem; text-align: center; font-size: 0.8rem; color: #888; }
+    footer a { color: #555; }
+
+    /* Print */
+    @media print {
+      .topbar, .enroll-section, footer { display: none; }
+      body { font-size: 11pt; }
+      .section-body p { text-align: left; color: #000; }
+      h1.section-title, h2.section-title { color: #000; }
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      main { padding: 2rem 1rem 4rem; }
+      .photo-grid--pair { grid-template-columns: 1fr; }
+      .enroll-section { padding: 1.25rem 1rem; }
+    }
+  </style>
+</head>
+<body data-track-page="course" data-track-id="cambio-climatico" data-track-name="Cambio Climático">
+
+  <div class="page-header">
+    <img src="images/header.webp" alt="Cambio Climático – Dr. Z Academy" width="2048" height="952">
+  </div>
+
+  <nav class="topbar" aria-label="Breadcrumb">
+    <a href="https://drz-academy.github.io/">Dr. Z Academy</a>
+    <span class="sep">Cursos</span>
+    <span class="sep" aria-current="page">Cambio Climático</span>
+  </nav>
+
+  <main>
+    <h1 class="section-title">Presentación</h1>
+    <div class="section-body"><p><strong>El cambio climático ya no es una advertencia lejana: es el presente que habitamos</strong>. Lo sentimos en sequías, inundaciones, olas de calor, ríos que se desbordan y ciudades que ya no pueden vivir como antes. <strong>Y, sin embargo, sigue siendo uno de los temas peor explicados del planeta</strong>: mezcla de datos sólidos, simplificaciones, alarmismo y negacionismo en la misma conversación.</p>
+<p><strong>Esta <em>Master Class</em> propone contarlo de otra manera: en cuatro historias</strong>. No como un manual técnico frío, sino como un recorrido riguroso y cercano, guiado por el experto en hidrología <strong>Juan Fernando Salazar, Ph. D.</strong>, que va de lo esencial a lo inmediato: qué es el cambio climático, cómo nos obliga a cambiar la forma de vivir, dónde están los puntos de inflexión que pueden sacudirlo todo y cómo —desde hoy— nos movemos hacia formas de adaptación posibles.</p>
+<p><strong>No es un meteorito que nos va a extinguir</strong>, pero <strong>sí es muy difícil y lo vamos a sentir</strong>. La pregunta no es solo si entendemos la ciencia, sino si estamos dispuestos a cooperar frente a un clima que ya cambió. Al final del recorrido, la clave será un <strong>realismo con esperanza</strong>: <em>cooperación o extinción</em>.</p></div>
+
+    <h2 class="section-title">¿Quién es el experto?</h2>
+    <div class="section-body"><p><div class="photo-grid photo-grid--single">
+      <img src="images/juan-fernando-salazar.webp" alt="Foto del curso" loading="lazy">
+    </div></p>
+<p><strong>Juan Fernando Salazar Villegas</strong> es <strong>Doctor y Magíster en Recursos Hidráulicos</strong> e <strong>Ingeniero Civil</strong> de la <strong>Universidad Nacional de Colombia, sede Medellín</strong>, y <strong>profesor titular de la Universidad de Antioquia</strong>. Coordina el <strong>Grupo de Ingeniería y Gestión Ambiental (GIGA)</strong>, reconocido por Minciencias en <strong>categoría A1</strong>, desde el cual desarrolla investigación, docencia y extensión en <strong>hidrología</strong>, <strong>calidad del agua y del aire</strong>, <strong>cambio ambiental</strong> y <strong>sostenibilidad</strong>.</p>
+<p>Su trabajo conecta la ciencia ambiental con problemas concretos del territorio: ha participado en proyectos como <strong>SOS-Cuenca</strong> (sostenibilidad de la cuenca Magdalena-Cauca bajo escenarios de cambio climático y pérdida de bosques) y <strong>REDRÍo</strong> (monitoreo del río Aburrá, desde Caldas hasta su desembocadura en el Porce), además de investigaciones sobre almacenamiento hídrico, modelación climática e interacciones tierra-atmósfera en los Andes tropicales y la Amazonía. El GIGA colabora con instituciones como el <strong>IPCC</strong>, el <strong>IDEAM</strong>, <strong>CORANTIOQUIA</strong>, el <strong>Área Metropolitana del Valle de Aburrá</strong>, <strong>EPM</strong> e <strong>IHE Delft</strong>, entre otras.</p>
+<p>Salazar ha publicado ampliamente sobre hidrología, calidad del aire en valles urbanos, cambio climático, puntos de inflexión climáticos y la relación entre ambiente y sociedad. Más información sobre su grupo de investigación está disponible en la <a href="https://www.udea.edu.co/wps/portal/udea/web/inicio/investigacion/areas-investigacion/inicio-fichas/fichas/facultad-ingenieria/grupo-de-ingenieria-y-gestion-ambiental-giga">ficha del GIGA en la Universidad de Antioquia</a>.</p></div>
+
+    <h2 class="section-title">Un vistazo al contenido</h2>
+    <div class="section-body"><p><strong>Cambio climático en cuatro historias.</strong> Cada sesión es un capítulo del relato: riguroso en lo científico, claro en lo humano y anclado en casos reales.</p>
+<div class="topics-list">
+<p><strong>1. ¿Qué carajos es el cambio climático?</strong> — Riguroso pero simple: el cuento de la bomba y el balde, conceptos, cifras, causas, efectos y rudimentos para entender de verdad de qué estamos hablando.<br />
+<strong>2. Clima nuevo, vida nueva</strong> — No podemos vivir la vida vieja en el clima nuevo. Si cambia el clima, tiene que cambiar nuestra forma de vivir. Casos de la vida real alrededor del mundo: el río Aburrá, las inundaciones de Valencia, la mansión que ya no vale nada…<br />
+<strong>3. Cimbronazos climáticos</strong> — Historias de puntos de inflexión: esos momentos en que un sistema —un glaciar, una corriente oceánica, un ecosistema, una ciudad— cruza un umbral y deja de comportarse como antes.<br />
+<strong>4. Nómadas climáticos</strong> — Historias de adaptación al cambio climático, desde alternativas actuales hasta el futuro de niños y niñas. Cierre en clave de realismo con esperanza: no es un meteorito que nos va a extinguir, pero sí es muy difícil y lo vamos a sentir. <em>Cooperación o extinción</em>.</p>
+</div>
+<p>Es importante señalar que el orden y la extensión con la que se tratarán los temas depende de la elección del experto.</p></div>
+
+    <h2 class="section-title">A quién va dirigida esta actividad</h2>
+    <div class="section-body"><p>Esta <em>Master Class</em> está dirigida a entusiastas, estudiantes, profesionales, docentes y público general interesado en comprender el cambio climático con base científica. <strong>No se necesitan conocimientos previos</strong> de matemáticas, física o ciencias de la Tierra, aunque un interés genuino por la naturaleza y el medio ambiente enriquecerá la experiencia. Pueden participar jóvenes y adultos; se recomienda una edad mínima de 12 años.</p></div>
+
+    <h2 class="section-title">Metodología</h2>
+    <div class="section-body"><p>Las <em>Master Class</em> de la <a href="https://www.drz.academy">Dr. Z Academy</a> son <strong>espacios de formación e interacción académica con expertos o expertas en disciplinas específicas</strong>. Tienen una duración máxima de 4 sesiones de 2 horas cada una. Este evento no es gratuito. Puedes consultar el valor y las formas de pago en el <a href="https://drz.academy/producto/cambio-climatico/">enlace de inscripción</a>.</p>
+<p>Esta <em>Master Class</em> es <strong>virtual</strong>: sesiones sincrónicas que pueden seguirse en vivo mientras se graban y también en diferido. Las sesiones se realizan los <strong>lunes de 6:30 pm a 8:30 pm (hora Colombia)</strong>, del <strong>14 de septiembre al 12 de octubre de 2026</strong>.</p>
+<p>Todo el material de la <em>Master Class</em> —presentaciones, lecturas recomendadas y la totalidad de los videos grabados— se compartirá con las personas inscritas a través de la <a href="https://classroom.google.com/">plataforma Google Classroom</a> (¡necesitas una cuenta de Google para acceder a ella!).</p></div>
+
+    <h2 class="section-title">Certificación</h2>
+    <div class="section-body"><p>Al terminar la <em>Master Class</em> recibirás un <strong>certificado de participación</strong> firmado por el experto invitado. <strong>Para obtener el certificado se deberá demostrar la asistencia o reproducción de por lo menos el 75% de las sesiones</strong> (3 sesiones) dentro del plazo del evento.</p>
+<p>En el caso de la <em>Master Class Cambio Climático</em>, el plazo para demostrar la asistencia será el <strong>15 de octubre de 2026</strong>.</p></div>
+
+    <h2 class="section-title">Datos para no olvidar</h2>
+    <div class="section-body"><p>Estos son los datos que no puedes olvidar sobre la <em>Master Class</em>:</p>
+<ul class="checklist">
+<li>En esta <em>Master Class</em> recorreremos el cambio climático en <strong>cuatro historias</strong>: qué es, cómo cambia nuestra vida, los cimbronazos y la adaptación.</li>
+<li>Nuestro experto invitado es <strong>Juan Fernando Salazar Villegas, Ph. D.</strong>, coordinador del grupo <strong>GIGA</strong> de la Universidad de Antioquia.</li>
+<li>La <em>Master Class</em> se realiza en <strong>4 sesiones de 2 horas</strong> cada una.</li>
+<li>Las sesiones se graban los <strong>lunes de 6:30 pm a 8:30 pm (hora Colombia)</strong>.</li>
+<li>El evento va del <strong>14 de septiembre al 12 de octubre de 2026</strong>.</li>
+<li>Es un <strong>evento virtual</strong>; las grabaciones se transmitirán en vivo a través de <strong>Google Meet</strong>.</li>
+<li>Todo el material (videos, presentaciones, material complementario) se comparte por <a href="https://classroom.google.com/">Google Classroom</a>. <strong>Necesitas una cuenta personal en Google</strong>.</li>
+<li>Para obtener el certificado debes asistir o reproducir el 75% de las sesiones antes del <strong>15 de octubre de 2026</strong>.</li>
+<li>Puedes inscribirte en <a href="https://drz.academy/producto/cambio-climatico/">https://drz.academy/producto/cambio-climatico/</a>.</li>
+</ul></div>
+
+
+    <div class="enroll-section">
+      <a class="enroll-btn" href="https://drz.academy/producto/cambio-climatico/" target="_blank" rel="noopener" data-track="course_enroll_click" data-track-id="cambio-climatico" data-track-name="Cambio Climático">
+        Inscribete ahora →
+      </a>
+      <div class="qr-wrap">
+        <img src="images/qr-inscripcion.png" alt="Código QR para inscripción">
+        <span>Comparte el enlace de inscripción con este QR</span>
+      </div>
+      <div class="contact-links" style="margin-top:1.5rem;">
+        <a href="mailto:soydoctorz@gmail.com">soydoctorz@gmail.com</a>
+        <a href="https://wa.me/573002422052" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://drz.academy" target="_blank" rel="noopener">drz.academy</a>
+      </div>
+    </div>
+    <p class="closing">¡Nos vemos!</p>
+  </main>
+
+  <footer>
+    <p>© 2026 <a href="https://drz.academy" target="_blank" rel="noopener">Dr. Z Academy</a>
+    · Medellín, Colombia
+    · <a href="mailto:soydoctorz@gmail.com">soydoctorz@gmail.com</a></p>
+  </footer>
+
+  <script type="module" src="/assets/site-analytics.js"></script>
+</body>
+</html>

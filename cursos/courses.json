@@ -1,6 +1,22 @@
 {
   "cursos": [
     {
+      "id": "cambio-climatico",
+      "titulo": "Cambio Climático",
+      "tagline": "La ciencia que nadie te explicó y el futuro que ya nos alcanzó",
+      "descripcion": "Cuatro historias para entender el cambio climático: qué es, cómo nos cambia la vida, los cimbronazos y cómo adaptarnos con realismo y esperanza.",
+      "url": "cursos/cambio-climatico/",
+      "imagen": "cursos/cambio-climatico/images/header.webp",
+      "etiquetas": [
+        "Cambio Climático",
+        "Hidrología",
+        "Medio Ambiente"
+      ],
+      "instructor": "Juan Fernando Salazar Villegas, Ph. D.",
+      "sesiones": 4,
+      "activo": true
+    },
+    {
       "id": "python-fin-del-mundo",
       "titulo": "Python para el fin del mundo",
       "tagline": "Aprende Python desde cero con datos reales de asteroides y criterio científico",
