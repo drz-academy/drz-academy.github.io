@@ -1,5 +1,262 @@
 [
   {
+    "id": "8d724a98-3f10-4283-9f1f-197edf490373",
+    "timestampServer": "2026-08-21T05:07:05.358Z",
+    "ip": "186.29.180.111",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-08-21T05:07:04.189Z"
+  },
+  {
+    "id": "7acdde17-1f64-4d26-b427-d121284b8c30",
+    "timestampServer": "2026-08-20T23:11:40.026Z",
+    "ip": "192.178.11.32",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "http://www.google.com/search",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64)  AppleWebKit/537.36 (KHTML, like Gecko; Google Web Preview)  Chrome/151.0.7922.137 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-08-20T23:11:39.488Z"
+  },
+  {
+    "id": "ccc56317-8aa9-4be7-af7f-15dcb9f4140e",
+    "timestampServer": "2026-08-20T22:37:35.084Z",
+    "ip": "40.77.178.143",
+    "country": "US",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/136.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-20T22:37:34.374Z"
+  },
+  {
+    "id": "393ad713-2929-4085-b8f8-149070af32ee",
+    "timestampServer": "2026-08-20T20:58:24.374Z",
+    "ip": "38.25.84.212",
+    "country": "PE",
+    "eventType": "course_page_view",
+    "page": "/cursos/python-fin-del-mundo/",
+    "url": "https://drz-academy.github.io/cursos/python-fin-del-mundo/",
+    "referrer": "https://www.google.com/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "python-fin-del-mundo",
+      "courseName": "Python para el fin del mundo"
+    },
+    "timestampClient": "2026-08-20T20:58:24.148Z"
+  },
+  {
+    "id": "c18f5407-de86-4e26-8f01-346b665f88e6",
+    "timestampServer": "2026-08-20T20:57:37.861Z",
+    "ip": "38.25.84.212",
+    "country": "PE",
+    "eventType": "course_page_view",
+    "page": "/cursos/python-fin-del-mundo/",
+    "url": "https://drz-academy.github.io/cursos/python-fin-del-mundo/",
+    "referrer": "https://www.google.com/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "python-fin-del-mundo",
+      "courseName": "Python para el fin del mundo"
+    },
+    "timestampClient": "2026-08-20T20:57:37.501Z"
+  },
+  {
+    "id": "14eaf25c-6d33-4be4-9a1c-94e7584f7e6b",
+    "timestampServer": "2026-08-20T02:43:54.096Z",
+    "ip": "17.241.227.59",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/astropython/",
+    "url": "https://drz-academy.github.io/cursos/astropython/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15 (Applebot/0.1; +http://www.apple.com/go/applebot)",
+    "language": "es",
+    "details": {
+      "courseId": "astropython",
+      "courseName": "AstroPython"
+    },
+    "timestampClient": "2026-08-20T02:43:51.851Z"
+  },
+  {
+    "id": "d91c471c-3d45-4ba7-91b1-5ea9460aa008",
+    "timestampServer": "2026-08-20T00:05:43.457Z",
+    "ip": "2a03:2880:ff:40::",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/?fbclid=IwcGRvZgRleHRuA2FlbQIxMQBzcnRjBmFwcF9pZAwyNTYyODEwNDA1NTgAAR7RFFtRZOfGSzRrMPGtPE61IJ2Y2ZnGD-1aAdRZPcPqDyoNxv4ff-kctZkrAA_aem_gqiF9kNBRhTLKw7Ou4DxDQ",
+    "referrer": "https://www.facebook.com/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 12; V2028 Build/SP1A.210812.003; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/151.0.7922.134 Mobile Safari/537.36 [FBAN/FB4A;FBAV/574.0.0.40.71;FBBV/1038038936;FBDM/{density=1.875,width=720,height=1475};FBLC/en_US;FBRV/1043910889;FB_FW/2;FBCR/;FBMF/vivo;FBBD/vivo;FBPN/com.facebook.katana;FBDV/V2028;FBSV/12;FBOP/1;FBCA/arm64-v8a:;]",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-08-20T00:05:43.005Z"
+  },
+  {
+    "id": "c0d07fdb-f559-4bba-9275-23879e1eacb7",
+    "timestampServer": "2026-08-20T00:05:43.079Z",
+    "ip": "2a03:2880:31ff:36::",
+    "country": "IE",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/?fbclid=IwcGRvZgRleHRuA2FlbQIxMQBzcnRjBmFwcF9pZAwyNTYyODEwNDA1NTgAAR6zmXDG81QY8AWXlDvLcEfiks4i7sr1wF32YhQgME4gWWK4f5Jq22X5HEqBIg_aem_00wPMTyQKSu-qrdjdQ2RAw",
+    "referrer": "https://www.facebook.com/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 12; CPH2127 Build/RKQ1.211119.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/150.0.7871.183 Mobile Safari/537.36 [FBAN/EMA;FBLC/ru_RU;FBAV/523.0.0.10.106;FB_FW/1;FBBV/1032591843;FBDM/DisplayMetrics{density=2.0, width=720, height=1496, scaledDensity=2.0, xdpi=268.941, ydpi=269.139};]",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-08-20T00:05:42.857Z"
+  },
+  {
+    "id": "71b44af2-67b7-4d78-9e38-4d86b153258f",
+    "timestampServer": "2026-08-19T16:13:48.305Z",
+    "ip": "17.22.237.195",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15 (Applebot/0.1; +http://www.apple.com/go/applebot)",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-08-19T16:13:46.516Z"
+  },
+  {
+    "id": "0e63743b-1e8f-4ff0-980d-8ef6fce2c64f",
+    "timestampServer": "2026-08-19T14:43:12.943Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "app_click",
+    "page": "/",
+    "url": "http://localhost:8000/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "drake-calculator",
+      "targetName": "Calculadora de Drake",
+      "href": "apps/drake-calculator/",
+      "label": "Abrir aplicación"
+    },
+    "timestampClient": "2026-08-19T14:43:12.839Z"
+  },
+  {
+    "id": "2965aca8-d3e9-4547-98bf-667b31b783b5",
+    "timestampServer": "2026-08-19T14:43:09.338Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "http://localhost:8000/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-19T14:43:09.012Z"
+  },
+  {
+    "id": "c7b50e29-0222-4bc1-bd73-218d3a27bae2",
+    "timestampServer": "2026-08-19T14:35:39.669Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "app_click",
+    "page": "/",
+    "url": "http://127.0.0.1:8000/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "drake-calculator",
+      "targetName": "Calculadora de Drake",
+      "href": "apps/drake-calculator/",
+      "label": "Abrir aplicación"
+    },
+    "timestampClient": "2026-08-19T14:35:39.536Z"
+  },
+  {
+    "id": "8067793d-4451-4f3f-a5de-43d616bbcce5",
+    "timestampServer": "2026-08-19T14:35:35.713Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "http://127.0.0.1:8000/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-19T14:35:35.511Z"
+  },
+  {
+    "id": "1600c199-c792-47b4-a399-9b426751408d",
+    "timestampServer": "2026-08-19T14:35:22.834Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "app_click",
+    "page": "/",
+    "url": "http://127.0.0.1:8000/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "drake-calculator",
+      "targetName": "Calculadora de Drake",
+      "href": "apps/drake-calculator/",
+      "label": "Abrir aplicación"
+    },
+    "timestampClient": "2026-08-19T14:35:22.632Z"
+  },
+  {
+    "id": "b499e59d-f37c-48ea-8dd2-03e76aa273e1",
+    "timestampServer": "2026-08-19T14:35:15.113Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "http://127.0.0.1:8000/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-19T14:35:14.739Z"
+  },
+  {
     "id": "465e45b5-afb7-4440-a9ea-fea91269a22f",
     "timestampServer": "2026-08-19T08:22:49.712Z",
     "ip": "17.246.19.249",
