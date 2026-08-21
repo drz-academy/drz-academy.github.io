@@ -146,3 +146,13 @@ notify-preview-newsletter:
 		exit 1; \
 	fi
 	@python3 notify/client/send_newsletter.py "$(FILE)" --preview
+# --- dev/cleanall (auto) ---
+include .dev_common.mk
+
+.PHONY: cleanall
+
+cleanall: _dev_cleanall
+
+.PHONY: env
+
+env: _dev_env
