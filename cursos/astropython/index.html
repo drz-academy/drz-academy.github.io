@@ -147,7 +147,13 @@
     }
     .hotmart-btn:hover { background: #e09410; text-decoration: none; color: #1a1a1a; }
 
-    /* CTA / Enroll */
+    /* CTA / Enroll (arriba) */
+    .enroll-top {
+      text-align: center; margin-bottom: 2rem;
+    }
+    .enroll-btn--top { margin-bottom: 0; }
+
+    /* CTA / Enroll (final) */
     .enroll-section {
       background: var(--bg-alt); border: 2px solid var(--teal);
       border-radius: var(--r); padding: 2rem; margin-top: var(--gap); text-align: center;
@@ -179,7 +185,7 @@
 
     /* Print */
     @media print {
-      .topbar, .enroll-section, footer { display: none; }
+      .topbar, .enroll-top, .enroll-section, footer { display: none; }
       body { font-size: 11pt; }
       .section-body p { text-align: left; color: #000; }
       h1.section-title, h2.section-title { color: #000; }
@@ -207,9 +213,10 @@
 
   <main>
 
-    <div class="hotmart-banner">
-      <p class="hotmart-banner-lead">Este curso se realiza en la plataforma <strong>Hotmart</strong>. En el siguiente enlace puedes adquirirlo:</p>
-      <a class="hotmart-btn" href="https://go.hotmart.com/E97526567X?dp=1" target="_blank" rel="noopener" data-track="course_enroll_click" data-track-id="astropython" data-track-name="AstroPython">Adquirir en Hotmart →</a>
+    <div class="enroll-top">
+      <a class="enroll-btn enroll-btn--top" href="https://go.hotmart.com/E97526567X?dp=1" target="_blank" rel="noopener" data-track="course_enroll_click" data-track-id="astropython" data-track-name="AstroPython">
+        Inscribete ahora →
+      </a>
     </div>
 
     <h1 class="section-title">¿De qué va este curso?</h1>

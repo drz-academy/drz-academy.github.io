@@ -147,7 +147,13 @@
     }
     .hotmart-btn:hover { background: #e09410; text-decoration: none; color: #1a1a1a; }
 
-    /* CTA / Enroll */
+    /* CTA / Enroll (arriba) */
+    .enroll-top {
+      text-align: center; margin-bottom: 2rem;
+    }
+    .enroll-btn--top { margin-bottom: 0; }
+
+    /* CTA / Enroll (final) */
     .enroll-section {
       background: var(--bg-alt); border: 2px solid var(--teal);
       border-radius: var(--r); padding: 2rem; margin-top: var(--gap); text-align: center;
@@ -179,7 +185,7 @@
 
     /* Print */
     @media print {
-      .topbar, .enroll-section, footer { display: none; }
+      .topbar, .enroll-top, .enroll-section, footer { display: none; }
       body { font-size: 11pt; }
       .section-body p { text-align: left; color: #000; }
       h1.section-title, h2.section-title { color: #000; }
@@ -206,6 +212,13 @@
   </nav>
 
   <main>
+
+    <div class="enroll-top">
+      <a class="enroll-btn enroll-btn--top" href="https://drz.academy/producto/cambio-climatico/" target="_blank" rel="noopener" data-track="course_enroll_click" data-track-id="cambio-climatico" data-track-name="Cambio Climático">
+        Inscribete ahora →
+      </a>
+    </div>
+
     <h1 class="section-title">Presentación</h1>
     <div class="section-body"><p><strong>El cambio climático ya no es una advertencia lejana: es el presente que habitamos</strong>. Lo sentimos en sequías, inundaciones, olas de calor, ríos que se desbordan y ciudades que ya no pueden vivir como antes. <strong>Y, sin embargo, sigue siendo uno de los temas peor explicados del planeta</strong>: mezcla de datos sólidos, simplificaciones, alarmismo y negacionismo en la misma conversación.</p>
 <p><strong>Esta <em>Master Class</em> propone contarlo de otra manera: en cuatro historias</strong>. No como un manual técnico frío, sino como un recorrido riguroso y cercano, guiado por el experto en hidrología <strong>Juan Fernando Salazar, Ph. D.</strong>, que va de lo esencial a lo inmediato: qué es el cambio climático, cómo nos obliga a cambiar la forma de vivir, dónde están los puntos de inflexión que pueden sacudirlo todo y cómo —desde hoy— nos movemos hacia formas de adaptación posibles.</p>

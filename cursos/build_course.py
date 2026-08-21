@@ -418,6 +418,19 @@ def generate_og_images(course_dir: Path, meta: dict) -> None:
 # PLANTILLA HTML
 # ─────────────────────────────────────────────────────────────────────────────
 
+def enroll_top_block(meta: dict) -> str:
+    """Botón de inscripción al inicio del contenido."""
+    url    = meta.get("inscripcion_url", "#")
+    cid    = escape_attr(meta.get("id", ""))
+    titulo = escape_attr(meta.get("titulo", ""))
+    return f'''
+    <div class="enroll-top">
+      <a class="enroll-btn enroll-btn--top" href="{url}" target="_blank" rel="noopener" data-track="course_enroll_click" data-track-id="{cid}" data-track-name="{titulo}">
+        Inscribete ahora →
+      </a>
+    </div>'''
+
+
 def hotmart_top_block(meta: dict) -> str:
     """Banner de inscripción para cursos en Hotmart (arriba del contenido)."""
     url = meta.get("inscripcion_url", "#")
@@ -537,8 +550,8 @@ def render_html(meta: dict, sections: list[tuple[str, str]]) -> str:
 
     # Construir el cuerpo de secciones
     body_html_parts: list[str] = []
-    if meta.get("plataforma") == "hotmart":
-        body_html_parts.append(hotmart_top_block(meta))
+    if activo:
+        body_html_parts.append(enroll_top_block(meta))
     first = True
     for heading, content in sections:
         if not content and not heading:
@@ -688,7 +701,13 @@ def render_html(meta: dict, sections: list[tuple[str, str]]) -> str:
     }}
     .hotmart-btn:hover {{ background: #e09410; text-decoration: none; color: #1a1a1a; }}
 
-    /* CTA / Enroll */
+    /* CTA / Enroll (arriba) */
+    .enroll-top {{
+      text-align: center; margin-bottom: 2rem;
+    }}
+    .enroll-btn--top {{ margin-bottom: 0; }}
+
+    /* CTA / Enroll (final) */
     .enroll-section {{
       background: var(--bg-alt); border: 2px solid var(--teal);
       border-radius: var(--r); padding: 2rem; margin-top: var(--gap); text-align: center;
@@ -720,7 +739,7 @@ def render_html(meta: dict, sections: list[tuple[str, str]]) -> str:
 
     /* Print */
     @media print {{
-      .topbar, .enroll-section, footer {{ display: none; }}
+      .topbar, .enroll-top, .enroll-section, footer {{ display: none; }}
       body {{ font-size: 11pt; }}
       .section-body p {{ text-align: left; color: #000; }}
       h1.section-title, h2.section-title {{ color: #000; }}
