@@ -1,5 +1,89 @@
 [
   {
+    "id": "8d724a98-3f10-4283-9f1f-197edf490373",
+    "timestampServer": "2026-08-21T05:07:05.358Z",
+    "ip": "186.29.180.111",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-08-21T05:07:04.189Z"
+  },
+  {
+    "id": "7acdde17-1f64-4d26-b427-d121284b8c30",
+    "timestampServer": "2026-08-20T23:11:40.026Z",
+    "ip": "192.178.11.32",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "http://www.google.com/search",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64)  AppleWebKit/537.36 (KHTML, like Gecko; Google Web Preview)  Chrome/151.0.7922.137 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-08-20T23:11:39.488Z"
+  },
+  {
+    "id": "ccc56317-8aa9-4be7-af7f-15dcb9f4140e",
+    "timestampServer": "2026-08-20T22:37:35.084Z",
+    "ip": "40.77.178.143",
+    "country": "US",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/136.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-20T22:37:34.374Z"
+  },
+  {
+    "id": "393ad713-2929-4085-b8f8-149070af32ee",
+    "timestampServer": "2026-08-20T20:58:24.374Z",
+    "ip": "38.25.84.212",
+    "country": "PE",
+    "eventType": "course_page_view",
+    "page": "/cursos/python-fin-del-mundo/",
+    "url": "https://drz-academy.github.io/cursos/python-fin-del-mundo/",
+    "referrer": "https://www.google.com/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "python-fin-del-mundo",
+      "courseName": "Python para el fin del mundo"
+    },
+    "timestampClient": "2026-08-20T20:58:24.148Z"
+  },
+  {
+    "id": "c18f5407-de86-4e26-8f01-346b665f88e6",
+    "timestampServer": "2026-08-20T20:57:37.861Z",
+    "ip": "38.25.84.212",
+    "country": "PE",
+    "eventType": "course_page_view",
+    "page": "/cursos/python-fin-del-mundo/",
+    "url": "https://drz-academy.github.io/cursos/python-fin-del-mundo/",
+    "referrer": "https://www.google.com/",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "python-fin-del-mundo",
+      "courseName": "Python para el fin del mundo"
+    },
+    "timestampClient": "2026-08-20T20:57:37.501Z"
+  },
+  {
     "id": "14eaf25c-6d33-4be4-9a1c-94e7584f7e6b",
     "timestampServer": "2026-08-20T02:43:54.096Z",
     "ip": "17.241.227.59",
