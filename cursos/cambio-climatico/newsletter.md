@@ -14,7 +14,9 @@ Hola,
 
 El cambio climático ya no es una advertencia lejana: es el presente que habitamos. Lo sentimos en sequías, inundaciones, olas de calor y ríos que se desbordan. Y, sin embargo, sigue siendo uno de los temas peor explicados del planeta: mezcla de datos sólidos, simplificaciones, alarmismo y negacionismo en la misma conversación.
 
-Por eso te invitamos a la **Master Class: Cambio Climático** — *La ciencia que nadie te explicó y el futuro que ya nos alcanzó*. Un recorrido en **cuatro historias**, riguroso pero cercano, con el experto en hidrología **Juan Fernando Salazar Villegas, Ph. D.** (coordinador del grupo **GIGA** de la Universidad de Antioquia).
+Por eso te invitamos a la **Master Class: Cambio Climático** — *La ciencia que nadie te explicó y el futuro que ya nos alcanzó*. Un recorrido en **cuatro historias**, riguroso pero cercano, con el experto en hidrología **Juan Fernando Salazar Villegas, Ph. D.**
+
+Juan Fernando es Doctor y Magíster en Recursos Hidráulicos, Ingeniero Civil de la Universidad Nacional, y profesor titular de la Universidad de Antioquia. Ha sido coordinador del **Grupo de Ingeniería y Gestión Ambiental (GIGA)** y su trabajo conecta la ciencia ambiental con problemas reales del territorio, con investigaciones sobre el clima en los Andes y la Amazonía que lo han llevado a colaborar con instituciones como el **IPCC** y el **IDEAM**.
 
 **No es un meteorito que nos va a extinguir**, pero **sí es muy difícil y lo vamos a sentir**. Al final del camino, la clave será un **realismo con esperanza**: *cooperación o extinción*.
 

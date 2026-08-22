@@ -40,7 +40,7 @@ activo: true
 
 <!-- fotos1 -->
 
-**Juan Fernando Salazar Villegas** es **Doctor y Magíster en Recursos Hidráulicos** e **Ingeniero Civil** de la **Universidad Nacional de Colombia, sede Medellín**, y **profesor titular de la Universidad de Antioquia**. Coordina el **Grupo de Ingeniería y Gestión Ambiental (GIGA)**, reconocido por Minciencias en **categoría A1**, desde el cual desarrolla investigación, docencia y extensión en **hidrología**, **calidad del agua y del aire**, **cambio ambiental** y **sostenibilidad**.
+**Juan Fernando Salazar Villegas** es **Doctor y Magíster en Recursos Hidráulicos** e **Ingeniero Civil** de la **Universidad Nacional de Colombia, sede Medellín**, y **profesor titular de la Universidad de Antioquia**. Ha sido coordinador del **Grupo de Ingeniería y Gestión Ambiental (GIGA)**, reconocido por Minciencias en **categoría A1**, desde el cual desarrolla investigación, docencia y extensión en **hidrología**, **calidad del agua y del aire**, **cambio ambiental** y **sostenibilidad**.
 
 Su trabajo conecta la ciencia ambiental con problemas concretos del territorio: ha participado en proyectos como **SOS-Cuenca** (sostenibilidad de la cuenca Magdalena-Cauca bajo escenarios de cambio climático y pérdida de bosques) y **REDRÍo** (monitoreo del río Aburrá, desde Caldas hasta su desembocadura en el Porce), además de investigaciones sobre almacenamiento hídrico, modelación climática e interacciones tierra-atmósfera en los Andes tropicales y la Amazonía. El GIGA colabora con instituciones como el **IPCC**, el **IDEAM**, **CORANTIOQUIA**, el **Área Metropolitana del Valle de Aburrá**, **EPM** e **IHE Delft**, entre otras.
 

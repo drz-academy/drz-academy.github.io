@@ -6,10 +6,10 @@ Esta <em>Master Class</em> está dirigida a entusiastas, estudiantes, profesiona
 
 <strong>Cambio climático en cuatro historias.</strong> Cada sesión es un capítulo del relato: riguroso en lo científico, claro en lo humano y anclado en casos reales.
 <ul class="checklist">
- 	<li><strong>1. ¿Qué carajos es el cambio climático?</strong> — Riguroso pero simple: el cuento de la bomba y el balde, conceptos, cifras, causas, efectos y rudimentos para entender de verdad de qué estamos hablando.</li>
- 	<li><strong>2. Clima nuevo, vida nueva</strong> — No podemos vivir la vida vieja en el clima nuevo. Casos de la vida real alrededor del mundo: el río Aburrá, las inundaciones de Valencia, la mansión que ya no vale nada…</li>
- 	<li><strong>3. Cimbronazos climáticos</strong> — Historias de puntos de inflexión: esos momentos en que un sistema cruza un umbral y deja de comportarse como antes.</li>
- 	<li><strong>4. Nómadas climáticos</strong> — Historias de adaptación al cambio climático, desde alternativas actuales hasta el futuro de niños y niñas. Cierre en clave de realismo con esperanza: <em>cooperación o extinción</em>.</li>
+ 	<li><strong>¿Qué carajos es el cambio climático?</strong> — Riguroso pero simple: el cuento de la bomba y el balde, conceptos, cifras, causas, efectos y rudimentos para entender de verdad de qué estamos hablando.</li>
+ 	<li><strong>Clima nuevo, vida nueva</strong> — No podemos vivir la vida vieja en el clima nuevo. Casos de la vida real alrededor del mundo: el río Aburrá, las inundaciones de Valencia, la mansión que ya no vale nada…</li>
+ 	<li><strong>Cimbronazos climáticos</strong> — Historias de puntos de inflexión: esos momentos en que un sistema cruza un umbral y deja de comportarse como antes.</li>
+ 	<li><strong>Nómadas climáticos</strong> — Historias de adaptación al cambio climático, desde alternativas actuales hasta el futuro de niños y niñas. Cierre en clave de realismo con esperanza: <em>cooperación o extinción</em>.</li>
 </ul>
 Es importante señalar que el orden y la extensión con la que se tratarán los temas depende de la elección del experto.
 
@@ -33,7 +33,7 @@ Al terminar la <em>Master Class</em> recibirás un <strong>certificado de partic
 
 <strong>¿Quién es el experto?</strong>
 
-<strong>Juan Fernando Salazar Villegas</strong> es <strong>Doctor y Magíster en Recursos Hidráulicos</strong> e <strong>Ingeniero Civil</strong> de la <strong>Universidad Nacional de Colombia, sede Medellín</strong>, y <strong>profesor titular de la Universidad de Antioquia</strong>. Coordina el <strong>Grupo de Ingeniería y Gestión Ambiental (GIGA)</strong>, reconocido por Minciencias en <strong>categoría A1</strong>, desde el cual desarrolla investigación, docencia y extensión en <strong>hidrología</strong>, <strong>calidad del agua y del aire</strong>, <strong>cambio ambiental</strong> y <strong>sostenibilidad</strong>.
+<strong>Juan Fernando Salazar Villegas</strong> es <strong>Doctor y Magíster en Recursos Hidráulicos</strong> e <strong>Ingeniero Civil</strong> de la <strong>Universidad Nacional de Colombia, sede Medellín</strong>, y <strong>profesor titular de la Universidad de Antioquia</strong>. Ha sido coordinador del <strong>Grupo de Ingeniería y Gestión Ambiental (GIGA)</strong>, reconocido por Minciencias en <strong>categoría A1</strong>, desde el cual desarrolla investigación, docencia y extensión en <strong>hidrología</strong>, <strong>calidad del agua y del aire</strong>, <strong>cambio ambiental</strong> y <strong>sostenibilidad</strong>.
 
 Su trabajo conecta la ciencia ambiental con problemas concretos del territorio: ha participado en proyectos como <strong>SOS-Cuenca</strong> (sostenibilidad de la cuenca Magdalena-Cauca bajo escenarios de cambio climático y pérdida de bosques) y <strong>REDRÍo</strong> (monitoreo del río Aburrá, desde Caldas hasta su desembocadura en el Porce), además de investigaciones sobre almacenamiento hídrico, modelación climática e interacciones tierra-atmósfera en los Andes tropicales y la Amazonía. El GIGA colabora con instituciones como el <strong>IPCC</strong>, el <strong>IDEAM</strong>, <strong>CORANTIOQUIA</strong>, el <strong>Área Metropolitana del Valle de Aburrá</strong>, <strong>EPM</strong> e <strong>IHE Delft</strong>, entre otras. Más información en la <a href="https://www.udea.edu.co/wps/portal/udea/web/inicio/investigacion/areas-investigacion/inicio-fichas/fichas/facultad-ingenieria/grupo-de-ingenieria-y-gestion-ambiental-giga" target="_blank" rel="noopener">ficha del GIGA en la Universidad de Antioquia</a>.
 
