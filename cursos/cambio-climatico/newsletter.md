@@ -4,7 +4,7 @@ subject: "🌍 Cambio Climático: cuatro historias con ciencia y esperanza - Nue
 
 <div align="center">
   <a href="https://drz-academy.github.io/cursos/cambio-climatico/">
-    <img src="https://drz-academy.github.io/cursos/cambio-climatico/images/poster.webp" alt="Afiche Master Class Cambio Climático" style="max-width: 600px; width: 100%; height: auto; border-radius: 8px;">
+    <img src="https://drz-academy.github.io/cursos/cambio-climatico/images/Cambio_Climático_Post_Instagram_1080x1350.png" alt="Afiche Master Class Cambio Climático" style="max-width: 600px; width: 100%; height: auto; border-radius: 8px;">
   </a>
 </div>
 
