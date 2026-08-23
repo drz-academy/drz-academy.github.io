@@ -98,6 +98,22 @@ function applySubscribeQueryFeedback() {
   }
 }
 
+async function updateSubscriberCount() {
+  const display = document.getElementById("subscriber-count-display");
+  if (!display) return;
+  const endpoint = workerEndpoint();
+  if (!endpoint) return;
+  try {
+    const res = await fetch(`${endpoint}/subscriber-count`);
+    const data = await res.json();
+    if (res.ok && data.ok && typeof data.count === "number") {
+      display.textContent = `¡Somos ${data.count}!`;
+    }
+  } catch (e) {
+    console.error("Error fetching subscriber count:", e);
+  }
+}
+
 function bindSubscribeUi() {
   document.getElementById("newsletter-subscribe-open")?.addEventListener("click", openModal);
   document.getElementById("newsletter-subscribe-close")?.addEventListener("click", closeModal);
@@ -110,6 +126,7 @@ function bindSubscribeUi() {
     if (ev.key === "Escape") closeModal();
   });
   applySubscribeQueryFeedback();
+  updateSubscriberCount();
 }
 
 if (document.readyState === "loading") {

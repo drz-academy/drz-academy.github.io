@@ -861,7 +861,10 @@
           <a href="https://drz.academy" target="_blank" rel="noopener">drz.academy</a>.
         </p>
         <div class="hero-ctas">
-          <button type="button" id="newsletter-subscribe-open" class="btn btn-primary">Suscribirse al boletín</button>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 0.35rem;">
+            <button type="button" id="newsletter-subscribe-open" class="btn btn-primary">Suscribirse al boletín</button>
+            <span id="subscriber-count-display" style="font-size: 0.7rem; opacity: 0.6; line-height: 1;"></span>
+          </div>
           <a href="#apps" class="btn btn-ghost">Aplicaciones</a>
           <a href="#demos" class="btn btn-ghost">Demos</a>
           <a href="#cursos" class="btn btn-ghost">Cursos</a>
@@ -1060,7 +1063,7 @@
             <div class="stat-label">Años divulgando ciencia</div>
           </div>
           <div class="stat-card">
-            <div class="stat-number">2</div>
+            <div class="stat-number" id="stat-apps">3</div>
             <div class="stat-label">Aplicaciones publicadas</div>
           </div>
           <div class="stat-card">
@@ -1269,8 +1272,10 @@
       ]).then(([coursesData, demosData]) => {
         const elCursos = document.getElementById('stat-cursos');
         const elDemos = document.getElementById('stat-demos');
+        const elApps = document.getElementById('stat-apps');
         if (elCursos) elCursos.textContent = (coursesData.cursos || []).length;
         if (elDemos) elDemos.textContent = (demosData.demos || []).filter(d => d.activo).length;
+        if (elApps) elApps.textContent = document.querySelectorAll('#apps .app-card-link').length || 3;
       });
     })();
   </script>
