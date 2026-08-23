@@ -22,6 +22,7 @@ help:
 	@echo "  make notify-list - Consulta la lista de suscriptores actualmente guardados"
 	@echo "  make notify-number - Muestra la cantidad total de suscriptores guardados"
 	@echo "  make notify-reset - Borra la lista de todos los suscriptores guardados"
+	@echo "  make subscribe [FILE=...] - Suscribe los correos de un archivo (por defecto .secrets/subscribers.md)"
 	@echo "  make notify-send-newsletter FILE=notify/newsletter.md [TEST_EMAILS=a@b.com] - Envía un newsletter (usa TEST_EMAILS para enviar solo a esos correos de prueba)"
 	@echo "  make notify-preview-newsletter FILE=notify/newsletter.md - Previsualiza el newsletter en el navegador antes de enviarlo"
 	@echo ""
@@ -137,6 +138,9 @@ notify-number:
 notify-reset:
 	@echo "Borrando todos los suscriptores de la base de datos..."
 	@python3 notify/client/course_notify_client.py reset
+
+subscribe:
+	@python3 notify/client/subscribe_from_file.py "$${FILE:-.secrets/subscribers.md}"
 
 notify-send-newsletter:
 	@if [ -z "$(FILE)" ]; then \
