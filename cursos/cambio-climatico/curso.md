@@ -13,8 +13,8 @@ direccion: ""
 tiene_zoom: false
 tiene_classroom: true
 inscripcion_url: "https://drz.academy/producto/cambio-climatico/"
-imagen_header: "images/Cambio_Climático_Encabezado_Página_Informativa_1600x600.png"
-imagen_og: "images/Cambio_Climático_Post_Instagram_1080x1350.png"
+imagen_header: "images/Cambio_Climatico_Encabezado_Pagina_Informativa_1600x600.png"
+imagen_og: "images/Cambio_Climatico_Post_Instagram_1080x1350.png"
 imagen_qr_curso: "images/qr-curso.png"
 imagen_qr: "images/qr-inscripcion.png"
 fotos1:
