@@ -13,6 +13,7 @@ help:
 	@echo "  make sync-site  - Copia index, assets y cursos/ a $(SITE)/"
 	@echo "  make start      - Arranca http://$(HOST):$(PORT) (actualiza cursos si hace falta)"
 	@echo "  make stop       - Detiene el servidor en el puerto $(PORT)"
+	@echo "  make stash      - Guarda cambios locales temporalmente (git stash)"
 	@echo "  make update     - Actualiza la Calculadora de Drake desde GitHub"
 	@echo ""
 	@echo "  make worker-deploy - Despliega el Worker de analytics en Cloudflare"
@@ -91,6 +92,10 @@ stop:
 	else \
 		echo "No process listening on $(PORT)."; \
 	fi
+
+stash:
+	@echo "▶  Guardando cambios locales temporalmente (git stash)…"
+	@git stash
 
 update:
 	@echo "▶  Updating Drake Calculator from GitHub…"
