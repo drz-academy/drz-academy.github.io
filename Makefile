@@ -95,8 +95,12 @@ stop:
 	fi
 
 stash:
-	@echo "▶  Guardando cambios locales temporalmente (git stash)…"
-	@git stash
+	@echo "▶  Sincronizando cambios remotos y resolviendo (pull & merge)..."
+	@if git diff-index --quiet HEAD --; then \
+		git pull --no-rebase; \
+	else \
+		git stash && git pull --no-rebase && git stash pop || echo "⚠️ Revisa si hubo conflictos al restaurar tus cambios locales."; \
+	fi
 
 update:
 	@echo "▶  Updating Drake Calculator from GitHub…"
