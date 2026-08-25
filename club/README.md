@@ -73,7 +73,7 @@ O, dentro de `club/`: `make todo` (base + clasificar + informe + boletines).
 
 ## Boletines personalizados (Oro / Plata / Bronce)
 
-Antes de generar: clasifica (`make club-clasificar`) y revisa `personal/cupones.json` y el próximo curso en `cursos.json`. Los banners del correo son `assets/club/banner-{oro,plata,bronce}.png` (fondo blanco); tienen que estar publicados en GitHub Pages.
+Antes de generar: clasifica (`make club-clasificar`) y revisa `personal/cupones.json` y el próximo curso en `cursos.json`. Los banners del correo son `assets/club/banner-{oro,plata,bronce}.png` (fondo blanco); el envío los adjunta en el mensaje para que Gmail no dependa de GitHub Pages.
 
 ```bash
 make club-boletines

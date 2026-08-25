@@ -5,14 +5,39 @@ from __future__ import annotations
 
 import smtplib
 import time
+from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import formataddr, make_msgid
+from pathlib import Path
 
 from course_notify_secrets import load_secret, normalize_credential
 
 DEFAULT_FROM_NAME = "Jorge Zuluaga, Dr. Z Academy"
 SEND_DELAY_SEC = 2.0
+
+_IMAGE_SUBTYPES = {
+    ".png": "png",
+    ".jpg": "jpeg",
+    ".jpeg": "jpeg",
+    ".gif": "gif",
+    ".webp": "webp",
+}
+
+
+def _attach_inline_images(root: MIMEMultipart, inline_images: list | None) -> None:
+    for item in inline_images or []:
+        path = Path(str(item.get("path") or ""))
+        cid = str(item.get("cid") or path.stem).strip("<>")
+        if not cid or not path.is_file():
+            continue
+        subtype = _IMAGE_SUBTYPES.get(path.suffix.lower(), "png")
+        with path.open("rb") as handle:
+            part = MIMEImage(handle.read(), _subtype=subtype)
+        part.add_header("Content-ID", f"<{cid}>")
+        part.add_header("Content-Disposition", "inline", filename=path.name)
+        root.attach(part)
+
 
 def build_message(
     *,
@@ -22,8 +47,22 @@ def build_message(
     html_body: str,
     from_name: str = DEFAULT_FROM_NAME,
     unsubscribe_url: str = "",
+    inline_images: list | None = None,
 ) -> MIMEMultipart:
-    msg = MIMEMultipart("alternative")
+    if unsubscribe_url:
+        footer = f'<br><br><hr style="border:0; border-top:1px solid #eee;"><p style="font-size: 12px; color: #777; text-align: center;">¿No deseas recibir más correos como este? <a href="{unsubscribe_url}" style="color:#007bff;">Desuscribirme</a></p>'
+        html_body += footer
+
+    alt = MIMEMultipart("alternative")
+    alt.attach(MIMEText("Este mensaje requiere un cliente de correo con soporte HTML.", "plain", "utf-8"))
+    alt.attach(MIMEText(html_body, "html", "utf-8"))
+
+    images = [item for item in (inline_images or []) if item]
+    msg: MIMEMultipart = MIMEMultipart("related") if images else alt
+    if images:
+        msg.attach(alt)
+        _attach_inline_images(msg, images)
+
     msg["Subject"] = subject
     msg["From"] = formataddr((from_name, user))
     msg["To"] = to_addr
@@ -32,13 +71,6 @@ def build_message(
     if unsubscribe_url:
         msg["List-Unsubscribe"] = f"<{unsubscribe_url}>"
         msg["List-Unsubscribe-Post"] = "List-Unsubscribe=One-Click"
-        
-        # Agregar link de desuscripción al final del HTML si existe
-        footer = f'<br><br><hr style="border:0; border-top:1px solid #eee;"><p style="font-size: 12px; color: #777; text-align: center;">¿No deseas recibir más correos como este? <a href="{unsubscribe_url}" style="color:#007bff;">Desuscribirme</a></p>'
-        html_body += footer
-
-    msg.attach(MIMEText("Este mensaje requiere un cliente de correo con soporte HTML.", "plain", "utf-8"))
-    msg.attach(MIMEText(html_body, "html", "utf-8"))
     return msg
 
 
@@ -133,6 +165,7 @@ def send_gmail_bulk(
                 html_body=msg_data.get("html", ""),
                 from_name=from_name,
                 unsubscribe_url=msg_data.get("unsub", ""),
+                inline_images=msg_data.get("inline") or None,
             )
             
             try:

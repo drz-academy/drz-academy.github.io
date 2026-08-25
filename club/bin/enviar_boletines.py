@@ -14,8 +14,16 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
+
+BANNER_CID = "banner-club"
+BANNER_FILES = {
+    "ORO": "banner-oro.png",
+    "PLATA": "banner-plata.png",
+    "BRONCE": "banner-bronce.png",
+}
 
 
 def find_repo() -> Path:
@@ -62,6 +70,28 @@ def read_html(folder: Path, item: dict) -> str:
     return path.read_text(encoding="utf-8")
 
 
+def attach_banner(repo: Path, html: str, categoria: str) -> tuple[str, list]:
+    """Gmail no puede cargar banners de Pages si aún no están publicados.
+
+    Adjunta el PNG local y apunta el <img> a cid:banner-club.
+    """
+    cat = str(categoria or "").strip().upper()
+    filename = BANNER_FILES.get(cat)
+    if not filename:
+        return html, []
+    path = repo / "assets" / "club" / filename
+    if not path.is_file():
+        print(f"Aviso: no está el banner {path}", file=sys.stderr)
+        return html, []
+    html = re.sub(
+        r'src="https://drz-academy\.github\.io/assets/club/banner-[^"]+"',
+        f'src="cid:{BANNER_CID}"',
+        html,
+        count=1,
+    )
+    return html, [{"cid": BANNER_CID, "path": str(path)}]
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Enviar boletines personalizados del Club")
     parser.add_argument("--prueba", default="", help="Enviar a este correo (no al de cada miembro)")
@@ -87,12 +117,12 @@ def main() -> int:
     prueba = args.prueba.strip()
     messages = []
     for item in items:
-        html = read_html(folder, item)
+        html, inline = attach_banner(repo, read_html(folder, item), item.get("categoria"))
         to_addr = prueba or str(item.get("correo") or "").strip()
         subject = str(item.get("asunto") or "").strip()
         if prueba:
             subject = f"[PRUEBA] {subject}"
-        messages.append({"to": to_addr, "subject": subject, "html": html, "unsub": ""})
+        messages.append({"to": to_addr, "subject": subject, "html": html, "unsub": "", "inline": inline})
 
     print(f"Carpeta: {folder}")
     print(f"Boletines: {len(messages)}")
