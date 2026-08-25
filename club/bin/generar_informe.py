@@ -110,10 +110,12 @@ def generar_informe():
     # Beneficios usados
     n_beneficios, beneficios_lista = contar_beneficios_usados()
 
-    # Inscritos por curso
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from clasificar_miembros import cursos_dictados_ordenados
+
     cursos = cargar_cursos()
     total_cursos = len(cursos)
-    cursos_dictados = [c for c in cursos if int(c.get("numero_participantes", 0)) > 0]
+    cursos_dictados = cursos_dictados_ordenados(cursos)
     ultimo_curso = cursos_dictados[-1] if cursos_dictados else None
     ultimo_curso_nombre = ultimo_curso["nombre"] if ultimo_curso else "?"
 
@@ -127,7 +129,7 @@ def generar_informe():
     lines.append(f"> **Cursos dictados**: {total_cursos}  ")
     lines.append(f"> **Miembros registrados**: {len(members)}  ")
     lines.append(f"> **Miembros con beneficios activos**: {total_beneficiarios}  ")
-    lines.append(f"> **Criterio**: inscripción consecutiva desde el último dictado (máx. 1 interrupción para Plata). El certificado no es requisito.")
+    lines.append(f"> **Criterio**: desde el último dictado ({ultimo_curso_nombre}); Plata admite 1 pausa si igual se llega a 3 matrículas. El certificado no es requisito.")
     lines.append("")
     lines.append("---")
     lines.append("")
@@ -156,7 +158,7 @@ def generar_informe():
     # ── PLATA ──
     lines.append(f"## 🥈 Categoría PLATA ({len(plata)} miembro{'s' if len(plata) != 1 else ''})")
     lines.append("")
-    lines.append("**Requisito**: 3 a 4 cursos consecutivos desde el último.  ")
+    lines.append("**Requisito**: 3 matrículas con máximo 1 pausa, incluyendo el último dictado.  ")
     lines.append("**Beneficio**: **30%** de descuento en el próximo curso. Al aprovechar el beneficio se reinicia el conteo.")
     lines.append("")
 
@@ -252,9 +254,9 @@ def generar_informe():
     # Criterios
     lines.append("### Criterios de clasificación")
     lines.append("")
-    lines.append("- **Oro**: 5+ cursos **consecutivos** desde el último dictado")
-    lines.append("- **Plata**: 3 cursos con máximo **1 interrupción** (hacia atrás)")
-    lines.append("- **Bronce**: Participó en el último curso dictado")
+    lines.append("- **Oro**: los últimos 5 cursos **consecutivos** (incluye el último dictado)")
+    lines.append("- **Plata**: 3 matrículas con máximo **1 pausa**, incluyendo el último dictado")
+    lines.append("- **Bronce**: participó en el último curso dictado")
     lines.append("- Se aplica siempre la **mejor categoría** (Oro > Plata > Bronce)")
     lines.append("- Si un miembro **usa su beneficio**, pierde la categoría y debe acumular de nuevo")
     lines.append("")

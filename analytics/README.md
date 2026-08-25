@@ -13,6 +13,7 @@ Registro de clicks e interacciones vía **Cloudflare Worker + KV**, igual que [j
 | `course_click` | Click en tarjeta de curso |
 | `course_page_view` | Vista de hoja de curso |
 | `course_enroll_click` | «Inscribete ahora» o «Adquirir en Hotmart» |
+| `club_visit` | Entrada al portal del Club (nombre y correo del miembro) |
 
 Cada evento guarda IP, país (CF), ruta, referrer y detalles (`targetId`, `targetName`, `href`).
 

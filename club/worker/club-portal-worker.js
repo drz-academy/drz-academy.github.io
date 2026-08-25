@@ -197,6 +197,7 @@ function requireAdmin(request, env) {
 function publicProfile(record) {
   return {
     nombre: record.nombre || "",
+    correo: record.correo || "",
     categoria: record.categoria || "SIN CATEGORÍA",
     emoji: record.emoji || "",
     beneficios: record.beneficios || "",

@@ -171,6 +171,7 @@
     }
     .stats-table th { color: var(--text-muted); font-weight: 500; }
     .stats-table td:last-child { font-weight: 600; color: var(--gold); white-space: nowrap; }
+    .stats-table td.stats-email { color: var(--text-muted); font-weight: 400; white-space: normal; }
   </style>
 </head>
 <body>
@@ -183,7 +184,7 @@
 
   <main>
     <h1>Estadísticas de interacción</h1>
-    <p class="stats-sub">Panel privado · apps, demos, cursos e inscripciones</p>
+    <p class="stats-sub">Panel privado · apps, demos, cursos, Club e inscripciones</p>
 
     <div class="stats-actions">
       <button id="stats-refresh" class="stats-btn" type="button">Actualizar</button>
@@ -252,6 +253,17 @@
     </section>
 
     <section class="stats-section">
+      <h2>Visitas al Club</h2>
+      <p class="stats-muted" style="margin-bottom: 0.75rem;">Quién entra al portal (nombre y correo) y cuántas veces en este periodo.</p>
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <thead><tr><th>Nombre</th><th>Correo</th><th>Visitas</th></tr></thead>
+          <tbody id="by-club"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="stats-section">
       <h2>Inscribirse ahora</h2>
       <div class="stats-table-wrap">
         <table class="stats-table">
@@ -282,6 +294,6 @@
     </section>
   </main>
 
-  <script type="module" src="/assets/stats-page.js?v=2"></script>
+  <script type="module" src="/assets/stats-page.js?v=3"></script>
 </body>
 </html>

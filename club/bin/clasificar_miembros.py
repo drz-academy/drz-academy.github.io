@@ -8,10 +8,10 @@ en los cursos más recientes y genera cupones de descuento.
 La inscripción en la lista del curso **habilita** la categoría. El certificado
 es opcional: no se exige diploma para Bronce, Plata u Oro.
 
-Categorías (requieren cursos CONSECUTIVOS desde el último):
+Categorías (desde el último curso dictado, en orden de fechas):
   - Bronce: participó en el último curso → 15% descuento (transferible)
-  - Plata:  participó en los últimos 3 cursos consecutivos → 30% descuento
-  - Oro:    participó en los últimos 5 cursos consecutivos → curso gratis + producto permanente
+  - Plata:  3 cursos con máximo 1 pausa, incluyendo el último → 30% descuento
+  - Oro:    los últimos 5 cursos consecutivos → curso gratis + producto permanente
 
 Los miembros que ya usaron un beneficio pierden su categoría automáticamente.
 El registro de beneficios usados se lleva en beneficios_usados.csv.
@@ -25,6 +25,7 @@ Ejemplo:
 
 import pandas as pd
 import argparse
+import json
 import os
 import sys
 from datetime import datetime
@@ -41,23 +42,63 @@ BENEFICIOS_CSV = os.path.join(PERSONAL_DIR, "beneficios_usados.csv")
 CURSOS_JSON = os.path.join(CLUB_DIR, "cursos.json")
 CATEGORIAS_JSON = os.path.join(CLUB_DIR, "categorias.json")
 
-# Orden cronológico de los cursos y el próximo curso
-# Se cargarán dinámicamente desde cursos.json
-CURSOS_ORDEN = []
-PROXIMO_CURSO_NOMBRE = "Próximo curso"
-PROXIMO_CURSO_PRECIO = 0
+def as_int(value, default=0):
+    try:
+        return int(value or 0)
+    except (TypeError, ValueError):
+        return default
 
-import json
-if os.path.exists(CURSOS_JSON):
+
+def load_cursos_catalog():
+    if not os.path.exists(CURSOS_JSON):
+        return []
     with open(CURSOS_JSON, "r", encoding="utf-8") as f:
-        _cursos_data = json.load(f)
-        for c in _cursos_data:
-            if int(c.get("numero_participantes", 0)) > 0:
-                CURSOS_ORDEN.append(c["nombre"])
-            elif PROXIMO_CURSO_NOMBRE == "Próximo curso":
-                # Tomar el primer curso con 0 inscritos como el próximo
-                PROXIMO_CURSO_NOMBRE = c["nombre"]
-                PROXIMO_CURSO_PRECIO = float(c.get("valor", 0))
+        return json.load(f)
+
+
+def _cursos_unicos(cursos_data):
+    """Un curso por id. Ignora permanentes (no intercalan pausas en la racha)."""
+    by_id = {}
+    for curso in cursos_data or []:
+        cid = str(curso.get("id") or "").strip()
+        if not cid or "permanente" in cid:
+            continue
+        prev = by_id.get(cid)
+        if prev is None or as_int(curso.get("numero_participantes")) > as_int(prev.get("numero_participantes")):
+            by_id[cid] = curso
+    return list(by_id.values())
+
+
+def cursos_dictados_ordenados(cursos_data=None):
+    """Cursos ya dictados, únicos, ordenados por fecha de inicio."""
+    items = [
+        c for c in _cursos_unicos(cursos_data if cursos_data is not None else load_cursos_catalog())
+        if as_int(c.get("numero_participantes")) > 0
+    ]
+    items.sort(
+        key=lambda c: (
+            str(c.get("fecha_inicio") or "9999"),
+            str(c.get("fecha_fin") or "9999"),
+            str(c.get("nombre") or ""),
+        )
+    )
+    return items
+
+
+def proximo_curso(cursos_data=None):
+    pendientes = [
+        c for c in _cursos_unicos(cursos_data if cursos_data is not None else load_cursos_catalog())
+        if as_int(c.get("numero_participantes")) == 0
+    ]
+    pendientes.sort(key=lambda c: str(c.get("fecha_inicio") or "9999"))
+    return pendientes[0] if pendientes else None
+
+
+_cursos_data = load_cursos_catalog()
+CURSOS_ORDEN = [c["nombre"] for c in cursos_dictados_ordenados(_cursos_data)]
+_proximo = proximo_curso(_cursos_data)
+PROXIMO_CURSO_NOMBRE = (_proximo or {}).get("nombre") or "Próximo curso"
+PROXIMO_CURSO_PRECIO = float((_proximo or {}).get("valor") or 0)
 
 CATEGORIAS = {}
 if os.path.exists(CATEGORIAS_JSON):
@@ -96,38 +137,38 @@ def evaluar_historial(cursos_participados, total_cursos_existentes):
     Evalúa el historial de cursos de la persona (listas de inscripción).
     Tener o no certificado no cambia el resultado.
     Retorna (es_oro, es_plata, es_bronce).
+
+    Plata y Oro se cuentan hacia atrás desde el último dictado e incluyen
+    ese último curso. Una sola pausa (p. ej. saltarse Python) no impide Plata
+    si igual se llega a 3 matrículas.
     """
     cursos_existentes = CURSOS_ORDEN[:total_cursos_existentes]
-    
-    # Bronce: participó en el último curso
+    if not cursos_existentes:
+        return False, False, False
+
     ultimo_curso = cursos_existentes[-1]
     es_bronce = ultimo_curso in cursos_participados
 
-    # Oro: 5 últimos consecutivos
     es_oro = False
     if len(cursos_existentes) >= 5:
         ultimos_5 = cursos_existentes[-5:]
         if all(c in cursos_participados for c in ultimos_5):
             es_oro = True
 
-    # Plata: 3 cursos con máximo 1 interrupción hacia atrás
     es_plata = False
-    asistidos = 0
-    interrupciones = 0
-    for curso in reversed(cursos_existentes):
-        if curso in cursos_participados:
-            asistidos += 1
-        else:
-            interrupciones += 1
-            
-        if asistidos == 3:
-            if interrupciones <= 1:
-                es_plata = True
-            break
-        
-        # Si ya acumuló más de 1 interrupción antes de llegar a 3, ya no es plata
-        if interrupciones > 1:
-            break
+    if es_bronce:
+        asistidos = 0
+        interrupciones = 0
+        for curso in reversed(cursos_existentes):
+            if curso in cursos_participados:
+                asistidos += 1
+            else:
+                interrupciones += 1
+            if asistidos == 3:
+                es_plata = interrupciones <= 1
+                break
+            if interrupciones > 1:
+                break
 
     return es_oro, es_plata, es_bronce
 
@@ -263,6 +304,8 @@ def main():
     print(f"📖 Último curso dictado: {CURSOS_ORDEN[args.ultimo_curso - 1]} (#{args.ultimo_curso})")
     print(f"🎯 Próximo curso: {nombre_curso}")
     print("📌 Criterio: inscripción en el curso (el certificado no es requisito)")
+    print("📌 Orden (fechas): " + " → ".join(CURSOS_ORDEN))
+    print("📌 Plata: 3 matrículas con máx. 1 pausa, incluyendo el último dictado")
 
     # Cargar beneficios usados
     crear_archivo_beneficios_si_no_existe()

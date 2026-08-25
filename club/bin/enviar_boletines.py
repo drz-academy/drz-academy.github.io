@@ -8,7 +8,7 @@ Uso (desde personal/boletines o desde el repo):
   python3 enviar-todos.py --dry-run
   python3 enviar-todos.py --prueba tucorreo@gmail.com
   python3 enviar-todos.py --prueba tucorreo@gmail.com --correo puntobernal@gmail.com
-  python3 enviar-todos.py --categoria ORO
+  python3 enviar-todos.py --categoria PLATA --force
   python3 enviar-todos.py
 """
 
@@ -70,6 +70,7 @@ def main() -> int:
     parser.add_argument("--correo", default="", help="Solo el boletín de este miembro")
     parser.add_argument("--categoria", default="", help="Solo ORO, PLATA o BRONCE")
     parser.add_argument("--dry-run", action="store_true", help="Lista destinatarios, no envía")
+    parser.add_argument("--force", action="store_true", help="Reenvía aunque ya figuren en .enviados.log")
     parser.add_argument("--limite", type=int, default=0, help="Máximo de correos a enviar (0 = todos)")
     args = parser.parse_args()
 
@@ -118,7 +119,7 @@ def main() -> int:
 
     log_path = folder / ".enviados.log"
     already = set()
-    if log_path.exists() and not prueba:
+    if log_path.exists() and not prueba and not args.force:
         already = {line.strip() for line in log_path.read_text(encoding="utf-8").splitlines() if line.strip()}
         before = len(messages)
         kept = []
@@ -135,7 +136,10 @@ def main() -> int:
         messages, items = kept, kept_items
         if not messages:
             print("Nada pendiente por enviar.")
+            print("Para reenviar igual: añade --force")
             return 0
+    elif args.force and not prueba:
+        print("Modo --force: se reenvía aunque figuren en .enviados.log.")
 
     def on_progress(email: str, success: bool, error: str | None):
         if success:

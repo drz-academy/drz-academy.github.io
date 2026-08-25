@@ -44,13 +44,13 @@ Usuario de prueba: `puntobernal@gmail.com`, cédula `666666`, clave `prueba666`.
 
 ## Categorías
 
-Se calculan con cursos **consecutivos** desde el más reciente ya dictado (`numero_participantes` > 0 en `cursos.json`). **Basta con aparecer en la lista de inscritos**: el certificado no es requisito para la categoría ni para el cupón.
+Se calculan con los cursos **ya dictados**, ordenados por fecha (`cursos.json`). Los permanentes no intercalan pausas. **Basta con aparecer en la lista de inscritos**: el certificado no es requisito para la categoría ni para el cupón.
 
 | Categoría | Condición | Beneficio |
 |-----------|-----------|-----------|
-| Bronce | Último curso | 15% (bono transferible) |
-| Plata | Últimos 3 | 30% |
-| Oro | Últimos 5 | Inscripción gratis + un producto permanente |
+| Bronce | Último curso dictado | 15% (bono transferible) |
+| Plata | 3 matrículas con máximo 1 pausa, **incluyendo el último** | 30% |
+| Oro | Los últimos 5 consecutivos | Inscripción gratis + un producto permanente |
 
 Quien ya usó un beneficio (registrado en `personal/beneficios_usados.csv`) pierde la categoría hasta volver a acumular.
 
@@ -100,9 +100,12 @@ python3 club/personal/boletines/enviar-todos.py --categoria ORO --dry-run
 # todos los reales (pide confirmación y-N)
 python3 club/personal/boletines/enviar-todos.py
 # o: make club-enviar-boletines
+
+# reenviar aunque ya figuren en .enviados.log
+python3 club/personal/boletines/enviar-todos.py --categoria PLATA --force
 ```
 
-Usa las credenciales de Gmail en `.secrets/` (`gmail-smtp-user`, `gmail-app-password`). Los ya enviados se anotan en `personal/boletines/.enviados.log` y se saltan en el siguiente envío.
+Usa las credenciales de Gmail en `.secrets/` (`gmail-smtp-user`, `gmail-app-password`). Los ya enviados se anotan en `personal/boletines/.enviados.log` y se saltan en el siguiente envío, salvo que pases `--force`.
 
 `make club-sync` sube al Worker lo que cada persona verá al entrar: categoría, cupón, Classroom y certificados. La página pública **no lee** los JSON de `personal/`; solo habla con el Worker.
 

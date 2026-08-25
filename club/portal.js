@@ -1,4 +1,8 @@
+import { trackEvent } from "../assets/visitor-tracker.js";
+
 const TOKEN_KEY = "drz-club-token";
+const VISIT_KEY = "drz-club-visit-logged";
+const EMAIL_KEY = "drz-club-email";
 const WORKER_URL = "https://drz-club-portal.drz-academy.workers.dev";
 
 function workerEndpoint() {
@@ -116,7 +120,7 @@ let categoriasCache = null;
 
 async function loadCategorias() {
   if (categoriasCache) return categoriasCache;
-  const res = await fetch("/club/categorias.json?v=20260825h");
+  const res = await fetch("/club/categorias.json?v=20260825j");
   if (!res.ok) throw new Error("categorias_failed");
   categoriasCache = await res.json();
   return categoriasCache;
@@ -238,6 +242,42 @@ function setSession(token) {
   else sessionStorage.removeItem(TOKEN_KEY);
 }
 
+function rememberClubEmail(email) {
+  const value = String(email || "").trim().toLowerCase();
+  if (!value) return;
+  try {
+    sessionStorage.setItem(EMAIL_KEY, value);
+  } catch {
+    /* ignore */
+  }
+}
+
+function rememberedClubEmail() {
+  try {
+    return sessionStorage.getItem(EMAIL_KEY) || "";
+  } catch {
+    return "";
+  }
+}
+
+function trackClubVisit(profile) {
+  const email = String(profile?.correo || rememberedClubEmail() || "").trim().toLowerCase();
+  const nombre = String(profile?.nombre || "").trim();
+  if (!email) return;
+  rememberClubEmail(email);
+  try {
+    if (sessionStorage.getItem(VISIT_KEY) === email) return;
+    sessionStorage.setItem(VISIT_KEY, email);
+  } catch {
+    /* still send */
+  }
+  trackEvent("club_visit", {
+    memberName: nombre,
+    memberEmail: email,
+    categoria: profile?.categoria || "",
+  });
+}
+
 function currentToken() {
   return sessionStorage.getItem(TOKEN_KEY) || "";
 }
@@ -288,6 +328,7 @@ async function enterDashboard(token, profile) {
   $("lead").hidden = true;
   setConsultaChrome(false);
   showView("view-dashboard");
+  trackClubVisit(profile);
 }
 
 function mapError(err) {
@@ -327,7 +368,8 @@ $("form-lookup").addEventListener("submit", async (event) => {
     }
     const path = mode === "register" ? "/register" : "/login";
     const data = await api(path, { method: "POST", body: { documento, correo, password } });
-    await enterDashboard(data.token, data.profile);
+    rememberClubEmail(correo);
+    await enterDashboard(data.token, { ...data.profile, correo: data.profile?.correo || correo });
   } catch (err) {
     showStatus(status, mapError(err), "error");
   } finally {
@@ -388,6 +430,12 @@ $("logout").addEventListener("click", async () => {
     /* ignore */
   }
   setSession("");
+  try {
+    sessionStorage.removeItem(VISIT_KEY);
+    sessionStorage.removeItem(EMAIL_KEY);
+  } catch {
+    /* ignore */
+  }
   resetLookupForm();
   showView("view-lookup");
 });

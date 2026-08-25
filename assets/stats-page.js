@@ -9,6 +9,7 @@ const EVENT_LABELS = {
   demo_click: "Click en demo (índice)",
   course_click: "Click en curso (índice)",
   course_enroll_click: "Inscribirse ahora",
+  club_visit: "Visita al Club",
 };
 
 function endpointFromMeta() {
@@ -54,6 +55,37 @@ function eventLabel(type) {
 function targetLabel(log) {
   const d = log.details || {};
   return d.targetName || d.courseName || d.demoName || d.pageName || log.page || "—";
+}
+
+function renderClubRows(visitors) {
+  const tbody = document.getElementById("by-club");
+  if (!tbody) return;
+  if (!visitors.length) {
+    tbody.innerHTML = '<tr><td colspan="3">Sin datos</td></tr>';
+    return;
+  }
+  tbody.innerHTML = visitors
+    .map(
+      (v) =>
+        `<tr><td>${escapeHtml(v.name || "—")}</td><td class="stats-email">${escapeHtml(v.email)}</td><td>${fmt(v.visits)}</td></tr>`,
+    )
+    .join("");
+}
+
+function clubVisitors(logs) {
+  const map = new Map();
+  for (const log of logs) {
+    if (log.eventType !== "club_visit") continue;
+    const d = log.details || {};
+    const email = String(d.memberEmail || d.email || d.correo || "").trim().toLowerCase();
+    if (!email) continue;
+    const name = String(d.memberName || d.nombre || "").trim();
+    const prev = map.get(email) || { name: "", email, visits: 0 };
+    if (name) prev.name = name;
+    prev.visits += 1;
+    map.set(email, prev);
+  }
+  return [...map.values()].sort((a, b) => b.visits - a.visits || a.name.localeCompare(b.name, "es"));
 }
 
 function renderRows(tbodyId, rows, valueFmt = fmt) {
@@ -236,6 +268,8 @@ function renderDashboard(logs, subsCount = 0) {
   const appClicks = logs.filter((l) => l.eventType === "app_click");
   const demoClicks = logs.filter((l) => l.eventType === "demo_click" || l.eventType === "demo_page_view");
   const courseViews = logs.filter((l) => l.eventType === "course_page_view" || l.eventType === "course_click");
+  const clubPeople = clubVisitors(logs);
+  const clubVisitCount = logs.filter((l) => l.eventType === "club_visit").length;
 
   const summary = document.getElementById("stats-summary");
   if (summary) {
@@ -246,6 +280,8 @@ function renderDashboard(logs, subsCount = 0) {
       ["Demos (clicks + vistas)", demoClicks.length],
       ["Cursos (clicks + vistas)", courseViews.length],
       ["Inscripciones", enrollClicks.length],
+      ["Visitas al Club", clubVisitCount],
+      ["Miembros en el Club", clubPeople.length],
       ["Newsletters suscritos", subsCount],
     ]
       .map(
@@ -275,6 +311,7 @@ function renderDashboard(logs, subsCount = 0) {
     "by-enroll",
     countBy(enrollClicks, (l) => targetLabel(l)),
   );
+  renderClubRows(clubPeople);
   renderRows(
     "by-page",
     countBy(logs, (l) => l.page || "—"),
