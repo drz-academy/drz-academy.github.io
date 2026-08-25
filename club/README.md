@@ -22,7 +22,7 @@ club/
     certificados/fuentes/   PDFs originales (un folder por curso)
     certificados/           Un PDF por persona: CURSO-CEDULA-EMAIL-NOMBRE.pdf
     ClubDrZAcademy/         Acceso local a la carpeta de Google Drive
-    boletines/              CSV generados para correo
+    boletines/              HTML personalizados + script de envío
     drz-club.md             Informe de clasificación
     beneficios_usados.csv   Quién ya redimió un beneficio
 ```
@@ -62,7 +62,7 @@ Desde la raíz del repo:
 make club-base-datos     # Excel de personal/inscripciones → personal/drz-club-members.json
 make club-clasificar     # Oro / Plata / Bronce
 make club-informe        # personal/drz-club.md
-make club-boletines      # CSV en personal/boletines/
+make club-boletines      # HTML y CSV en personal/boletines/
 make club-certificados         # Parte y nombra PDFs en personal/certificados/
 make club-certificados-drive   # Enlaces de Drive → personal/certificados.csv
 make club-sync                 # sube miembros + catálogo al Worker
@@ -70,6 +70,38 @@ make club-reset-pass           # borra todas las claves; cada quien crea una nue
 ```
 
 O, dentro de `club/`: `make todo` (base + clasificar + informe + boletines).
+
+## Boletines personalizados (Oro / Plata / Bronce)
+
+Antes de generar: clasifica (`make club-clasificar`) y revisa `personal/cupones.json` y el próximo curso en `cursos.json`. Los banners del correo son `assets/club/banner-{oro,plata,bronce}.png` (fondo blanco); tienen que estar publicados en GitHub Pages.
+
+```bash
+make club-boletines
+```
+
+Eso escribe en `personal/boletines/` (no va a GitHub):
+
+- `html/oro/`, `html/plata/`, `html/bronce/` — un HTML por persona (nombre, banner de su categoría, mensaje, cupón, firma)
+- `index.json` — lista para el envío
+- `enviar.py` — script de envío (copia de `club/bin/enviar_boletines.py`)
+
+Para mandarlos:
+
+```bash
+# ver a quién saldría, sin enviar
+python3 club/personal/boletines/enviar.py --dry-run
+
+# un correo de prueba: el HTML de esa persona, a tu bandeja
+python3 club/personal/boletines/enviar.py --prueba tucorreo@gmail.com --correo jmmontoy@gmail.com
+
+# solo una categoría
+python3 club/personal/boletines/enviar.py --categoria ORO --dry-run
+
+# todos los reales (pide confirmación y-N)
+python3 club/personal/boletines/enviar.py
+```
+
+Usa las credenciales de Gmail en `.secrets/` (`gmail-smtp-user`, `gmail-app-password`). Los ya enviados se anotan en `personal/boletines/.enviados.log` y se saltan en el siguiente envío.
 
 `make club-sync` sube al Worker lo que cada persona verá al entrar: categoría, cupón, Classroom y certificados. La página pública **no lee** los JSON de `personal/`; solo habla con el Worker.
 
