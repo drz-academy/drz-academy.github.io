@@ -67,14 +67,14 @@ if os.path.exists(CATEGORIAS_JSON):
 
 def mensaje_categoria(clave):
     cat = CATEGORIAS.get(clave) or {}
-    descripcion = str(cat.get("descripcion") or "").strip()
+    mensaje = str(cat.get("mensaje") or "").strip()
     requisitos = [str(item).strip() for item in cat.get("requisitos") or [] if str(item).strip()]
     beneficios = [str(item).strip() for item in cat.get("beneficios") or [] if str(item).strip()]
     requisito = " y ".join(requisitos) if len(requisitos) <= 2 else f"{', '.join(requisitos[:-1])} y {requisitos[-1]}"
     beneficio = " y ".join(beneficios) if len(beneficios) <= 2 else f"{', '.join(beneficios[:-1])} y {beneficios[-1]}"
-    if descripcion and requisito and beneficio:
+    if mensaje and requisito and beneficio:
         return (
-            f"{descripcion} ({requisito}) "
+            f"{mensaje} ({requisito}) "
             f"te otorgamos {beneficio}. ¡Gracias por tu constancia!"
         )
     return ""

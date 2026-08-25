@@ -116,7 +116,7 @@ let categoriasCache = null;
 
 async function loadCategorias() {
   if (categoriasCache) return categoriasCache;
-  const res = await fetch("/club/categorias.json?v=20260825f");
+  const res = await fetch("/club/categorias.json?v=20260825h");
   if (!res.ok) throw new Error("categorias_failed");
   categoriasCache = await res.json();
   return categoriasCache;
@@ -127,11 +127,11 @@ function benefitMessage(profile, categorias) {
   if (/beneficio ya usado/i.test(stored)) return stored;
   const key = CATEGORIA_KEYS[String(profile.categoria || "").toUpperCase()];
   const cat = key && categorias ? categorias[key] : null;
-  const descripcion = String(cat?.descripcion || "").trim();
+  const mensaje = String(cat?.mensaje || "").trim();
   const requisito = joinList(cat?.requisitos);
   const beneficio = joinList(cat?.beneficios);
-  if (descripcion && requisito && beneficio) {
-    return `${descripcion} (${requisito}) te otorgamos ${beneficio}. ¡Gracias por tu constancia!`;
+  if (mensaje && requisito && beneficio) {
+    return `${mensaje} (${requisito}) te otorgamos ${beneficio}. ¡Gracias por tu constancia!`;
   }
   return stored || "Consulta tu historial de cursos a continuación.";
 }

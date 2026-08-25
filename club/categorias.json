@@ -1,7 +1,6 @@
 {
   "bronze": {
     "nombre": "Bronce",
-    "descripcion": "Por tu apoyo reconocido en las actividades de la Dr. Z Academy",
     "mensaje": "¡Eres un bronce! ", 
     "requisitos": [
       "Inscripción en el club"
@@ -12,7 +11,6 @@
   },
   "silver": {
     "nombre": "Plata",
-    "descripcion": "Por tu apoyo reconocido en las actividades de la Dr. Z Academy",
     "mensaje": "Por tu apoyo reconocido en las actividades de la Dr. Z Academy ",
     "requisitos": [
       "Matrícula en 3 cursos con máximo 1 pausa"
@@ -23,7 +21,6 @@
   },
   "gold": {
     "nombre": "Oro",
-    "descripcion": "Por tu apoyo reconocido en las actividades de la Dr. Z Academy",
     "mensaje": "¡Tu compromiso con la causa ñoñistica no tiene igual! ",
     "requisitos": [
       "Matrícula en 5 cursos consecutivos"
