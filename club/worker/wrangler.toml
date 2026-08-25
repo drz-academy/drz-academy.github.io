@@ -1,0 +1,21 @@
+name = "drz-club-portal"
+main = "club-portal-worker.js"
+compatibility_date = "2026-08-24"
+
+# Crear namespace (una sola vez):
+#   cd club/worker && npx wrangler kv namespace create DRZ_CLUB
+# Pegar el id devuelto abajo.
+[[kv_namespaces]]
+binding = "DRZ_CLUB"
+id = "36b07a052803460ebabcf8486048f652"
+
+[vars]
+SITE_BASE_URL = "https://drz-academy.github.io"
+
+[observability]
+enabled = true
+
+# Secretos (no commitear):
+#   npx wrangler secret put CLUB_ADMIN_TOKEN
+#   npx wrangler secret put GMAIL_SMTP_USER
+#   npx wrangler secret put GMAIL_APP_PASSWORD

@@ -1,0 +1,35 @@
+{
+  "bronze": {
+    "nombre": "Bronce",
+    "descripcion": "Por tu apoyo reconocido en las actividades de la Dr. Z Academy",
+    "mensaje": "¡Eres un bronce! ", 
+    "requisitos": [
+      "Inscripción en el club"
+    ],
+    "beneficios": [
+      "15% de descuento en el próximo curso"
+    ]
+  },
+  "silver": {
+    "nombre": "Plata",
+    "descripcion": "Por tu apoyo reconocido en las actividades de la Dr. Z Academy",
+    "mensaje": "Por tu apoyo reconocido en las actividades de la Dr. Z Academy ",
+    "requisitos": [
+      "Matrícula en 3 cursos con máximo 1 pausa"
+    ],
+    "beneficios": [
+      "30% de descuento en el próximo curso"
+    ]
+  },
+  "gold": {
+    "nombre": "Oro",
+    "descripcion": "Por tu apoyo reconocido en las actividades de la Dr. Z Academy",
+    "mensaje": "¡Tu compromiso con la causa ñoñistica no tiene igual! ",
+    "requisitos": [
+      "Matrícula en 5 cursos consecutivos"
+    ],
+    "beneficios": [
+      "100% de descuento en el próximo curso"
+    ]
+  }
+}

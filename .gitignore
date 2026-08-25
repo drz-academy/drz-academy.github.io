@@ -30,4 +30,8 @@ __pycache__/
 # Logs de Newsletter (Evitar subir correos)
 *.sent.log
 
-club/*
+# Datos confidenciales del Club (no publicar)
+club/personal/
+
+# Club worker local cache
+club/worker/.wrangler/

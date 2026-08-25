@@ -28,7 +28,7 @@ etiquetas:
   - "Historia y Cultura "
 email_contacto: "SoyDoctorZ@gmail.com"
 whatsapp: "https://wa.me/573022871135"
-activo: true
+activo: false
 ---
 
 ## Presentación

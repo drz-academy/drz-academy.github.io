@@ -1,0 +1,127 @@
+[
+  {
+    "id": "cuantica_a_pie",
+    "nombre": "Cuántica a Pie",
+    "fecha_inicio": "2024-06-22",
+    "fecha_fin": "2024-08-03",
+    "classroom_url": "",
+    "certificados_folder": "https://drive.google.com/drive/folders/1LxnTHykCiabylnCg12kciWji7eIf35Ip",
+    "pagina_url": "https://drz-academy.github.io/cursos/cuantica-a-pie/",
+    "numero_participantes": 68,
+    "numero_certificados": 29
+  },
+  {
+    "id": "cuantica_a_pie_permanente",
+    "nombre": "Cuántica a Pie (Permanente)",
+    "fecha_inicio": "",
+    "fecha_fin": "",
+    "classroom_url": "",
+    "hotmart_url": "https://hotmart.com/es/club/drz-academy/products/4736808",
+    "certificados_folder": "https://drive.google.com/drive/folders/1LxnTHykCiabylnCg12kciWji7eIf35Ip",
+    "pagina_url": "https://drz-academy.github.io/cursos/cuantica-a-pie/",
+    "numero_participantes": 0,
+    "numero_certificados": 8
+  },
+  {
+    "id": "catastrofisica",
+    "nombre": "Catastrofísica",
+    "fecha_inicio": "2024-10-09",
+    "fecha_fin": "2024-10-30",
+    "classroom_url": "https://classroom.google.com/c/Njg1NTk4NjAxNTU4?cjc=goefelm",
+    "certificados_folder": "https://drive.google.com/drive/folders/1LxnTHykCiabylnCg12kciWji7eIf35Ip",
+    "pagina_url": "",
+    "numero_participantes": 32,
+    "numero_certificados": 26
+  },
+  {
+    "id": "einstein",
+    "nombre": "Einstein Relativamente Fácil",
+    "fecha_inicio": "2025-02-19",
+    "fecha_fin": "2025-04-10",
+    "classroom_url": "https://classroom.google.com/c/NzczMjYzOTA2NzUz?cjc=axbyy7lb",
+    "certificados_folder": "https://drive.google.com/drive/folders/1LxnTHykCiabylnCg12kciWji7eIf35Ip",
+    "pagina_url": "",
+    "numero_participantes": 29,
+    "numero_certificados": 28
+  },
+  {
+    "id": "mundo_cuantico",
+    "nombre": "Mundo Cuántico",
+    "fecha_inicio": "2025-07-23",
+    "fecha_fin": "2025-09-11",
+    "classroom_url": "https://classroom.google.com/c/Nzg5MTM1ODMyOTI1?cjc=hvcd3ror",
+    "certificados_folder": "https://drive.google.com/drive/folders/1LxnTHykCiabylnCg12kciWji7eIf35Ip",
+    "pagina_url": "",
+    "numero_participantes": 34,
+    "numero_certificados": 33
+  },
+  {
+    "id": "mundo_cuantico",
+    "nombre": "Mundo Cuántico",
+    "fecha_inicio": "2025-07-23",
+    "fecha_fin": "2025-09-11",
+    "classroom_url": "https://classroom.google.com/c/Nzg5MTM1ODMyOTI1?cjc=hvcd3ror",
+    "certificados_folder": "https://drive.google.com/drive/folders/1LxnTHykCiabylnCg12kciWji7eIf35Ip",
+    "pagina_url": "",
+    "numero_participantes": 0,
+    "numero_certificados": 0
+  },
+  {
+    "id": "rompecabezas_materia",
+    "nombre": "El Rompecabezas de la Materia",
+    "fecha_inicio": "2025-10-15",
+    "fecha_fin": "2025-12-04",
+    "classroom_url": "https://classroom.google.com/c/NzgxMDQ4MTU2MjU4?cjc=tx2x6ddi",
+    "certificados_folder": "https://drive.google.com/drive/folders/1LxnTHykCiabylnCg12kciWji7eIf35Ip",
+    "pagina_url": "",
+    "numero_participantes": 31,
+    "numero_certificados": 20
+  },
+  {
+    "id": "astropython",
+    "nombre": "Astropython",
+    "fecha_inicio": "2025-01-18",
+    "fecha_fin": "2025-02-18",
+    "classroom_url": "",
+    "hotmart_url": "https://hotmart.com/es/club/drz-academy/products/4956086",
+    "certificados_folder": "https://drive.google.com/drive/folders/1LxnTHykCiabylnCg12kciWji7eIf35Ip",
+    "pagina_url": "https://drz-academy.github.io/cursos/astropython/",
+    "numero_participantes": 68,
+    "numero_certificados": 15
+  },
+  {
+    "id": "python_fin_mundo",
+    "nombre": "Python para el fin del mundo",
+    "fecha_inicio": "2026-03-18",
+    "fecha_fin": "2026-04-29",
+    "classroom_url": "https://classroom.google.com/c/Nzk2NjQ2MTg3OTc2?cjc=uzwzch45",
+    "certificados_folder": "https://drive.google.com/drive/folders/1LxnTHykCiabylnCg12kciWji7eIf35Ip",
+    "pagina_url": "https://drz-academy.github.io/cursos/python-fin-del-mundo/",
+    "numero_participantes": 19,
+    "numero_certificados": 5
+  },
+  {
+    "id": "masterclass_extraterrestre",
+    "nombre": "Master Class Extraterrestre",
+    "fecha_inicio": "2026-08-03",
+    "fecha_fin": "2026-08-31",
+    "classroom_url": "https://classroom.google.com/c/ODcxNTA4OTg1MzY1?cjc=asctdoyb",
+    "certificados_folder": "https://drive.google.com/drive/folders/1LxnTHykCiabylnCg12kciWji7eIf35Ip",
+    "pagina_url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "numero_participantes": 23,
+    "numero_certificados": 0
+  },
+  {
+    "id": "masterclass_cambio_climatico",
+    "nombre": "Master Class Cambio Climático",
+    "fecha_inicio": "2026-09-14",
+    "fecha_fin": "2026-10-05",
+    "classroom_url": "",
+    "certificados_folder": "https://drive.google.com/drive/folders/1LxnTHykCiabylnCg12kciWji7eIf35Ip",
+    "pagina_url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "inscripcion_url": "https://drz.academy/producto/cambio-climatico/",
+    "valor": "314159",
+    "numero_participantes": 0,
+    "numero_certificados": 0
+  }
+]

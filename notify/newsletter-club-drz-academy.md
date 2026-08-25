@@ -1,20 +1,7 @@
-
-    <!DOCTYPE html>
-    <html>
-    <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-      body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; }
-      a { color: #007bff; text-decoration: none; }
-      a:hover { text-decoration: underline; }
-      img { max-width: 100%; height: auto; }
-      h1, h2, h3 { color: #222; margin-top: 1.5em; margin-bottom: 0.5em; }
-      p { margin-bottom: 1em; }
-    </style>
-    </head>
-    <body>
-    <!--
+---
+subject: "[Novedades Dr. Z Academy] Nace el Dr. Z Academy Club"
+---
+<!--
 Para previsualizar este newsletter en el navegador:
 make notify-preview-newsletter FILE=notify/newsletter-club-drz-academy.md
 
@@ -97,18 +84,6 @@ make notify-send-newsletter FILE=notify/newsletter-club-drz-academy.md
 <table width="100%" cellpadding="10" cellspacing="0" border="0" style="margin-bottom: 30px;">
   <tr>
     <td width="30%" valign="top" style="padding-bottom: 20px;">
-      <a href="https://drz-academy.github.io/cursos/extraterrestres/">
-        <img src="https://drz-academy.github.io/cursos/extraterrestres/images/header.png" alt="Extraterrestres" width="150" style="max-width: 100%; border-radius: 5px;">
-      </a>
-    </td>
-    <td width="70%" valign="top" style="padding-bottom: 20px;">
-      <h4 style="margin: 0 0 10px 0; color: #2c3e50;">Extraterrestres</h4>
-      <p style="margin: 0 0 10px 0; font-size: 14px; color: #555;">De los aspectos culturales al análisis científico de la existencia y contacto con civilizaciones extraterrestres.</p>
-      <a href="https://drz-academy.github.io/cursos/extraterrestres/" style="font-size: 14px; color: #0056b3; font-weight: bold; text-decoration: none;">Ver más información →</a>
-    </td>
-  </tr>
-  <tr>
-    <td width="30%" valign="top" style="padding-bottom: 20px;">
       <a href="https://drz-academy.github.io/cursos/cuantica-a-pie/">
         <img src="https://drz-academy.github.io/cursos/cuantica-a-pie/images/header.png" alt="Cuántica a Pie con Dr. Z" width="150" style="max-width: 100%; border-radius: 5px;">
       </a>
@@ -170,6 +145,3 @@ make notify-send-newsletter FILE=notify/newsletter-club-drz-academy.md
 </p>
 
 </div>
-    </body>
-    </html>
-    

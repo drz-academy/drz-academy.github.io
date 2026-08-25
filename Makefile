@@ -1,4 +1,4 @@
-.PHONY: help build cursos pages demos sync-site start stop worker-deploy update
+.PHONY: help build cursos pages demos sync-site start stop worker-deploy update club-worker-deploy club-dev club-sync club-base-datos club-clasificar club-informe club-boletines club-certificados club-certificados-drive club-certificados-hotmart club-reset-pass portal-worker-deploy portal-dev portal-sync
 
 PORT ?= 8000
 HOST ?= 127.0.0.1
@@ -26,6 +26,18 @@ help:
 	@echo "  make notify-send-newsletter FILE=notify/newsletter.md [TEST_EMAILS=a@b.com] - Envía un newsletter (usa TEST_EMAILS para enviar solo a esos correos de prueba)"
 	@echo "  make notify-preview-newsletter FILE=notify/newsletter.md - Previsualiza el newsletter en el navegador antes de enviarlo"
 	@echo ""
+	@echo "  make club-worker-deploy - Despliega el Worker del Club"
+	@echo "  make club-sync          - Sube miembros y catálogo de club/ a Cloudflare KV"
+	@echo "  make club-reset-pass    - Borra todas las claves del Club (vuelven a crearla)"
+	@echo "  make club-dev           - Worker local en http://127.0.0.1:8787"
+	@echo "  make club-base-datos    - Regenera la base de miembros (Excel → JSON)"
+	@echo "  make club-clasificar    - Clasifica Oro / Plata / Bronce"
+	@echo "  make club-informe       - Genera club/personal/drz-club.md"
+	@echo "  make club-boletines     - Genera CSV de boletines"
+	@echo "  make club-certificados  - Parte y nombra PDFs en personal/certificados/"
+	@echo "  make club-certificados-hotmart - Avisos Hotmart nuevos (AstroPython, Cuántica permanente)"
+	@echo "  make club-certificados-drive - Enlaces de Drive → personal/certificados.csv"
+	@echo ""
 	@echo "  PORT=3000 make start   - Usar otro puerto"
 
 cursos:
@@ -49,6 +61,13 @@ sync-site:
 	@rm -rf $(SITE)/cursos && cp -r cursos $(SITE)/cursos
 	@rm -rf $(SITE)/demos && cp -r demos $(SITE)/demos
 	@rm -rf $(SITE)/analytics && cp -r analytics $(SITE)/analytics
+	@rm -rf $(SITE)/club
+	@mkdir -p $(SITE)/club
+	@cp club/index.html club/portal.js club/categorias.json $(SITE)/club/
+	@python3 club/bin/generar_stats.py --out $(SITE)/club/stats.json
+	@rm -rf $(SITE)/portal
+	@mkdir -p $(SITE)/portal
+	@printf '%s\n' '<!doctype html><meta http-equiv="refresh" content="0;url=/club/"><link rel="canonical" href="/club/">' > $(SITE)/portal/index.html
 	@touch $(SITE)/.nojekyll
 
 build: cursos demos
@@ -75,6 +94,7 @@ start:
 	@sleep 0.2
 	@echo "Started. Stop with: make stop"
 	@echo "  Home:  http://$(HOST):$(PORT)/"
+	@echo "  Club:  http://$(HOST):$(PORT)/club/"
 	@echo "  Apps:  http://$(HOST):$(PORT)/apps/cloud_academy/"
 	@echo "         http://$(HOST):$(PORT)/apps/lighting-black-holes/"
 	@echo "         http://$(HOST):$(PORT)/apps/drake-calculator/"
@@ -123,6 +143,41 @@ worker-deploy:
 notify-worker-deploy:
 	@echo "▶  Deploying notify worker…"
 	@cd notify/worker && npx wrangler deploy
+
+club-worker-deploy portal-worker-deploy:
+	@echo "▶  Deploying club worker…"
+	@cd club/worker && npx wrangler deploy
+
+club-dev portal-dev:
+	@echo "▶  Club worker en http://127.0.0.1:8787"
+	@cd club/worker && npx wrangler dev --ip 127.0.0.1 --port 8787
+
+club-sync portal-sync:
+	@python3 club/client/sync_members.py
+
+club-reset-pass:
+	@$(MAKE) -C club reset-pass
+
+club-base-datos:
+	@$(MAKE) -C club base-datos
+
+club-clasificar:
+	@$(MAKE) -C club clasificar
+
+club-informe:
+	@$(MAKE) -C club informe
+
+club-boletines:
+	@$(MAKE) -C club generar-boletines
+
+club-certificados:
+	@$(MAKE) -C club certificados
+
+club-certificados-hotmart:
+	@$(MAKE) -C club certificados-hotmart
+
+club-certificados-drive:
+	@$(MAKE) -C club certificados-drive
 
 notify-import-csv:
 	@if [ -z "$(CSV)" ]; then \

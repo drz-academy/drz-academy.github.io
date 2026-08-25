@@ -257,6 +257,12 @@ make notify-send-newsletter FILE=notify/mi-newsletter.md
 
 ---
 
+## Consulta del Dr. Z Academy Club
+
+Los participantes consultan categoría, cursos, Classroom y certificados en `/club/`. Cómo funciona, el catálogo y el flujo local están en [`club/README.md`](club/README.md). **Los datos personales no van a GitHub**: viven en `club/personal/` y se suben a un Cloudflare Worker + KV.
+
+---
+
 ## Estadísticas de clicks
 
 El sitio registra interacciones (apps, demos, cursos, botón «Inscribete ahora») en un **Cloudflare Worker** con KV. Ver [`analytics/README.md`](../analytics/README.md) para desplegar el worker y abrir el panel en `/stats.html`.
@@ -457,6 +463,14 @@ demos/
 notify/
   worker/               Backend en Cloudflare Workers + KV (suscripciones)
   client/               Scripts Python para importar contactos y enviar correos
+club/
+  README.md             Cómo funciona el Club, catálogo y flujo local
+  index.html            Consulta de participación (sin datos personales)
+  portal.js             Cliente del Worker
+  worker/               Backend en Cloudflare Workers + KV (perfiles y claves)
+  client/sync_members.py  Sube club/ + club/personal/ al Worker (personal/ no va a Git)
+  bin/                  Scripts locales: base de datos, clasificación, boletines, informe
+  personal/             Datos confidenciales (gitignored): miembros, boletines, inscripciones
 apps/
   cloud_academy/        Cámara de burbujas (Next.js)
   lighting-black-holes/ Simulación agujeros negros (Next.js)

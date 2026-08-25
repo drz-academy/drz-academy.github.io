@@ -95,6 +95,14 @@ jobs:
           # Analytics events
           rm -rf _site/analytics && cp -r analytics _site/analytics
 
+          # Club (HTML/JS públicos; los datos viven en Cloudflare KV)
+          mkdir -p _site/club
+          cp club/index.html club/portal.js club/categorias.json _site/club/
+          python3 club/bin/generar_stats.py --out _site/club/stats.json
+          rm -rf _site/club/personal _site/portal
+          mkdir -p _site/portal
+          printf '%s\n' '<!doctype html><meta http-equiv="refresh" content="0;url=/club/"><link rel="canonical" href="/club/">' > _site/portal/index.html
+
           # Apps Next.js (export estático)
           mkdir -p _site/apps
           cp -r apps/cloud_academy/out _site/apps/cloud_academy

@@ -830,6 +830,7 @@
         <a href="#apps">Aplicaciones</a>
         <a href="#demos">Demos</a>
         <a href="#cursos">Cursos</a>
+        <a href="/club/">Club</a>
         <a href="#sobre-este-sitio">Sobre este sitio</a>
         <a href="https://www.drz.academy" target="_blank" rel="noopener" class="nav-drz">drz.academy</a>
       </nav>
@@ -1075,6 +1076,14 @@
             <div class="stat-label">Cursos publicados</div>
           </div>
           <div class="stat-card">
+            <div class="stat-number" id="stat-cursos-ofrecidos">—</div>
+            <div class="stat-label">Cursos ofrecidos</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="stat-certificados">—</div>
+            <div class="stat-label">Personas certificadas</div>
+          </div>
+          <div class="stat-card">
             <div class="stat-number">∞</div>
             <div class="stat-label">Curiosidad científica</div>
           </div>
@@ -1269,13 +1278,19 @@
       Promise.all([
         fetch('cursos/courses.json').then(r => r.json()).catch(() => ({ cursos: [] })),
         fetch('demos/demos.json').then(r => r.json()).catch(() => ({ demos: [] })),
-      ]).then(([coursesData, demosData]) => {
+        fetch('club/stats.json').then(r => r.json()).catch(() => ({})),
+      ]).then(([coursesData, demosData, clubStats]) => {
         const elCursos = document.getElementById('stat-cursos');
         const elDemos = document.getElementById('stat-demos');
         const elApps = document.getElementById('stat-apps');
+        const elOfrecidos = document.getElementById('stat-cursos-ofrecidos');
+        const elCertificados = document.getElementById('stat-certificados');
+        const fmt = (n) => Number.isFinite(Number(n)) ? Number(n).toLocaleString('es-CO') : '—';
         if (elCursos) elCursos.textContent = (coursesData.cursos || []).length;
         if (elDemos) elDemos.textContent = (demosData.demos || []).filter(d => d.activo).length;
         if (elApps) elApps.textContent = document.querySelectorAll('#apps .app-card-link').length || 3;
+        if (elOfrecidos) elOfrecidos.textContent = fmt(clubStats.cursos_ofrecidos);
+        if (elCertificados) elCertificados.textContent = fmt(clubStats.certificados);
       });
     })();
   </script>
