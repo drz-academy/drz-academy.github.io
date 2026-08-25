@@ -1,4 +1,4 @@
-.PHONY: help build cursos pages demos sync-site start stop worker-deploy update club-worker-deploy club-dev club-sync club-base-datos club-clasificar club-informe club-boletines club-certificados club-certificados-drive club-certificados-hotmart club-reset-pass portal-worker-deploy portal-dev portal-sync
+.PHONY: help build cursos pages demos sync-site start stop worker-deploy update club-worker-deploy club-dev club-sync club-base-datos club-clasificar club-informe club-boletines generar-boletines club-enviar-boletines club-certificados club-certificados-drive club-certificados-hotmart club-reset-pass portal-worker-deploy portal-dev portal-sync
 
 PORT ?= 8000
 HOST ?= 127.0.0.1
@@ -33,7 +33,9 @@ help:
 	@echo "  make club-base-datos    - Regenera la base de miembros (Excel → JSON)"
 	@echo "  make club-clasificar    - Clasifica Oro / Plata / Bronce"
 	@echo "  make club-informe       - Genera club/personal/drz-club.md"
-	@echo "  make club-boletines     - Genera HTML y CSV de boletines en club/personal/boletines/"
+	@echo "  make generar-boletines  - HTML individuales + script de envío (club/personal/boletines/)"
+	@echo "  make club-boletines     - igual que generar-boletines"
+	@echo "  make club-enviar-boletines - Envía todos los boletines (Gmail; pide confirmación)"
 	@echo "  make club-certificados  - Parte y nombra PDFs en personal/certificados/"
 	@echo "  make club-certificados-hotmart - Avisos Hotmart nuevos (AstroPython, Cuántica permanente)"
 	@echo "  make club-certificados-drive - Enlaces de Drive → personal/certificados.csv"
@@ -167,8 +169,11 @@ club-clasificar:
 club-informe:
 	@$(MAKE) -C club informe
 
-club-boletines:
+generar-boletines club-boletines:
 	@$(MAKE) -C club generar-boletines
+
+club-enviar-boletines:
+	@$(MAKE) -C club enviar-boletines
 
 club-certificados:
 	@$(MAKE) -C club certificados

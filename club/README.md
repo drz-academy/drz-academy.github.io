@@ -62,7 +62,7 @@ Desde la raíz del repo:
 make club-base-datos     # Excel de personal/inscripciones → personal/drz-club-members.json
 make club-clasificar     # Oro / Plata / Bronce
 make club-informe        # personal/drz-club.md
-make club-boletines      # HTML y CSV en personal/boletines/
+make generar-boletines   # HTML individuales + script de envío en personal/boletines/
 make club-certificados         # Parte y nombra PDFs en personal/certificados/
 make club-certificados-drive   # Enlaces de Drive → personal/certificados.csv
 make club-sync                 # sube miembros + catálogo al Worker
@@ -73,32 +73,33 @@ O, dentro de `club/`: `make todo` (base + clasificar + informe + boletines).
 
 ## Boletines personalizados (Oro / Plata / Bronce)
 
-Antes de generar: clasifica (`make club-clasificar`) y revisa `personal/cupones.json` y el próximo curso en `cursos.json`. Los banners del correo son `assets/club/banner-{oro,plata,bronce}.png` (fondo blanco); el envío los adjunta en el mensaje para que Gmail no dependa de GitHub Pages.
+Antes de generar: clasifica (`make club-clasificar`) y revisa `personal/cupones.json` y el próximo curso en `cursos.json`. Los banners del correo son `assets/club/banner-{oro,plata,bronce}.png` (fondo blanco); tienen que estar publicados en GitHub Pages.
 
 ```bash
-make club-boletines
+make generar-boletines          # desde la raíz, o: make -C club generar-boletines
 ```
 
 Eso escribe en `personal/boletines/` (no va a GitHub):
 
 - `html/oro/`, `html/plata/`, `html/bronce/` — un HTML por persona (nombre, banner de su categoría, mensaje, cupón, firma)
 - `index.json` — lista para el envío
-- `enviar.py` — script de envío (copia de `club/bin/enviar_boletines.py`)
+- `enviar-todos.py` — script para mandar todos (copia de `club/bin/enviar_boletines.py`)
 
 Para mandarlos:
 
 ```bash
 # ver a quién saldría, sin enviar
-python3 club/personal/boletines/enviar.py --dry-run
+python3 club/personal/boletines/enviar-todos.py --dry-run
 
 # un correo de prueba: el HTML de esa persona, a tu bandeja
-python3 club/personal/boletines/enviar.py --prueba tucorreo@gmail.com --correo jmmontoy@gmail.com
+python3 club/personal/boletines/enviar-todos.py --prueba tucorreo@gmail.com --correo jmmontoy@gmail.com
 
 # solo una categoría
-python3 club/personal/boletines/enviar.py --categoria ORO --dry-run
+python3 club/personal/boletines/enviar-todos.py --categoria ORO --dry-run
 
 # todos los reales (pide confirmación y-N)
-python3 club/personal/boletines/enviar.py
+python3 club/personal/boletines/enviar-todos.py
+# o: make club-enviar-boletines
 ```
 
 Usa las credenciales de Gmail en `.secrets/` (`gmail-smtp-user`, `gmail-app-password`). Los ya enviados se anotan en `personal/boletines/.enviados.log` y se saltan en el siguiente envío.

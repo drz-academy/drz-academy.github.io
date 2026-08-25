@@ -1,8 +1,9 @@
-.PHONY: clasificar generar-boletines informe base-datos certificados certificados-drive certificados-hotmart reset-pass todo
+.PHONY: clasificar generar-boletines enviar-boletines informe base-datos certificados certificados-drive certificados-hotmart reset-pass todo
 
 PYTHON ?= python3
 CLUB := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 BIN  := $(CLUB)bin
+BOLETINES := $(CLUB)personal/boletines
 
 base-datos:
 	$(PYTHON) $(BIN)/build_database.py
@@ -10,8 +11,16 @@ base-datos:
 clasificar:
 	$(PYTHON) $(BIN)/clasificar_miembros.py
 
+# HTML por persona + personal/boletines/enviar-todos.py
 generar-boletines:
 	$(PYTHON) $(BIN)/generar_boletines.py
+
+enviar-boletines:
+	@if [ ! -f "$(BOLETINES)/enviar-todos.py" ]; then \
+		echo "No hay script de envío. Primero: make generar-boletines"; \
+		exit 1; \
+	fi
+	$(PYTHON) $(BOLETINES)/enviar-todos.py
 
 informe:
 	$(PYTHON) $(BIN)/generar_informe.py

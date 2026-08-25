@@ -6,10 +6,11 @@ Genera boletines personalizados por correo electrónico para informar
 a los miembros del club sobre el próximo curso y sus beneficios.
 
 Uso:
-    python3 club/bin/generar_boletines.py --nombre-curso "Nombre del curso" [--precio 350000]
+    make generar-boletines
+    python3 club/bin/generar_boletines.py
 
-Ejemplo:
-    python3 club/bin/generar_boletines.py --nombre-curso "Cosmología para todos" --precio 350000
+Escribe HTML por persona en personal/boletines/html/ y el script
+personal/boletines/enviar-todos.py para mandarlos todos.
 """
 
 import argparse
@@ -298,10 +299,13 @@ def html_boletin(row, cat, codigo, nombre_curso, precio, inscripcion_url, pagina
 
 def instalar_enviar_script():
     src = os.path.join(os.path.dirname(os.path.abspath(__file__)), "enviar_boletines.py")
+    dst_todos = os.path.join(BOLETINES_DIR, "enviar-todos.py")
     dst = os.path.join(BOLETINES_DIR, "enviar.py")
+    shutil.copy2(src, dst_todos)
     shutil.copy2(src, dst)
+    os.chmod(dst_todos, 0o755)
     os.chmod(dst, 0o755)
-    return dst
+    return dst_todos
 
 # Productos permanentes disponibles para miembros Oro
 PRODUCTOS_PERMANENTES = [
@@ -628,15 +632,19 @@ def main():
     print(f"\n{'=' * 70}")
     print(f"  ARCHIVOS GENERADOS")
     print(f"{'=' * 70}")
-    print(f"  📋 Índice:              {index_path}")
-    print(f"  📤 Envío:               {enviar_path}")
     print(f"  📂 Carpeta:             {BOLETINES_DIR}")
+    print(f"  👤 HTML individuales:   html/oro/  html/plata/  html/bronce/")
+    print(f"  📋 Índice:              {index_path}")
+    print(f"  📤 Enviar todos:        {enviar_path}")
     print(f"  📋 Total boletines:     {len(boletines_todos)}")
     print()
+    print("  Ver a quién saldría (sin enviar):")
+    print(f"    python3 {enviar_path} --dry-run")
     print("  Prueba un correo:")
     print(f"    python3 {enviar_path} --prueba tucorreo@gmail.com")
-    print("  Enviar todos:")
+    print("  Enviar todos los boletines:")
     print(f"    python3 {enviar_path}")
+    print("    make -C club enviar-boletines")
 
     print(f"\n{'=' * 70}")
     print(f"  EJEMPLO DE BOLETINES")
