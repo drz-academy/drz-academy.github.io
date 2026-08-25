@@ -14,8 +14,8 @@ make notify-send-newsletter FILE=notify/newsletter-club-drz-academy.md
 <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
 
 <!-- Banner -->
-<div style="text-align: center; margin-bottom: 20px;">
-  <img src="https://drz-academy.github.io/assets/club/banner-oro.webp" alt="Dr. Z Academy Club" style="max-width: 100%; border-radius: 10px;">
+<div style="text-align: center; margin-bottom: 20px; background: #ffffff;">
+  <img src="https://drz-academy.github.io/assets/club/banner-oro.png" alt="Dr. Z Academy Club" style="max-width: 100%; background: #ffffff;">
 </div>
 
 <!-- Contenido Principal -->

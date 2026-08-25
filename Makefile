@@ -33,7 +33,7 @@ help:
 	@echo "  make club-base-datos    - Regenera la base de miembros (Excel → JSON)"
 	@echo "  make club-clasificar    - Clasifica Oro / Plata / Bronce"
 	@echo "  make club-informe       - Genera club/personal/drz-club.md"
-	@echo "  make club-boletines     - Genera CSV de boletines"
+	@echo "  make club-boletines     - Genera HTML y CSV de boletines en club/personal/boletines/"
 	@echo "  make club-certificados  - Parte y nombra PDFs en personal/certificados/"
 	@echo "  make club-certificados-hotmart - Avisos Hotmart nuevos (AstroPython, Cuántica permanente)"
 	@echo "  make club-certificados-drive - Enlaces de Drive → personal/certificados.csv"

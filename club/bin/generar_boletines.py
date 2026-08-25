@@ -13,9 +13,13 @@ Ejemplo:
 """
 
 import argparse
-import os
-import sys
+import csv
+import html
 import json
+import os
+import re
+import shutil
+import sys
 from datetime import datetime
 
 # ============================================================================
@@ -26,24 +30,83 @@ CLUB_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PERSONAL_DIR = os.path.join(CLUB_DIR, "personal")
 BOLETINES_DIR = os.path.join(PERSONAL_DIR, "boletines")
 CURSOS_JSON = os.path.join(CLUB_DIR, "cursos.json")
+CATEGORIAS_JSON = os.path.join(CLUB_DIR, "categorias.json")
 CUPONES_JSON = os.path.join(PERSONAL_DIR, "cupones.json")
+SITE_URL = "https://drz-academy.github.io"
+CLUB_URL = f"{SITE_URL}/club/"
+LOGO_URL = f"{SITE_URL}/assets/DrZ-Logos/logo-firma.webp"
+
+CATEGORIA_META = {
+    "ORO": {
+        "key": "gold",
+        "slug": "oro",
+        "accent": "#c9ae4a",
+        "bg": "#fbf8ea",
+        "ink": "#8a7310",
+        "banner": f"{SITE_URL}/assets/club/banner-oro.png",
+    },
+    "PLATA": {
+        "key": "silver",
+        "slug": "plata",
+        "accent": "#888888",
+        "bg": "#f6f6f6",
+        "ink": "#555555",
+        "banner": f"{SITE_URL}/assets/club/banner-plata.png",
+    },
+    "BRONCE": {
+        "key": "bronze",
+        "slug": "bronce",
+        "accent": "#b87333",
+        "bg": "#fbf7f2",
+        "ink": "#8a5a2b",
+        "banner": f"{SITE_URL}/assets/club/banner-bronce.png",
+    },
+}
 
 # Determinar próximo curso
 PROXIMO_CURSO_ID = ""
 PROXIMO_CURSO_NOMBRE = "Próximo curso"
 PROXIMO_CURSO_PRECIO = 0
 PROXIMO_CURSO_INSCRIPCION = ""
+PROXIMO_CURSO_PAGINA = ""
+_cursos_data = []
 
 if os.path.exists(CURSOS_JSON):
     with open(CURSOS_JSON, "r", encoding="utf-8") as f:
         _cursos_data = json.load(f)
-        for c in _cursos_data:
-            if int(c.get("numero_participantes", 0)) == 0:
-                PROXIMO_CURSO_ID = c.get("id") or ""
-                PROXIMO_CURSO_NOMBRE = c["nombre"]
-                PROXIMO_CURSO_PRECIO = float(c.get("valor", 0) or 0)
-                PROXIMO_CURSO_INSCRIPCION = str(c.get("inscripcion_url") or c.get("pagina_url") or "")
-                break
+    candidatos = []
+    for c in _cursos_data:
+        try:
+            n = int(c.get("numero_participantes", 0) or 0)
+        except (TypeError, ValueError):
+            n = 0
+        if n != 0:
+            continue
+        cid = str(c.get("id") or "")
+        if "permanente" in cid:
+            continue
+        candidatos.append(c)
+    preferidos = [c for c in candidatos if c.get("inscripcion_url") or c.get("valor")]
+    elegido = (preferidos or candidatos or [None])[0]
+    if elegido:
+        PROXIMO_CURSO_ID = elegido.get("id") or ""
+        PROXIMO_CURSO_NOMBRE = elegido.get("nombre") or PROXIMO_CURSO_NOMBRE
+        PROXIMO_CURSO_PRECIO = float(elegido.get("valor", 0) or 0)
+        PROXIMO_CURSO_INSCRIPCION = str(elegido.get("inscripcion_url") or elegido.get("pagina_url") or "")
+        PROXIMO_CURSO_PAGINA = str(elegido.get("pagina_url") or PROXIMO_CURSO_INSCRIPCION)
+
+CATEGORIAS = {}
+if os.path.exists(CATEGORIAS_JSON):
+    with open(CATEGORIAS_JSON, "r", encoding="utf-8") as f:
+        CATEGORIAS = json.load(f)
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from generar_stats import build_stats
+
+CLUB_STATS = build_stats(_cursos_data) if _cursos_data else {
+    "cursos_dictados": 0,
+    "certificados": 0,
+}
 
 
 def load_cupones():
@@ -76,6 +139,169 @@ def codigo_cupon(categoria, cupones, curso_id):
     else:
         return ""
     return (cupones.get(curso_id) or {}).get(key) or ""
+
+
+def slug_correo(correo: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "_", str(correo or "").strip().lower()).strip("_") or "sin_correo"
+
+
+def primer_correo(raw) -> str:
+    for part in re.split(r"[;,\s]+", str(raw or "").strip()):
+        if "@" in part and "." in part.split("@")[-1]:
+            return part.strip()
+    return str(raw or "").strip()
+
+
+def join_es(items) -> str:
+    values = [str(item).strip() for item in (items or []) if str(item).strip()]
+    if not values:
+        return ""
+    if len(values) == 1:
+        return values[0]
+    if len(values) == 2:
+        return f"{values[0]} y {values[1]}"
+    return f"{', '.join(values[:-1])} y {values[-1]}"
+
+
+def texto_categoria(cat: str) -> tuple[str, str, str]:
+    meta = CATEGORIA_META.get(cat) or {}
+    data = CATEGORIAS.get(meta.get("key") or "") or {}
+    mensaje = str(data.get("mensaje") or "").strip()
+    requisito = join_es(data.get("requisitos"))
+    beneficio = join_es(data.get("beneficios"))
+    return mensaje, requisito, beneficio
+
+
+def html_boletin(row, cat, codigo, nombre_curso, precio, inscripcion_url, pagina_url) -> str:
+    meta = CATEGORIA_META[cat]
+    nombre = html.escape(str(row.get("nombre") or "participante").strip())
+    mensaje, requisito, beneficio = texto_categoria(cat)
+    frase = html.escape(mensaje)
+    if requisito:
+        frase = f"{frase} ({html.escape(requisito)})"
+    if beneficio:
+        frase = f"{frase} te otorgamos {html.escape(beneficio)}."
+    if not frase.endswith("."):
+        frase += "."
+    frase += " ¡Gracias por tu constancia!"
+
+    cursos = row.get("cursos_participados") or []
+    if isinstance(cursos, str):
+        cursos = [c.strip() for c in cursos.split(";") if c.strip()]
+    cursos_li = "".join(
+        f'<li style="margin:0 0 6px 0;">{html.escape(str(c))}</li>' for c in cursos
+    )
+    cursos_block = (
+        f'<p style="margin:0 0 8px 0;">Has participado en <strong>{html.escape(str(row.get("total_cursos") or len(cursos)))}</strong> cursos con nosotros:</p>'
+        f'<ul style="margin:0 0 16px 0; padding-left: 18px; color:#555;">{cursos_li}</ul>'
+        if cursos_li
+        else ""
+    )
+
+    transferible = str(row.get("bono_transferible") or "").lower().startswith("sí") or cat == "BRONCE"
+    extra_bronce = ""
+    if cat == "BRONCE" and transferible:
+        extra_bronce = (
+            '<p style="margin:12px 0 0 0; font-size:14px; color:#555;">'
+            "Este bono es <strong>transferible</strong>: puedes compartirlo con alguien cercano."
+            "</p>"
+        )
+    extra_oro = ""
+    if cat == "ORO":
+        extra_oro = (
+            '<p style="margin:12px 0 0 0; font-size:14px; color:#555;">'
+            "Como miembro Oro también tienes acceso a un <strong>producto permanente</strong>."
+            "</p>"
+        )
+
+    cupon_html = ""
+    if codigo:
+        cupon_html = f"""
+  <p style="margin:16px 0 8px 0;">Tu cupón para el próximo curso:</p>
+  <p style="margin:0 0 8px 0; text-align:center;">
+    <span style="display:inline-block; border:1px solid {meta['accent']}; color:{meta['ink']}; letter-spacing:0.08em; padding:8px 16px; font-family:ui-monospace,Menlo,monospace; font-weight:bold;">{html.escape(codigo)}</span>
+  </p>
+"""
+
+    precio_html = ""
+    if precio:
+        precio_html = f'<p style="margin:0 0 8px 0; font-size:14px; color:#555;">Valor: ${precio:,.0f}</p>'.replace(",", ".")
+
+    n_cursos = CLUB_STATS.get("cursos_dictados") or 0
+    n_certs = CLUB_STATS.get("certificados") or 0
+    pagina = pagina_url or inscripcion_url or f"{SITE_URL}/cursos/cambio-climatico/"
+    inscribe = inscripcion_url or pagina
+
+    return f"""<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Z Academy Club</title>
+</head>
+<body style="margin:0; padding:0; background:#ffffff;">
+<div style="max-width:600px; margin:0 auto; font-family:Arial,sans-serif; color:#333; line-height:1.6; background:#ffffff;">
+
+  <div style="text-align:center; margin:0; background:#ffffff;">
+    <img src="{meta['banner']}" alt="Dr. Z Academy Club {html.escape(cat.title())}" style="max-width:100%; height:auto; display:block; background:#ffffff;">
+  </div>
+
+  <div style="padding:24px 28px 8px 28px;">
+    <p style="text-align:center; color:#777; font-style:italic; margin:0 0 24px 0;">Novedades del 25 de agosto de 2026</p>
+    <h1 style="color:#2c3e50; font-size:22px; margin:0 0 16px 0; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">Hola {nombre}</h1>
+    <p>Este semestre cumplimos <strong>2 años</strong> (desde 2024) de poner a la gente a ñoñiar. Después de <strong>{n_cursos} cursos</strong> y <strong>{n_certs} personas certificadas</strong>, y a modo de celebración, nace el <strong>Dr. Z Academy Club</strong>: beneficios para quienes nos apoyan participando en los cursos.</p>
+    <p>Según tu historial, tu categoría es <strong style="color:{meta['ink']};">{html.escape(cat.title())}</strong>.</p>
+    {cursos_block}
+    <div style="border-left:4px solid {meta['accent']}; background:{meta['bg']}; padding:14px 16px; margin:16px 0; border-radius:0 6px 6px 0;">
+      <p style="margin:0;">{frase}</p>
+      {extra_bronce}{extra_oro}
+    </div>
+    {cupon_html}
+    <p>Para consultar tu categoría, el cupón, los espacios de formación y tus certificados, entra a tu página del Club con la cédula y el correo con el que te inscribiste:</p>
+    <p style="text-align:center; font-size:16px; margin:18px 0;"><a href="{CLUB_URL}" style="color:#0056b3; font-weight:bold;">{CLUB_URL}</a></p>
+    <div style="text-align:center; margin:24px 0 8px 0;">
+      <a href="{CLUB_URL}" style="background-color:{meta['accent']}; color:#1a1a1a; text-decoration:none; padding:12px 25px; border-radius:5px; font-weight:bold; display:inline-block;">Consultar mi Club</a>
+    </div>
+  </div>
+
+  <div style="padding:8px 28px 24px 28px;">
+    <h2 style="text-align:center; color:#2c3e50; font-size:18px; margin:16px 0 12px 0;">El próximo curso</h2>
+    <p style="margin:0 0 4px 0;"><strong>{html.escape(nombre_curso)}</strong></p>
+    {precio_html}
+    <p style="margin:0 0 16px 0; font-size:14px; color:#555;">Si el Club te otorgó un cupón, este es el curso para usarlo.</p>
+    <p style="margin:0;"><a href="{html.escape(inscribe)}" style="color:#0056b3; font-weight:bold; text-decoration:none;">Inscribirse →</a>
+      &nbsp;·&nbsp;
+      <a href="{html.escape(pagina)}" style="color:#0056b3; text-decoration:none;">Ver la hoja del curso</a></p>
+  </div>
+
+  <div style="text-align:center; padding:24px 28px 32px 28px; border-top:1px solid #eee;">
+    <a href="{SITE_URL}/">
+      <img src="{LOGO_URL}" alt="Dr. Z Academy" width="150" style="margin-bottom:15px;">
+    </a>
+    <div>
+      <a href="https://instagram.com/dr.zacademy" style="text-decoration:none; color:#0056b3; display:inline-block; margin-right:15px;">
+        <img src="{SITE_URL}/assets/instagram-25x25.png" alt="Instagram" width="25" style="vertical-align:middle; margin-right:5px;">
+        <span style="vertical-align:middle; font-weight:bold;">@dr.zacademy</span>
+      </a>
+      <a href="https://wa.me/573002422052" style="text-decoration:none; color:#0056b3; display:inline-block;">
+        <img src="{SITE_URL}/assets/whatsapp-25x25.png" alt="WhatsApp" width="25" style="vertical-align:middle; margin-right:5px;">
+        <span style="vertical-align:middle; font-weight:bold;">+57 300 2422052</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
+"""
+
+
+def instalar_enviar_script():
+    src = os.path.join(os.path.dirname(os.path.abspath(__file__)), "enviar_boletines.py")
+    dst = os.path.join(BOLETINES_DIR, "enviar.py")
+    shutil.copy2(src, dst)
+    os.chmod(dst, 0o755)
+    return dst
 
 # Productos permanentes disponibles para miembros Oro
 PRODUCTOS_PERMANENTES = [
@@ -309,7 +535,7 @@ def main():
         members = json.load(f)
 
     # Filtrar solo los que tienen correo
-    miembros_con_correo = [m for m in members if str(m.get("correo", "")).strip() != ""]
+    miembros_con_correo = [m for m in members if primer_correo(m.get("correo", ""))]
     miembros_sin_correo = [m for m in members if str(m.get("correo", "")).strip() == ""]
 
     print(f"\n📊 Total miembros: {len(members)}")
@@ -318,76 +544,105 @@ def main():
 
     # Crear directorio de boletines
     os.makedirs(BOLETINES_DIR, exist_ok=True)
+    html_root = os.path.join(BOLETINES_DIR, "html")
+    if os.path.isdir(html_root):
+        shutil.rmtree(html_root)
+    os.makedirs(html_root, exist_ok=True)
 
     # Generar boletines por categoría
     boletines_todos = []
+    index_items = []
     fecha = datetime.now().strftime("%Y-%m-%d")
+    pagina_url = PROXIMO_CURSO_PAGINA
 
-    for cat in ["ORO", "PLATA", "BRONCE", "SIN CATEGORÍA"]:
+    for cat in ["ORO", "PLATA", "BRONCE"]:
         subset = [m for m in miembros_con_correo if m.get("categoria") == cat]
         if len(subset) == 0:
             continue
 
         plantilla = PLANTILLAS[cat]
         boletines_cat = []
+        html_cat_dir = os.path.join(html_root, CATEGORIA_META[cat]["slug"])
+        os.makedirs(html_cat_dir, exist_ok=True)
 
         for row in subset:
             codigo = codigo_cupon(cat, cupones, PROXIMO_CURSO_ID)
             texto = plantilla(row, nombre_curso, precio, codigo, inscripcion_url)
+            correo = primer_correo(row.get("correo"))
+            rel_html = os.path.join("html", CATEGORIA_META[cat]["slug"], f"{slug_correo(correo)}.html")
+            html_path = os.path.join(BOLETINES_DIR, rel_html)
+            html_body = html_boletin(
+                row, cat, codigo, nombre_curso, precio, inscripcion_url, pagina_url
+            )
+            with open(html_path, "w", encoding="utf-8") as fh:
+                fh.write(html_body)
+            asunto = f"[Dr. Z Academy Club] {row.get('nombre', '').strip()}, eres miembro {cat.title()}"
             boletin = {
                 "nombre": row.get("nombre", ""),
-                "correo": row.get("correo", ""),
+                "correo": correo,
                 "celular": row.get("celular", ""),
                 "categoria": cat,
                 "descuento": row.get("descuento", "0%"),
                 "cupon": codigo,
-                "asunto": f"🎓 Dr. Z Academy Club | {nombre_curso}" + (
-                    f" | Tu cupón {codigo or cat}" if cat != "SIN CATEGORÍA" else ""
-                ),
+                "asunto": asunto,
+                "archivo": rel_html.replace("\\", "/"),
                 "mensaje": texto,
                 "fecha_generacion": fecha,
             }
             boletines_cat.append(boletin)
             boletines_todos.append(boletin)
+            index_items.append({
+                "nombre": boletin["nombre"],
+                "correo": correo,
+                "categoria": cat,
+                "asunto": asunto,
+                "archivo": boletin["archivo"],
+            })
 
-        # Guardar CSV por categoría para envío
-        import csv
-        cat_filename = cat.lower().replace(" ", "_").replace("í", "i")
+        cat_filename = cat.lower()
         cat_filepath = os.path.join(BOLETINES_DIR, f"boletines_{cat_filename}.csv")
-        
-        # En vez de pandas, usamos el módulo csv de Python
-        keys = boletines_cat[0].keys() if boletines_cat else []
-        with open(cat_filepath, 'w', encoding='utf-8-sig', newline='') as output_file:
+        keys = boletines_cat[0].keys()
+        with open(cat_filepath, "w", encoding="utf-8-sig", newline="") as output_file:
             dict_writer = csv.DictWriter(output_file, fieldnames=keys)
             dict_writer.writeheader()
             dict_writer.writerows(boletines_cat)
-        emoji = row.get('emoji', '📝')
-        print(f"\n  {emoji} {cat}: {len(boletines_cat)} boletín(es) → {cat_filepath}")
+        emoji = subset[0].get("emoji", "📝")
+        print(f"\n  {emoji} {cat}: {len(boletines_cat)} boletín(es) → html/{CATEGORIA_META[cat]['slug']}/")
 
-    # Guardar todos los boletines en un solo archivo
+    todos_filepath = ""
     if boletines_todos:
         todos_filepath = os.path.join(BOLETINES_DIR, "boletines_todos.csv")
         keys = boletines_todos[0].keys()
-        import csv
-        with open(todos_filepath, 'w', encoding='utf-8-sig', newline='') as output_file:
+        with open(todos_filepath, "w", encoding="utf-8-sig", newline="") as output_file:
             dict_writer = csv.DictWriter(output_file, fieldnames=keys)
             dict_writer.writeheader()
             dict_writer.writerows(boletines_todos)
-        print(f"  • Todos: {todos_filepath}")
+        print(f"  • CSV: {todos_filepath}")
+
+    index_path = os.path.join(BOLETINES_DIR, "index.json")
+    with open(index_path, "w", encoding="utf-8") as fh:
+        json.dump({"fecha": fecha, "items": index_items}, fh, ensure_ascii=False, indent=2)
+        fh.write("\n")
+    enviar_path = instalar_enviar_script()
 
     print(f"\n{'=' * 70}")
     print(f"  ARCHIVOS GENERADOS")
     print(f"{'=' * 70}")
-    print(f"  📋 Boletín consolidado: {todos_filepath if boletines_todos else 'N/A'}")
-    print(f"  📂 Carpeta: {BOLETINES_DIR}")
+    print(f"  📋 Índice:              {index_path}")
+    print(f"  📤 Envío:               {enviar_path}")
+    print(f"  📂 Carpeta:             {BOLETINES_DIR}")
     print(f"  📋 Total boletines:     {len(boletines_todos)}")
+    print()
+    print("  Prueba un correo:")
+    print(f"    python3 {enviar_path} --prueba tucorreo@gmail.com")
+    print("  Enviar todos:")
+    print(f"    python3 {enviar_path}")
 
-    # Mostrar ejemplo de cada categoría
     print(f"\n{'=' * 70}")
     print(f"  EJEMPLO DE BOLETINES")
     print(f"{'=' * 70}")
 
-    for cat in ["ORO", "PLATA", "BRONCE", "SIN CATEGORÍA"]:
+    for cat in ["ORO", "PLATA", "BRONCE"]:
         ejemplos = [b for b in boletines_todos if b["categoria"] == cat]
         if ejemplos:
             print(f"\n{'─' * 50}")
@@ -395,8 +650,9 @@ def main():
             print(f"{'─' * 50}")
             print(f"  Para: {ejemplos[0]['nombre']} <{ejemplos[0]['correo']}>")
             print(f"  Asunto: {ejemplos[0]['asunto']}")
+            print(f"  HTML: {ejemplos[0]['archivo']}")
             print(f"{'─' * 50}")
-            print(ejemplos[0]['mensaje'])
+            print(ejemplos[0]["mensaje"])
 
     print()
 
