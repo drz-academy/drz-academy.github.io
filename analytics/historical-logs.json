@@ -1,5 +1,597 @@
 [
   {
+    "id": "3232f12f-dbda-4408-94c8-9b4b69f589fd",
+    "timestampServer": "2026-08-26T12:54:34.690Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "club_click_certificado",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "curso": "El Rompecabezas de la Materia",
+      "href": "https://drive.google.com/file/d/18Clh5qWxIHgnDlPzETWYqUvBbz1MIjxm/view?usp=sharing"
+    },
+    "timestampClient": "2026-08-26T12:54:34.470Z"
+  },
+  {
+    "id": "990bc3df-b621-4e64-98b6-69c2d440ed29",
+    "timestampServer": "2026-08-26T12:53:43.187Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "memberName": "Juan Manuel Montoya Moreno",
+      "memberEmail": "jmmontoy@gmail.com",
+      "categoria": "ORO"
+    },
+    "timestampClient": "2026-08-26T12:53:43.027Z"
+  },
+  {
+    "id": "060ba571-fff0-4463-98a8-918bf8efc8e8",
+    "timestampServer": "2026-08-26T12:51:32.181Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-26T12:51:31.899Z"
+  },
+  {
+    "id": "7c3c6436-7f8d-408d-a9f8-52392bfe6ced",
+    "timestampServer": "2026-08-26T12:47:36.874Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "http://127.0.0.1:8000/club/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "memberName": "Juan Manuel Montoya Moreno",
+      "memberEmail": "jmmontoy@gmail.com",
+      "categoria": "ORO"
+    },
+    "timestampClient": "2026-08-26T12:47:36.609Z"
+  },
+  {
+    "id": "00ac727e-7220-4b69-841a-273c44c35227",
+    "timestampServer": "2026-08-26T12:37:28.838Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "http://127.0.0.1:8000/club/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "memberName": "Omer Moreno",
+      "memberEmail": "omermoreno78@gmail.com",
+      "categoria": "SIN CATEGORÍA"
+    },
+    "timestampClient": "2026-08-26T12:37:28.545Z"
+  },
+  {
+    "id": "c4b715e7-8bb2-442f-95f9-73a0864964d3",
+    "timestampServer": "2026-08-26T12:25:14.611Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "http://127.0.0.1:8000/club/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "memberName": "Juan Manuel Montoya Moreno",
+      "memberEmail": "jmmontoy@gmail.com",
+      "categoria": "ORO"
+    },
+    "timestampClient": "2026-08-26T12:25:14.388Z"
+  },
+  {
+    "id": "cef6268f-3908-40bd-b6bb-03afb79befca",
+    "timestampServer": "2026-08-26T12:24:12.429Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "http://127.0.0.1:8000/club/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "memberName": "Omer Moreno",
+      "memberEmail": "omermoreno78@gmail.com",
+      "categoria": "SIN CATEGORÍA"
+    },
+    "timestampClient": "2026-08-26T12:24:12.013Z"
+  },
+  {
+    "id": "d3c133ed-6505-4190-bf17-60813c130d46",
+    "timestampServer": "2026-08-26T11:30:49.320Z",
+    "ip": "181.60.100.157",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-26T11:30:50.968Z"
+  },
+  {
+    "id": "3c938976-15a8-4813-a461-56771ff621f4",
+    "timestampServer": "2026-08-26T11:30:12.714Z",
+    "ip": "181.60.100.157",
+    "country": "CO",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "memberName": "Luis Eduardo Arroyo Tovar",
+      "memberEmail": "learroyo20@gmail.com",
+      "categoria": "SIN CATEGORÍA"
+    },
+    "timestampClient": "2026-08-26T11:30:14.208Z"
+  },
+  {
+    "id": "dad4ca66-c6c4-4eec-9f5a-adf3388cba6d",
+    "timestampServer": "2026-08-26T00:22:25.143Z",
+    "ip": "190.61.42.220",
+    "country": "CO",
+    "eventType": "course_enroll_click",
+    "page": "/cursos/cuantica-a-pie/",
+    "url": "https://drz-academy.github.io/cursos/cuantica-a-pie/",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36 EdgA/151.0.0.0",
+    "language": "es",
+    "details": {
+      "targetId": "cuantica-a-pie",
+      "targetName": "Cuántica a Pie con Dr. Z",
+      "href": "https://go.hotmart.com/T96569602E?dp=1",
+      "label": "Inscribete ahora →"
+    },
+    "timestampClient": "2026-08-26T00:22:24.796Z"
+  },
+  {
+    "id": "3d2e4e70-9e8a-4675-af9c-721b1cc4acd6",
+    "timestampServer": "2026-08-26T00:22:19.267Z",
+    "ip": "190.61.42.220",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cuantica-a-pie/",
+    "url": "https://drz-academy.github.io/cursos/cuantica-a-pie/",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36 EdgA/151.0.0.0",
+    "language": "es",
+    "details": {
+      "courseId": "cuantica-a-pie",
+      "courseName": "Cuántica a Pie con Dr. Z"
+    },
+    "timestampClient": "2026-08-26T00:22:18.596Z"
+  },
+  {
+    "id": "41253467-797b-4b49-8eee-2dbda30bbd83",
+    "timestampServer": "2026-08-26T00:21:38.825Z",
+    "ip": "190.61.42.220",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cuantica-a-pie/",
+    "url": "https://drz-academy.github.io/cursos/cuantica-a-pie/",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36 EdgA/151.0.0.0",
+    "language": "es",
+    "details": {
+      "courseId": "cuantica-a-pie",
+      "courseName": "Cuántica a Pie con Dr. Z"
+    },
+    "timestampClient": "2026-08-26T00:21:38.366Z"
+  },
+  {
+    "id": "1baf15e2-45c0-42c5-b8cd-80ea272365a9",
+    "timestampServer": "2026-08-26T00:16:58.490Z",
+    "ip": "190.61.42.220",
+    "country": "CO",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36 EdgA/151.0.0.0",
+    "language": "es",
+    "details": {
+      "memberName": "Sonia Ofelia Ortiz Penagos",
+      "memberEmail": "sonortiz268@gmail.com",
+      "categoria": "BRONCE"
+    },
+    "timestampClient": "2026-08-26T00:16:57.771Z"
+  },
+  {
+    "id": "bd43f615-2e29-4b35-88f6-92fc258f896e",
+    "timestampServer": "2026-08-26T00:16:52.367Z",
+    "ip": "72.153.231.68",
+    "country": "US",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.7444.175 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-26T00:16:52.169Z"
+  },
+  {
+    "id": "1a336f33-73e7-4403-b0de-bd097cbfb97f",
+    "timestampServer": "2026-08-25T20:10:25.291Z",
+    "ip": "2800:e2:5300:70c6:84b4:eb70:23b7:6a34",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-25T20:10:25.208Z"
+  },
+  {
+    "id": "6e3d0481-9c73-447a-92cc-39d55731916a",
+    "timestampServer": "2026-08-25T20:09:41.478Z",
+    "ip": "2800:e2:5300:70c6:84b4:eb70:23b7:6a34",
+    "country": "CO",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "memberName": "Mary Zulay Cespedes Garcia",
+      "memberEmail": "mzulaycespedes@gmail.com",
+      "categoria": "BRONCE"
+    },
+    "timestampClient": "2026-08-25T20:09:41.340Z"
+  },
+  {
+    "id": "7cf46bf1-e237-4894-a946-27e1e4c6ac09",
+    "timestampServer": "2026-08-25T19:01:42.981Z",
+    "ip": "66.9.160.104",
+    "country": "VE",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "memberName": "Omer Moreno",
+      "memberEmail": "omermoreno78@gmail.com",
+      "categoria": "SIN CATEGORÍA"
+    },
+    "timestampClient": "2026-08-25T19:01:42.635Z"
+  },
+  {
+    "id": "3662ff47-5bdf-426b-b80b-a372cea1b443",
+    "timestampServer": "2026-08-25T18:59:16.336Z",
+    "ip": "66.9.160.104",
+    "country": "VE",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-25T18:59:15.900Z"
+  },
+  {
+    "id": "badfb3ad-adef-4375-b2da-4daba82dd47f",
+    "timestampServer": "2026-08-25T18:58:47.460Z",
+    "ip": "66.9.160.104",
+    "country": "VE",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "memberName": "Omer Moreno",
+      "memberEmail": "omermoreno78@gmail.com",
+      "categoria": "SIN CATEGORÍA"
+    },
+    "timestampClient": "2026-08-25T18:58:46.735Z"
+  },
+  {
+    "id": "04d219b4-c44f-4185-bbf0-ecc55e681ea1",
+    "timestampServer": "2026-08-25T17:28:37.677Z",
+    "ip": "190.71.32.110",
+    "country": "CO",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "memberName": "Fanuer Javier López Moná",
+      "memberEmail": "fanuer21@gmail.com",
+      "categoria": "PLATA"
+    },
+    "timestampClient": "2026-08-25T17:28:37.460Z"
+  },
+  {
+    "id": "e7417254-9458-4e09-873a-4a04d5d799bc",
+    "timestampServer": "2026-08-25T16:49:50.355Z",
+    "ip": "193.33.237.196",
+    "country": "US",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:152.0) Gecko/20100101 Firefox/152.0",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-25T16:49:49.215Z"
+  },
+  {
+    "id": "714794f7-d234-4701-93ad-24d279ccf966",
+    "timestampServer": "2026-08-25T16:30:12.664Z",
+    "ip": "2600:8801:17a1:1800:85a5:ca8d:d2d3:ef27",
+    "country": "US",
+    "eventType": "course_enroll_click",
+    "page": "/cursos/cuantica-a-pie/",
+    "url": "https://drz-academy.github.io/cursos/cuantica-a-pie/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "targetId": "cuantica-a-pie",
+      "targetName": "Cuántica a Pie con Dr. Z",
+      "href": "https://go.hotmart.com/T96569602E?dp=1",
+      "label": "Inscribete ahora →"
+    },
+    "timestampClient": "2026-08-25T16:30:12.586Z"
+  },
+  {
+    "id": "67bf8f47-9d2c-4689-9796-6c1fb9945dec",
+    "timestampServer": "2026-08-25T16:30:05.151Z",
+    "ip": "2600:8801:17a1:1800:85a5:ca8d:d2d3:ef27",
+    "country": "US",
+    "eventType": "course_click",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "targetId": "cuantica-a-pie",
+      "targetName": "Cuántica a Pie con Dr. Z",
+      "href": "cursos/cuantica-a-pie/",
+      "label": "Cuántica a Pie con Dr. Z\n            Teoría cuántica explicada en un lenguaje sencillo, para gente de a pie\n            "
+    },
+    "timestampClient": "2026-08-25T16:30:04.671Z"
+  },
+  {
+    "id": "f4bac921-9040-4224-b845-6f7dce43c484",
+    "timestampServer": "2026-08-25T16:30:05.146Z",
+    "ip": "2600:8801:17a1:1800:85a5:ca8d:d2d3:ef27",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/cuantica-a-pie/",
+    "url": "https://drz-academy.github.io/cursos/cuantica-a-pie/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "cuantica-a-pie",
+      "courseName": "Cuántica a Pie con Dr. Z"
+    },
+    "timestampClient": "2026-08-25T16:30:04.698Z"
+  },
+  {
+    "id": "32c028bb-ad01-4280-ab3d-1c16aafce32a",
+    "timestampServer": "2026-08-25T16:26:40.414Z",
+    "ip": "2600:8801:17a1:1800:85a5:ca8d:d2d3:ef27",
+    "country": "US",
+    "eventType": "course_enroll_click",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "targetId": "cambio-climatico",
+      "targetName": "Cambio Climático",
+      "href": "https://drz.academy/producto/cambio-climatico/",
+      "label": "Inscribete ahora →"
+    },
+    "timestampClient": "2026-08-25T16:26:40.321Z"
+  },
+  {
+    "id": "0534ccfa-28be-47ec-8ff9-012276221e81",
+    "timestampServer": "2026-08-25T16:24:50.780Z",
+    "ip": "2600:8801:17a1:1800:85a5:ca8d:d2d3:ef27",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-08-25T16:24:50.727Z"
+  },
+  {
+    "id": "ef9f8bf9-1cf6-4aa5-a09f-9b1617ea1e20",
+    "timestampServer": "2026-08-25T16:24:50.592Z",
+    "ip": "2600:8801:17a1:1800:85a5:ca8d:d2d3:ef27",
+    "country": "US",
+    "eventType": "course_click",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "targetId": "cambio-climatico",
+      "targetName": "Cambio Climático",
+      "href": "cursos/cambio-climatico/",
+      "label": "Cambio Climático\n            La ciencia que nadie te explicó y el futuro que ya nos alcanzó\n            Cambio Climático"
+    },
+    "timestampClient": "2026-08-25T16:24:50.500Z"
+  },
+  {
+    "id": "461a180c-9836-4683-ae35-7fd19ff70218",
+    "timestampServer": "2026-08-25T16:23:38.079Z",
+    "ip": "2600:8801:17a1:1800:85a5:ca8d:d2d3:ef27",
+    "country": "US",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-25T16:23:37.988Z"
+  },
+  {
+    "id": "7c3ed86b-2890-4d45-94f4-49e9d513b3ad",
+    "timestampServer": "2026-08-25T16:23:31.447Z",
+    "ip": "2600:8801:17a1:1800:85a5:ca8d:d2d3:ef27",
+    "country": "US",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-25T16:23:31.378Z"
+  },
+  {
+    "id": "114b7cf3-f23b-4cfa-baab-6f46b2495fef",
+    "timestampServer": "2026-08-25T16:23:16.794Z",
+    "ip": "2600:8801:17a1:1800:85a5:ca8d:d2d3:ef27",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/cuantica-a-pie/",
+    "url": "https://drz-academy.github.io/cursos/cuantica-a-pie/",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "cuantica-a-pie",
+      "courseName": "Cuántica a Pie con Dr. Z"
+    },
+    "timestampClient": "2026-08-25T16:23:16.729Z"
+  },
+  {
+    "id": "efe935d3-bfc9-45b6-9456-98efe20be363",
+    "timestampServer": "2026-08-25T16:22:51.271Z",
+    "ip": "2600:8801:17a1:1800:85a5:ca8d:d2d3:ef27",
+    "country": "US",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "memberName": "Luis Fernando Madrid",
+      "memberEmail": "luismadridnavas@gmail.com",
+      "categoria": "PLATA"
+    },
+    "timestampClient": "2026-08-25T16:22:51.127Z"
+  },
+  {
+    "id": "4397e0c5-4f49-4c05-aef3-df9c3afadb77",
+    "timestampServer": "2026-08-25T16:18:36.739Z",
+    "ip": "2001:1308:4104:b651:acc4:fafe:7be4:ec4",
+    "country": "DO",
+    "eventType": "course_page_view",
+    "page": "/cursos/astropython/",
+    "url": "https://drz-academy.github.io/cursos/astropython/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Android 16; Mobile; rv:154.0) Gecko/154.0 Firefox/154.0",
+    "language": "es",
+    "details": {
+      "courseId": "astropython",
+      "courseName": "AstroPython"
+    },
+    "timestampClient": "2026-08-25T16:18:36.596Z"
+  },
+  {
+    "id": "89741c58-5ac9-4e7d-9d2a-52ccfffefe0d",
+    "timestampServer": "2026-08-25T14:45:18.316Z",
+    "ip": "2605:8d80:6d60:4bd:9fce:aa72:5d4e:6d89",
+    "country": "CA",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "memberName": "Cristian Moreno",
+      "memberEmail": "piki_moreno@hotmail.com",
+      "categoria": "SIN CATEGORÍA"
+    },
+    "timestampClient": "2026-08-25T14:45:19.052Z"
+  },
+  {
+    "id": "d85b7ae2-d5e6-44d2-ae71-1537076d217e",
+    "timestampServer": "2026-08-25T14:11:19.737Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-25T14:11:19.437Z"
+  },
+  {
     "id": "a4c83235-b5be-4016-82cb-b9e930077c44",
     "timestampServer": "2026-08-25T11:41:02.075Z",
     "ip": "200.34.0.33",
