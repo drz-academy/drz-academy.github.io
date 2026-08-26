@@ -10,6 +10,9 @@ const EVENT_LABELS = {
   course_click: "Click en curso (índice)",
   course_enroll_click: "Inscribirse ahora",
   club_visit: "Visita al Club",
+  club_click_classroom: "Ir a Classroom",
+  club_click_hotmart: "Ir a Hotmart",
+  club_click_certificado: "Descargar Certificado",
 };
 
 function endpointFromMeta() {
@@ -54,7 +57,7 @@ function eventLabel(type) {
 
 function targetLabel(log) {
   const d = log.details || {};
-  return d.targetName || d.courseName || d.demoName || d.pageName || log.page || "—";
+  return d.targetName || d.courseName || d.demoName || d.pageName || d.curso || log.page || "—";
 }
 
 function renderClubRows(visitors) {
@@ -270,6 +273,7 @@ function renderDashboard(logs, subsCount = 0) {
   const courseViews = logs.filter((l) => l.eventType === "course_page_view" || l.eventType === "course_click");
   const clubPeople = clubVisitors(logs);
   const clubVisitCount = logs.filter((l) => l.eventType === "club_visit").length;
+  const clubClicks = logs.filter((l) => String(l.eventType).startsWith("club_click_"));
 
   const summary = document.getElementById("stats-summary");
   if (summary) {
@@ -281,6 +285,7 @@ function renderDashboard(logs, subsCount = 0) {
       ["Cursos (clicks + vistas)", courseViews.length],
       ["Inscripciones", enrollClicks.length],
       ["Visitas al Club", clubVisitCount],
+      ["Clicks en cursos (Club)", clubClicks.length],
       ["Miembros en el Club", clubPeople.length],
       ["Newsletters suscritos", subsCount],
     ]
@@ -312,6 +317,10 @@ function renderDashboard(logs, subsCount = 0) {
     countBy(enrollClicks, (l) => targetLabel(l)),
   );
   renderClubRows(clubPeople);
+  renderRows(
+    "by-club-click",
+    countBy(clubClicks, (l) => `${eventLabel(l.eventType)} - ${targetLabel(l)}`),
+  );
   renderRows(
     "by-page",
     countBy(logs, (l) => l.page || "—"),
