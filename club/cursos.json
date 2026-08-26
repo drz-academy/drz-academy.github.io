@@ -19,7 +19,7 @@
     "hotmart_url": "https://hotmart.com/es/club/drz-academy/products/4736808",
     "certificados_folder": "https://drive.google.com/drive/folders/1LxnTHykCiabylnCg12kciWji7eIf35Ip",
     "pagina_url": "https://drz-academy.github.io/cursos/cuantica-a-pie/",
-    "numero_participantes": 0,
+    "numero_participantes": 8,
     "numero_certificados": 8
   },
   {
@@ -54,17 +54,6 @@
     "pagina_url": "",
     "numero_participantes": 34,
     "numero_certificados": 33
-  },
-  {
-    "id": "mundo_cuantico",
-    "nombre": "Mundo Cuántico",
-    "fecha_inicio": "2025-07-23",
-    "fecha_fin": "2025-09-11",
-    "classroom_url": "https://classroom.google.com/c/Nzg5MTM1ODMyOTI1?cjc=hvcd3ror",
-    "certificados_folder": "https://drive.google.com/drive/folders/1LxnTHykCiabylnCg12kciWji7eIf35Ip",
-    "pagina_url": "",
-    "numero_participantes": 0,
-    "numero_certificados": 0
   },
   {
     "id": "rompecabezas_materia",
@@ -122,6 +111,7 @@
     "inscripcion_url": "https://drz.academy/producto/cambio-climatico/",
     "valor": "314159",
     "numero_participantes": 0,
-    "numero_certificados": 0
+    "numero_certificados": 0,
+    "next_course": true
   }
 ]

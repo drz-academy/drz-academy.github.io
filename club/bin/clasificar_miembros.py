@@ -86,8 +86,13 @@ def cursos_dictados_ordenados(cursos_data=None):
 
 
 def proximo_curso(cursos_data=None):
+    data = cursos_data if cursos_data is not None else load_cursos_catalog()
+    for c in _cursos_unicos(data):
+        if c.get("next_course"):
+            return c
+
     pendientes = [
-        c for c in _cursos_unicos(cursos_data if cursos_data is not None else load_cursos_catalog())
+        c for c in _cursos_unicos(data)
         if as_int(c.get("numero_participantes")) == 0
     ]
     pendientes.sort(key=lambda c: str(c.get("fecha_inicio") or "9999"))

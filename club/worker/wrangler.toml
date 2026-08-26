@@ -16,6 +16,7 @@ SITE_BASE_URL = "https://drz-academy.github.io"
 enabled = true
 
 # Secretos (no commitear):
+#   npx wrangler secret put CLUB_ADMIN_MASTER
 #   npx wrangler secret put CLUB_ADMIN_TOKEN
 #   npx wrangler secret put GMAIL_SMTP_USER
 #   npx wrangler secret put GMAIL_APP_PASSWORD

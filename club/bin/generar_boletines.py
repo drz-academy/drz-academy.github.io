@@ -76,19 +76,28 @@ if os.path.exists(CURSOS_JSON):
     with open(CURSOS_JSON, "r", encoding="utf-8") as f:
         _cursos_data = json.load(f)
     candidatos = []
+    explicit_next = None
     for c in _cursos_data:
-        try:
-            n = int(c.get("numero_participantes", 0) or 0)
-        except (TypeError, ValueError):
-            n = 0
-        if n != 0:
-            continue
-        cid = str(c.get("id") or "")
-        if "permanente" in cid:
-            continue
-        candidatos.append(c)
-    preferidos = [c for c in candidatos if c.get("inscripcion_url") or c.get("valor")]
-    elegido = (preferidos or candidatos or [None])[0]
+        if c.get("next_course"):
+            explicit_next = c
+            break
+
+    if explicit_next:
+        elegido = explicit_next
+    else:
+        for c in _cursos_data:
+            try:
+                n = int(c.get("numero_participantes", 0) or 0)
+            except (TypeError, ValueError):
+                n = 0
+            if n != 0:
+                continue
+            cid = str(c.get("id") or "")
+            if "permanente" in cid:
+                continue
+            candidatos.append(c)
+        preferidos = [c for c in candidatos if c.get("inscripcion_url") or c.get("valor")]
+        elegido = (preferidos or candidatos or [None])[0]
     if elegido:
         PROXIMO_CURSO_ID = elegido.get("id") or ""
         PROXIMO_CURSO_NOMBRE = elegido.get("nombre") or PROXIMO_CURSO_NOMBRE

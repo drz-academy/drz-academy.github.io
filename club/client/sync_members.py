@@ -60,6 +60,7 @@ def load_cursos() -> list[dict]:
             "inscripcion_url": str(curso.get("inscripcion_url") or "").strip(),
             "valor": str(curso.get("valor") or "").strip(),
             "numero_participantes": curso.get("numero_participantes", ""),
+            "next_course": curso.get("next_course", False),
         }
         if item["id"] or item["nombre"]:
             cursos.append(item)
@@ -81,12 +82,19 @@ def load_certificados() -> dict[tuple[str, str], str]:
             doc = re.sub(r"[^0-9]", "", str(row.get("documento") or ""))
             cel = re.sub(r"[^0-9]", "", str(row.get("celular") or ""))
             correo = first_valid_email(row.get("correo") or "")
-            if doc:
-                mapping[(doc, curso_id)] = url
-            if cel:
-                mapping[(cel, curso_id)] = url
-            if correo:
-                mapping[(correo, curso_id)] = url
+            
+            is_hotmart = "-hotmart-" in str(row.get("archivo") or "").lower()
+            
+            if is_hotmart:
+                if correo:
+                    mapping[(correo, curso_id)] = url
+            else:
+                if doc:
+                    mapping[(doc, curso_id)] = url
+                if cel:
+                    mapping[(cel, curso_id)] = url
+                if correo:
+                    mapping[(correo, curso_id)] = url
     return mapping
 
 
@@ -153,6 +161,10 @@ def codigo_cupon(curso_id: str, categoria: str, cupones: dict[str, dict]) -> str
 
 
 def next_course(cursos: list[dict]) -> dict | None:
+    for curso in cursos:
+        if curso.get("next_course"):
+            return curso
+
     for curso in cursos:
         n = curso.get("numero_participantes")
         try:

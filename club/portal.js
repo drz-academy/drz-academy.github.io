@@ -218,14 +218,14 @@ async function renderProfile(profile, categorias) {
     .map((curso) => {
       const links = [];
       if (curso.classroom_url) {
-        links.push(`<a class="chip" href="${curso.classroom_url}" target="_blank" rel="noopener">Classroom</a>`);
+        links.push(`<a class="chip" href="${curso.classroom_url}" target="_blank" rel="noopener" data-track="classroom" data-curso="${curso.nombre || ''}">Classroom</a>`);
       }
       if (curso.hotmart_url) {
-        links.push(`<a class="chip" href="${curso.hotmart_url}" target="_blank" rel="noopener">Hotmart</a>`);
+        links.push(`<a class="chip" href="${curso.hotmart_url}" target="_blank" rel="noopener" data-track="hotmart" data-curso="${curso.nombre || ''}">Hotmart</a>`);
       }
       links.push(
         curso.certificado_url
-          ? `<a class="chip" href="${curso.certificado_url}" target="_blank" rel="noopener">Certificado</a>`
+          ? `<a class="chip" href="${curso.certificado_url}" target="_blank" rel="noopener" data-track="certificado" data-curso="${curso.nombre || ''}">Certificado</a>`
           : `<span class="chip off">Certificado no disponible</span>`,
       );
       return `<article class="course">
@@ -477,3 +477,14 @@ async function boot() {
 }
 
 boot();
+
+document.addEventListener("click", (event) => {
+  const target = event.target.closest("[data-track]");
+  if (!target) return;
+  const trackType = target.dataset.track;
+  if (!trackType) return;
+  trackEvent(`club_click_${trackType}`, {
+    curso: target.dataset.curso || "",
+    href: target.href || ""
+  });
+});
