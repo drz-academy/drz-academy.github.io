@@ -142,11 +142,26 @@ def main() -> int:
         return 0
     if cmd == "unsubscribe":
         if len(sys.argv) < 3:
-            print("Indique email.", file=sys.stderr)
+            print("Indique email(s).", file=sys.stderr)
             return 1
-        result = unsubscribe_subscriber(sys.argv[2])
-        print(json.dumps(result, indent=2, ensure_ascii=False))
-        return 0 if result.get("ok") else 1
+        
+        raw_emails = " ".join(sys.argv[2:])
+        emails = [e.strip() for e in raw_emails.replace(",", " ").split() if e.strip()]
+        
+        all_ok = True
+        results = []
+        for email in emails:
+            result = unsubscribe_subscriber(email)
+            results.append(result)
+            if not result.get("ok"):
+                all_ok = False
+                
+        if len(results) == 1:
+            print(json.dumps(results[0], indent=2, ensure_ascii=False))
+        else:
+            print(json.dumps(results, indent=2, ensure_ascii=False))
+            
+        return 0 if all_ok else 1
     if cmd == "subscribe":
         if len(sys.argv) < 3:
             print("Indique email.", file=sys.stderr)
