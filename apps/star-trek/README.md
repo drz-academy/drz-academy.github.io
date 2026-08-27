@@ -83,7 +83,7 @@ v_{L}(\tau)
 \end{aligned}
 $$
 
-Introduciendo la **rapidez** $\theta = \operatorname{artanh}(v_{L})$, con
+Introduciendo la **rapidez** $\theta = \tanh^{-1}(v_{L})$, con
 $\gamma_{0} = \cosh\theta_{0}$ y $\gamma_{0} v_{L0} = \sinh\theta_{0}$, las tres
 expresiones colapsan: la rapidez crece linealmente con el tiempo propio,
 
@@ -133,7 +133,7 @@ $$
 $$
 \cosh\theta_{1} = 1 + \alpha\Delta x = 1 + 0{,}2065\times 4{,}2 = 1{,}867,
 \qquad
-\theta_{1} = \operatorname{arcosh}(1{,}867) = 1{,}237.
+\theta_{1} = \cosh^{-1}(1{,}867) = 1{,}237.
 $$
 
 **3. Todas las cantidades del reporte**

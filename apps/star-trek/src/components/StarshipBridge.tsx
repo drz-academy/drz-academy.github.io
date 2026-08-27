@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { createPortal } from "react-dom";
 import { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "react";
 import packageJson from "../../package.json";
 import Starfield from "./Starfield";
@@ -45,6 +46,8 @@ const GITHUB_APP_URL =
   "https://github.com/seap-udea/seap-udea.github.io/tree/main/apps/star-trek";
 
 const WHATSNEW_URL = `${GITHUB_APP_URL.replace("/tree/", "/blob/")}/WHATSNEW.md`;
+
+const DAEDALUS_SRC = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/daedalus.png`;
 
 /** Duración en segundos de la reproducción completa del viaje a velocidad ×1. */
 const PLAYBACK_SECONDS = 18;
@@ -225,6 +228,135 @@ function AcademyFooter() {
         </div>
       </div>
     </footer>
+  );
+}
+
+function DaedalusCredit() {
+  return (
+    <>
+      La silueta del título es una nave tipo{" "}
+      <a
+        href="https://en.wikipedia.org/wiki/Project_Daedalus"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Daedalus
+      </a>
+      , el estudio de la British Interplanetary Society (década de 1970) para un
+      viaje de fusión a la estrella de Barnard: esferas de combustible, tobera y
+      carga útil a proa. Otros conceptos clásicos de naves interestelares son
+      los{" "}
+      <a
+        href="https://markbaumann.net/interstellar-ramjets-and-antimatter-drives/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Bussard ramjets
+      </a>{" "}
+      —que recolectarían hidrógeno del medio interestelar— y los motores de
+      fusión. Véase también{" "}
+      <a
+        href="https://www.damninteresting.com/the-daedalus-starship/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        The Daedalus Starship
+      </a>
+      . Imagen: concepto de Daedalus en{" "}
+      <a
+        href="https://en.wikipedia.org/wiki/Project_Daedalus#/media/File:Daedalus_Spaceship_concept.jpg"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Wikimedia Commons
+      </a>
+      .
+    </>
+  );
+}
+
+function DaedalusPortrait() {
+  const [open, setOpen] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  const close = useCallback(() => setOpen(false), []);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") close();
+    };
+    const previousOverflow = document.body.style.overflow;
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    closeRef.current?.focus();
+    const trigger = triggerRef.current;
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = previousOverflow;
+      trigger?.focus();
+    };
+  }, [open, close]);
+
+  return (
+    <>
+      <button
+        ref={triggerRef}
+        type="button"
+        className="title-ship-button"
+        aria-haspopup="dialog"
+        aria-expanded={open}
+        aria-label="Ver la nave Daedalus a tamaño completo"
+        onClick={() => setOpen(true)}
+      >
+        <Image
+          className="title-ship"
+          src={DAEDALUS_SRC}
+          alt=""
+          width={240}
+          height={180}
+          priority
+        />
+      </button>
+      {open
+        ? createPortal(
+            <div
+              className="ship-lightbox"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Nave interestelar tipo Daedalus"
+              onClick={close}
+            >
+              <button
+                ref={closeRef}
+                type="button"
+                className="ship-lightbox-close"
+                aria-label="Cerrar"
+                onClick={close}
+              >
+                ×
+              </button>
+              <figure
+                className="ship-lightbox-figure"
+                onClick={(event) => event.stopPropagation()}
+              >
+                <Image
+                  className="ship-lightbox-image"
+                  src={DAEDALUS_SRC}
+                  alt="Nave interestelar tipo Daedalus"
+                  width={960}
+                  height={720}
+                />
+                <figcaption className="ship-lightbox-caption">
+                  <DaedalusCredit />
+                </figcaption>
+              </figure>
+            </div>,
+            document.body,
+          )
+        : null}
+    </>
   );
 }
 
@@ -528,14 +660,7 @@ export default function StarshipBridge() {
       <div className="bridge-inner">
         <header className="bridge-header">
           <div className="title-grid">
-            <Image
-              className="title-ship"
-              src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/daedalus.png`}
-              alt="Nave interestelar tipo Daedalus"
-              width={240}
-              height={180}
-              priority
-            />
+            <DaedalusPortrait />
             <div className="title-copy">
               <h1>
                 <i>Star trek</i>
@@ -1489,43 +1614,7 @@ function TheoryPanel() {
           .
         </p>
         <p>
-          La silueta del título es una nave tipo{" "}
-          <a
-            href="https://en.wikipedia.org/wiki/Project_Daedalus"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Daedalus
-          </a>
-          , el estudio de la British Interplanetary Society (década de 1970)
-          para un viaje de fusión a la estrella de Barnard: esferas de
-          combustible, tobera y carga útil a proa. Otros conceptos clásicos
-          de naves interestelares son los{" "}
-          <a
-            href="https://markbaumann.net/interstellar-ramjets-and-antimatter-drives/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Bussard ramjets
-          </a>{" "}
-          —que recolectarían hidrógeno del medio interestelar— y los motores
-          de fusión. Véase también{" "}
-          <a
-            href="https://www.damninteresting.com/the-daedalus-starship/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            The Daedalus Starship
-          </a>
-          . Imagen: concepto de Daedalus en{" "}
-          <a
-            href="https://en.wikipedia.org/wiki/Project_Daedalus#/media/File:Daedalus_Spaceship_concept.jpg"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Wikimedia Commons
-          </a>
-          .
+          <DaedalusCredit />
         </p>
       </div>
     </section>
