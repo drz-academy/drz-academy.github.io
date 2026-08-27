@@ -14,7 +14,9 @@ help:
 	@echo "  make start      - Arranca http://$(HOST):$(PORT) (actualiza cursos si hace falta)"
 	@echo "  make stop       - Detiene el servidor en el puerto $(PORT)"
 	@echo "  make stash      - Guarda cambios locales temporalmente (git stash)"
-	@echo "  make update     - Actualiza la Calculadora de Drake desde GitHub"
+	@echo "  make update     - Actualiza todas las aplicaciones desde GitHub"
+	@echo "  make update_drake_calculator - Actualiza solo la Calculadora de Drake"
+	@echo "  make update_star_trek        - Actualiza solo la aplicación Star Trek"
 	@echo ""
 	@echo "  make worker-deploy - Despliega el Worker de analytics en Cloudflare"
 	@echo "  make notify-worker-deploy - Despliega el Worker de notificaciones en Cloudflare"
@@ -79,6 +81,8 @@ build: cursos demos
 	@cd apps/lighting-black-holes && npm ci && npm run build
 	@echo "▶  Building Drake Calculator…"
 	@cd apps/drake-calculator && npm ci && npm run build
+	@echo "▶  Building Star Trek app…"
+	@cd apps/star-trek && npm ci && npm run build
 	@echo "▶  Assembling $(SITE)/…"
 	@rm -rf $(SITE)
 	@mkdir -p $(SITE)/apps
@@ -86,10 +90,11 @@ build: cursos demos
 	@cp -r apps/cloud_academy/out $(SITE)/apps/cloud_academy
 	@cp -r apps/lighting-black-holes/out $(SITE)/apps/lighting-black-holes
 	@cp -r apps/drake-calculator/out $(SITE)/apps/drake-calculator
+	@cp -r apps/star-trek/out $(SITE)/apps/star-trek
 	@echo "✓  Site ready in $(SITE)/"
 
 start:
-	@if [ ! -f $(SITE)/apps/cloud_academy/index.html ] || [ ! -f $(SITE)/apps/lighting-black-holes/index.html ] || [ ! -f $(SITE)/apps/drake-calculator/index.html ]; then $(MAKE) build; fi
+	@if [ ! -f $(SITE)/apps/cloud_academy/index.html ] || [ ! -f $(SITE)/apps/lighting-black-holes/index.html ] || [ ! -f $(SITE)/apps/drake-calculator/index.html ] || [ ! -f $(SITE)/apps/star-trek/index.html ]; then $(MAKE) build; fi
 	@$(MAKE) cursos demos sync-site
 	@echo "Starting server on http://$(HOST):$(PORT)"
 	@cd $(SITE) && nohup python3 -m http.server "$(PORT)" --bind "$(HOST)" >/dev/null 2>&1 &
@@ -100,6 +105,7 @@ start:
 	@echo "  Apps:  http://$(HOST):$(PORT)/apps/cloud_academy/"
 	@echo "         http://$(HOST):$(PORT)/apps/lighting-black-holes/"
 	@echo "         http://$(HOST):$(PORT)/apps/drake-calculator/"
+	@echo "         http://$(HOST):$(PORT)/apps/star-trek/"
 
 stop:
 	@echo "Stopping server on port $(PORT) (best-effort)"
@@ -124,7 +130,9 @@ stash:
 		git stash && git pull --no-rebase && git stash pop || echo "⚠️ Revisa si hubo conflictos al restaurar tus cambios locales."; \
 	fi
 
-update:
+update: update_drake_calculator update_star_trek
+
+update_drake_calculator:
 	@echo "▶  Updating Drake Calculator from GitHub…"
 	@rm -rf apps/drake-calculator
 	@mkdir -p /tmp/seap-temp
@@ -137,6 +145,20 @@ update:
 	@rm -rf $(SITE)/apps/drake-calculator/*
 	@cp -r apps/drake-calculator/out/* $(SITE)/apps/drake-calculator/
 	@echo "✓  Drake Calculator updated and rebuilt."
+
+update_star_trek:
+	@echo "▶  Updating Star Trek app from GitHub…"
+	@rm -rf apps/star-trek
+	@mkdir -p /tmp/seap-temp
+	@curl -sL https://github.com/seap-udea/seap-udea.github.io/archive/main.tar.gz | tar xz -C /tmp/seap-temp
+	@mv /tmp/seap-temp/seap-udea.github.io-main/apps/star-trek apps/
+	@rm -rf /tmp/seap-temp
+	@echo "▶  Building Star Trek app…"
+	@cd apps/star-trek && npm ci && npm run build
+	@mkdir -p $(SITE)/apps/star-trek
+	@rm -rf $(SITE)/apps/star-trek/*
+	@cp -r apps/star-trek/out/* $(SITE)/apps/star-trek/
+	@echo "✓  Star Trek app updated and rebuilt."
 
 worker-deploy:
 	@echo "▶  Deploying analytics worker…"
