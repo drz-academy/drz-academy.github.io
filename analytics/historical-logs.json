@@ -1,5 +1,37 @@
 [
   {
+    "id": "ba849131-f51a-4805-83f5-53e10b6393b5",
+    "timestampServer": "2026-08-28T02:41:13.618Z",
+    "ip": "79.133.41.108",
+    "country": "DE",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 OPR/113.0.0.0",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-28T02:41:13.451Z"
+  },
+  {
+    "id": "9cde814a-6fec-41f3-ba98-92207fbfc7f5",
+    "timestampServer": "2026-08-28T02:39:13.233Z",
+    "ip": "2001:41d0:8:cd2f::",
+    "country": "FR",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 OPR/113.0.0.0",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-28T02:39:13.064Z"
+  },
+  {
     "id": "498dc9ca-af56-4719-aa28-03febe29e347",
     "timestampServer": "2026-08-27T20:45:55.005Z",
     "ip": "115.186.234.1",
