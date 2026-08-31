@@ -53,7 +53,7 @@ const DRAKE_1961_L_MAX_YEARS = 100_000_000;
 const INITIAL_VALUES: DrakeValues = {
   starRate: 1,
   planetFraction: 0.35,
-  habitablePlanets: 3,
+  habitablePlanets: 2,
   lifeFraction: 1,
   intelligenceFraction: 1,
   communicationFraction: 0.15,
@@ -63,7 +63,7 @@ const INITIAL_VALUES: DrakeValues = {
 const INITIAL_RANGES: DrakeRanges = {
   starRate: { min: 1, max: 1 },
   planetFraction: { min: 0.2, max: 0.5 },
-  habitablePlanets: { min: 1, max: 5 },
+  habitablePlanets: { min: 0, max: 2 },
   lifeFraction: { min: 1, max: 1 },
   intelligenceFraction: { min: 1, max: 1 },
   communicationFraction: { min: 0.1, max: 0.2 },
@@ -95,6 +95,17 @@ const SAMPLING_DISTRIBUTION_LABELS: Record<SamplingDistribution, string> = {
 const formatDecimal = (value: number) =>
   new Intl.NumberFormat("es-CO", { maximumFractionDigits: 2 }).format(value);
 
+function isRateModeLifetime(exponent: number) {
+  return exponent <= 0;
+}
+
+function formatLifetime(exponent: number) {
+  if (isRateModeLifetime(exponent)) return "0 años";
+  return `${new Intl.NumberFormat("es-CO", {
+    maximumSignificantDigits: 3,
+  }).format(10 ** exponent)} años`;
+}
+
 const PARAMETERS: ParameterDefinition[] = [
   {
     key: "starRate",
@@ -122,8 +133,8 @@ const PARAMETERS: ParameterDefinition[] = [
     label: "Mundos habitables",
     description: "Planetas potencialmente habitables por sistema planetario.",
     min: 0,
-    max: 10,
-    step: 0.1,
+    max: 2,
+    step: 0.01,
     format: formatDecimal,
   },
   {
@@ -160,14 +171,12 @@ const PARAMETERS: ParameterDefinition[] = [
     key: "lifetimeExponent",
     symbol: "L",
     label: "Tiempo comunicándose",
-    description: "Años durante los cuales una civilización emite señales.",
-    min: 1,
+    description:
+      "Años durante los cuales una civilización emite señales. Con L = 0 se estima cuántas civilizaciones nacen cada milenio.",
+    min: 0,
     max: 8,
     step: 0.01,
-    format: (value) =>
-      `${new Intl.NumberFormat("es-CO", {
-        maximumSignificantDigits: 3,
-      }).format(10 ** value)} años`,
+    format: formatLifetime,
   },
 ];
 
@@ -177,7 +186,7 @@ const DRAKE_HELP_TERMS = [
     symbol: "N",
     name: "Civilizaciones comunicantes",
     description:
-      "Número estimado de civilizaciones en la Vía Láctea cuyas señales podríamos detectar hoy. Es el resultado de multiplicar todos los factores de la ecuación.",
+      "Número estimado de civilizaciones en la Vía Láctea cuyas señales podríamos detectar hoy. Es el resultado de multiplicar todos los factores de la ecuación. Si L = 0, el resultado es cuántas civilizaciones nacen cada milenio.",
   },
   {
     id: "starRate",
@@ -226,7 +235,7 @@ const DRAKE_HELP_TERMS = [
     symbol: "L",
     name: "Tiempo comunicándose",
     description:
-      "Años durante los cuales una civilización mantiene señales detectables. Cuanto más breve sea L, menos civilizaciones activas habrá en un momento dado.",
+      "Años durante los cuales una civilización mantiene señales detectables. Cuanto más breve sea L, menos civilizaciones activas habrá en un momento dado. Si L = 0, se omite este factor y el resultado es cuántas civilizaciones comunicantes nacen cada milenio.",
   },
 ] as const;
 
@@ -572,6 +581,12 @@ function rangesFromExactValues(values: DrakeValues): DrakeRanges {
 
   for (const parameter of PARAMETERS) {
     const exact = values[parameter.key];
+
+    if (parameter.key === "lifetimeExponent" && isRateModeLifetime(exact)) {
+      ranges[parameter.key] = { min: exact, max: exact };
+      continue;
+    }
+
     let min = clampToParameter(exact * 0.95, parameter);
     let max = clampToParameter(exact * 1.05, parameter);
 
@@ -679,18 +694,38 @@ function sampleDrakeValues(
 }
 
 function computeLifetimeYears(values: DrakeValues) {
+  if (isRateModeLifetime(values.lifetimeExponent)) return 0;
   return 10 ** values.lifetimeExponent;
 }
 
-function computeCivilizationEstimate(values: DrakeValues) {
+function computeCivilizationRate(values: DrakeValues) {
   return (
     values.starRate *
     values.planetFraction *
     values.habitablePlanets *
     values.lifeFraction *
     values.intelligenceFraction *
-    values.communicationFraction *
-    computeLifetimeYears(values)
+    values.communicationFraction
+  );
+}
+
+function computeCivilizationEstimate(values: DrakeValues) {
+  const rate = computeCivilizationRate(values);
+  const lifetimeYears = computeLifetimeYears(values);
+  return lifetimeYears <= 0 ? rate : rate * lifetimeYears;
+}
+
+function isCivilizationRateMode(
+  inputMode: InputMode,
+  values: DrakeValues,
+  ranges: DrakeRanges,
+) {
+  if (inputMode === "exact") {
+    return isRateModeLifetime(values.lifetimeExponent);
+  }
+  return (
+    isRateModeLifetime(ranges.lifetimeExponent.min) &&
+    isRateModeLifetime(ranges.lifetimeExponent.max)
   );
 }
 
@@ -912,14 +947,55 @@ function mulberry32(seed: number) {
   };
 }
 
+const YEARS_PER_MILLENNIUM = 1000;
+
 function roundCivilizations(value: number) {
   return Math.max(0, Math.round(value));
 }
 
-function formatCivilizations(value: number) {
+function ratePerMillennium(perYear: number) {
+  return perYear * YEARS_PER_MILLENNIUM;
+}
+
+function rateToMapCount(perYear: number) {
+  const perMillennium = ratePerMillennium(perYear);
+  if (!Number.isFinite(perMillennium) || perMillennium <= 0) return 0;
+  if (perMillennium > 0.5) return Math.round(perMillennium);
+  return 0;
+}
+
+function estimateToMapCount(value: number, asRate: boolean) {
+  return asRate ? rateToMapCount(value) : roundCivilizations(value);
+}
+
+function formatCivilizationRate(perYear: number) {
+  const perMillennium = ratePerMillennium(perYear);
+  if (!Number.isFinite(perMillennium) || perMillennium <= 0) return "0";
+  if (perMillennium > 0.5) {
+    return new Intl.NumberFormat("es-CO", {
+      maximumFractionDigits: 0,
+    }).format(Math.round(perMillennium));
+  }
+  if (perMillennium >= 0.01) return formatDecimal(perMillennium);
+  return new Intl.NumberFormat("es-CO", {
+    maximumSignificantDigits: 3,
+  }).format(perMillennium);
+}
+
+function formatCivilizations(value: number, asRate = false) {
+  if (asRate) return formatCivilizationRate(value);
   return new Intl.NumberFormat("es-CO", {
     maximumFractionDigits: 0,
   }).format(roundCivilizations(value));
+}
+
+function civilizationUnitLabel(perYear: number, asRate: boolean) {
+  if (asRate) {
+    const perMillennium = ratePerMillennium(perYear);
+    const display = perMillennium > 0.5 ? Math.round(perMillennium) : perMillennium;
+    return display === 1 ? "civilización / milenio" : "civilizaciones / milenio";
+  }
+  return perYear === 1 ? "civilización" : "civilizaciones";
 }
 
 function percentile(sorted: number[], probability: number) {
@@ -947,6 +1023,7 @@ function estimateDistributionAnalysis(
   distributions: ParameterDistributions,
   radiosphereYears: number,
   spatialMode: DistributionMode,
+  asRate = false,
 ): DistributionAnalysis {
   const civilizationSamples: number[] = [];
 
@@ -960,9 +1037,9 @@ function estimateDistributionAnalysis(
   }
 
   const civilization = summarizeSamples(civilizationSamples);
-  const minN = roundCivilizations(civilization.lower95);
-  const maxN = roundCivilizations(civilization.upper95);
-  const meanN = roundCivilizations(civilization.mean);
+  const minN = estimateToMapCount(civilization.lower95, asRate);
+  const maxN = estimateToMapCount(civilization.upper95, asRate);
+  const meanN = estimateToMapCount(civilization.mean, asRate);
 
   const statsAtMinN = computeDerivedStats(
     minN,
@@ -1520,16 +1597,58 @@ function AcademyFooter({ variant }: { variant: "panel" | "site-end" }) {
   );
 }
 
+function DrakeEquation({ rateMode = false }: { rateMode?: boolean }) {
+  if (rateMode) {
+    return (
+      <>
+        <i>N</i>/<i>L</i> = <i>R</i>
+        <sub>★</sub> · <i>f</i>
+        <sub>p</sub> · <i>n</i>
+        <sub>e</sub> · <i>f</i>
+        <sub>l</sub> · <i>f</i>
+        <sub>i</sub> · <i>f</i>
+        <sub>c</sub>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <i>N</i> = <i>R</i>
+      <sub>★</sub> · <i>f</i>
+      <sub>p</sub> · <i>n</i>
+      <sub>e</sub> · <i>f</i>
+      <sub>l</sub> · <i>f</i>
+      <sub>i</sub> · <i>f</i>
+      <sub>c</sub> · <i>L</i>
+    </>
+  );
+}
+
 function MapAttributionNotes({
   roundedEstimate,
   civilizationEstimate,
+  isRateMode,
 }: {
   roundedEstimate: number;
   civilizationEstimate: number;
+  isRateMode: boolean;
 }) {
   return (
     <>
-      {roundedEstimate > MAX_VISIBLE_CIVILIZATIONS ? (
+      {isRateMode && roundedEstimate > MAX_VISIBLE_CIVILIZATIONS ? (
+        <p>
+          Se muestran {MAX_VISIBLE_CIVILIZATIONS.toLocaleString("es-CO")}{" "}
+          puntos representativos de un total estimado de{" "}
+          {formatCivilizations(civilizationEstimate, true)} civilizaciones /
+          milenio.
+        </p>
+      ) : isRateMode ? (
+        <p>
+          Cada punto turquesa representa una civilización que nacería en un
+          milenio, según la tasa estimada.
+        </p>
+      ) : roundedEstimate > MAX_VISIBLE_CIVILIZATIONS ? (
         <p>
           Se muestran {MAX_VISIBLE_CIVILIZATIONS.toLocaleString("es-CO")}{" "}
           puntos representativos de un total estimado de{" "}
@@ -1560,6 +1679,7 @@ type EstimateHeaderProps = {
   distributionAnalysis: DistributionAnalysis | null;
   civilizationEstimate: number;
   estimateLabel: string;
+  isRateMode: boolean;
   onOpenConfidenceIntervalHelp: () => void;
 };
 
@@ -1570,6 +1690,7 @@ function EstimateHeader({
   distributionAnalysis,
   civilizationEstimate,
   estimateLabel,
+  isRateMode,
   onOpenConfidenceIntervalHelp,
 }: EstimateHeaderProps) {
   return (
@@ -1581,16 +1702,18 @@ function EstimateHeader({
       <h2 id={variant === "desktop" ? "estimate-title" : undefined}>
         <strong>
           {inputMode === "range" && civilizationBounds
-            ? `${formatCivilizations(civilizationBounds.min)} – ${formatCivilizations(civilizationBounds.max)}`
+            ? `${formatCivilizations(civilizationBounds.min, isRateMode)} – ${formatCivilizations(civilizationBounds.max, isRateMode)}`
             : inputMode === "distribution" && distributionAnalysis
-              ? formatCivilizations(distributionAnalysis.civilization.mean)
-              : formatCivilizations(civilizationEstimate)}
+              ? formatCivilizations(distributionAnalysis.civilization.mean, isRateMode)
+              : formatCivilizations(civilizationEstimate, isRateMode)}
         </strong>{" "}
         {estimateLabel}
       </h2>
       <span>
         {inputMode === "range"
-          ? "rango posible en la galaxia; el mapa usa una muestra aleatoria uniforme"
+          ? isRateMode
+            ? "rango posible de civilizaciones por milenio; el mapa usa una muestra aleatoria uniforme"
+            : "rango posible en la galaxia; el mapa usa una muestra aleatoria uniforme"
           : inputMode === "distribution" && distributionAnalysis
             ? (
                 <>
@@ -1600,17 +1723,23 @@ function EstimateHeader({
                   :{" "}
                   {formatCivilizations(
                     distributionAnalysis.civilization.lower95,
+                    isRateMode,
                   )}{" "}
                   –{" "}
                   {formatCivilizations(
                     distributionAnalysis.civilization.upper95,
+                    isRateMode,
                   )}
                   ; el mapa muestra una muestra aleatoria
                 </>
               )
             : inputMode === "distribution"
-              ? "muestra aleatoria según las distribuciones elegidas"
-              : "en nuestra galaxia, según tus supuestos"}
+              ? isRateMode
+                ? "tasa de aparición según las distribuciones elegidas; el mapa sitúa una muestra"
+                : "muestra aleatoria según las distribuciones elegidas"
+              : isRateMode
+                ? "civilizaciones que nacen cada milenio, según tus supuestos"
+                : "en nuestra galaxia, según tus supuestos"}
       </span>
     </header>
   );
@@ -1620,45 +1749,50 @@ function MapSummary({
   inputMode,
   civilizationEstimate,
   distributionAnalysis,
+  isRateMode,
   onOpenConfidenceIntervalHelp,
 }: {
   inputMode: InputMode;
   civilizationEstimate: number;
   distributionAnalysis: DistributionAnalysis | null;
+  isRateMode: boolean;
   onOpenConfidenceIntervalHelp: () => void;
 }) {
   if (inputMode === "exact") {
     return null;
   }
 
+  const unit = civilizationUnitLabel(civilizationEstimate, isRateMode);
+
   return (
     <div className="map-summary">
       {inputMode === "range" && (
         <p>
           Muestra actual:{" "}
-          {formatCivilizations(civilizationEstimate)} civilizaciones con
+          {formatCivilizations(civilizationEstimate, isRateMode)} {unit} con
           parámetros aleatorios uniformes.
         </p>
       )}
       {inputMode === "distribution" && distributionAnalysis && (
         <p>
           Promedio:{" "}
-          {formatCivilizations(distributionAnalysis.civilization.mean)}{" "}
-          civilizaciones (
+          {formatCivilizations(distributionAnalysis.civilization.mean, isRateMode)}{" "}
+          {civilizationUnitLabel(distributionAnalysis.civilization.mean, isRateMode)}{" "}
+          (
           <ConfidenceIntervalLabel
             onOpenHelp={onOpenConfidenceIntervalHelp}
           />
           :{" "}
-          {formatCivilizations(distributionAnalysis.civilization.lower95)} –{" "}
-          {formatCivilizations(distributionAnalysis.civilization.upper95)}
+          {formatCivilizations(distributionAnalysis.civilization.lower95, isRateMode)} –{" "}
+          {formatCivilizations(distributionAnalysis.civilization.upper95, isRateMode)}
           ). Muestra del mapa:{" "}
-          {formatCivilizations(civilizationEstimate)} civilizaciones.
+          {formatCivilizations(civilizationEstimate, isRateMode)} {unit}.
         </p>
       )}
       {inputMode === "distribution" && !distributionAnalysis && (
         <p>
           Muestra actual:{" "}
-          {formatCivilizations(civilizationEstimate)} civilizaciones con
+          {formatCivilizations(civilizationEstimate, isRateMode)} {unit} con
           parámetros generados según las distribuciones elegidas.
         </p>
       )}
@@ -1898,13 +2032,15 @@ function DrakeCalculatorView({
     [activeValues],
   );
 
+  const isRateMode = isCivilizationRateMode(inputMode, values, ranges);
+
   const civilizationBounds = useMemo(() => {
     if (inputMode !== "range") return null;
     const minValues = valuesFromBounds(ranges, "min");
     const maxValues = valuesFromBounds(ranges, "max");
     return {
-      min: roundCivilizations(computeCivilizationEstimate(minValues)),
-      max: roundCivilizations(computeCivilizationEstimate(maxValues)),
+      min: computeCivilizationEstimate(minValues),
+      max: computeCivilizationEstimate(maxValues),
     };
   }, [inputMode, ranges]);
 
@@ -1915,10 +2051,11 @@ function DrakeCalculatorView({
       parameterDistributions,
       radiosphereYears,
       distributionMode,
+      isRateMode,
     );
-  }, [inputMode, ranges, parameterDistributions, radiosphereYears, distributionMode]);
+  }, [inputMode, ranges, parameterDistributions, radiosphereYears, distributionMode, isRateMode]);
 
-  const roundedEstimate = roundCivilizations(civilizationEstimate);
+  const roundedEstimate = estimateToMapCount(civilizationEstimate, isRateMode);
   const visibleCount = Math.min(roundedEstimate, MAX_VISIBLE_CIVILIZATIONS);
 
   const civilizationPositions = useMemo(
@@ -1969,14 +2106,14 @@ function DrakeCalculatorView({
     if (inputMode === "exact" || !civilizationBounds) return null;
     return {
       min: computeDerivedStats(
-        civilizationBounds.min,
+        estimateToMapCount(civilizationBounds.min, isRateMode),
         radiosphereYears,
         [],
         distributionMode,
         distributionSeed + 1,
       ),
       max: computeDerivedStats(
-        civilizationBounds.max,
+        estimateToMapCount(civilizationBounds.max, isRateMode),
         radiosphereYears,
         [],
         distributionMode,
@@ -1986,6 +2123,7 @@ function DrakeCalculatorView({
   }, [
     inputMode,
     civilizationBounds,
+    isRateMode,
     radiosphereYears,
     distributionMode,
     distributionSeed,
@@ -2063,10 +2201,18 @@ function DrakeCalculatorView({
     setRadiosphereInput(String(parsed));
   };
 
-  const estimateLabel =
-    (inputMode === "distribution" && distributionAnalysis
-      ? roundCivilizations(distributionAnalysis.civilization.mean)
-      : roundedEstimate) === 1
+  const displayedEstimate =
+    inputMode === "distribution" && distributionAnalysis
+      ? distributionAnalysis.civilization.mean
+      : inputMode === "range" && civilizationBounds
+        ? civilizationBounds.max
+        : civilizationEstimate;
+  const estimateCountForLabel = isRateMode
+    ? displayedEstimate
+    : roundCivilizations(displayedEstimate);
+  const estimateLabel = isRateMode
+    ? civilizationUnitLabel(estimateCountForLabel, true)
+    : estimateCountForLabel === 1
       ? "civilización podría comunicarse"
       : "civilizaciones podrían comunicarse";
 
@@ -2096,9 +2242,7 @@ function DrakeCalculatorView({
         </header>
 
         <div className="equation" aria-label="Ecuación de Drake">
-          <i>N</i> = <i>R</i><sub>★</sub> · <i>f</i><sub>p</sub> ·{" "}
-          <i>n</i><sub>e</sub> · <i>f</i><sub>l</sub> · <i>f</i>
-          <sub>i</sub> · <i>f</i><sub>c</sub> · <i>L</i>
+          <DrakeEquation rateMode={isRateMode} />
         </div>
 
         <fieldset className="input-mode-selector" aria-label="Entrada de parámetros">
@@ -2319,6 +2463,7 @@ function DrakeCalculatorView({
           distributionAnalysis={distributionAnalysis}
           civilizationEstimate={civilizationEstimate}
           estimateLabel={estimateLabel}
+          isRateMode={isRateMode}
           onOpenConfidenceIntervalHelp={openConfidenceIntervalHelp}
         />
 
@@ -2329,9 +2474,16 @@ function DrakeCalculatorView({
               className="galaxy-map"
               viewBox="0 0 1000 1000"
               role="img"
-              aria-label={`Mapa estimado de ${formatCivilizations(
-                civilizationEstimate,
-              )} civilizaciones en la Vía Láctea`}
+              aria-label={
+                isRateMode
+                  ? `Mapa de ${formatCivilizations(
+                      civilizationEstimate,
+                      true,
+                    )} civilizaciones que nacerían por milenio en la Vía Láctea`
+                  : `Mapa estimado de ${formatCivilizations(
+                      civilizationEstimate,
+                    )} civilizaciones en la Vía Láctea`
+              }
             >
             <defs>
               <clipPath id="galaxy-clip">
@@ -2490,17 +2642,20 @@ function DrakeCalculatorView({
               distributionAnalysis={distributionAnalysis}
               civilizationEstimate={civilizationEstimate}
               estimateLabel={estimateLabel}
+              isRateMode={isRateMode}
               onOpenConfidenceIntervalHelp={openConfidenceIntervalHelp}
             />
             <MapSummary
               inputMode={inputMode}
               civilizationEstimate={civilizationEstimate}
               distributionAnalysis={distributionAnalysis}
+              isRateMode={isRateMode}
               onOpenConfidenceIntervalHelp={openConfidenceIntervalHelp}
             />
             <MapAttributionNotes
               roundedEstimate={roundedEstimate}
               civilizationEstimate={civilizationEstimate}
+              isRateMode={isRateMode}
             />
           </div>
 
@@ -2521,7 +2676,9 @@ function DrakeCalculatorView({
                         ? "Rangos estimados a partir de los límites mínimo y máximo de cada parámetro."
                         : inputMode === "distribution"
                           ? "Promedio e intervalo del 95 % estimados por simulación Monte Carlo."
-                          : "Estimaciones según N y la distribución espacial del mapa (disco, ZHG o brazos)."}
+                          : isRateMode
+                            ? "Estimaciones según las civilizaciones que nacerían en un milenio y la distribución espacial del mapa (disco, ZHG o brazos)."
+                            : "Estimaciones según N y la distribución espacial del mapa (disco, ZHG o brazos)."}
                     </p>
 
                     <dl className="stats-list">
@@ -2787,10 +2944,15 @@ function DrakeCalculatorView({
                       en la galaxia:
                     </p>
                     <p className="help-equation" aria-label="Ecuación de Drake">
-                      <i>N</i> = <i>R</i><sub>★</sub> · <i>f</i><sub>p</sub> ·{" "}
-                      <i>n</i><sub>e</sub> · <i>f</i><sub>l</sub> · <i>f</i>
-                      <sub>i</sub> · <i>f</i><sub>c</sub> · <i>L</i>
+                      <DrakeEquation rateMode={isRateMode} />
                     </p>
+                    {isRateMode && (
+                      <p className="side-index-intro">
+                        Con <i>L</i> = 0 se omite la duración de las señales y
+                        el resultado es cuántas civilizaciones comunicantes
+                        nacen cada milenio.
+                      </p>
+                    )}
 
                     <div className="help-list">
                       {DRAKE_HELP_TERMS.map((term) => {
@@ -2931,11 +3093,13 @@ function DrakeCalculatorView({
             inputMode={inputMode}
             civilizationEstimate={civilizationEstimate}
             distributionAnalysis={distributionAnalysis}
+            isRateMode={isRateMode}
             onOpenConfidenceIntervalHelp={openConfidenceIntervalHelp}
           />
           <MapAttributionNotes
             roundedEstimate={roundedEstimate}
             civilizationEstimate={civilizationEstimate}
+            isRateMode={isRateMode}
           />
         </div>
       </section>

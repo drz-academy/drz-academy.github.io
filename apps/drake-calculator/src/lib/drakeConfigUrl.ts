@@ -41,13 +41,13 @@ type ParameterSpec = {
 const PARAMETER_SPECS: ParameterSpec[] = [
   { key: "starRate", min: 0, max: 10, step: 0.1 },
   { key: "planetFraction", min: 0, max: 1, step: 0.01 },
-  { key: "habitablePlanets", min: 0, max: 10, step: 0.1 },
+  { key: "habitablePlanets", min: 0, max: 2, step: 0.01 },
   { key: "lifeFraction", min: 0, max: 1, step: 0.01 },
   { key: "intelligenceFraction", min: 0, max: 1, step: 0.01 },
   { key: "communicationFraction", min: 0, max: 1, step: 0.01 },
   {
     key: "lifetimeExponent",
-    min: 1,
+    min: 0,
     max: 8,
     step: 0.01,
     useLifetimeYears: true,
@@ -101,10 +101,15 @@ function parseBoolean(raw: string | null) {
 
 function lifetimeYearsToExponent(years: number, spec: ParameterSpec) {
   if (years <= 0) return spec.min;
-  return clampParameter(Math.log10(years), spec);
+  const exponent = Math.log10(years);
+  if (exponent <= spec.min) {
+    return clampParameter(spec.step, spec);
+  }
+  return clampParameter(exponent, spec);
 }
 
 function lifetimeExponentToYears(exponent: number) {
+  if (exponent <= 0) return 0;
   return 10 ** exponent;
 }
 
@@ -161,6 +166,9 @@ function readStoredValue(
         : clampParameter(maxRaw, spec);
 
   if (min > max) [min, max] = [max, min];
+  if (spec.useLifetimeYears && min <= spec.min && max <= spec.min) {
+    return { min: spec.min, max: spec.min };
+  }
   if (min === max && max < spec.max) {
     max = clampParameter(max + spec.step, spec);
   } else if (min === max && min > spec.min) {
