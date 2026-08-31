@@ -8,8 +8,15 @@
  * POST /reset               { token, password }
  * GET  /me                  Authorization: Bearer <session>
  * POST /logout              Authorization: Bearer <session>
+ * GET  /forms/status        Authorization: Bearer <session>
+ * POST /forms/submit        Authorization: Bearer <session>
+ * GET  /forms/catalog       lista pública de cursos (id, nombre)
+ * GET  /forms/export-auth   Authorization: Bearer CLUB_ADMIN_MASTER
+ * GET  /forms/export        CSV; Authorization: Bearer CLUB_ADMIN_MASTER o CLUB_ADMIN_TOKEN
  * POST /admin/sync          Authorization: Bearer CLUB_ADMIN_TOKEN
+ * GET  /admin/forms         Authorization: Bearer CLUB_ADMIN_TOKEN
  * POST /admin/reset-pass    Authorization: Bearer CLUB_ADMIN_TOKEN
+ * POST /admin/reset-forms   Authorization: Bearer CLUB_ADMIN_TOKEN
  * GET  /health
  */
 
@@ -207,6 +214,187 @@ function publicProfile(record) {
   };
 }
 
+const MAX_ANSWER_LEN = 4000;
+const EVAL_FORM_ID = "evaluacion-curso";
+
+function sanitizeId(raw) {
+  const value = String(raw || "")
+    .trim()
+    .toLowerCase();
+  if (!/^[a-z0-9][a-z0-9_-]{0,63}$/.test(value)) return "";
+  return value;
+}
+
+function formResponseKey(formId, cursoId, memberId) {
+  return `form:${formId}:${cursoId}:${memberId}`;
+}
+
+async function loadCatalog(env) {
+  const raw = await env.DRZ_CLUB.get("catalog:cursos");
+  if (!raw) return [];
+  try {
+    const data = JSON.parse(raw);
+    return Array.isArray(data) ? data : [];
+  } catch {
+    return [];
+  }
+}
+
+async function loadFormSchema(env, formId) {
+  const raw = await env.DRZ_CLUB.get(`form-schema:${formId}`);
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+
+function courseRequiresEvaluation(curso, catalogById) {
+  const meta = catalogById.get(String(curso.id || ""));
+  if (meta && typeof meta.evaluacion === "boolean") return meta.evaluacion;
+  return Boolean(curso.evaluacion);
+}
+
+function findMemberCourse(record, cursoId) {
+  return (record.cursos || []).find((curso) => String(curso.id || "") === cursoId) || null;
+}
+
+async function clientProfile(env, memberId, record) {
+  const catalog = await loadCatalog(env);
+  const catalogById = new Map(catalog.map((item) => [String(item.id || ""), item]));
+  const cursos = Array.isArray(record.cursos) ? record.cursos : [];
+  const enriched = await Promise.all(
+    cursos.map(async (curso) => {
+      const evaluacion = courseRequiresEvaluation(curso, catalogById);
+      const certUrl = String(curso.certificado_url || "");
+      let evaluacion_completa = !evaluacion;
+      if (evaluacion) {
+        const saved = await env.DRZ_CLUB.get(formResponseKey(EVAL_FORM_ID, String(curso.id || ""), memberId));
+        evaluacion_completa = Boolean(saved);
+      }
+      return {
+        id: curso.id || "",
+        nombre: curso.nombre || "",
+        fecha_inicio: curso.fecha_inicio || "",
+        fecha_fin: curso.fecha_fin || "",
+        classroom_url: curso.classroom_url || "",
+        hotmart_url: curso.hotmart_url || "",
+        pagina_url: curso.pagina_url || "",
+        evaluacion,
+        evaluacion_completa,
+        certificado_disponible: Boolean(certUrl),
+        certificado_url: evaluacion && !evaluacion_completa ? "" : certUrl,
+      };
+    }),
+  );
+  return publicProfile({ ...record, cursos: enriched });
+}
+
+function formQuestions(schema) {
+  if (Array.isArray(schema?.secciones) && schema.secciones.length) {
+    const out = [];
+    for (const section of schema.secciones) {
+      if (Array.isArray(section?.preguntas)) out.push(...section.preguntas);
+    }
+    return out;
+  }
+  return Array.isArray(schema?.preguntas) ? schema.preguntas : [];
+}
+
+function isRequired(question) {
+  return question?.obligatoria !== false;
+}
+
+function offeredCourses(catalog) {
+  return (catalog || [])
+    .filter((curso) => curso?.id && curso?.nombre && !curso.next_course)
+    .map((curso) => ({ id: String(curso.id), nombre: String(curso.nombre) }));
+}
+
+function optionValues(question) {
+  return (question.opciones || []).map((opt) => {
+    if (opt && typeof opt === "object") return String(opt.value ?? opt.id ?? opt.nombre ?? "");
+    return String(opt);
+  }).filter(Boolean);
+}
+
+function validateAnswers(schema, answers, catalogById) {
+  if (!answers || typeof answers !== "object" || Array.isArray(answers)) return "invalid_answers";
+  const questions = formQuestions(schema);
+  if (!questions.length) return "empty_schema";
+  for (const question of questions) {
+    const id = String(question.id || "").trim();
+    if (!id) continue;
+    const tipo = String(question.tipo || "").trim();
+    const required = isRequired(question);
+    const val = answers[id];
+
+    if (tipo === "opciones" || tipo === "seleccion_multiple") {
+      if (!Array.isArray(val) || !val.length) {
+        if (required) return `missing:${id}`;
+        continue;
+      }
+      const allowed = new Set(optionValues(question));
+      for (const item of val) {
+        if (!allowed.has(String(item))) return `invalid:${id}`;
+      }
+      continue;
+    }
+
+    if (val === undefined || val === null || val === "") {
+      if (required) return `missing:${id}`;
+      continue;
+    }
+
+    if (tipo === "puntaje" || tipo === "escala_scroll") {
+      const min = Number.isFinite(Number(question.min)) ? Number(question.min) : 1;
+      const max = Number.isFinite(Number(question.max)) ? Number(question.max) : 5;
+      const step = tipo === "escala_scroll" && Number.isFinite(Number(question.step)) && Number(question.step) > 0
+        ? Number(question.step)
+        : 1;
+      const n = Number(val);
+      if (!Number.isFinite(n) || n < min || n > max) return `invalid:${id}`;
+      const ticks = (n - min) / step;
+      if (Math.abs(ticks - Math.round(ticks)) > 1e-6) return `invalid:${id}`;
+      if (tipo === "puntaje" && !Number.isInteger(n)) return `invalid:${id}`;
+    } else if (tipo === "radio" || tipo === "seleccion_unica" || tipo === "lista_desplegable") {
+      let allowed;
+      if (question.fuente === "cursos") {
+        allowed = [...(catalogById || new Map()).keys()];
+      } else {
+        allowed = optionValues(question);
+      }
+      if (!allowed.includes(String(val))) return `invalid:${id}`;
+    } else {
+      if (typeof val !== "string" || !String(val).trim()) return `missing:${id}`;
+      if (String(val).length > MAX_ANSWER_LEN) return `invalid:${id}`;
+    }
+  }
+  return "";
+}
+
+function pickAnswers(schema, answers) {
+  const out = {};
+  for (const question of formQuestions(schema)) {
+    const id = String(question.id || "").trim();
+    if (!id) continue;
+    const tipo = String(question.tipo || "texto").trim();
+    const val = answers?.[id];
+    if (tipo === "opciones" || tipo === "seleccion_multiple") {
+      if (!Array.isArray(val) || !val.length) continue;
+      out[id] = val.map((item) => String(item));
+    } else if (tipo === "puntaje" || tipo === "escala_scroll") {
+      if (val === undefined || val === null || val === "") continue;
+      out[id] = Number(val);
+    } else {
+      if (typeof val !== "string" || !String(val).trim()) continue;
+      out[id] = String(val).trim().slice(0, MAX_ANSWER_LEN);
+    }
+  }
+  return out;
+}
+
 async function loadProfile(env, memberId, profilesHint) {
   if (!memberId) return null;
   const profiles = profilesHint || (await readIndexes(env)).profiles;
@@ -338,7 +526,7 @@ async function handleRegister(request, env) {
   const masterPassword = String(env.CLUB_ADMIN_MASTER || "").trim();
   if (masterPassword && password === masterPassword) {
     const token = await createSession(env, found.memberId);
-    return json(request, { ok: true, token, profile: publicProfile(found.record) });
+    return json(request, { ok: true, token, profile: await clientProfile(env, found.memberId, found.record) });
   }
 
   if (err) return json(request, { ok: false, error: "weak_password", message: err }, 400);
@@ -355,7 +543,7 @@ async function handleRegister(request, env) {
     JSON.stringify({ salt, hash, created: Date.now() }),
   );
   const token = await createSession(env, found.memberId);
-  return json(request, { ok: true, token, profile: publicProfile(found.record) });
+  return json(request, { ok: true, token, profile: await clientProfile(env, found.memberId, found.record) });
 }
 
 async function handleLogin(request, env) {
@@ -374,7 +562,7 @@ async function handleLogin(request, env) {
   const masterPassword = String(env.CLUB_ADMIN_MASTER || "").trim();
   if (found && masterPassword && password === masterPassword) {
     const token = await createSession(env, found.memberId);
-    return json(request, { ok: true, token, profile: publicProfile(found.record) });
+    return json(request, { ok: true, token, profile: await clientProfile(env, found.memberId, found.record) });
   }
 
   const auth = found ? await getAuth(env, found.memberId) : null;
@@ -386,7 +574,7 @@ async function handleLogin(request, env) {
     return json(request, { ok: false, error: "invalid_credentials" }, 401);
   }
   const token = await createSession(env, found.memberId);
-  return json(request, { ok: true, token, profile: publicProfile(found.record) });
+  return json(request, { ok: true, token, profile: await clientProfile(env, found.memberId, found.record) });
 }
 
 async function handleForgot(request, env) {
@@ -446,7 +634,7 @@ async function handleReset(request, env) {
   await env.DRZ_CLUB.put(`auth:${memberId}`, JSON.stringify({ salt, hash, created: Date.now(), reset: Date.now() }));
   await env.DRZ_CLUB.delete(`reset:${token}`);
   const session = await createSession(env, memberId);
-  return json(request, { ok: true, token: session, profile: publicProfile(found.record) });
+  return json(request, { ok: true, token: session, profile: await clientProfile(env, found.memberId, found.record) });
 }
 
 async function handleMe(request, env) {
@@ -454,13 +642,234 @@ async function handleMe(request, env) {
   if (!session) return json(request, { ok: false, error: "unauthorized" }, 401);
   const found = await loadProfile(env, session.memberId);
   if (!found) return json(request, { ok: false, error: "unauthorized" }, 401);
-  return json(request, { ok: true, profile: publicProfile(found.record) });
+  return json(request, { ok: true, profile: await clientProfile(env, found.memberId, found.record) });
 }
 
 async function handleLogout(request, env) {
   const session = await readSession(env, request);
   if (session) await env.DRZ_CLUB.delete(`session:${session.token}`);
   return json(request, { ok: true });
+}
+
+async function handleFormStatus(request, env) {
+  const session = await readSession(env, request);
+  if (!session) return json(request, { ok: false, error: "unauthorized" }, 401);
+  const found = await loadProfile(env, session.memberId);
+  if (!found) return json(request, { ok: false, error: "unauthorized" }, 401);
+
+  const url = new URL(request.url);
+  const formId = sanitizeId(url.searchParams.get("form"));
+  const cursoId = sanitizeId(url.searchParams.get("curso"));
+  if (!formId) return json(request, { ok: false, error: "invalid_input" }, 400);
+
+  const schema = await loadFormSchema(env, formId);
+  const catalog = await loadCatalog(env);
+  const cursos = offeredCourses(catalog);
+  const requiresCourse = schema?.requiere_curso !== false;
+
+  const course = cursoId ? findMemberCourse(found.record, cursoId) : null;
+  if (requiresCourse && cursoId && !course) {
+    return json(request, {
+      ok: true,
+      enrolled: false,
+      completed: false,
+      curso_nombre: "",
+      certificado_url: "",
+      nombre: found.record.nombre || "",
+      cursos,
+    });
+  }
+
+  const savedRaw = cursoId ? await env.DRZ_CLUB.get(formResponseKey(formId, cursoId, session.memberId)) : null;
+  const completed = Boolean(savedRaw);
+  const certUrl = String(course?.certificado_url || "");
+  const reveal = completed && schema?.revela_certificado !== false;
+  return json(request, {
+    ok: true,
+    enrolled: true,
+    completed,
+    curso_nombre: course?.nombre || "",
+    certificado_disponible: Boolean(certUrl),
+    certificado_url: reveal ? certUrl : "",
+    nombre: found.record.nombre || "",
+    cursos,
+  });
+}
+
+async function handleFormSubmit(request, env) {
+  if (!(await rateLimit(request, "forms", 30, 3600))) {
+    return json(request, { ok: false, error: "too_many_requests" }, 429);
+  }
+  const session = await readSession(env, request);
+  if (!session) return json(request, { ok: false, error: "unauthorized" }, 401);
+  const found = await loadProfile(env, session.memberId);
+  if (!found) return json(request, { ok: false, error: "unauthorized" }, 401);
+
+  const body = await readJson(request);
+  const formId = sanitizeId(body?.formId);
+  let cursoId = sanitizeId(body?.cursoId) || sanitizeId(body?.answers?.curso);
+  if (!formId) return json(request, { ok: false, error: "invalid_input" }, 400);
+
+  const schema = await loadFormSchema(env, formId);
+  if (!schema) return json(request, { ok: false, error: "schema_missing" }, 503);
+  const catalog = await loadCatalog(env);
+  const catalogById = new Map(catalog.map((item) => [String(item.id || ""), item]));
+
+  if (schema.requiere_curso !== false && !cursoId) {
+    return json(request, { ok: false, error: "invalid_input" }, 400);
+  }
+  const course = cursoId ? findMemberCourse(found.record, cursoId) : null;
+  if (schema.requiere_curso !== false && !course) {
+    return json(request, { ok: false, error: "not_enrolled" }, 403);
+  }
+
+  const existing = await env.DRZ_CLUB.get(formResponseKey(formId, cursoId, session.memberId));
+  const certUrl = schema.revela_certificado !== false ? String(course?.certificado_url || "") : "";
+  if (existing) {
+    return json(request, { ok: false, error: "already_submitted", certificado_url: certUrl }, 409);
+  }
+
+  const invalid = validateAnswers(schema, body?.answers, catalogById);
+  if (invalid) return json(request, { ok: false, error: invalid }, 400);
+
+  const payload = {
+    formId,
+    cursoId,
+    cursoNombre: course?.nombre || catalogById.get(cursoId)?.nombre || "",
+    nombre: found.record.nombre || "",
+    correo: found.record.correo || "",
+    submittedAt: new Date().toISOString(),
+    answers: pickAnswers(schema, body.answers),
+  };
+  await env.DRZ_CLUB.put(formResponseKey(formId, cursoId, session.memberId), JSON.stringify(payload));
+  return json(request, { ok: true, certificado_url: certUrl });
+}
+
+async function listFormSubmissions(env, formId, cursoId) {
+  const prefix = cursoId ? `form:${formId}:${cursoId}:` : `form:${formId}:`;
+  const submissions = [];
+  let cursor;
+  for (;;) {
+    const page = await env.DRZ_CLUB.list({ prefix, cursor, limit: 1000 });
+    const names = page.keys.map((key) => key.name);
+    for (let i = 0; i < names.length; i += 20) {
+      const chunk = await Promise.all(names.slice(i, i + 20).map((name) => env.DRZ_CLUB.get(name)));
+      for (const raw of chunk) {
+        if (!raw) continue;
+        try {
+          submissions.push(JSON.parse(raw));
+        } catch {
+          /* skip broken records */
+        }
+      }
+    }
+    if (page.list_complete) break;
+    cursor = page.cursor;
+  }
+  submissions.sort((a, b) => String(a.submittedAt || "").localeCompare(String(b.submittedAt || "")));
+  return submissions;
+}
+
+function csvEscape(value) {
+  const text = Array.isArray(value) ? value.join("; ") : String(value ?? "");
+  if (/[",\n\r]/.test(text)) return `"${text.replaceAll('"', '""')}"`;
+  return text;
+}
+
+function submissionsToCsv(schema, submissions) {
+  const questions = formQuestions(schema);
+  const headers = ["fecha", "nombre", "correo", "curso_id", "curso", ...questions.map((q) => q.enunciado || q.id)];
+  const lines = [headers.map(csvEscape).join(",")];
+  for (const row of submissions) {
+    const answers = row.answers || {};
+    const cells = [
+      row.submittedAt || "",
+      row.nombre || "",
+      row.correo || "",
+      row.cursoId || "",
+      row.cursoNombre || "",
+      ...questions.map((q) => {
+        const id = String(q.id || "").trim();
+        const val = answers[id];
+        if (Array.isArray(val)) return val.join("; ");
+        return val ?? "";
+      }),
+    ];
+    lines.push(cells.map(csvEscape).join(","));
+  }
+  return `\uFEFF${lines.join("\r\n")}\r\n`;
+}
+
+function exportTokenFromRequest(request) {
+  const url = new URL(request.url);
+  return (
+    bearerToken(request) ||
+    String(url.searchParams.get("TOKEN") || url.searchParams.get("token") || "").trim()
+  );
+}
+
+function formsExportAuthorized(request, env) {
+  const got = exportTokenFromRequest(request);
+  if (!got) return false;
+  const master = String(env.CLUB_ADMIN_MASTER || "").trim();
+  const admin = String(env.CLUB_ADMIN_TOKEN || "").trim();
+  if (master && timingSafeEqual(got, master)) return true;
+  if (admin && timingSafeEqual(got, admin)) return true;
+  return false;
+}
+
+async function handleFormsExportAuth(request, env) {
+  if (!(await rateLimit(request, "export-auth", 30, 3600))) {
+    return json(request, { ok: false, error: "too_many_requests" }, 429);
+  }
+  if (!formsExportAuthorized(request, env)) {
+    return json(request, { ok: false, error: "unauthorized" }, 401);
+  }
+  return json(request, { ok: true });
+}
+
+async function handleFormsCatalog(request, env) {
+  if (!(await rateLimit(request, "catalog", 120, 3600))) {
+    return json(request, { ok: false, error: "too_many_requests" }, 429);
+  }
+  const catalog = await loadCatalog(env);
+  return json(request, { ok: true, cursos: offeredCourses(catalog) });
+}
+
+async function handleFormsExport(request, env) {
+  if (!formsExportAuthorized(request, env)) {
+    return json(request, { ok: false, error: "unauthorized" }, 401);
+  }
+  const url = new URL(request.url);
+  const formId = sanitizeId(url.searchParams.get("form") || EVAL_FORM_ID);
+  const cursoId = sanitizeId(url.searchParams.get("curso"));
+  if (!formId) return json(request, { ok: false, error: "invalid_input" }, 400);
+
+  const [schema, submissions] = await Promise.all([
+    loadFormSchema(env, formId),
+    listFormSubmissions(env, formId, cursoId),
+  ]);
+  const filename = `${formId}${cursoId ? `-${cursoId}` : ""}-${new Date().toISOString().slice(0, 10)}.csv`;
+  return new Response(submissionsToCsv(schema || { preguntas: [] }, submissions), {
+    status: 200,
+    headers: {
+      "content-type": "text/csv; charset=utf-8",
+      "content-disposition": `attachment; filename="${filename}"`,
+      "cache-control": "no-store",
+      ...corsHeaders(request),
+    },
+  });
+}
+
+async function handleAdminForms(request, env) {
+  const admin = requireAdmin(request, env);
+  if (!admin.ok) return json(request, { ok: false, error: admin.error }, admin.status);
+  const url = new URL(request.url);
+  const formId = sanitizeId(url.searchParams.get("form") || EVAL_FORM_ID);
+  const cursoId = sanitizeId(url.searchParams.get("curso"));
+  if (!formId) return json(request, { ok: false, error: "invalid_input" }, 400);
+  const submissions = await listFormSubmissions(env, formId, cursoId);
+  return json(request, { ok: true, form: formId, curso: cursoId, count: submissions.length, submissions });
 }
 
 async function handleAdminSync(request, env) {
@@ -506,12 +915,24 @@ async function handleAdminSync(request, env) {
     stored += 1;
   }
 
+  const forms = Array.isArray(body?.forms) ? body.forms : [];
+  const formPuts = [];
+  for (const form of forms) {
+    const id = sanitizeId(form?.id);
+    if (!id) continue;
+    const hasQuestions = Array.isArray(form.preguntas) && form.preguntas.length;
+    const hasSections = Array.isArray(form.secciones) && form.secciones.length;
+    if (!hasQuestions && !hasSections) continue;
+    formPuts.push(env.DRZ_CLUB.put(`form-schema:${id}`, JSON.stringify(form)));
+  }
+
   await Promise.all([
     env.DRZ_CLUB.put(INDEX_PROFILES, JSON.stringify(profiles)),
     env.DRZ_CLUB.put(INDEX_LOOKUPS, JSON.stringify(lookups)),
     env.DRZ_CLUB.put("catalog:cursos", JSON.stringify(cursos)),
+    ...formPuts,
   ]);
-  return json(request, { ok: true, stored, cursos: cursos.length, kv_puts: 3 });
+  return json(request, { ok: true, stored, cursos: cursos.length, forms: formPuts.length, kv_puts: 3 + formPuts.length });
 }
 
 async function deleteByPrefix(env, prefix) {
@@ -537,6 +958,16 @@ async function handleAdminResetPass(request, env) {
   const sessions = await deleteByPrefix(env, "session:");
   const resets = await deleteByPrefix(env, "reset:");
   return json(request, { ok: true, auth, sessions, resets });
+}
+
+async function handleAdminResetForms(request, env) {
+  const admin = requireAdmin(request, env);
+  if (!admin.ok) return json(request, { ok: false, error: admin.error }, admin.status);
+  const body = await readJson(request);
+  const formId = sanitizeId(body?.form || body?.formId);
+  const prefix = formId ? `form:${formId}:` : "form:";
+  const deleted = await deleteByPrefix(env, prefix);
+  return json(request, { ok: true, deleted, prefix });
 }
 
 async function sendResetEmail(env, to, nombre, resetUrl) {
@@ -668,8 +1099,15 @@ export default {
       if (request.method === "POST" && url.pathname === "/reset") return handleReset(request, env);
       if (request.method === "GET" && url.pathname === "/me") return handleMe(request, env);
       if (request.method === "POST" && url.pathname === "/logout") return handleLogout(request, env);
+      if (request.method === "GET" && url.pathname === "/forms/status") return handleFormStatus(request, env);
+      if (request.method === "POST" && url.pathname === "/forms/submit") return handleFormSubmit(request, env);
+      if (request.method === "GET" && url.pathname === "/forms/catalog") return handleFormsCatalog(request, env);
+      if (request.method === "GET" && url.pathname === "/forms/export-auth") return handleFormsExportAuth(request, env);
+      if (request.method === "GET" && url.pathname === "/forms/export") return handleFormsExport(request, env);
       if (request.method === "POST" && url.pathname === "/admin/sync") return handleAdminSync(request, env);
+      if (request.method === "GET" && url.pathname === "/admin/forms") return handleAdminForms(request, env);
       if (request.method === "POST" && url.pathname === "/admin/reset-pass") return handleAdminResetPass(request, env);
+      if (request.method === "POST" && url.pathname === "/admin/reset-forms") return handleAdminResetForms(request, env);
       if (request.method === "GET" && url.pathname === "/health") {
         return json(request, { ok: true, service: "drz-club-portal" });
       }

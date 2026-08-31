@@ -1,4 +1,4 @@
-.PHONY: clasificar generar-boletines enviar-boletines informe base-datos certificados certificados-drive certificados-hotmart reset-pass todo
+.PHONY: clasificar generar-boletines enviar-boletines informe base-datos certificados certificados-drive certificados-hotmart reset-pass reset-forms todo
 
 PYTHON ?= python3
 CLUB := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
@@ -36,5 +36,8 @@ certificados-hotmart:
 
 reset-pass:
 	$(PYTHON) $(CLUB)client/reset_passwords.py
+
+reset-forms:
+	$(PYTHON) $(CLUB)client/reset_forms.py
 
 todo: base-datos clasificar informe generar-boletines

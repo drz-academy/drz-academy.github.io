@@ -25,6 +25,7 @@ CLUB = REPO / "club"
 PERSONAL = CLUB / "personal"
 MEMBERS_JSON = PERSONAL / "drz-club-members.json"
 CURSOS_JSON = CLUB / "cursos.json"
+FORMS_DIR = CLUB / "drz-forms"
 CERTIFICADOS_CSV = PERSONAL / "certificados.csv"
 CUPONES_JSON = PERSONAL / "cupones.json"
 
@@ -53,6 +54,7 @@ def load_cursos() -> list[dict]:
             "nombre": str(curso.get("nombre") or "").strip(),
             "fecha_inicio": str(curso.get("fecha_inicio") or "").strip(),
             "fecha_fin": str(curso.get("fecha_fin") or "").strip(),
+            "evaluacion": bool(curso.get("evaluacion")),
             "classroom_url": str(curso.get("classroom_url") or "").strip(),
             "hotmart_url": str(curso.get("hotmart_url") or "").strip(),
             "certificados_folder": str(curso.get("certificados_folder") or "").strip(),
@@ -65,6 +67,26 @@ def load_cursos() -> list[dict]:
         if item["id"] or item["nombre"]:
             cursos.append(item)
     return cursos
+
+
+def load_forms() -> list[dict]:
+    forms: list[dict] = []
+    if not FORMS_DIR.exists():
+        return forms
+    for path in sorted(FORMS_DIR.glob("*.json")):
+        if path.name == "cursos-opciones.json":
+            continue
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            continue
+        if not isinstance(data, dict) or not data.get("id"):
+            continue
+        has_questions = isinstance(data.get("preguntas"), list) and data["preguntas"]
+        has_sections = isinstance(data.get("secciones"), list) and data["secciones"]
+        if has_questions or has_sections:
+            forms.append(data)
+    return forms
 
 
 def load_certificados() -> dict[tuple[str, str], str]:
@@ -239,11 +261,12 @@ def test_member(cursos: list[dict]) -> dict:
     }
 
 
-def build_payload() -> tuple[list[dict], list[dict], dict]:
+def build_payload() -> tuple[list[dict], list[dict], list[dict], dict]:
     if not MEMBERS_JSON.exists():
         raise FileNotFoundError(f"No está {MEMBERS_JSON}. Genera la base con club/bin/build_database.py")
     members_raw = json.loads(MEMBERS_JSON.read_text(encoding="utf-8"))
     cursos = load_cursos()
+    forms = load_forms()
     existing = next((m for m in members_raw if first_valid_email(m.get("correo") or "") == TEST_EMAIL), None)
     if existing:
         existing["documento"] = TEST_DOCUMENTO
@@ -291,6 +314,7 @@ def build_payload() -> tuple[list[dict], list[dict], dict]:
                     "hotmart_url": meta.get("hotmart_url") or "",
                     "certificado_url": cert_url,
                     "pagina_url": meta.get("pagina_url") or "",
+                    "evaluacion": bool(meta.get("evaluacion")),
                 }
             )
         members.append(
@@ -313,15 +337,16 @@ def build_payload() -> tuple[list[dict], list[dict], dict]:
         "skipped_no_email": skipped_no_email,
         "certs_attached": certs_attached,
         "cursos": len(cursos),
+        "forms": len(forms),
         "total_source": len(members_raw),
     }
-    return members, cursos, stats
+    return members, cursos, forms, stats
 
 
-def post_sync(members: list[dict], cursos: list[dict]) -> dict:
+def post_sync(members: list[dict], cursos: list[dict], forms: list[dict]) -> dict:
     url = load_secret("club-worker-url").rstrip("/") + "/admin/sync"
     token = load_secret("club-admin-token")
-    payload = json.dumps({"members": members, "cursos": cursos}).encode("utf-8")
+    payload = json.dumps({"members": members, "cursos": cursos, "forms": forms}).encode("utf-8")
     req = urllib.request.Request(
         url,
         data=payload,
@@ -347,13 +372,14 @@ def post_sync(members: list[dict], cursos: list[dict]) -> dict:
 
 
 def main() -> int:
-    members, cursos, stats = build_payload()
+    members, cursos, forms, stats = build_payload()
     print("Dr. Z Academy Club — sincronización al portal")
     print(f"  Fuente:              {stats['total_source']} miembros")
     print(f"  Listos para el portal: {stats['eligible']} (cédula + correo)")
     print(f"  Sin cédula:          {stats['skipped_no_doc']}")
     print(f"  Sin correo:          {stats['skipped_no_email']}")
     print(f"  Cursos en catálogo:  {stats['cursos']}")
+    print(f"  Formularios:         {stats['forms']}")
     print(f"  Certificados ligados:{stats['certs_attached']}")
     print(f"  Cupones:             {CUPONES_JSON.name if CUPONES_JSON.exists() else '(sin personal/cupones.json)'}")
     if not members:
@@ -362,7 +388,7 @@ def main() -> int:
     if "--dry-run" in sys.argv:
         print("  (dry-run: no se subió nada)")
         return 0
-    result = post_sync(members, cursos)
+    result = post_sync(members, cursos, forms)
     if not result.get("ok"):
         print(f"Error al sincronizar: {result}", file=sys.stderr)
         return 1

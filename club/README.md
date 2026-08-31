@@ -67,6 +67,7 @@ make club-certificados         # Parte y nombra PDFs en personal/certificados/
 make club-certificados-drive   # Enlaces de Drive → personal/certificados.csv
 make club-sync                 # sube miembros + catálogo al Worker
 make club-reset-pass           # borra todas las claves; cada quien crea una nueva
+make club-forms-reset          # borra todas las evaluaciones (pide confirmación)
 ```
 
 O, dentro de `club/`: `make todo` (base + clasificar + informe + boletines).
@@ -174,6 +175,22 @@ make club-certificados-drive
 Solo crea PDF para correos que aún no tienen aviso. El PDF es una hoja blanca con nombre, correo y el enlace de `hotmart_url` en `cursos.json`. Para rehacer los existentes: `python3 club/bin/generar_certificados_hotmart.py --force`.
 
 Las fuentes no se borran. El portal usa esos enlaces cuando el miembro entra al Club.
+
+## Evaluación de cursos (certificado al final)
+
+Si un curso tiene `"evaluacion": true` en `cursos.json`, el portal muestra **Evaluación** y no revela el certificado hasta que la persona complete el formulario `evaluacion-curso`.
+
+La guía completa (crear un JSON, tipos de pregunta, desplegar, asociar a un curso, CSV y reset) está en [`DEVELOPER.md`](../DEVELOPER.md#formularios-del-club-clubdrz-forms).
+
+Resumen operativo:
+
+- Esquema: `club/drz-forms/evaluacion-curso.json`
+- Página: `/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=<id>` (`&preview=1` sin login)
+- Admin CSV: el mismo enlace con `TOKEN=` y `CLUB_ADMIN_MASTER`
+- Export local: `make club-forms-export CURSO=masterclass_extraterrestre`
+- Pruebas: `make club-forms-reset`
+
+Tras cambiar preguntas o el flag `evaluacion`: `make club-worker-deploy` (si cambió el Worker) y `make club-sync`.
 
 ## Worker (primera vez)
 

@@ -223,11 +223,16 @@ async function renderProfile(profile, categorias) {
       if (curso.hotmart_url) {
         links.push(`<a class="chip" href="${curso.hotmart_url}" target="_blank" rel="noopener" data-track="hotmart" data-curso="${curso.nombre || ''}">Hotmart</a>`);
       }
-      links.push(
-        curso.certificado_url
-          ? `<a class="chip" href="${curso.certificado_url}" target="_blank" rel="noopener" data-track="certificado" data-curso="${curso.nombre || ''}">Certificado</a>`
-          : `<span class="chip off">Certificado no disponible</span>`,
-      );
+      if (curso.evaluacion && !curso.evaluacion_completa) {
+        const formUrl = `/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=${encodeURIComponent(curso.id || "")}`;
+        links.push(`<a class="chip eval" href="${formUrl}" data-track="evaluacion" data-curso="${curso.nombre || ''}">Evaluación</a>`);
+      } else {
+        links.push(
+          curso.certificado_url
+            ? `<a class="chip" href="${curso.certificado_url}" target="_blank" rel="noopener" data-track="certificado" data-curso="${curso.nombre || ''}">Certificado</a>`
+            : `<span class="chip off">Certificado no disponible</span>`,
+        );
+      }
       return `<article class="course">
         <h3>${curso.nombre || "Curso"}</h3>
         <p class="course-dates">${formatDates(curso)}</p>
@@ -282,6 +287,21 @@ function currentToken() {
   return sessionStorage.getItem(TOKEN_KEY) || "";
 }
 
+function safeClubPath(raw) {
+  try {
+    const url = new URL(String(raw || ""), location.origin);
+    if (url.origin !== location.origin) return "";
+    if (!url.pathname.startsWith("/club/")) return "";
+    return `${url.pathname}${url.search}`;
+  } catch {
+    return "";
+  }
+}
+
+function pendingNextPath() {
+  return safeClubPath(new URLSearchParams(location.search).get("next") || "");
+}
+
 function lookupMode(mode) {
   const block = $("password-block");
   const forgot = $("forgot-open");
@@ -320,6 +340,11 @@ function resetLookupForm() {
 
 async function enterDashboard(token, profile) {
   setSession(token);
+  const next = pendingNextPath();
+  if (next && next !== "/club/" && next !== "/club") {
+    location.replace(next);
+    return;
+  }
   showStatus($("lookup-status"), "");
   $("submit-lookup").disabled = false;
   const categorias = await loadCategorias().catch(() => null);
@@ -467,9 +492,14 @@ async function boot() {
     return;
   }
   const token = currentToken();
+  const next = pendingNextPath();
   if (!token) return;
   try {
     const data = await api("/me", { token });
+    if (next && next !== "/club/" && next !== "/club") {
+      location.replace(next);
+      return;
+    }
     await enterDashboard(token, data.profile);
   } catch {
     setSession("");

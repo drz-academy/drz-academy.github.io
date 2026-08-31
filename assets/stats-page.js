@@ -13,6 +13,9 @@ const EVENT_LABELS = {
   club_click_classroom: "Ir a Classroom",
   club_click_hotmart: "Ir a Hotmart",
   club_click_certificado: "Descargar Certificado",
+  club_click_evaluacion: "Abrir evaluación del curso",
+  club_form_submit: "Enviar evaluación",
+  club_form_certificado: "Descargar certificado (evaluación)",
 };
 
 function endpointFromMeta() {

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "cuantica_a_pie",
+    "nombre": "Cuántica a Pie"
+  },
+  {
+    "id": "cuantica_a_pie_permanente",
+    "nombre": "Cuántica a Pie (Permanente)"
+  },
+  {
+    "id": "catastrofisica",
+    "nombre": "Catastrofísica"
+  },
+  {
+    "id": "einstein",
+    "nombre": "Einstein Relativamente Fácil"
+  },
+  {
+    "id": "mundo_cuantico",
+    "nombre": "Mundo Cuántico"
+  },
+  {
+    "id": "rompecabezas_materia",
+    "nombre": "El Rompecabezas de la Materia"
+  },
+  {
+    "id": "astropython",
+    "nombre": "Astropython"
+  },
+  {
+    "id": "python_fin_mundo",
+    "nombre": "Python para el fin del mundo"
+  },
+  {
+    "id": "masterclass_extraterrestre",
+    "nombre": "Master Class Extraterrestre"
+  }
+]

@@ -47,9 +47,27 @@ def build_stats(cursos: list) -> dict:
     }
 
 
+def offered_courses(cursos: list) -> list:
+    items = unique_courses(cursos)
+    out = []
+    for curso in items:
+        if curso.get("next_course"):
+            continue
+        cid = str(curso.get("id") or "").strip()
+        nombre = str(curso.get("nombre") or "").strip()
+        if cid and nombre:
+            out.append({"id": cid, "nombre": nombre})
+    return out
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Genera stats.json público del Club")
     parser.add_argument("--out", required=True, help="Ruta de salida (p. ej. _site/club/stats.json)")
+    parser.add_argument(
+        "--cursos-out",
+        default="",
+        help="JSON público id+nombre de cursos ofrecidos (p. ej. _site/club/drz-forms/cursos-opciones.json)",
+    )
     args = parser.parse_args()
 
     with open(CURSOS_JSON, encoding="utf-8") as f:
@@ -68,6 +86,13 @@ def main() -> int:
         f"{stats['inscritos']} inscritos, "
         f"{stats['certificados']} certificados → {args.out}"
     )
+    if args.cursos_out:
+        opciones = offered_courses(cursos)
+        os.makedirs(os.path.dirname(os.path.abspath(args.cursos_out)) or ".", exist_ok=True)
+        with open(args.cursos_out, "w", encoding="utf-8") as f:
+            json.dump(opciones, f, ensure_ascii=False, indent=2)
+            f.write("\n")
+        print(f"✓  Cursos para formularios: {len(opciones)} → {args.cursos_out}")
     return 0
 
 

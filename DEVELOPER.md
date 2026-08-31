@@ -259,7 +259,178 @@ make notify-send-newsletter FILE=notify/mi-newsletter.md
 
 ## Consulta del Dr. Z Academy Club
 
-Los participantes consultan categoría, cursos, Classroom y certificados en `/club/`. Cómo funciona, el catálogo y el flujo local están en [`club/README.md`](club/README.md). **Los datos personales no van a GitHub**: viven en `club/personal/` y se suben a un Cloudflare Worker + KV.
+Los participantes consultan categoría, cursos, Classroom y certificados en `/club/`. Cómo funciona el Club, el catálogo y el flujo local están en [`club/README.md`](club/README.md). **Los datos personales no van a GitHub**: viven en `club/personal/` y se suben a un Cloudflare Worker + KV.
+
+---
+
+## Formularios del Club (`club/drz-forms/`)
+
+El motor es genérico: una sola página (`drz-form.html` + `drz-form.js`) pinta cualquier esquema JSON. Las respuestas se guardan en Cloudflare KV (no en GitHub). El formulario de evaluación de cursos es el que desbloquea el certificado.
+
+```
+club/drz-forms/
+├── drz-form.html              Motor (no hace falta tocarlo para un formulario nuevo)
+├── drz-form.js
+├── evaluacion-curso.json      Esquema de la evaluación de cursos
+└── cursos-opciones.json       Lista pública id+nombre (se regenera en el build)
+```
+
+URL de un formulario:
+
+```
+/club/drz-forms/drz-form.html?form=<id-del-json>&curso=<id-del-curso>
+```
+
+Vista previa sin login: añade `&preview=1`.
+
+El `id` del JSON (y del archivo) solo admite minúsculas, números, `_` y `-` (máx. 64 caracteres). El archivo tiene que llamarse `<id>.json`.
+
+### 1. Crear un formulario
+
+Copia `evaluacion-curso.json` o parte de cero. Estructura:
+
+```json
+{
+  "id": "mi-formulario",
+  "titulo": "Título que ve la persona",
+  "intro": "Texto bajo el título.",
+  "requiere_curso": true,
+  "revela_certificado": true,
+  "secciones": [
+    {
+      "id": "seccion_1",
+      "titulo": "Nombre de la sección",
+      "explicacion": "Opcional, bajo el título de sección.",
+      "preguntas": [ ]
+    }
+  ]
+}
+```
+
+| Campo del formulario | Qué hace |
+|----------------------|----------|
+| `requiere_curso` | `true`: hay que estar inscrito en el curso del enlace (o elegido en el desplegable). |
+| `revela_certificado` | `true`: al enviar, si hay certificado, se muestra el enlace. |
+
+Cada pregunta:
+
+| Campo | Obligatorio | Notas |
+|-------|-------------|--------|
+| `id` | sí | Clave en el CSV (`curso`, `lo_mejor`, …) |
+| `enunciado` | sí | Texto de la pregunta |
+| `tipo` | sí | Ver tabla de tipos |
+| `obligatoria` | no | Por defecto `true`. Pon `false` para opcional |
+| `explicacion` | no | Texto gris bajo el enunciado |
+| `default` | no | Valor inicial. Aplica a `lista_desplegable`, `escala_scroll`, `radio` y `opciones`. El prefill (p. ej. `?curso=`) gana si existe. En `opciones` puede ser un string o una lista. En `escala_scroll` deja la escala ya marcada. |
+
+Tipos:
+
+| `tipo` | Campos extra |
+|--------|----------------|
+| `texto` | Una línea |
+| `parrafo` | Varias líneas |
+| `radio` | Radio buttons. `opciones`: strings o `{ "id", "label" }`. `default`: id de la opción |
+| `opciones` | Checkboxes (varias a la vez). `opciones` igual que `radio`. `default`: id o lista de ids |
+| `seleccion_unica` | Alias de `radio` |
+| `seleccion_multiple` | Alias de `opciones` |
+| `puntaje` | `min`, `max` (enteros; por defecto 1–5) |
+| `lista_desplegable` | `opciones`, o `"fuente": "cursos"` para el catálogo. `default`: id de la opción |
+| `escala_scroll` | `min`, `max`, `step`, `min_label`, `max_label`, `emotions` (caras en los enteros, no tienen que coincidir con cada `step`), `flip_aleatorio` (`true` = al azar de menor a mayor o al revés; el valor guardado sigue siendo min→max), `default`: número dentro del rango |
+
+Guarda el archivo en `club/drz-forms/<id>.json`.
+
+Vista previa local (con el servidor de `make start` o sirviendo la raíz del repo):
+
+```
+http://127.0.0.1:8000/club/drz-forms/drz-form.html?form=mi-formulario&preview=1
+```
+
+### 2. Desplegarlo
+
+Hay **tres capas**. Según lo que cambies:
+
+| Qué cambiaste | Qué correr |
+|---------------|------------|
+| Preguntas JSON, HTML o JS del formulario | Commit + push a `main` (GitHub Pages copia `club/drz-forms/`) **y** `make club-sync` para subir el esquema a KV |
+| `"evaluacion"` en `cursos.json` | `make club-sync` |
+| Código del Worker (`club/worker/`) | `make club-worker-deploy` **y** luego `make club-sync` si también cambió el JSON |
+
+```bash
+make club-worker-deploy   # solo si todiste el Worker
+make club-sync            # catálogo + miembros + esquemas de formularios → KV
+```
+
+Sin `club-sync` el portal no conoce el formulario nuevo y el Worker rechaza el envío (`schema_missing`).
+
+El HTML público se publica con el deploy de GitHub Pages (unos minutos tras el push).
+
+### 3. Asociarlo a un curso (evaluación + certificado)
+
+El enlace **Evaluación** del Club y el candado del certificado usan **siempre** el formulario `evaluacion-curso`.
+
+1. En `club/cursos.json`, en ese curso:
+
+```json
+"evaluacion": true
+```
+
+2. `make club-sync`
+
+En el portal, ese curso muestra **Evaluación** y **no** muestra **Certificado** hasta que la persona envíe el formulario. El enlace que genera el Club es:
+
+```
+/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=<id>
+```
+
+(`<id>` es el `id` del curso en `cursos.json`, p. ej. `masterclass_extraterrestre`.)
+
+Otros JSON en `drz-forms/` sirven con el mismo motor, pero **no** desbloquean el certificado a menos que el portal apunte a ese `form=` (hoy está fijo a `evaluacion-curso`).
+
+### 4. Probar el flujo de un miembro
+
+Usuario de prueba (ver `club/README.md`): cédula `666666`, correo `puntobernal@gmail.com`.
+
+1. Entra a `/club/`, abre **Evaluación** en un curso con `"evaluacion": true`.
+2. Envía el formulario.
+3. Debe aparecer el certificado (si ya está en `personal/certificados.csv`) y, al volver al Club, el chip **Certificado**.
+
+Para volver a evaluar en pruebas, borra las respuestas en KV:
+
+```bash
+make club-forms-reset
+```
+
+Pide confirmación: *¿Estás completamente seguro de borrar todas las evaluaciones?* Responde `sí`. No borra esquemas ni perfiles.
+
+### 5. Descargar las respuestas
+
+**Desde el navegador (administrador):** abre el formulario con la clave maestra del Club en la URL (el secreto `CLUB_ADMIN_MASTER` del Worker; no está en el JavaScript):
+
+```
+/club/drz-forms/drz-form.html?form=evaluacion-curso&TOKEN=<CLUB_ADMIN_MASTER>
+```
+
+Aparece **Descargar resultados (CSV)**. El `TOKEN` se quita de la barra al cargar.
+
+**Desde la máquina (JSON en `club/personal/formularios/`, gitignored):**
+
+```bash
+make club-forms-export
+make club-forms-export FORM=evaluacion-curso
+make club-forms-export FORM=evaluacion-curso CURSO=masterclass_extraterrestre
+```
+
+Usa `.secrets/club-admin-token` y `.secrets/club-worker-url`.
+
+### 6. Qué toca cada comando
+
+| Comando | Efecto |
+|---------|--------|
+| `make club-sync` | Sube miembros, `cursos.json` y todos los `club/drz-forms/*.json` de formulario a KV |
+| `make club-worker-deploy` | Publica `club/worker/club-portal-worker.js` |
+| `make club-forms-export` | Baja respuestas a `club/personal/formularios/` |
+| `make club-forms-reset` | Borra respuestas de evaluación en KV (pide confirmación) |
+| Push a `main` | Publica HTML/JS/JSON estáticos en GitHub Pages |
 
 ---
 
@@ -439,6 +610,10 @@ También puedes lanzar el deploy manualmente desde la pestaña **Actions** → *
 | Generar / actualizar demo | `python3 demos/build_demo.py demos/<id>/demo.json` |
 | Regenerar todos los demos | `python3 demos/build_demo.py --all` o `make demos` |
 | Sitio local | `make build && make start` |
+| Formulario del Club (evaluación) | `club/drz-forms/` — ver sección *Formularios del Club* |
+| Sync Club → Worker | `make club-sync` |
+| Exportar respuestas | `make club-forms-export` |
+| Borrar evaluaciones (pruebas) | `make club-forms-reset` |
 | Plantilla de curso | `cursos/template/curso.md` |
 | Plantilla de demo | `demos/template/demo.json` |
 | Generador de cursos | `cursos/build_course.py` |
@@ -467,8 +642,12 @@ club/
   README.md             Cómo funciona el Club, catálogo y flujo local
   index.html            Consulta de participación (sin datos personales)
   portal.js             Cliente del Worker
-  worker/               Backend en Cloudflare Workers + KV (perfiles y claves)
+  cursos.json           Catálogo (incluye `"evaluacion": true` para pedir el formulario)
+  drz-forms/            Motor de formularios + JSON de preguntas
+  worker/               Backend en Cloudflare Workers + KV (perfiles, claves, respuestas)
   client/sync_members.py  Sube club/ + club/personal/ al Worker (personal/ no va a Git)
+  client/export_forms.py  Descarga respuestas a personal/formularios/
+  client/reset_forms.py   Borra evaluaciones en KV
   bin/                  Scripts locales: base de datos, clasificación, boletines, informe
   personal/             Datos confidenciales (gitignored): miembros, boletines, inscripciones
 apps/

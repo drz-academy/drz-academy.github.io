@@ -104,7 +104,9 @@ jobs:
           # Club (HTML/JS públicos; los datos viven en Cloudflare KV)
           mkdir -p _site/club
           cp club/index.html club/portal.js club/categorias.json _site/club/
-          python3 club/bin/generar_stats.py --out _site/club/stats.json
+          python3 club/bin/generar_stats.py --out _site/club/stats.json --cursos-out club/drz-forms/cursos-opciones.json
+          mkdir -p _site/club/drz-forms
+          cp club/drz-forms/drz-form.html club/drz-forms/drz-form.js club/drz-forms/*.json _site/club/drz-forms/
           rm -rf _site/club/personal _site/portal
           mkdir -p _site/portal
           printf '%s\n' '<!doctype html><meta http-equiv="refresh" content="0;url=/club/"><link rel="canonical" href="/club/">' > _site/portal/index.html
