@@ -33,8 +33,8 @@
           "tipo": "radio",
           "opciones": [
             { "id": "si", "label": "Todito" },
-            { "id": "falto", "label": "Me faltaron unas pocas cositas" },
-            { "id": "no", "label": "Lo deje empezado" }
+            { "id": "falto", "label": "Me faltaron cositas" },
+            { "id": "no", "label": "Lo deje todo empezado" }
           ],
           "default": "si",
           "obligatoria": true
