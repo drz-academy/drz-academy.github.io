@@ -1,5 +1,379 @@
 [
   {
+    "id": "647b8bbb-3e18-48da-8836-067921e9e88f",
+    "timestampServer": "2026-08-31T18:34:35.028Z",
+    "ip": "200.24.16.72",
+    "country": "CO",
+    "eventType": "app_click",
+    "page": "/",
+    "url": "https://drz-academy.github.io/#apps",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "star-trek",
+      "targetName": "Star Trek",
+      "href": "apps/star-trek/",
+      "label": "Abrir aplicación"
+    },
+    "timestampClient": "2026-08-31T18:34:34.745Z"
+  },
+  {
+    "id": "029a1338-a573-4492-b9fe-5eee91bc327f",
+    "timestampServer": "2026-08-31T18:34:28.436Z",
+    "ip": "200.24.16.72",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-31T18:34:28.011Z"
+  },
+  {
+    "id": "9acaf810-430f-4614-a225-f7d7b397f802",
+    "timestampServer": "2026-08-31T18:02:59.003Z",
+    "ip": "200.24.16.72",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-31T18:02:58.276Z"
+  },
+  {
+    "id": "f2be62fd-c01f-4eb9-8a95-dbf4dc7e1cb3",
+    "timestampServer": "2026-08-31T16:57:58.475Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-31T16:57:58.236Z"
+  },
+  {
+    "id": "ad9be66d-dc4f-4426-8a88-f915554be029",
+    "timestampServer": "2026-08-31T16:57:33.797Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "memberName": "Juan Manuel Montoya Moreno",
+      "memberEmail": "jmmontoy@gmail.com",
+      "categoria": "ORO"
+    },
+    "timestampClient": "2026-08-31T16:57:33.609Z"
+  },
+  {
+    "id": "52824621-b412-440b-b912-f5d40e85b30c",
+    "timestampServer": "2026-08-31T16:56:24.253Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-31T16:56:23.969Z"
+  },
+  {
+    "id": "beb3ecf3-0b29-46b4-8937-24e837f8a794",
+    "timestampServer": "2026-08-31T16:56:04.628Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "http://127.0.0.1:8000/",
+    "referrer": "http://127.0.0.1:8000/club/?next=%2Fclub%2Fdrz-forms%2Fdrz-form.html%3Fform%3Devaluacion-curso",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-31T16:56:04.295Z"
+  },
+  {
+    "id": "35b07b34-0796-459e-af1d-60a489dc887c",
+    "timestampServer": "2026-08-31T16:35:53.972Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "club_click_evaluacion",
+    "page": "/club/",
+    "url": "http://127.0.0.1:8000/club/",
+    "referrer": "http://127.0.0.1:8000/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=masterclass_extraterrestre",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "curso": "Astropython",
+      "href": "http://127.0.0.1:8000/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=astropython"
+    },
+    "timestampClient": "2026-08-31T16:35:53.665Z"
+  },
+  {
+    "id": "ed8422d9-ceae-4c18-8407-0106e7938dd0",
+    "timestampServer": "2026-08-31T16:28:18.669Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "club_click_evaluacion",
+    "page": "/club/",
+    "url": "http://127.0.0.1:8000/club/",
+    "referrer": "http://127.0.0.1:8000/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=masterclass_extraterrestre",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "curso": "Master Class Extraterrestre",
+      "href": "http://127.0.0.1:8000/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=masterclass_extraterrestre"
+    },
+    "timestampClient": "2026-08-31T16:28:18.480Z"
+  },
+  {
+    "id": "057a6e67-faba-497f-98c3-14252f0ee1f3",
+    "timestampServer": "2026-08-31T16:24:00.339Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "http://127.0.0.1:8000/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=masterclass_extraterrestre",
+    "referrer": "http://127.0.0.1:8000/club/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "evaluacion-curso",
+      "curso": "Master Class Extraterrestre"
+    },
+    "timestampClient": "2026-08-31T16:24:00.181Z"
+  },
+  {
+    "id": "5e468af4-8252-4166-946f-9081129067af",
+    "timestampServer": "2026-08-31T16:23:30.744Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "club_click_evaluacion",
+    "page": "/club/",
+    "url": "http://127.0.0.1:8000/club/",
+    "referrer": "http://127.0.0.1:8000/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=rompecabezas_materia",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "curso": "Master Class Extraterrestre",
+      "href": "http://127.0.0.1:8000/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=masterclass_extraterrestre"
+    },
+    "timestampClient": "2026-08-31T16:23:30.460Z"
+  },
+  {
+    "id": "5c7d6e02-7f3a-4932-8899-d79be9871eef",
+    "timestampServer": "2026-08-31T16:09:41.949Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "club_form_certificado",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "http://127.0.0.1:8000/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=rompecabezas_materia",
+    "referrer": "http://127.0.0.1:8000/club/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "curso": "El Rompecabezas de la Materia",
+      "href": "https://drive.google.com/file/d/18Clh5qWxIHgnDlPzETWYqUvBbz1MIjxm/view?usp=sharing"
+    },
+    "timestampClient": "2026-08-31T16:09:41.756Z"
+  },
+  {
+    "id": "c2cfc6f6-47a5-46e2-b432-73fc74764f9f",
+    "timestampServer": "2026-08-31T16:09:33.226Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "http://127.0.0.1:8000/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=rompecabezas_materia",
+    "referrer": "http://127.0.0.1:8000/club/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "evaluacion-curso",
+      "curso": "El Rompecabezas de la Materia"
+    },
+    "timestampClient": "2026-08-31T16:09:33.061Z"
+  },
+  {
+    "id": "896c5a73-f1c0-4266-8902-3b6e96c47c7b",
+    "timestampServer": "2026-08-31T16:09:11.213Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "club_click_evaluacion",
+    "page": "/club/",
+    "url": "http://127.0.0.1:8000/club/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "curso": "El Rompecabezas de la Materia",
+      "href": "http://127.0.0.1:8000/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=rompecabezas_materia"
+    },
+    "timestampClient": "2026-08-31T16:09:10.964Z"
+  },
+  {
+    "id": "ad25f1f4-ba79-42f4-ab8f-55097b5865b4",
+    "timestampServer": "2026-08-31T16:09:01.317Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "club_click_evaluacion",
+    "page": "/club/",
+    "url": "http://127.0.0.1:8000/club/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "curso": "El Rompecabezas de la Materia",
+      "href": "http://127.0.0.1:8000/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=rompecabezas_materia"
+    },
+    "timestampClient": "2026-08-31T16:09:01.121Z"
+  },
+  {
+    "id": "29f10eea-9ecc-415b-b8f3-93b3bcb2ac0c",
+    "timestampServer": "2026-08-31T16:05:59.375Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "http://127.0.0.1:8000/club/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "memberName": "Juan Manuel Montoya Moreno",
+      "memberEmail": "jmmontoy@gmail.com",
+      "categoria": "ORO"
+    },
+    "timestampClient": "2026-08-31T16:05:59.194Z"
+  },
+  {
+    "id": "f97129df-be23-436c-ac8b-e1920d1bcdeb",
+    "timestampServer": "2026-08-31T16:05:13.100Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "club_click_certificado",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "curso": "El Rompecabezas de la Materia",
+      "href": "https://drive.google.com/file/d/18Clh5qWxIHgnDlPzETWYqUvBbz1MIjxm/view?usp=sharing"
+    },
+    "timestampClient": "2026-08-31T16:05:12.901Z"
+  },
+  {
+    "id": "350e0906-60e0-48a5-9942-354a88b23e35",
+    "timestampServer": "2026-08-31T16:01:13.455Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "http://127.0.0.1:8000/club/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cursor/3.18.9 Chrome/144.0.7559.236 Electron/40.10.3 Safari/537.36",
+    "language": "es",
+    "details": {
+      "memberName": "Punto Bernal",
+      "memberEmail": "puntobernal@gmail.com",
+      "categoria": "ORO"
+    },
+    "timestampClient": "2026-08-31T16:01:13.178Z"
+  },
+  {
+    "id": "84fc4add-6226-4c71-a4fe-aa214c429e07",
+    "timestampServer": "2026-08-31T15:31:27.374Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "memberName": "Juan Manuel Montoya Moreno",
+      "memberEmail": "jmmontoy@gmail.com",
+      "categoria": "ORO"
+    },
+    "timestampClient": "2026-08-31T15:31:27.189Z"
+  },
+  {
+    "id": "a3681ec8-9b23-404c-b75b-0b91d49dfa13",
+    "timestampServer": "2026-08-31T15:30:56.624Z",
+    "ip": "186.121.27.144",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-08-31T15:30:56.364Z"
+  },
+  {
+    "id": "57e27482-4dfa-46e6-b44b-a020ca937891",
+    "timestampServer": "2026-08-31T15:06:49.159Z",
+    "ip": "2a03:2880:f806:8::",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 (compatible; meta-externalads/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/crawler))",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-08-31T15:06:48.729Z"
+  },
+  {
+    "id": "f0164bb1-4db2-4c6a-9d0f-2944e4e93d0f",
+    "timestampServer": "2026-08-31T05:20:04.813Z",
+    "ip": "190.24.56.48",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/152.0.7977.64 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-08-31T05:20:04.200Z"
+  },
+  {
     "id": "8de234cd-ea01-4e89-824f-23cc6bc5704d",
     "timestampServer": "2026-08-30T16:14:57.254Z",
     "ip": "2a02:26f7:f7c2:e161:0:1000:0:7",
