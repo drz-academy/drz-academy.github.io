@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultados — Dr. Z Academy Club</title>
+  <meta name="description" content="Estadísticas anónimas de las evaluaciones del Club.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/assets/favicon.ico" sizes="any">
+  <link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta name="club-portal-endpoint" content="https://drz-club-portal.drz-academy.workers.dev">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #F3D361;
+      --gold-dim: #c9ae4a;
+      --bg: #0c0c0c;
+      --bg-card: #141414;
+      --border: #242424;
+      --text: #e2e2e2;
+      --text-muted: #888;
+      --text-dim: #555;
+      --radius: 8px;
+      --max-width: 920px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { opacity: 0.85; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(12, 12, 12, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: Raleway, sans-serif;
+      font-weight: 900;
+      font-size: 1.25rem;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+
+    .logo span { color: var(--text); font-weight: 300; }
+
+    .page {
+      flex: 1;
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    .hero-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(243, 211, 97, 0.08);
+      border: 1px solid rgba(243, 211, 97, 0.2);
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
+      font-family: Raleway, sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 em { font-style: normal; color: var(--gold); }
+
+    .lead { color: var(--text-muted); margin-bottom: 1.5rem; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.55rem 1.1rem;
+      border-radius: var(--radius);
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary { background: var(--gold); color: #111; }
+    .btn-ghost { background: transparent; color: var(--text); border-color: var(--border); }
+    .btn-ghost:hover { border-color: var(--gold-dim); color: var(--gold); opacity: 1; }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.6rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      align-items: end;
+    }
+
+    .filter-bar label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      flex: 1 1 16rem;
+    }
+
+    input, select {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.95rem;
+      padding: 0.55rem 0.75rem;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.85rem;
+    }
+
+    .chip {
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text-muted);
+      border-radius: 100px;
+      padding: 0.2rem 0.75rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .chip:hover, .chip.active {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .count-line {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-top: 0.85rem;
+    }
+
+    .status { font-size: 0.92rem; margin-top: 0.6rem; }
+    .status.error { color: #e07a5f; }
+    .hidden { display: none !important; }
+
+    .section-title {
+      font-family: Raleway, sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 1.75rem 0 0.75rem;
+    }
+
+    .question-block h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.35rem;
+    }
+
+    .question-help {
+      display: block;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .pie-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 1.25rem;
+      align-items: center;
+    }
+
+    @media (max-width: 640px) {
+      .pie-row { grid-template-columns: 1fr; justify-items: center; }
+    }
+
+    .pie-svg { width: 150px; height: 150px; }
+
+    .legend { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; width: 100%; }
+
+    .legend li {
+      display: grid;
+      grid-template-columns: 0.75rem 1fr auto auto;
+      gap: 0.55rem;
+      align-items: center;
+      font-size: 0.88rem;
+    }
+
+    .swatch {
+      width: 0.75rem;
+      height: 0.75rem;
+      border-radius: 2px;
+    }
+
+    .legend .n { color: var(--text-muted); font-variant-numeric: tabular-nums; }
+    .legend .pct { color: var(--gold); font-variant-numeric: tabular-nums; min-width: 3.2rem; text-align: right; }
+
+    .mean {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .answer-list {
+      max-height: 16rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      padding-right: 0.25rem;
+    }
+
+    .answer-list blockquote {
+      margin: 0;
+      padding: 0.65rem 0.85rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.92rem;
+      color: var(--text);
+    }
+
+    .empty { color: var(--text-dim); font-size: 0.9rem; }
+
+    footer {
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-copy { font-size: 0.8rem; color: var(--text-dim); }
+    .footer-right { display: flex; gap: 1.5rem; align-items: center; }
+    .footer-right a { color: var(--text-dim); font-size: 0.8rem; }
+    .footer-right a:hover { color: var(--gold); opacity: 1; }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="/club/" class="logo">Dr.Z Academy <span>- Club</span></a>
+      <a href="/club/drz-forms/drz-form.html" class="btn btn-ghost" id="back-form">Volver al formulario</a>
+    </div>
+  </header>
+
+  <main class="page">
+    <span class="hero-label">Resultados</span>
+    <h1 id="page-title">Estadísticas de la <em>evaluación</em></h1>
+    <p class="lead" id="page-lead">Las respuestas son anónimas: no se muestra el nombre de quien evaluó.</p>
+
+    <section class="card" id="filter-card">
+      <div class="filter-bar">
+        <label>
+          Filtro
+          <input id="filter-input" type="text" placeholder="curso:Master Class Extraterrestre" autocomplete="off" spellcheck="false">
+        </label>
+        <button type="button" class="btn btn-primary" id="filter-apply">Aplicar</button>
+        <button type="button" class="btn btn-ghost" id="filter-clear">Todas</button>
+      </div>
+      <div class="chips" id="course-chips"></div>
+      <p class="count-line" id="count-line">Cargando…</p>
+      <p class="status" id="boot-status" hidden></p>
+    </section>
+
+    <div id="stats-root"></div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <a href="/" class="logo" style="font-size: 1rem;">Dr.Z Academy <span>- Code</span></a>
+        <div class="footer-copy">© 2026 Dr.Z® · Medellín, Colombia</div>
+      </div>
+      <div class="footer-right">
+        <a href="https://drz.academy/politica-de-privacidad/" target="_blank" rel="noopener">Privacidad</a>
+        <a href="mailto:soydoctorz@gmail.com">soydoctorz@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/club/drz-forms/drz-stats.js?v=20260831n" type="module"></script>
+</body>
+
+</html>

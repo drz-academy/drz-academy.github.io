@@ -4,6 +4,8 @@
   "intro": "Antes de descargar tu certificado, cuéntanos cómo te fue. Las preguntas marcadas con * son obligatorias.",
   "requiere_curso": true,
   "revela_certificado": true,
+  "prueba_curso_nombre": "El Rompecabezas de la Materia",
+  "prueba_certificado_url": "https://drive.google.com/file/d/18Clh5qWxIHgnDlPzETWYqUvBbz1MIjxm/view?usp=sharing",
   "secciones": [
     {
       "id": "identificacion",
@@ -31,8 +33,8 @@
           "tipo": "radio",
           "opciones": [
             { "id": "si", "label": "Todito" },
-            { "id": "falto", "label": "Me faltaron cositas" },
-            { "id": "no", "label": "Lo deje en la mitad" }
+            { "id": "falto", "label": "Me faltaron unas pocas cositas" },
+            { "id": "no", "label": "Lo deje empezado" }
           ],
           "default": "si",
           "obligatoria": true

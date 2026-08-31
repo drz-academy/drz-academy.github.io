@@ -13,6 +13,7 @@
  * GET  /forms/catalog       lista pública de cursos (id, nombre)
  * GET  /forms/export-auth   Authorization: Bearer CLUB_ADMIN_MASTER
  * GET  /forms/export        CSV; Authorization: Bearer CLUB_ADMIN_MASTER o CLUB_ADMIN_TOKEN
+ * GET  /forms/stats         JSON anónimo; Authorization: Bearer CLUB_ADMIN_MASTER o CLUB_ADMIN_TOKEN
  * POST /admin/sync          Authorization: Bearer CLUB_ADMIN_TOKEN
  * GET  /admin/forms         Authorization: Bearer CLUB_ADMIN_TOKEN
  * POST /admin/reset-pass    Authorization: Bearer CLUB_ADMIN_TOKEN
@@ -861,6 +862,33 @@ async function handleFormsExport(request, env) {
   });
 }
 
+function anonymizeSubmission(row) {
+  const answers = { ...(row?.answers || {}) };
+  delete answers.evaluador;
+  delete answers.nombre;
+  return {
+    submittedAt: String(row?.submittedAt || ""),
+    cursoId: String(row?.cursoId || answers.curso || ""),
+    cursoNombre: String(row?.cursoNombre || ""),
+    answers,
+  };
+}
+
+async function handleFormsStats(request, env) {
+  if (!(await rateLimit(request, "forms-stats", 60, 3600))) {
+    return json(request, { ok: false, error: "too_many_requests" }, 429);
+  }
+  if (!formsExportAuthorized(request, env)) {
+    return json(request, { ok: false, error: "unauthorized" }, 401);
+  }
+  const url = new URL(request.url);
+  const formId = sanitizeId(url.searchParams.get("form") || EVAL_FORM_ID);
+  const cursoId = sanitizeId(url.searchParams.get("curso"));
+  if (!formId) return json(request, { ok: false, error: "invalid_input" }, 400);
+  const submissions = (await listFormSubmissions(env, formId, cursoId)).map(anonymizeSubmission);
+  return json(request, { ok: true, form: formId, count: submissions.length, submissions });
+}
+
 async function handleAdminForms(request, env) {
   const admin = requireAdmin(request, env);
   if (!admin.ok) return json(request, { ok: false, error: admin.error }, admin.status);
@@ -1104,6 +1132,7 @@ export default {
       if (request.method === "GET" && url.pathname === "/forms/catalog") return handleFormsCatalog(request, env);
       if (request.method === "GET" && url.pathname === "/forms/export-auth") return handleFormsExportAuth(request, env);
       if (request.method === "GET" && url.pathname === "/forms/export") return handleFormsExport(request, env);
+      if (request.method === "GET" && url.pathname === "/forms/stats") return handleFormsStats(request, env);
       if (request.method === "POST" && url.pathname === "/admin/sync") return handleAdminSync(request, env);
       if (request.method === "GET" && url.pathname === "/admin/forms") return handleAdminForms(request, env);
       if (request.method === "POST" && url.pathname === "/admin/reset-pass") return handleAdminResetPass(request, env);

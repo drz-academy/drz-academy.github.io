@@ -283,7 +283,7 @@
       align-items: center;
       gap: 1rem;
       flex-wrap: wrap;
-      margin-bottom: 1.5rem;
+      margin-top: 1.5rem;
       padding: 0.85rem 1.1rem;
       border: 1px solid rgba(243, 211, 97, 0.35);
       background: rgba(243, 211, 97, 0.08);
@@ -293,6 +293,12 @@
     .admin-bar p {
       font-size: 0.9rem;
       color: var(--text-muted);
+    }
+
+    .admin-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
     }
 
     .options {
@@ -479,12 +485,6 @@
     <h1 id="form-title">Evaluación del <em>curso</em></h1>
     <p class="lead" id="form-intro">Cargando el formulario…</p>
 
-    <div id="admin-bar" class="admin-bar hidden" hidden>
-      <p>Modo administrador: puedes descargar todas las respuestas.</p>
-      <button type="button" class="btn btn-primary" id="admin-csv">Descargar resultados (CSV)</button>
-    </div>
-    <p class="status" id="admin-status" hidden></p>
-
     <section id="view-loading" class="card">
       <p class="status">Preparando tus preguntas…</p>
     </section>
@@ -521,6 +521,15 @@
         <a class="btn btn-ghost" href="/club/">Volver al Club</a>
       </div>
     </section>
+
+    <div id="admin-bar" class="admin-bar hidden" hidden>
+      <p>Modo administrador: puedes analizar o descargar las respuestas.</p>
+      <div class="admin-actions">
+        <a class="btn btn-ghost" id="admin-stats" href="/club/drz-forms/drz-stats.html">Analizar resultados</a>
+        <button type="button" class="btn btn-primary" id="admin-csv">Descargar resultados (CSV)</button>
+      </div>
+    </div>
+    <p class="status" id="admin-status" hidden></p>
   </main>
 
   <footer>
@@ -536,7 +545,7 @@
     </div>
   </footer>
 
-  <script src="/club/drz-forms/drz-form.js?v=20260831j" type="module"></script>
+  <script src="/club/drz-forms/drz-form.js?v=20260831l" type="module"></script>
 </body>
 
 </html>

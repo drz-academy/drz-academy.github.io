@@ -186,8 +186,9 @@ Resumen operativo:
 
 - Esquema: `club/drz-forms/evaluacion-curso.json`
 - Página: `/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=<id>` (`&preview=1` sin login)
-- Admin CSV: el mismo enlace con `TOKEN=` y `CLUB_ADMIN_MASTER`
-- Export local: `make club-forms-export CURSO=masterclass_extraterrestre`
+- Admin: `TOKEN=` → **Analizar resultados** (`drz-stats.html`, anónimo) y CSV; modo prueba no guarda respuestas
+- Export local: `make club-forms-export` → JSON gitignored y `club/drz-forms/evaluacion-curso-respuestas.csv`
+- Backup diario (GitHub Actions): el mismo CSV se actualiza cada mañana en el repo
 - Pruebas: `make club-forms-reset`
 
 Tras cambiar preguntas o el flag `evaluacion`: `make club-worker-deploy` (si cambió el Worker) y `make club-sync`.

@@ -4,7 +4,7 @@ const TOKEN_KEY = "drz-club-token";
 const ADMIN_TOKEN_KEY = "drz-forms-export-token";
 const WORKER_URL = "https://drz-club-portal.drz-academy.workers.dev";
 const FORM_ID_RE = /^[a-z0-9][a-z0-9_-]{0,63}$/;
-const SCHEMA_VERSION = "20260831j";
+const SCHEMA_VERSION = "20260831l";
 
 function workerEndpoint() {
   const params = new URLSearchParams(location.search);
@@ -438,9 +438,23 @@ function collectAnswers(schema) {
   return { answers, missing };
 }
 
+function pruebaDoneStatus(schema, answers, catalog, cursoId) {
+  const chosenCurso = sanitizeId(answers?.curso) || cursoId;
+  const chosen = (catalog || []).find((item) => item.id === chosenCurso);
+  return {
+    prueba: true,
+    curso_nombre: String(schema.prueba_curso_nombre || chosen?.nombre || "").trim(),
+    certificado_url: String(schema.prueba_certificado_url || "").trim(),
+  };
+}
+
 function showDone(status) {
   const cursoNombre = status.curso_nombre || "";
-  if (cursoNombre) {
+  if (status.prueba) {
+    $("done-lead").textContent = cursoNombre
+      ? `Prueba con ${cursoNombre}: las respuestas no se guardaron.`
+      : "Prueba: las respuestas no se guardaron.";
+  } else if (cursoNombre) {
     $("done-lead").textContent = `Ya registramos tus respuestas sobre ${cursoNombre}.`;
   }
   const certUrl = String(status.certificado_url || "").trim();
@@ -535,6 +549,10 @@ function enableAdminBar(formId) {
   if (!bar) return;
   bar.hidden = false;
   bar.classList.remove("hidden");
+  const stats = $("admin-stats");
+  if (stats) {
+    stats.href = `/club/drz-forms/drz-stats.html?form=${encodeURIComponent(formId)}`;
+  }
   const btn = $("admin-csv");
   if (!btn) return;
   btn.addEventListener("click", async () => {
@@ -559,14 +577,65 @@ function paintForm(schema, { cursos, prefill, submitMode }) {
     submit.disabled = true;
     submit.textContent = "Vista previa (no se envía)";
     showStatus($("form-status"), "Vista previa: las respuestas no se guardan.", "ok");
-  } else if (submitMode === "admin-only") {
-    submit.disabled = true;
-    submit.textContent = "Enviar evaluación";
-    showStatus($("form-status"), "Entra al Club para enviar una evaluación. El CSV sí está disponible.", "ok");
+  } else if (submitMode === "prueba") {
+    submit.disabled = false;
+    submit.textContent = "Enviar evaluación (prueba)";
+    showStatus($("form-status"), "Modo prueba: puedes enviar, pero las respuestas no se guardan.", "ok");
   } else {
     submit.disabled = false;
     submit.textContent = "Enviar evaluación";
   }
+}
+
+function bindFormSubmit(schema, { formId, cursoId, catalog = [], sessionToken = "", submitMode = "live", status = {} } = {}) {
+  $("drz-form").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const submit = $("submit-form");
+    const { answers, missing } = collectAnswers(schema);
+    if (missing.length) {
+      showStatus($("form-status"), "Revisa las preguntas obligatorias que faltan.", "error");
+      const first = document.querySelector(`.question[data-id="${CSS.escape(missing[0])}"]`);
+      first?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    if (submitMode === "prueba") {
+      showDone(pruebaDoneStatus(schema, answers, catalog, cursoId));
+      return;
+    }
+    submit.disabled = true;
+    showStatus($("form-status"), "Enviando…");
+    const chosenCurso = sanitizeId(answers.curso) || cursoId;
+    try {
+      const data = await api("/forms/submit", {
+        method: "POST",
+        token: sessionToken,
+        body: { formId, cursoId: chosenCurso, answers },
+      });
+      if (!isAdmin()) {
+        trackEvent("club_form_submit", { form: formId, curso: status.curso_nombre || chosenCurso });
+      }
+      const chosen = catalog.find((item) => item.id === chosenCurso);
+      showDone({
+        curso_nombre: chosen?.nombre || status.curso_nombre,
+        certificado_url: data.certificado_url || "",
+      });
+    } catch (err) {
+      if (err.code === "already_submitted") {
+        showDone({
+          curso_nombre: status.curso_nombre,
+          certificado_url: err.certificado_url || "",
+        });
+        return;
+      }
+      if (err.status === 401 || err.code === "unauthorized") {
+        loginRedirect();
+        return;
+      }
+      showStatus($("form-status"), mapError(err), "error");
+    } finally {
+      submit.disabled = false;
+    }
+  });
 }
 
 async function boot() {
@@ -599,24 +668,26 @@ async function boot() {
   const cursos = await loadCursos();
   const sessionToken = currentToken();
 
+  if (admin) {
+    paintForm(schema, {
+      cursos,
+      prefill: cursoId ? { curso: cursoId } : {},
+      submitMode: "prueba",
+    });
+    bindFormSubmit(schema, { formId, cursoId, catalog: cursos, submitMode: "prueba" });
+    return;
+  }
+
   if (preview && !sessionToken) {
     paintForm(schema, {
       cursos,
       prefill: cursoId ? { curso: cursoId } : {},
-      submitMode: admin ? "admin-only" : "preview",
+      submitMode: "preview",
     });
     return;
   }
 
   if (!sessionToken) {
-    if (admin) {
-      paintForm(schema, {
-        cursos,
-        prefill: cursoId ? { curso: cursoId } : {},
-        submitMode: "admin-only",
-      });
-      return;
-    }
     loginRedirect();
     return;
   }
@@ -658,51 +729,7 @@ async function boot() {
   if (status.nombre) prefill.evaluador = status.nombre;
 
   paintForm(schema, { cursos: catalog, prefill, submitMode: "live" });
-
-  $("drz-form").addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const submit = $("submit-form");
-    const { answers, missing } = collectAnswers(schema);
-    if (missing.length) {
-      showStatus($("form-status"), "Revisa las preguntas obligatorias que faltan.", "error");
-      const first = document.querySelector(`.question[data-id="${CSS.escape(missing[0])}"]`);
-      first?.scrollIntoView({ behavior: "smooth", block: "center" });
-      return;
-    }
-    submit.disabled = true;
-    showStatus($("form-status"), "Enviando…");
-    const chosenCurso = sanitizeId(answers.curso) || cursoId;
-    try {
-      const data = await api("/forms/submit", {
-        method: "POST",
-        token: sessionToken,
-        body: { formId, cursoId: chosenCurso, answers },
-      });
-      if (!isAdmin()) {
-        trackEvent("club_form_submit", { form: formId, curso: status.curso_nombre || chosenCurso });
-      }
-      const chosen = catalog.find((item) => item.id === chosenCurso);
-      showDone({
-        curso_nombre: chosen?.nombre || status.curso_nombre,
-        certificado_url: data.certificado_url || "",
-      });
-    } catch (err) {
-      if (err.code === "already_submitted") {
-        showDone({
-          curso_nombre: status.curso_nombre,
-          certificado_url: err.certificado_url || "",
-        });
-        return;
-      }
-      if (err.status === 401 || err.code === "unauthorized") {
-        loginRedirect();
-        return;
-      }
-      showStatus($("form-status"), mapError(err), "error");
-    } finally {
-      submit.disabled = false;
-    }
-  });
+  bindFormSubmit(schema, { formId, cursoId, catalog, sessionToken, submitMode: "live", status });
 }
 
 boot();

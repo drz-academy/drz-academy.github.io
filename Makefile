@@ -30,7 +30,7 @@ help:
 	@echo ""
 	@echo "  make club-worker-deploy - Despliega el Worker del Club"
 	@echo "  make club-sync          - Sube miembros, catálogo y formularios de club/ a Cloudflare KV"
-	@echo "  make club-forms-export  - Descarga respuestas de evaluación a club/personal/formularios/"
+	@echo "  make club-forms-export  - Descarga respuestas (JSON en personal/ y CSV en club/drz-forms/)"
 	@echo "  make club-forms-reset   - Borra todas las evaluaciones en el Worker (pide confirmación)"
 	@echo "  make club-reset-pass    - Borra todas las claves del Club (vuelven a crearla)"
 	@echo "  make club-dev           - Worker local en http://127.0.0.1:8787"
@@ -72,7 +72,8 @@ sync-site:
 	@cp club/index.html club/portal.js club/categorias.json $(SITE)/club/
 	@python3 club/bin/generar_stats.py --out $(SITE)/club/stats.json --cursos-out club/drz-forms/cursos-opciones.json
 	@mkdir -p $(SITE)/club/drz-forms
-	@cp club/drz-forms/drz-form.html club/drz-forms/drz-form.js club/drz-forms/*.json $(SITE)/club/drz-forms/
+	@# Solo HTML/JS/JSON públicos. Nunca copiar *-respuestas.csv (datos de miembros).
+	@cp club/drz-forms/*.html club/drz-forms/*.js club/drz-forms/*.json $(SITE)/club/drz-forms/
 	@rm -rf $(SITE)/portal
 	@mkdir -p $(SITE)/portal
 	@printf '%s\n' '<!doctype html><meta http-equiv="refresh" content="0;url=/club/"><link rel="canonical" href="/club/">' > $(SITE)/portal/index.html
@@ -184,7 +185,7 @@ club-sync portal-sync:
 	@python3 club/client/sync_members.py
 
 club-forms-export:
-	@python3 club/client/export_forms.py $(if $(FORM),--form $(FORM),) $(if $(CURSO),--curso $(CURSO),)
+	@python3 club/client/export_forms.py --csv-repo $(if $(FORM),--form $(FORM),) $(if $(CURSO),--curso $(CURSO),)
 
 club-forms-reset:
 	@python3 club/client/reset_forms.py $(if $(FORM),--form $(FORM),)

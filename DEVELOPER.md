@@ -271,6 +271,8 @@ El motor es genérico: una sola página (`drz-form.html` + `drz-form.js`) pinta 
 club/drz-forms/
 ├── drz-form.html              Motor (no hace falta tocarlo para un formulario nuevo)
 ├── drz-form.js
+├── drz-stats.html             Estadísticas anónimas (TOKEN)
+├── drz-stats.js
 ├── evaluacion-curso.json      Esquema de la evaluación de cursos
 └── cursos-opciones.json       Lista pública id+nombre (se regenera en el build)
 ```
@@ -311,6 +313,8 @@ Copia `evaluacion-curso.json` o parte de cero. Estructura:
 |----------------------|----------|
 | `requiere_curso` | `true`: hay que estar inscrito en el curso del enlace (o elegido en el desplegable). |
 | `revela_certificado` | `true`: al enviar, si hay certificado, se muestra el enlace. |
+| `prueba_certificado_url` | Solo modo `TOKEN`: enlace de certificado de ejemplo al enviar sin guardar. |
+| `prueba_curso_nombre` | Nombre que acompaña ese certificado de ejemplo. |
 
 Cada pregunta:
 
@@ -410,9 +414,18 @@ Pide confirmación: *¿Estás completamente seguro de borrar todas las evaluacio
 /club/drz-forms/drz-form.html?form=evaluacion-curso&TOKEN=<CLUB_ADMIN_MASTER>
 ```
 
-Aparece **Descargar resultados (CSV)**. El `TOKEN` se quita de la barra al cargar.
+Aparece **Analizar resultados** y **Descargar resultados (CSV)**. También puedes **enviar el formulario en modo prueba**: valida las respuestas, no las guarda en KV/CSV y, en `evaluacion-curso`, muestra el certificado de ejemplo (El Rompecabezas de la Materia, Juan Manuel Montoya). El `TOKEN` se quita de la barra al cargar.
 
-**Desde la máquina (JSON en `club/personal/formularios/`, gitignored):**
+**Estadísticas (anónimas, sin nombres):**
+
+```
+/club/drz-forms/drz-stats.html?form=evaluacion-curso&TOKEN=<CLUB_ADMIN_MASTER>
+/club/drz-forms/drz-stats.html?form=evaluacion-curso&filter=curso:Master Class Extraterrestre&TOKEN=<CLUB_ADMIN_MASTER>
+```
+
+`filter=` acepta `campo:valor` (varios unidos con `;`). `curso:` filtra por el nombre del curso (coincidencias flexibles). El nombre de quien evalúa no aparece. Requiere el Worker con `GET /forms/stats` (`make club-worker-deploy`).
+
+**Desde la máquina (JSON en `club/personal/formularios/`, gitignored, y CSV de backup en git):**
 
 ```bash
 make club-forms-export
@@ -420,7 +433,11 @@ make club-forms-export FORM=evaluacion-curso
 make club-forms-export FORM=evaluacion-curso CURSO=masterclass_extraterrestre
 ```
 
-Usa `.secrets/club-admin-token` y `.secrets/club-worker-url`.
+Usa `.secrets/club-admin-token` y `.secrets/club-worker-url`. El CSV queda en `club/drz-forms/<id>-respuestas.csv` (p. ej. `evaluacion-curso-respuestas.csv`). Ese archivo **no** se publica en GitHub Pages.
+
+**Backup diario en GitHub:** el workflow `Backup form responses` corre cada mañana (~7:50 AM COT), baja todas las respuestas y hace commit del CSV si cambió. Así un `make club-forms-reset` no borra el histórico en git. En el repo hace falta el secreto `CLUB_ADMIN_TOKEN` (el mismo del Worker; también vale `CLUB_ADMIN_MASTER`). Opcional: `CLUB_WORKER_URL` si no es el Worker por defecto.
+
+También puedes lanzarlo a mano: **Actions** → **Backup form responses** → **Run workflow**.
 
 ### 6. Qué toca cada comando
 
@@ -428,7 +445,7 @@ Usa `.secrets/club-admin-token` y `.secrets/club-worker-url`.
 |---------|--------|
 | `make club-sync` | Sube miembros, `cursos.json` y todos los `club/drz-forms/*.json` de formulario a KV |
 | `make club-worker-deploy` | Publica `club/worker/club-portal-worker.js` |
-| `make club-forms-export` | Baja respuestas a `club/personal/formularios/` |
+| `make club-forms-export` | Baja respuestas a `club/personal/formularios/` (JSON) y `club/drz-forms/<id>-respuestas.csv` |
 | `make club-forms-reset` | Borra respuestas de evaluación en KV (pide confirmación) |
 | Push a `main` | Publica HTML/JS/JSON estáticos en GitHub Pages |
 
@@ -646,7 +663,7 @@ club/
   drz-forms/            Motor de formularios + JSON de preguntas
   worker/               Backend en Cloudflare Workers + KV (perfiles, claves, respuestas)
   client/sync_members.py  Sube club/ + club/personal/ al Worker (personal/ no va a Git)
-  client/export_forms.py  Descarga respuestas a personal/formularios/
+  client/export_forms.py  Descarga JSON a personal/formularios/ y CSV a drz-forms/
   client/reset_forms.py   Borra evaluaciones en KV
   bin/                  Scripts locales: base de datos, clasificación, boletines, informe
   personal/             Datos confidenciales (gitignored): miembros, boletines, inscripciones
