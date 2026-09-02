@@ -358,7 +358,7 @@ def optimize_image_for_og(source_path: Path, dest_path: Path, *, label: str) -> 
 
 
 def optimize_image_for_og_share(source_path: Path, dest_path: Path, *, label: str) -> tuple[int, int] | None:
-    """Recorta al ratio 4:5, redimensiona a 1200×1500 y comprime a ≤300 KB (WhatsApp)."""
+    """Redimensiona a un máximo de 1200px de ancho y comprime a ≤300 KB (WhatsApp)."""
     if not HAS_QRCODE:
         return None
 
@@ -367,7 +367,11 @@ def optimize_image_for_og_share(source_path: Path, dest_path: Path, *, label: st
         return None
 
     img = Image.open(source_path).convert("RGB")
-    img = crop_to_aspect(img, OG_SHARE_WIDTH, OG_SHARE_HEIGHT)
+    w, h = img.size
+    if w > OG_SHARE_WIDTH:
+        h = int(h * OG_SHARE_WIDTH / w)
+        w = OG_SHARE_WIDTH
+        img = img.resize((w, h), Image.LANCZOS)
 
     dest_path.parent.mkdir(parents=True, exist_ok=True)
     for quality in (85, 75, 65, 55, 45, 35):
