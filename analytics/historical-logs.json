@@ -1,5 +1,424 @@
 [
   {
+    "id": "e7f55c4a-63df-4504-98f1-48daf7b66b03",
+    "timestampServer": "2026-09-02T16:29:17.472Z",
+    "ip": "200.24.16.67",
+    "country": "CO",
+    "eventType": "app_click",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "https://drz-academy.github.io/stats.html",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "drake-calculator",
+      "targetName": "Calculadora de Drake",
+      "href": "apps/drake-calculator/",
+      "label": "Abrir aplicación"
+    },
+    "timestampClient": "2026-09-02T16:29:17.320Z"
+  },
+  {
+    "id": "eca7f07c-07a2-4ba2-99e4-332c2d99c27c",
+    "timestampServer": "2026-09-02T16:28:59.594Z",
+    "ip": "200.24.16.67",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "https://drz-academy.github.io/stats.html",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-09-02T16:28:59.456Z"
+  },
+  {
+    "id": "df4437f9-4241-43ee-acc7-813c960bc955",
+    "timestampServer": "2026-09-02T16:27:14.108Z",
+    "ip": "191.156.47.146",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=masterclass_extraterrestre",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "evaluacion-curso",
+      "curso": "Master Class Extraterrestre"
+    },
+    "timestampClient": "2026-09-02T16:27:13.780Z"
+  },
+  {
+    "id": "3460b73e-01ce-4c59-af35-a6bb257f01f6",
+    "timestampServer": "2026-09-02T16:19:58.660Z",
+    "ip": "191.156.47.146",
+    "country": "CO",
+    "eventType": "club_click_evaluacion",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "curso": "Master Class Extraterrestre",
+      "href": "https://drz-academy.github.io/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=masterclass_extraterrestre"
+    },
+    "timestampClient": "2026-09-02T16:19:58.474Z"
+  },
+  {
+    "id": "c34107bd-f3e3-479e-86a2-12c4febbe4ab",
+    "timestampServer": "2026-09-02T16:19:44.986Z",
+    "ip": "191.156.47.146",
+    "country": "CO",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "memberName": "Rodrigo Martínez",
+      "memberEmail": "roanmg49@gmail.com",
+      "categoria": "BRONCE"
+    },
+    "timestampClient": "2026-09-02T16:19:44.680Z"
+  },
+  {
+    "id": "3c6c61c2-6523-4d6a-a434-fda44f7c88f7",
+    "timestampServer": "2026-09-02T16:15:08.686Z",
+    "ip": "200.24.16.67",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-09-02T16:15:08.078Z"
+  },
+  {
+    "id": "0e15fdb7-b40b-4ddb-a515-cf8b62709380",
+    "timestampServer": "2026-09-02T13:46:33.930Z",
+    "ip": "201.234.67.131",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "https://drz.academy/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-09-02T13:46:32.522Z"
+  },
+  {
+    "id": "dc97b3f9-18fc-497b-8281-c3472a8428d4",
+    "timestampServer": "2026-09-02T12:14:48.153Z",
+    "ip": "191.156.32.90",
+    "country": "CO",
+    "eventType": "course_enroll_click",
+    "page": "/cursos/python-fin-del-mundo/",
+    "url": "https://drz-academy.github.io/cursos/python-fin-del-mundo/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+    "language": "es",
+    "details": {
+      "targetId": "python-fin-del-mundo",
+      "targetName": "Python para el fin del mundo",
+      "href": "https://drz.academy/producto/python-fin-del-mundo/",
+      "label": "Inscribete ahora →"
+    },
+    "timestampClient": "2026-09-02T12:14:47.893Z"
+  },
+  {
+    "id": "6b512809-da00-436b-8b0a-763656821da5",
+    "timestampServer": "2026-09-02T12:14:34.505Z",
+    "ip": "191.156.32.90",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/python-fin-del-mundo/",
+    "url": "https://drz-academy.github.io/cursos/python-fin-del-mundo/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+    "language": "es",
+    "details": {
+      "courseId": "python-fin-del-mundo",
+      "courseName": "Python para el fin del mundo"
+    },
+    "timestampClient": "2026-09-02T12:14:34.319Z"
+  },
+  {
+    "id": "e3aba710-add3-4dd3-b134-59cae07b6e58",
+    "timestampServer": "2026-09-02T12:14:34.403Z",
+    "ip": "191.156.32.90",
+    "country": "CO",
+    "eventType": "course_click",
+    "page": "/",
+    "url": "https://drz-academy.github.io/#cursos",
+    "referrer": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+    "language": "es",
+    "details": {
+      "targetId": "python-fin-del-mundo",
+      "targetName": "Python para el fin del mundo",
+      "href": "cursos/python-fin-del-mundo/",
+      "label": "Python para el fin del mundo\n            Aprende Python desde cero con datos reales de asteroides y criterio científico\n"
+    },
+    "timestampClient": "2026-09-02T12:14:34.083Z"
+  },
+  {
+    "id": "adb2e89f-5447-44a7-8c1a-7e49cd18d0bd",
+    "timestampServer": "2026-09-02T12:13:20.434Z",
+    "ip": "191.156.32.90",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-09-02T12:13:20.155Z"
+  },
+  {
+    "id": "426c5ec6-5ac2-42eb-9c1e-a17149946ebb",
+    "timestampServer": "2026-09-02T12:12:02.792Z",
+    "ip": "191.156.32.90",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-09-02T12:12:02.136Z"
+  },
+  {
+    "id": "d0482c05-f946-4955-a49d-492f3d92069e",
+    "timestampServer": "2026-09-02T11:21:56.472Z",
+    "ip": "193.108.245.218",
+    "country": "GB",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "https://www.google.com/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-09-02T11:21:56.347Z"
+  },
+  {
+    "id": "220c3d36-584f-4674-aafd-6ef2000ba828",
+    "timestampServer": "2026-09-02T11:20:24.988Z",
+    "ip": "193.108.245.218",
+    "country": "GB",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "https://www.google.com/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-09-02T11:20:24.857Z"
+  },
+  {
+    "id": "c8f94152-f805-40d2-ac5e-3b35424782c7",
+    "timestampServer": "2026-09-02T00:51:42.785Z",
+    "ip": "200.24.16.67",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-09-02T00:51:41.882Z"
+  },
+  {
+    "id": "765e99d9-cf12-44a1-9f7e-12231d893bd9",
+    "timestampServer": "2026-09-01T23:30:56.851Z",
+    "ip": "200.24.16.67",
+    "country": "CO",
+    "eventType": "app_click",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "star-trek",
+      "targetName": "Star Trek",
+      "href": "apps/star-trek/",
+      "label": "Abrir aplicación"
+    },
+    "timestampClient": "2026-09-01T23:30:56.560Z"
+  },
+  {
+    "id": "ce0f9e66-b4fb-485b-a24a-3400a49da1c9",
+    "timestampServer": "2026-09-01T23:30:41.673Z",
+    "ip": "200.24.16.67",
+    "country": "CO",
+    "eventType": "app_click",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "drake-calculator",
+      "targetName": "Calculadora de Drake",
+      "href": "apps/drake-calculator/",
+      "label": "Abrir aplicación"
+    },
+    "timestampClient": "2026-09-01T23:30:41.388Z"
+  },
+  {
+    "id": "134e702a-2f33-49b8-8e09-202d291e59b8",
+    "timestampServer": "2026-09-01T23:29:56.602Z",
+    "ip": "200.24.16.67",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-09-01T23:29:55.731Z"
+  },
+  {
+    "id": "8cfe4927-1189-47ff-a38c-e5af8e744db5",
+    "timestampServer": "2026-09-01T23:29:00.250Z",
+    "ip": "192.178.11.37",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "http://www.google.com/search",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64)  AppleWebKit/537.36 (KHTML, like Gecko; Google Web Preview)  Chrome/151.0.7922.173 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-09-01T23:28:59.434Z"
+  },
+  {
+    "id": "b41ff77a-d6c5-4592-96e4-68b13838e398",
+    "timestampServer": "2026-09-01T21:22:33.517Z",
+    "ip": "186.28.152.158",
+    "country": "CO",
+    "eventType": "course_enroll_click",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6.1 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "targetId": "cambio-climatico",
+      "targetName": "Cambio Climático",
+      "href": "https://drz.academy/producto/cambio-climatico/",
+      "label": "Inscribete ahora →"
+    },
+    "timestampClient": "2026-09-01T21:22:33.109Z"
+  },
+  {
+    "id": "c087a1ad-b7cc-4369-a20a-3bab6c80c0f3",
+    "timestampServer": "2026-09-01T21:06:05.218Z",
+    "ip": "186.28.152.158",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6.1 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-09-01T21:06:04.698Z"
+  },
+  {
+    "id": "fe3faa5f-da4b-4743-b4a4-6193165775de",
+    "timestampServer": "2026-09-01T20:16:20.055Z",
+    "ip": "52.167.144.206",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/astropython/",
+    "url": "https://drz-academy.github.io/cursos/astropython/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/136.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "astropython",
+      "courseName": "AstroPython"
+    },
+    "timestampClient": "2026-09-01T20:16:18.775Z"
+  },
+  {
+    "id": "2dac1299-4357-4212-a316-6dea39435a19",
+    "timestampServer": "2026-09-01T18:01:16.888Z",
+    "ip": "191.95.51.121",
+    "country": "CO",
+    "eventType": "course_enroll_click",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "https://drz.academy/",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 27_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/24A5380h Instagram 444.0.0.31.65 (iPhone16,2; iOS 27_0; es_LA; es; scale=3.00; 1290x2796; IABMV/1; 1047335181) Safari/604.1",
+    "language": "es",
+    "details": {
+      "targetId": "cambio-climatico",
+      "targetName": "Cambio Climático",
+      "href": "https://drz.academy/producto/cambio-climatico/",
+      "label": "Inscribete ahora →"
+    },
+    "timestampClient": "2026-09-01T18:01:16.662Z"
+  },
+  {
+    "id": "a40660be-716f-49a6-86a0-8875089db112",
+    "timestampServer": "2026-09-01T18:00:51.906Z",
+    "ip": "191.95.51.121",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "https://drz.academy/",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 27_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/24A5380h Instagram 444.0.0.31.65 (iPhone16,2; iOS 27_0; es_LA; es; scale=3.00; 1290x2796; IABMV/1; 1047335181) Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-09-01T18:00:51.028Z"
+  },
+  {
     "id": "d0d88f32-9918-455d-ac25-c868b7580a61",
     "timestampServer": "2026-09-01T02:41:55.105Z",
     "ip": "2800:e2:f80:1651:efa0:786:efac:c6b4",
