@@ -22,6 +22,8 @@ club/
     certificados/fuentes/   PDFs originales (un folder por curso)
     certificados/           Un PDF por persona: CURSO-CEDULA-EMAIL-NOMBRE.pdf
     ClubDrZAcademy/         Acceso local a la carpeta de Google Drive
+      Certificados/         Diplomas: CURSO-CEDULA-EMAIL-NOMBRE.pdf
+      Certificados/bin/     actualizar_certificados.py (copia los SI de la lista Excel)
     boletines/              HTML personalizados + script de envío
     drz-club.md             Informe de clasificación
     beneficios_usados.csv   Quién ya redimió un beneficio
@@ -65,6 +67,7 @@ make club-informe        # personal/drz-club.md
 make generar-boletines   # HTML individuales + script de envío en personal/boletines/
 make club-certificados         # Parte y nombra PDFs en personal/certificados/
 make club-certificados-drive   # Enlaces de Drive → personal/certificados.csv
+# emisión por curso (Excel + PDF sueltos): personal/ClubDrZAcademy/Certificados/bin/actualizar_certificados.py
 make club-sync                 # sube miembros + catálogo al Worker
 make club-reset-pass           # borra todas las claves; cada quien crea una nueva
 make club-forms-reset          # borra todas las evaluaciones (pide confirmación)
@@ -162,6 +165,31 @@ Si no hay cédula, el segundo campo del nombre es el **celular**. Luego, para es
 ```bash
 make club-certificados-drive
 ```
+
+### Lista Excel + PDF sueltos (emisión por curso)
+
+Cuando el curso tiene una carpeta en Drive con un PDF por persona y una lista de quién ya se certifica, no copies a mano. Usa un **Excel** (no el atajo `.gsheet`) en esa carpeta: hoja `Certificaciones`, columna `Certifica` (`SI` / `NO`). Los PDF van al lado, nombrados con el nombre (`MARTHA ALZATE.pdf`).
+
+El script copia a `personal/ClubDrZAcademy/Certificados/` **solo** a quienes tienen `SI` (los que ya están se saltan; se puede ir emitiendo de a poco):
+
+```bash
+cd club/personal/ClubDrZAcademy/Certificados/bin
+python3 actualizar_certificados.py \
+  Extraterrestres-Certificación-RepositorioPublico/Lista\ Certificación\ -\ Master\ Class\ Extraterrestre\ -\ 2026-2.xlsx
+```
+
+Desde `Certificados/`: `python3 bin/actualizar_certificados.py <ruta-al-xlsx>`. Hace falta `openpyxl`. `--dry-run` muestra qué copiaría; `--curso <id>` fuerza el id de `cursos.json` si no lo infiere del nombre del archivo o de la carpeta.
+
+El nombre de salida es el del Club: `CURSO-CEDULA-EMAIL-NOMBRE.pdf` (ejemplo: `masterclass_extraterrestre-30399284-martha.alzate@gmail.com-Martha Cecilia Alzate Salazar.pdf`). Si la persona está en `personal/drz-club-members.json`, usa cédula, correo y nombre de esa base.
+
+Para que el portal los muestre:
+
+```bash
+make club-certificados-drive
+make club-sync
+```
+
+Si el curso tiene `"evaluacion": true`, el certificado sigue oculto hasta que la persona envíe el formulario `evaluacion-curso`.
 
 ### Cursos permanentes (Hotmart)
 
