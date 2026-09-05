@@ -229,7 +229,8 @@ function BlackHoleComponent() {
   const translations = useMemo(() => ({
     en: {
       title: "Black-hole optics",
-      subtitle: "by Dr. Z",
+      byline: "By Jorge I. Zuluaga, Dr. Z",
+      hostPrefix: "An app",
       cleanAll: "Clean All",
       gravitation: "Gravitation",
       showGrid: "Show Grid",
@@ -256,7 +257,8 @@ function BlackHoleComponent() {
     },
     es: {
       title: "Óptica de agujeros negros",
-      subtitle: "por Dr. Z",
+      byline: "Por Jorge I. Zuluaga, Dr. Z",
+      hostPrefix: "Una app",
       cleanAll: "Limpiar Todo",
       gravitation: "Gravitación",
       showGrid: "Mostrar Cuadrícula",
@@ -533,13 +535,41 @@ function BlackHoleComponent() {
     >
       {/* Sidebar */}
       <div 
-        className="absolute left-0 top-0 h-full w-[20%] bg-black/50 backdrop-blur-sm border-r border-white/20 p-6 z-50 flex flex-col"
+        className="absolute left-0 top-0 h-full w-[20%] bg-black/50 backdrop-blur-sm border-r border-white/20 p-6 z-50 flex min-h-0 flex-col overflow-y-auto"
         style={{ pointerEvents: "auto" }}
       >
-        <h1 className="text-white text-2xl font-bold mb-6">{t.title}<br/><i>{t.subtitle}</i></h1>
+        <div className="mb-6 shrink-0">
+          <img
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/logo.png`}
+            alt=""
+            className="mb-3 w-full max-w-[180px] object-contain opacity-90"
+          />
+          <h1 className="text-white text-2xl font-bold leading-tight">{t.title}</h1>
+          <p className="mt-1.5 text-xs leading-snug text-white/55">{t.byline}</p>
+          <p className="mt-1 text-[0.68rem] tracking-wide text-white/40">
+            {t.hostPrefix}{" "}
+            <a
+              href="https://drz-academy.github.io/#apps"
+              target="_blank"
+              rel="noreferrer"
+              className="text-white/55 hover:text-white hover:underline"
+            >
+              Dr.Z
+            </a>
+            {" / "}
+            <a
+              href="https://seap-udea.github.io/"
+              target="_blank"
+              rel="noreferrer"
+              className="text-white/55 hover:text-white hover:underline"
+            >
+              seap-udea
+            </a>
+          </p>
+        </div>
         
         {/* Controls */}
-        <div className="space-y-4 mb-8">
+        <div className="mb-6 shrink-0 space-y-4">
           <button
             className="w-full bg-white/10 text-white border border-white/30 rounded-lg px-4 py-2 text-sm hover:bg-white/20 transition"
             onClick={handleCleanAll}
@@ -581,8 +611,8 @@ function BlackHoleComponent() {
         </div>
 
         {/* Instructions */}
-        <div className="text-white/80 space-y-4 mb-8">
-          <div className="flex items-center justify-between">
+        <div className="mb-6 shrink-0 text-white/80">
+          <div className="mb-3 flex items-center justify-between">
             <h2 className="text-lg font-semibold">{t.howToUse}</h2>
             <div className="flex gap-2">
               <button
@@ -609,7 +639,7 @@ function BlackHoleComponent() {
         </div>
 
         {/* Zoom controls */}
-        <div className="flex gap-4 mb-8">
+        <div className="mb-6 flex shrink-0 gap-4">
           <button
             className="w-full bg-white/10 text-white border border-white/30 rounded-lg px-4 py-2 text-xl hover:bg-white/20 transition"
             onClick={() => setZoom((z) => Math.max(minZoom, z - 0.2))}
@@ -625,19 +655,19 @@ function BlackHoleComponent() {
         </div>
 
         {/* Dr. Z Logo */}
-        <div className="mt-auto flex justify-center">
+        <div className="flex shrink-0 justify-center">
           <img 
             src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/drz.png`}
             alt="Dr. Z Logo" 
             className="w-24 h-24 object-contain opacity-80 hover:opacity-100 transition-opacity"
           />
         </div>
-        <div className="flex justify-center text-white/30" style={{ fontSize: '10px' }}>
+        <div className="flex shrink-0 justify-center text-white/30" style={{ fontSize: '10px' }}>
           <center><i>{language === 'en' ? 'Developed by' : 'Desarrollado por'} <a href="https://drz.academy" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white">Jorge I. Zuluaga (Dr. Z)</a> {language === 'en' ? 'with the assistance of AI and the suggestions and tests of relativity students (thanks!)' : 'con la asistencia de IA y las sugerencias y pruebas de estudiantes de relatividad (¡gracias!)'}</i></center>
         </div>
         
         {/* Version and Commit Info */}
-        <div className="mt-4 pt-4 border-t border-white/10">
+        <div className="mt-4 shrink-0 border-t border-white/10 pt-4">
           <div className="text-center text-white/50 text-xs space-y-1">
             <div className="font-mono">{t.version} {packageJson.version}</div>
             <div className="font-mono">{t.latestCommit} {new Date().toLocaleDateString(language === 'en' ? 'en-US' : 'es-ES', { 

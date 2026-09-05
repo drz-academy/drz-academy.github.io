@@ -20,3 +20,36 @@ a {
   text-decoration: none;
 }
 
+.byline {
+  margin: 0.45rem 0 0;
+  color: #8a8a8a;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.byline a {
+  color: #c8c8c8;
+}
+
+.byline a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.host-line {
+  margin: 0.2rem 0 0;
+  color: #666;
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
+.host-line a {
+  color: #9a9a9a;
+}
+
+.host-line a:hover {
+  color: #4dabf7;
+  text-decoration: underline;
+}
+

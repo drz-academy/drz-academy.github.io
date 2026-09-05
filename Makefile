@@ -17,6 +17,8 @@ help:
 	@echo "  make update     - Actualiza todas las aplicaciones desde GitHub"
 	@echo "  make update_drake_calculator - Actualiza solo la Calculadora de Drake"
 	@echo "  make update_star_trek        - Actualiza solo la aplicación Star Trek"
+	@echo "  make update_black_holes      - Actualiza solo la aplicación Lighting Black Holes"
+	@echo "  make update_cloud_academy    - Actualiza solo la aplicación Cloud Academy"
 	@echo ""
 	@echo "  make worker-deploy - Despliega el Worker de analytics en Cloudflare"
 	@echo "  make notify-worker-deploy - Despliega el Worker de notificaciones en Cloudflare"
@@ -135,7 +137,7 @@ stash:
 		git stash && git pull --no-rebase && git stash pop || echo "⚠️ Revisa si hubo conflictos al restaurar tus cambios locales."; \
 	fi
 
-update: update_drake_calculator update_star_trek
+update: update_drake_calculator update_star_trek update_black_holes update_cloud_academy
 
 update_drake_calculator:
 	@echo "▶  Updating Drake Calculator from GitHub…"
@@ -164,6 +166,34 @@ update_star_trek:
 	@rm -rf $(SITE)/apps/star-trek/*
 	@cp -r apps/star-trek/out/* $(SITE)/apps/star-trek/
 	@echo "✓  Star Trek app updated and rebuilt."
+
+update_black_holes:
+	@echo "▶  Updating Lighting Black Holes app from GitHub…"
+	@rm -rf apps/lighting-black-holes
+	@mkdir -p /tmp/seap-temp
+	@curl -sL https://github.com/seap-udea/seap-udea.github.io/archive/main.tar.gz | tar xz -C /tmp/seap-temp
+	@mv /tmp/seap-temp/seap-udea.github.io-main/apps/lighting-black-holes apps/
+	@rm -rf /tmp/seap-temp
+	@echo "▶  Building Lighting Black Holes app…"
+	@cd apps/lighting-black-holes && npm ci && npm run build
+	@mkdir -p $(SITE)/apps/lighting-black-holes
+	@rm -rf $(SITE)/apps/lighting-black-holes/*
+	@cp -r apps/lighting-black-holes/out/* $(SITE)/apps/lighting-black-holes/
+	@echo "✓  Lighting Black Holes app updated and rebuilt."
+
+update_cloud_academy:
+	@echo "▶  Updating Cloud Academy app from GitHub…"
+	@rm -rf apps/cloud_academy
+	@mkdir -p /tmp/seap-temp
+	@curl -sL https://github.com/seap-udea/seap-udea.github.io/archive/main.tar.gz | tar xz -C /tmp/seap-temp
+	@mv /tmp/seap-temp/seap-udea.github.io-main/apps/cloud_academy apps/
+	@rm -rf /tmp/seap-temp
+	@echo "▶  Building Cloud Academy app…"
+	@cd apps/cloud_academy && npm ci --legacy-peer-deps && npm run build
+	@mkdir -p $(SITE)/apps/cloud_academy
+	@rm -rf $(SITE)/apps/cloud_academy/*
+	@cp -r apps/cloud_academy/out/* $(SITE)/apps/cloud_academy/
+	@echo "✓  Cloud Academy app updated and rebuilt."
 
 worker-deploy:
 	@echo "▶  Deploying analytics worker…"

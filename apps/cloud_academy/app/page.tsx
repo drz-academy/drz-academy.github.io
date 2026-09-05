@@ -20,8 +20,36 @@ export default function Home() {
             <h1 style={{ fontSize: '2.5rem', margin: 0, color: '#ffffff' }}>
               Cloud Academy
             </h1>
+            <p className="byline">
+              Por{" "}
+              <a
+                href="https://jorgezuluaga.github.io"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Jorge I. Zuluaga
+              </a>
+            </p>
+            <p className="host-line">
+              Una app{" "}
+              <a
+                href="https://drz-academy.github.io/#apps"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Dr.Z
+              </a>
+              {" / "}
+              <a
+                href="https://seap-udea.github.io/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                seap-udea
+              </a>
+            </p>
           </div>
-          <p style={{ fontSize: '1.1rem', color: '#b0b0b0', marginBottom: '1rem' }}>
+          <p style={{ fontSize: '1.1rem', color: '#b0b0b0', margin: '1rem 0' }}>
             Visualización interactiva de las trazas en una cámara de burbujas
           </p>
         </header>
