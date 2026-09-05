@@ -4,10 +4,6 @@
     "nombre": "Cuántica a Pie"
   },
   {
-    "id": "cuantica_a_pie_permanente",
-    "nombre": "Cuántica a Pie (Permanente)"
-  },
-  {
     "id": "catastrofisica",
     "nombre": "Catastrofísica"
   },
@@ -34,5 +30,9 @@
   {
     "id": "masterclass_extraterrestre",
     "nombre": "Master Class Extraterrestre"
+  },
+  {
+    "id": "cuantica_a_pie_permanente",
+    "nombre": "Cuántica a Pie (Permanente)"
   }
 ]

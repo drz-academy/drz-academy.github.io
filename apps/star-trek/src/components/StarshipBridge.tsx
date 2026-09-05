@@ -390,6 +390,12 @@ export default function StarshipBridge() {
     setProgressValue(1);
   }, [setProgressValue]);
 
+  /** Misma pose que al cargar la app: mitad del viaje, en pausa. */
+  const pauseAtMidJourney = useCallback(() => {
+    setPlaying(false);
+    setProgressValue(0.5);
+  }, [setProgressValue]);
+
   // El plan compartido vive en la URL, un sistema externo que solo puede leerse
   // ya montado el componente sin romper la hidratación del export estático.
   // useLayoutEffect corre antes del pintado, para no mostrar un instante el
@@ -400,13 +406,13 @@ export default function StarshipBridge() {
       if (!shared) return;
       setPlan(shared);
       setActivePreset(null);
-      rewindToArrival();
+      pauseAtMidJourney();
     };
 
     readSharedPlan();
     window.addEventListener("popstate", readSharedPlan);
     return () => window.removeEventListener("popstate", readSharedPlan);
-  }, [rewindToArrival]);
+  }, [pauseAtMidJourney]);
 
   const flight = useMemo(() => computeFlight(plan), [plan]);
   const totalTau = flight.totals.shipYears;
@@ -416,6 +422,7 @@ export default function StarshipBridge() {
 
     let raf = 0;
     let last = performance.now();
+    let lastHud = 0;
 
     const step = (now: number) => {
       const dt = Math.min(0.05, (now - last) / 1000);
@@ -425,10 +432,15 @@ export default function StarshipBridge() {
         progressRef.current + (dt * rate) / PLAYBACK_SECONDS,
       );
       progressRef.current = next;
-      setProgress(next);
       if (next >= 1) {
+        setProgress(1);
         setPlaying(false);
         return;
+      }
+      // El cielo avanza por refs; el HUD y los gráficos no necesitan 60 Hz.
+      if (now - lastHud >= 1000 / 24) {
+        lastHud = now;
+        setProgress(next);
       }
       raf = window.requestAnimationFrame(step);
     };
@@ -673,6 +685,24 @@ export default function StarshipBridge() {
                   rel="noreferrer"
                 >
                   Jorge I. Zuluaga
+                </a>
+              </p>
+              <p className="host-line">
+                Una app{" "}
+                <a
+                  href="https://drz-academy.github.io/#apps"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Dr.Z
+                </a>
+                {" / "}
+                <a
+                  href="https://seap-udea.github.io/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  seap-udea
                 </a>
               </p>
             </div>
@@ -990,7 +1020,7 @@ function Canopy({
 
   return (
     <section className="canopy" aria-label="Visor de la cabina">
-      <div className="canopy-glass">
+      <div className="canopy-glass" data-starfield-origin="">
         <div className="canopy-mullions" aria-hidden="true" />
         <div className="canopy-vignette" aria-hidden="true" />
 

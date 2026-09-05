@@ -25,9 +25,12 @@ import sys
 import unicodedata
 from pathlib import Path
 
+import config
+
 CLUB_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PERSONAL_DIR = os.path.join(CLUB_DIR, "personal")
-MEMBERS_JSON = os.path.join(PERSONAL_DIR, "drz-club-members.json")
+INFO_DIR = config.get_info_dir(CLUB_DIR)
+MEMBERS_JSON = os.path.join(INFO_DIR, "drz-club-members.json")
 CSV_PATH = os.path.join(PERSONAL_DIR, "certificados.csv")
 DRIVE_DIR = os.path.join(PERSONAL_DIR, "ClubDrZAcademy", "Certificados")
 LOCAL_DIR = os.path.join(PERSONAL_DIR, "certificados")
@@ -329,9 +332,24 @@ def main() -> int:
         for name in still_sincedula:
             print(f"    {name}")
     if args.dry_run:
-        print("  (dry-run: no se escribió CSV ni se renombró)")
+        print("  (dry-run: no se escribió CSV, ni se renombró, ni se actualizó cursos.json)")
     else:
         print(f"  CSV: {CSV_PATH}")
+        # Actualizar cursos.json con los nuevos conteos
+        cursos_json_path = Path(CLUB_DIR) / "cursos.json"
+        if cursos_json_path.exists():
+            cursos_data = json.loads(cursos_json_path.read_text(encoding="utf-8"))
+            changed = False
+            for c in cursos_data:
+                cid = c.get("id")
+                if cid and not c.get("next_course"):
+                    nuevo_conteo = by_curso.get(cid, 0)
+                    if c.get("numero_certificados") != nuevo_conteo:
+                        c["numero_certificados"] = nuevo_conteo
+                        changed = True
+            if changed:
+                cursos_json_path.write_text(json.dumps(cursos_data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+                print("  cursos.json: actualizado con los nuevos conteos de certificados")
     return 0 if rows else 1
 
 

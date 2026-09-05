@@ -21,10 +21,13 @@ import sys
 # CONFIGURACIÓN
 # ============================================================================
 
+import config
+
 CLUB_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PERSONAL_DIR = os.path.join(CLUB_DIR, "personal")
+INFO_DIR = config.get_info_dir(CLUB_DIR)
 INSCRIPCIONES_DIR = os.path.join(PERSONAL_DIR, "inscripciones")
-OUTPUT_JSON = os.path.join(PERSONAL_DIR, "drz-club-members.json")
+OUTPUT_JSON = os.path.join(INFO_DIR, "drz-club-members.json")
 CURSOS_JSON = os.path.join(CLUB_DIR, "cursos.json")
 
 # Orden cronológico de los cursos

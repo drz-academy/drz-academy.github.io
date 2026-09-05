@@ -2232,6 +2232,24 @@ function DrakeCalculatorView({
               Jorge I. Zuluaga
             </a>
           </p>
+          <p className="host-line">
+            Una app{" "}
+            <a
+              href="https://drz-academy.github.io/#apps"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Dr. Z
+            </a>
+            {" / "}
+            <a
+              href="https://seap-udea.github.io/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              seap-udea
+            </a>
+          </p>
           <p className="intro">
             Ajusta cada supuesto y explora cuántas civilizaciones podrían
             comunicarse hoy en la Vía Láctea.{" "}

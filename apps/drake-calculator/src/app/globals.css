@@ -91,6 +91,24 @@ input {
   text-decoration: underline;
 }
 
+.host-line {
+  margin: 4px 0 0;
+  color: #50616c;
+  font-size: 0.66rem;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
+.host-line a {
+  color: #8a9ba6;
+  text-decoration: none;
+}
+
+.host-line a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
 .intro {
   max-width: 390px;
   margin: 12px 0 0;

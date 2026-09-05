@@ -22,12 +22,15 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent.parent
 CLUB = REPO / "club"
+sys.path.append(str(CLUB / "bin"))
+import config
 PERSONAL = CLUB / "personal"
-MEMBERS_JSON = PERSONAL / "drz-club-members.json"
+INFO_DIR = Path(config.get_info_dir(str(CLUB)))
+MEMBERS_JSON = INFO_DIR / "drz-club-members.json"
 CURSOS_JSON = CLUB / "cursos.json"
 FORMS_DIR = CLUB / "drz-forms"
 CERTIFICADOS_CSV = PERSONAL / "certificados.csv"
-CUPONES_JSON = PERSONAL / "cupones.json"
+CUPONES_JSON = INFO_DIR / "cupones.json"
 
 
 def load_secret(name: str) -> str:

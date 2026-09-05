@@ -19,11 +19,14 @@ from datetime import datetime
 # CONFIGURACIÓN
 # ============================================================================
 
+import config
+
 CLUB_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PERSONAL_DIR = os.path.join(CLUB_DIR, "personal")
-OUTPUT_MD = os.path.join(PERSONAL_DIR, "drz-club.md")
-BENEFICIOS_CSV = os.path.join(PERSONAL_DIR, "beneficios_usados.csv")
-DATABASE_JSON = os.path.join(PERSONAL_DIR, "drz-club-members.json")
+INFO_DIR = config.get_info_dir(CLUB_DIR)
+OUTPUT_MD = os.path.join(INFO_DIR, "drz-club.md")
+BENEFICIOS_CSV = os.path.join(INFO_DIR, "beneficios_usados.csv")
+DATABASE_JSON = os.path.join(INFO_DIR, "drz-club-members.json")
 CURSOS_JSON = os.path.join(CLUB_DIR, "cursos.json")
 
 

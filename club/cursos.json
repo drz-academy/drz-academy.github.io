@@ -12,19 +12,6 @@
     "numero_certificados": 29
   },
   {
-    "id": "cuantica_a_pie_permanente",
-    "nombre": "Cuántica a Pie (Permanente)",
-    "fecha_inicio": "",
-    "fecha_fin": "",
-    "evaluacion": true,
-    "classroom_url": "",
-    "hotmart_url": "https://hotmart.com/es/club/drz-academy/products/4736808",
-    "certificados_folder": "https://drive.google.com/drive/folders/1LxnTHykCiabylnCg12kciWji7eIf35Ip",
-    "pagina_url": "https://drz-academy.github.io/cursos/cuantica-a-pie/",
-    "numero_participantes": 8,
-    "numero_certificados": 8
-  },
-  {
     "id": "catastrofisica",
     "nombre": "Catastrofísica",
     "fecha_inicio": "2024-10-09",
@@ -83,7 +70,7 @@
     "certificados_folder": "https://drive.google.com/drive/folders/1LxnTHykCiabylnCg12kciWji7eIf35Ip",
     "pagina_url": "https://drz-academy.github.io/cursos/astropython/",
     "numero_participantes": 68,
-    "numero_certificados": 15
+    "numero_certificados": 7
   },
   {
     "id": "python_fin_mundo",
@@ -107,7 +94,20 @@
     "certificados_folder": "https://drive.google.com/drive/folders/1LxnTHykCiabylnCg12kciWji7eIf35Ip",
     "pagina_url": "https://drz-academy.github.io/cursos/extraterrestres/",
     "numero_participantes": 23,
-    "numero_certificados": 0
+    "numero_certificados": 5
+  },
+  {
+    "id": "cuantica_a_pie_permanente",
+    "nombre": "Cuántica a Pie (Permanente)",
+    "fecha_inicio": "",
+    "fecha_fin": "",
+    "evaluacion": true,
+    "classroom_url": "",
+    "hotmart_url": "https://hotmart.com/es/club/drz-academy/products/4736808",
+    "certificados_folder": "https://drive.google.com/drive/folders/1LxnTHykCiabylnCg12kciWji7eIf35Ip",
+    "pagina_url": "https://drz-academy.github.io/cursos/cuantica-a-pie/",
+    "numero_participantes": 8,
+    "numero_certificados": 8
   },
   {
     "id": "masterclass_cambio_climatico",

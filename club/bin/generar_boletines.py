@@ -27,12 +27,15 @@ from datetime import datetime
 # CONFIGURACIÓN
 # ============================================================================
 
+import config
+
 CLUB_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PERSONAL_DIR = os.path.join(CLUB_DIR, "personal")
+INFO_DIR = config.get_info_dir(CLUB_DIR)
 BOLETINES_DIR = os.path.join(PERSONAL_DIR, "boletines")
 CURSOS_JSON = os.path.join(CLUB_DIR, "cursos.json")
 CATEGORIAS_JSON = os.path.join(CLUB_DIR, "categorias.json")
-CUPONES_JSON = os.path.join(PERSONAL_DIR, "cupones.json")
+CUPONES_JSON = os.path.join(INFO_DIR, "cupones.json")
 SITE_URL = "https://drz-academy.github.io"
 CLUB_URL = f"{SITE_URL}/club/"
 LOGO_URL = f"{SITE_URL}/assets/DrZ-Logos/logo-firma.webp"
@@ -515,7 +518,7 @@ def main():
     )
     parser.add_argument(
         "--base-datos",
-        default=os.path.join(PERSONAL_DIR, "drz-club-members.json"),
+        default=os.path.join(INFO_DIR, "drz-club-members.json"),
         help="Archivo JSON de la base de datos (default: drz-club-members.json)",
     )
     args = parser.parse_args()

@@ -29,9 +29,11 @@ from pathlib import Path
 
 from pypdf import PdfReader, PdfWriter
 
+import config
+
 CLUB_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PERSONAL_DIR = os.path.join(CLUB_DIR, "personal")
-MEMBERS_JSON = os.path.join(PERSONAL_DIR, "drz-club-members.json")
+MEMBERS_JSON = os.path.join(config.get_info_dir(CLUB_DIR), "drz-club-members.json")
 CURSOS_JSON = os.path.join(CLUB_DIR, "cursos.json")
 FUENTES_DIR = os.path.join(PERSONAL_DIR, "certificados", "fuentes")
 DEST_DIR = os.path.join(PERSONAL_DIR, "certificados")
