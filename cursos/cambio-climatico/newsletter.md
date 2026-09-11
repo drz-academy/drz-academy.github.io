@@ -4,7 +4,7 @@ subject: "🌍 Cambio Climático: cuatro historias con ciencia y esperanza - Nue
 
 <div align="center">
   <a href="https://drz-academy.github.io/cursos/cambio-climatico/">
-    <img src="https://drz-academy.github.io/cursos/cambio-climatico/images/Cambio_Climatico_Post_Instagram_1080x1350.png" alt="Afiche Master Class Cambio Climático" style="max-width: 600px; width: 100%; height: auto; border-radius: 8px;">
+    <img src="https://drz-academy.github.io/cursos/cambio-climatico/images/Cambio_Climatico_Post_Instagram_1080x1350.webp" alt="Afiche Master Class Cambio Climático" style="max-width: 600px; width: 100%; height: auto; border-radius: 8px;">
   </a>
 </div>
 
@@ -27,7 +27,7 @@ Juan Fernando es Doctor y Magíster en Recursos Hidráulicos, Ingeniero Civil de
 - **Nómadas climáticos** — Adaptación, futuro de niños y niñas, y caminos posibles desde hoy.
 
 ### Detalles del curso
-- 🗓️ **Fechas:** 14 de septiembre al 12 de octubre de 2026
+- 🗓️ **Fechas:** 14 de septiembre al 5 de octubre de 2026
 - 📅 **Días:** Lunes (4 sesiones en total)
 - ⏰ **Horario:** 6:30 p.m. a 8:30 p.m. (hora de Colombia)
 - 📍 **Modalidad:** Virtual (sesiones en vivo y acceso en diferido por Google Classroom)
