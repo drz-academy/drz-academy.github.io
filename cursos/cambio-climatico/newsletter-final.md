@@ -43,7 +43,20 @@ Conoce un adelanto de los temas que abordaremos con el profesor Juan Fernando:
     </a>
   </div>
 
-  <!-- Video 2: No todo es culpa de El Niño -->
+  <!-- Video 2: Short Los Calores -->
+  <div style="max-width: 540px; margin: 0 auto 20px auto; background-color: #1a1a1a; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.15); border: 1px solid #333;">
+    <div style="padding: 10px 14px; background: #252525; color: #ffffff; font-size: 14px; font-weight: bold; text-align: left;">
+      <span style="color: #ff0000;">▶</span> Short: Los Calores
+    </div>
+    <a href="https://www.youtube.com/shorts/vvqABh2-o6M" target="_blank" style="text-decoration: none; display: block;">
+      <img src="https://img.youtube.com/vi/vvqABh2-o6M/maxresdefault.jpg" alt="Short: Los Calores" style="width: 100%; height: auto; display: block; border: 0;">
+      <div style="background-color: #cc0000; color: #ffffff; text-align: center; padding: 10px; font-weight: bold; font-size: 14px;">
+        ▶ Ver Short en YouTube
+      </div>
+    </a>
+  </div>
+
+  <!-- Video 3: No todo es culpa de El Niño -->
   <div style="max-width: 540px; margin: 0 auto 22px auto; background-color: #1a1a1a; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.15); border: 1px solid #333;">
     <div style="padding: 10px 14px; background: #252525; color: #ffffff; font-size: 14px; font-weight: bold; text-align: left;">
       <span style="color: #ff0000;">▶</span> Video: No todo es culpa de El Niño
@@ -56,18 +69,6 @@ Conoce un adelanto de los temas que abordaremos con el profesor Juan Fernando:
     </a>
   </div>
 
-  <!-- Video 3: Short Los Calores -->
-  <div style="max-width: 540px; margin: 0 auto 20px auto; background-color: #1a1a1a; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.15); border: 1px solid #333;">
-    <div style="padding: 10px 14px; background: #252525; color: #ffffff; font-size: 14px; font-weight: bold; text-align: left;">
-      <span style="color: #ff0000;">▶</span> Short: Los Calores
-    </div>
-    <a href="https://www.youtube.com/shorts/vvqABh2-o6M" target="_blank" style="text-decoration: none; display: block;">
-      <img src="https://img.youtube.com/vi/vvqABh2-o6M/maxresdefault.jpg" alt="Short: Los Calores" style="width: 100%; height: auto; display: block; border: 0;">
-      <div style="background-color: #cc0000; color: #ffffff; text-align: center; padding: 10px; font-weight: bold; font-size: 14px;">
-        ▶ Ver Short en YouTube
-      </div>
-    </a>
-  </div>
 </div>
 
 ---
