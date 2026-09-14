@@ -29,6 +29,7 @@ __pycache__/
 
 # Logs de Newsletter (Evitar subir correos)
 *.sent.log
+inscritos.md
 
 # Datos confidenciales del Club (no publicar)
 club/personal/

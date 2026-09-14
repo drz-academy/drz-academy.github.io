@@ -18,12 +18,13 @@ def wrap_html(html_content: str) -> str:
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-      body {{ font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; }}
+    body {{ font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.45; color: #333; max-width: 600px; margin: 0 auto; padding: 16px; }}
       a {{ color: #007bff; text-decoration: none; }}
       a:hover {{ text-decoration: underline; }}
       img {{ max-width: 100%; height: auto; }}
-      h1, h2, h3 {{ color: #222; margin-top: 1.5em; margin-bottom: 0.5em; }}
-      p {{ margin-bottom: 1em; }}
+    h1, h2, h3 {{ color: #222; margin-top: 1em; margin-bottom: 0.35em; }}
+    p {{ margin-top: 0; margin-bottom: 0.65em; }}
+    ul, ol {{ margin-top: 0.25em; margin-bottom: 0.75em; padding-left: 1.4em; }}
     </style>
     </head>
     <body>
@@ -80,28 +81,21 @@ def main() -> int:
         webbrowser.open(f"file://{preview_file.absolute()}")
         return 0
 
-    print(f"Obteniendo lista de suscriptores...")
-    subs_resp = list_subscribers()
-    if not subs_resp.get("ok"):
-        print(f"Error listando suscriptores: {subs_resp}", file=sys.stderr)
-        return 1
-
-    subscribers = list(subs_resp.get("subscribers") or [])
-    if not subscribers:
-        print("No hay suscriptores confirmados.", file=sys.stderr)
-        return 0
-
     if args.test_emails:
         test_emails_list = [e.strip() for e in args.test_emails.split(",") if e.strip()]
-        if test_emails_list:
-            subs_map = {s.get("email"): s for s in subscribers}
-            subscribers = []
-            for e in test_emails_list:
-                if e in subs_map:
-                    subscribers.append(subs_map[e])
-                else:
-                    subscribers.append({"email": e, "unsubscribeToken": ""})
-            print(f"MODO TEST: Enviar prueba solo a: {', '.join(test_emails_list)}.")
+        subscribers = [{"email": email, "unsubscribeToken": ""} for email in test_emails_list]
+        print(f"MODO TEST: Enviar prueba solo a: {', '.join(test_emails_list)}.")
+    else:
+        print(f"Obteniendo lista de suscriptores...")
+        subs_resp = list_subscribers()
+        if not subs_resp.get("ok"):
+            print(f"Error listando suscriptores: {subs_resp}", file=sys.stderr)
+            return 1
+
+        subscribers = list(subs_resp.get("subscribers") or [])
+        if not subscribers:
+            print("No hay suscriptores confirmados.", file=sys.stderr)
+            return 0
 
     emails = [str(s.get("email") or "") for s in subscribers if s.get("email")]
     
