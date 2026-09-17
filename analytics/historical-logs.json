@@ -1,5 +1,39 @@
 [
   {
+    "id": "f3ec8237-3549-410e-8995-28cd385a3058",
+    "timestampServer": "2026-09-17T03:39:56.476Z",
+    "ip": "181.129.87.114",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_5_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/153.0.8010.24 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-09-17T03:39:55.545Z"
+  },
+  {
+    "id": "30577d3a-4743-4894-b49d-7ea9d07edfdc",
+    "timestampServer": "2026-09-16T21:51:19.371Z",
+    "ip": "2a03:2880:25ff:3::",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 (compatible; meta-externalads/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/crawler))",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-09-16T21:51:18.699Z"
+  },
+  {
     "id": "aa6988a2-e8ff-4652-92ca-2173ee4f65d3",
     "timestampServer": "2026-09-16T13:35:36.922Z",
     "ip": "190.60.62.229",
