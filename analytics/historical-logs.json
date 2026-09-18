@@ -1,5 +1,298 @@
 [
   {
+    "id": "64b2397b-f422-4cf1-b1bc-a217902e105f",
+    "timestampServer": "2026-09-18T11:26:38.621Z",
+    "ip": "2800:484:4c75:b300:b4c9:82a3:984:23d4",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cuantica-a-pie/",
+    "url": "https://drz-academy.github.io/cursos/cuantica-a-pie/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cuantica-a-pie",
+      "courseName": "Cuántica a Pie con Dr. Z"
+    },
+    "timestampClient": "2026-09-18T11:26:38.334Z"
+  },
+  {
+    "id": "192b9b60-6c92-4597-8f16-1e02bf665775",
+    "timestampServer": "2026-09-18T10:56:50.166Z",
+    "ip": "2800:484:4c75:b300:b4c9:82a3:984:23d4",
+    "country": "CO",
+    "eventType": "course_enroll_click",
+    "page": "/cursos/cuantica-a-pie/",
+    "url": "https://drz-academy.github.io/cursos/cuantica-a-pie/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "cuantica-a-pie",
+      "targetName": "Cuántica a Pie con Dr. Z",
+      "href": "https://go.hotmart.com/T96569602E?dp=1",
+      "label": "Inscribete ahora →"
+    },
+    "timestampClient": "2026-09-18T10:56:50.044Z"
+  },
+  {
+    "id": "c776fcac-70a1-4e3f-9b4f-7add6e6337e0",
+    "timestampServer": "2026-09-18T10:56:32.610Z",
+    "ip": "2800:484:4c75:b300:b4c9:82a3:984:23d4",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cuantica-a-pie/",
+    "url": "https://drz-academy.github.io/cursos/cuantica-a-pie/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cuantica-a-pie",
+      "courseName": "Cuántica a Pie con Dr. Z"
+    },
+    "timestampClient": "2026-09-18T10:56:32.329Z"
+  },
+  {
+    "id": "fb99bbfa-9693-453b-80de-80638762364b",
+    "timestampServer": "2026-09-18T00:31:10.978Z",
+    "ip": "2001:818:c640:f600:19d9:f0ca:d9cf:ca66",
+    "country": "PT",
+    "eventType": "demo_page_view",
+    "page": "/demos/campo-vision/",
+    "url": "https://drz-academy.github.io/demos/campo-vision/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/153.0.8010.24 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "demoId": "campo-vision",
+      "demoName": "Campo de visión"
+    },
+    "timestampClient": "2026-09-18T00:31:10.919Z"
+  },
+  {
+    "id": "52d1935b-f84a-4e49-bec5-0c4b7cf9c992",
+    "timestampServer": "2026-09-18T00:31:09.059Z",
+    "ip": "2001:818:c640:f600:19d9:f0ca:d9cf:ca66",
+    "country": "PT",
+    "eventType": "demo_page_view",
+    "page": "/demos/rejilla-difraccion/",
+    "url": "https://drz-academy.github.io/demos/rejilla-difraccion/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/153.0.8010.24 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "demoId": "rejilla-difraccion",
+      "demoName": "Rejilla de"
+    },
+    "timestampClient": "2026-09-18T00:31:08.888Z"
+  },
+  {
+    "id": "315c4fa8-8367-476d-a153-bca6250b38ad",
+    "timestampServer": "2026-09-17T21:19:23.019Z",
+    "ip": "2001:818:c640:f600:19d9:f0ca:d9cf:ca66",
+    "country": "PT",
+    "eventType": "demo_page_view",
+    "page": "/demos/campo-vision/",
+    "url": "https://drz-academy.github.io/demos/campo-vision/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/153.0.8010.24 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "demoId": "campo-vision",
+      "demoName": "Campo de visión"
+    },
+    "timestampClient": "2026-09-17T21:19:22.734Z"
+  },
+  {
+    "id": "ccab1a47-9f69-4b62-88a9-4d72d369a31b",
+    "timestampServer": "2026-09-17T21:19:23.015Z",
+    "ip": "2001:818:c640:f600:19d9:f0ca:d9cf:ca66",
+    "country": "PT",
+    "eventType": "demo_page_view",
+    "page": "/demos/rejilla-difraccion/",
+    "url": "https://drz-academy.github.io/demos/rejilla-difraccion/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/153.0.8010.24 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "demoId": "rejilla-difraccion",
+      "demoName": "Rejilla de"
+    },
+    "timestampClient": "2026-09-17T21:19:22.740Z"
+  },
+  {
+    "id": "7a8a5650-2591-43e4-b189-216777b3852b",
+    "timestampServer": "2026-09-17T21:18:01.429Z",
+    "ip": "2001:818:c640:f600:5505:322e:96e7:a80c",
+    "country": "PT",
+    "eventType": "demo_page_view",
+    "page": "/demos/rejilla-difraccion/",
+    "url": "https://drz-academy.github.io/demos/rejilla-difraccion/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "demoId": "rejilla-difraccion",
+      "demoName": "Rejilla de"
+    },
+    "timestampClient": "2026-09-17T21:18:00.679Z"
+  },
+  {
+    "id": "f85cd091-6b4b-4f33-963f-e27b8a3dc1a7",
+    "timestampServer": "2026-09-17T21:18:01.106Z",
+    "ip": "2001:818:c640:f600:5505:322e:96e7:a80c",
+    "country": "PT",
+    "eventType": "demo_click",
+    "page": "/",
+    "url": "https://drz-academy.github.io/#demos",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "rejilla-difraccion",
+      "targetName": "Rejilla de difracción",
+      "href": "demos/rejilla-difraccion/",
+      "label": "Abrir demo"
+    },
+    "timestampClient": "2026-09-17T21:18:00.328Z"
+  },
+  {
+    "id": "3e5237e6-daa5-46b9-9828-e6f96dd23483",
+    "timestampServer": "2026-09-17T21:17:46.864Z",
+    "ip": "2001:818:c640:f600:5505:322e:96e7:a80c",
+    "country": "PT",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/#demos",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-09-17T21:17:45.999Z"
+  },
+  {
+    "id": "8a8bb171-6b3d-4b88-8ffa-4452e85424da",
+    "timestampServer": "2026-09-17T21:12:50.496Z",
+    "ip": "2001:818:c640:f600:19d9:f0ca:d9cf:ca66",
+    "country": "PT",
+    "eventType": "demo_page_view",
+    "page": "/demos/campo-vision/",
+    "url": "https://drz-academy.github.io/demos/campo-vision/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/153.0.8010.24 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "demoId": "campo-vision",
+      "demoName": "Campo de visión"
+    },
+    "timestampClient": "2026-09-17T21:12:50.203Z"
+  },
+  {
+    "id": "0ebf26d9-9270-4edf-bbe3-47e113041bf9",
+    "timestampServer": "2026-09-17T21:12:28.083Z",
+    "ip": "45.127.195.187",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-09-17T21:12:27.486Z"
+  },
+  {
+    "id": "18e5ad92-5698-496a-bfa6-2b761742232f",
+    "timestampServer": "2026-09-17T21:10:10.074Z",
+    "ip": "2001:818:c640:f600:5505:322e:96e7:a80c",
+    "country": "PT",
+    "eventType": "demo_page_view",
+    "page": "/demos/campo-vision/",
+    "url": "https://drz-academy.github.io/demos/campo-vision/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "demoId": "campo-vision",
+      "demoName": "Campo de visión"
+    },
+    "timestampClient": "2026-09-17T21:10:09.323Z"
+  },
+  {
+    "id": "1e8295b1-ecb3-45a8-8aae-dded3c7ff167",
+    "timestampServer": "2026-09-17T21:10:09.457Z",
+    "ip": "2001:818:c640:f600:5505:322e:96e7:a80c",
+    "country": "PT",
+    "eventType": "demo_click",
+    "page": "/",
+    "url": "https://drz-academy.github.io/#demos",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "campo-vision",
+      "targetName": "Campo de visión del telescopio",
+      "href": "demos/campo-vision/",
+      "label": "Abrir demo"
+    },
+    "timestampClient": "2026-09-17T21:10:08.642Z"
+  },
+  {
+    "id": "ceebb87c-4180-42f9-820a-08f212d78d8e",
+    "timestampServer": "2026-09-17T21:08:56.960Z",
+    "ip": "2001:818:c640:f600:5505:322e:96e7:a80c",
+    "country": "PT",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-09-17T21:08:55.809Z"
+  },
+  {
+    "id": "97602cbf-0320-4e3c-a170-9e38d631884f",
+    "timestampServer": "2026-09-17T19:30:47.953Z",
+    "ip": "45.127.195.187",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-09-17T19:30:46.493Z"
+  },
+  {
+    "id": "385b97c6-ce1d-4f9c-b9fc-ebe55e100fc1",
+    "timestampServer": "2026-09-17T18:23:35.822Z",
+    "ip": "181.129.87.114",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_5_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/153.0.8010.24 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-09-17T18:23:35.042Z"
+  },
+  {
     "id": "f3ec8237-3549-410e-8995-28cd385a3058",
     "timestampServer": "2026-09-17T03:39:56.476Z",
     "ip": "181.129.87.114",
