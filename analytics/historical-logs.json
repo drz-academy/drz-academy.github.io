@@ -1,5 +1,141 @@
 [
   {
+    "id": "ee1beff9-ec49-4e30-8226-d19ca5a4c637",
+    "timestampServer": "2026-09-19T15:58:59.459Z",
+    "ip": "2a03:2880:f816:56::",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 (compatible; meta-externalagent/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/crawler))",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-09-19T15:58:58.752Z"
+  },
+  {
+    "id": "93854db9-bda0-4dd1-ba80-0e9cf42a19da",
+    "timestampServer": "2026-09-19T12:44:59.487Z",
+    "ip": "186.169.193.44",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/#apps",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/29.0 Chrome/136.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-09-19T12:44:58.424Z"
+  },
+  {
+    "id": "bbd094b0-1e8f-4c3a-b212-7092d88632b8",
+    "timestampServer": "2026-09-19T03:52:38.628Z",
+    "ip": "2800:e2:400:15eb:5936:e5e2:8b06:fbae",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_6_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/153.0.8010.24 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-09-19T03:52:38.496Z"
+  },
+  {
+    "id": "d6e3598c-3869-43eb-83c7-010ddf4644db",
+    "timestampServer": "2026-09-19T03:52:29.258Z",
+    "ip": "2800:e2:400:15eb:5936:e5e2:8b06:fbae",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/python-fin-del-mundo/",
+    "url": "https://drz-academy.github.io/cursos/python-fin-del-mundo/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_6_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/153.0.8010.24 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "python-fin-del-mundo",
+      "courseName": "Python para el fin del mundo"
+    },
+    "timestampClient": "2026-09-19T03:52:28.852Z"
+  },
+  {
+    "id": "4c336e6e-7637-4a49-8fb1-a72138316f34",
+    "timestampServer": "2026-09-19T01:39:33.397Z",
+    "ip": "2803:1800:41cd:4fc5:18d6:8e92:e03a:2fce",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAac78F_zE_EIy3Lc5tNlYndY7PdiN5MG5pNTpljHsr30jMZCxCqqJAkAPpp5XA_aem_P3efykYiMgCmxWF8Cvc8Gw",
+    "referrer": "https://l.instagram.com/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 16; SM-A566E Build/BP4A.251205.006; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/153.0.8010.41 Mobile Safari/537.36 Instagram 447.0.0.55.81 Android (36/16; 450dpi; 1080x2340; samsung; SM-A566E; a56x; s5e8855; es_US; 1068046257; IABMV/1)",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-09-19T01:39:32.605Z"
+  },
+  {
+    "id": "5056bbea-4273-462d-90cd-b1d736f48641",
+    "timestampServer": "2026-09-18T23:00:48.178Z",
+    "ip": "181.136.97.140",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=masterclass_extraterrestre",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0",
+    "language": "es",
+    "details": {
+      "form": "evaluacion-curso",
+      "curso": "Master Class Extraterrestre"
+    },
+    "timestampClient": "2026-09-18T23:00:45.967Z"
+  },
+  {
+    "id": "24ad53ce-7d20-4633-b59b-58fa64aa5a7b",
+    "timestampServer": "2026-09-18T22:58:42.489Z",
+    "ip": "181.136.97.140",
+    "country": "CO",
+    "eventType": "club_click_evaluacion",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0",
+    "language": "es",
+    "details": {
+      "curso": "Master Class Extraterrestre",
+      "href": "https://drz-academy.github.io/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=masterclass_extraterrestre"
+    },
+    "timestampClient": "2026-09-18T22:58:40.367Z"
+  },
+  {
+    "id": "eaf27b96-682a-4b12-a029-4aef255865dd",
+    "timestampServer": "2026-09-18T22:58:37.618Z",
+    "ip": "181.136.97.140",
+    "country": "CO",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0",
+    "language": "es",
+    "details": {
+      "memberName": "Sergio Arango Pineda",
+      "memberEmail": "sarangopin@gmail.com",
+      "categoria": "BRONCE"
+    },
+    "timestampClient": "2026-09-18T22:58:35.202Z"
+  },
+  {
     "id": "64b2397b-f422-4cf1-b1bc-a217902e105f",
     "timestampServer": "2026-09-18T11:26:38.621Z",
     "ip": "2800:484:4c75:b300:b4c9:82a3:984:23d4",
