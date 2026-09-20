@@ -1,5 +1,58 @@
 [
   {
+    "id": "afd8c765-b2c7-401d-92df-8d301860ebcf",
+    "timestampServer": "2026-09-19T19:44:25.651Z",
+    "ip": "2800:e6:4020:114f:bc49:b4f3:397e:4b48",
+    "country": "CO",
+    "eventType": "course_enroll_click",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0",
+    "language": "es",
+    "details": {
+      "targetId": "cambio-climatico",
+      "targetName": "Cambio Climático",
+      "href": "https://drz.academy/producto/cambio-climatico/",
+      "label": "Inscribete ahora →"
+    },
+    "timestampClient": "2026-09-19T19:45:36.725Z"
+  },
+  {
+    "id": "2c4c233a-efeb-42bb-adb6-824a34b03829",
+    "timestampServer": "2026-09-19T19:12:14.209Z",
+    "ip": "186.171.20.227",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-09-19T19:12:13.280Z"
+  },
+  {
+    "id": "9c192081-8aad-432d-9397-a118ff42ac13",
+    "timestampServer": "2026-09-19T18:52:35.452Z",
+    "ip": "190.28.2.202",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-09-19T18:53:45.103Z"
+  },
+  {
     "id": "ee1beff9-ec49-4e30-8226-d19ca5a4c637",
     "timestampServer": "2026-09-19T15:58:59.459Z",
     "ip": "2a03:2880:f816:56::",
