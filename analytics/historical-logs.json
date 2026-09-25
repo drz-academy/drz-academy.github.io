@@ -1,5 +1,106 @@
 [
   {
+    "id": "000a4ac1-6a5f-4222-a24f-7f99c2ab0701",
+    "timestampServer": "2026-09-25T15:04:49.811Z",
+    "ip": "181.55.23.123",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cuantica-a-pie/",
+    "url": "https://drz-academy.github.io/cursos/cuantica-a-pie/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:155.0) Gecko/20100101 Firefox/155.0",
+    "language": "es",
+    "details": {
+      "courseId": "cuantica-a-pie",
+      "courseName": "Cuántica a Pie con Dr. Z"
+    },
+    "timestampClient": "2026-09-25T15:04:49.545Z"
+  },
+  {
+    "id": "fa9e5df9-2f90-4916-bdbc-e5c838e149eb",
+    "timestampServer": "2026-09-25T04:16:12.464Z",
+    "ip": "2800:e6:4020:114f:522e:148c:22ce:be09",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-09-25T04:16:12.468Z"
+  },
+  {
+    "id": "e9752c0c-5106-4b5a-ad05-b027a53d9198",
+    "timestampServer": "2026-09-24T22:15:12.313Z",
+    "ip": "2800:e2:280:9c1:1875:d724:e104:4ac1",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6.1 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-09-24T22:15:10.666Z"
+  },
+  {
+    "id": "f87e5b0e-9f89-46ac-9c79-8624f1bfe462",
+    "timestampServer": "2026-09-24T22:14:50.321Z",
+    "ip": "2800:e2:280:9c1:1875:d724:e104:4ac1",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/#apps",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6.1 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-09-24T22:14:47.849Z"
+  },
+  {
+    "id": "c3838dc7-b960-4f85-acf2-5c4c3a1cfcce",
+    "timestampServer": "2026-09-24T21:13:32.198Z",
+    "ip": "45.127.195.188",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-09-24T21:13:31.681Z"
+  },
+  {
+    "id": "8f9cbd52-78d0-4c55-a194-a9e81174ceba",
+    "timestampServer": "2026-09-24T19:40:40.664Z",
+    "ip": "45.127.195.188",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-09-24T19:40:38.398Z"
+  },
+  {
     "id": "88a3bc2c-0a4c-42c3-b59a-640e652af431",
     "timestampServer": "2026-09-24T17:18:02.552Z",
     "ip": "40.77.167.30",
