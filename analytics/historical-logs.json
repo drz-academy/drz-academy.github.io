@@ -1,5 +1,56 @@
 [
   {
+    "id": "9aa8133c-bd3d-4b41-86ee-aebe6af95325",
+    "timestampServer": "2026-09-29T16:48:19.748Z",
+    "ip": "2803:1800:401f:cce6:917d:bed5:8e3c:ff59",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5.2 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-09-29T16:48:19.397Z"
+  },
+  {
+    "id": "015b878c-44aa-4724-b233-5e655dfa96d1",
+    "timestampServer": "2026-09-29T11:50:04.006Z",
+    "ip": "2a02:a445:e4db:0:d999:6609:acd0:7983",
+    "country": "NL",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPad; CPU OS 26_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/154.0.8037.55 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-09-29T11:50:04.000Z"
+  },
+  {
+    "id": "e0c5be88-0a68-44da-bb11-9bbd0e5b349e",
+    "timestampServer": "2026-09-29T11:50:02.677Z",
+    "ip": "2a02:a445:e4db:0:d999:6609:acd0:7983",
+    "country": "NL",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPad; CPU OS 26_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/154.0.8037.55 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-09-29T11:50:02.310Z"
+  },
+  {
     "id": "63d77ebf-83a1-48f8-a937-6cca469f7af1",
     "timestampServer": "2026-09-28T02:01:29.635Z",
     "ip": "66.249.88.43",
