@@ -1,5 +1,94 @@
 [
   {
+    "id": "8e98cfe1-c4e9-4928-a3a6-f31ce83d8ef8",
+    "timestampServer": "2026-10-01T03:47:08.299Z",
+    "ip": "2a03:2880:f814:f::",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 (compatible; meta-externalads/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/crawler))",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-10-01T03:47:07.290Z"
+  },
+  {
+    "id": "1719a741-dca5-4c1f-88f4-948178bb722a",
+    "timestampServer": "2026-09-30T22:30:59.402Z",
+    "ip": "130.117.88.64",
+    "country": "ES",
+    "eventType": "course_enroll_click",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "https://drz.academy/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "cambio-climatico",
+      "targetName": "Cambio Climático",
+      "href": "https://drz.academy/producto/cambio-climatico/",
+      "label": "Inscribete ahora →"
+    },
+    "timestampClient": "2026-09-30T20:30:59.291Z"
+  },
+  {
+    "id": "00a6e660-f131-49ea-8031-b68814919543",
+    "timestampServer": "2026-09-30T22:30:56.109Z",
+    "ip": "130.117.88.64",
+    "country": "ES",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "https://drz.academy/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-09-30T20:30:55.398Z"
+  },
+  {
+    "id": "5506bb21-25cc-4d51-97e9-465b03c77c7d",
+    "timestampServer": "2026-09-30T22:20:27.567Z",
+    "ip": "2800:e2:f80:443:f0db:72e1:f013:3a35",
+    "country": "CO",
+    "eventType": "course_enroll_click",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJmZGlkFlD2vuhkg8edPdKVfHP8Vzvc5jl7A25zcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAacsTfilRH8LkHcpulmEEKYbqNd6S92Iz2umzaed-BwFHM-CQylGBMFxY6FdOA_aem_vKwXt-GRJZTe22T2NsXnPw",
+    "referrer": "https://l.instagram.com/",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_6_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/23G90 Instagram 448.0.0.39.66 (iPhone16,2; iOS 26_6_2; es_LA; es; scale=3.00; 1290x2796; IABMV/1; 1072661960) Safari/604.1",
+    "language": "es",
+    "details": {
+      "targetId": "cambio-climatico",
+      "targetName": "Cambio Climático",
+      "href": "https://drz.academy/producto/cambio-climatico/",
+      "label": "Inscribete ahora →"
+    },
+    "timestampClient": "2026-09-30T22:20:27.462Z"
+  },
+  {
+    "id": "a21bca6c-1b88-4e8c-9b4d-4c24de886380",
+    "timestampServer": "2026-09-30T22:19:52.150Z",
+    "ip": "2800:e2:f80:443:f0db:72e1:f013:3a35",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJmZGlkFlD2vuhkg8edPdKVfHP8Vzvc5jl7A25zcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAacsTfilRH8LkHcpulmEEKYbqNd6S92Iz2umzaed-BwFHM-CQylGBMFxY6FdOA_aem_vKwXt-GRJZTe22T2NsXnPw",
+    "referrer": "https://l.instagram.com/",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_6_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/23G90 Instagram 448.0.0.39.66 (iPhone16,2; iOS 26_6_2; es_LA; es; scale=3.00; 1290x2796; IABMV/1; 1072661960) Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-09-30T22:19:51.765Z"
+  },
+  {
     "id": "9aa8133c-bd3d-4b41-86ee-aebe6af95325",
     "timestampServer": "2026-09-29T16:48:19.748Z",
     "ip": "2803:1800:401f:cce6:917d:bed5:8e3c:ff59",
