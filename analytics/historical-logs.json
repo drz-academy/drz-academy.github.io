@@ -1,5 +1,56 @@
 [
   {
+    "id": "10404195-ca49-4ead-a595-9581e88e14e7",
+    "timestampServer": "2026-10-02T15:34:36.873Z",
+    "ip": "66.249.83.136",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "http://www.google.com/search",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64)  AppleWebKit/537.36 (KHTML, like Gecko; Google Web Preview)  Chrome/153.0.8010.36 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-10-02T15:34:36.087Z"
+  },
+  {
+    "id": "426420cf-73ad-451c-ba9c-69325d3b8575",
+    "timestampServer": "2026-10-02T09:24:20.615Z",
+    "ip": "2a03:2880:f814:2e::",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 (compatible; meta-externalads/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/crawler))",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-02T09:24:20.295Z"
+  },
+  {
+    "id": "a975a428-a7d9-4c8d-a6c5-355209fb36bb",
+    "timestampServer": "2026-10-01T19:44:24.240Z",
+    "ip": "45.127.195.188",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-10-01T19:44:23.532Z"
+  },
+  {
     "id": "8e98cfe1-c4e9-4928-a3a6-f31ce83d8ef8",
     "timestampServer": "2026-10-01T03:47:08.299Z",
     "ip": "2a03:2880:f814:f::",
