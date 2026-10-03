@@ -1,5 +1,21 @@
 [
   {
+    "id": "f39ee0a3-3e85-4d48-ae6d-b9d35e5052b3",
+    "timestampServer": "2026-10-03T02:10:24.540Z",
+    "ip": "2804:14d:8e8d:8d70:8114:e968:ca6d:925e",
+    "country": "BR",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-03T02:10:24.286Z"
+  },
+  {
     "id": "10404195-ca49-4ead-a595-9581e88e14e7",
     "timestampServer": "2026-10-02T15:34:36.873Z",
     "ip": "66.249.83.136",
