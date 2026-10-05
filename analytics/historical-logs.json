@@ -1,5 +1,158 @@
 [
   {
+    "id": "f0db6b33-fc4e-417a-8319-c21b79d64f69",
+    "timestampServer": "2026-10-05T20:39:25.378Z",
+    "ip": "2803:1800:131a:f1fe:18db:b585:249a:fc24",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "https://classroom.google.com/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-05T20:39:24.350Z"
+  },
+  {
+    "id": "68b06b9b-a684-4cb0-9c9e-517903cde43b",
+    "timestampServer": "2026-10-05T20:03:48.177Z",
+    "ip": "2803:1800:131a:f1fe:18db:b585:249a:fc24",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "https://classroom.google.com/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-05T20:03:46.574Z"
+  },
+  {
+    "id": "b895897f-1120-433c-ab9c-1516a7fd2bf1",
+    "timestampServer": "2026-10-05T18:43:32.438Z",
+    "ip": "191.95.32.212",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.0 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-05T18:43:32.042Z"
+  },
+  {
+    "id": "12b0d1a1-6f27-4570-9816-b42cfd33b930",
+    "timestampServer": "2026-10-05T15:22:02.540Z",
+    "ip": "2803:1800:4206:eb40:c95b:b172:8711:882b",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.0 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-05T15:22:01.844Z"
+  },
+  {
+    "id": "0dd410a1-e622-481c-94a8-b29295cb68dc",
+    "timestampServer": "2026-10-05T14:29:55.499Z",
+    "ip": "2800:e6:4020:574e:350a:d051:5c1:8ecc",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-05T14:29:55.012Z"
+  },
+  {
+    "id": "343801b9-b922-40c4-beb2-5fab5452617f",
+    "timestampServer": "2026-10-05T14:26:41.565Z",
+    "ip": "66.102.8.108",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "http://www.google.com/search",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64)  AppleWebKit/537.36 (KHTML, like Gecko; Google Web Preview)  Chrome/153.0.8010.36 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-05T14:26:40.835Z"
+  },
+  {
+    "id": "69a47d4a-b364-4cfa-9f4e-a23eeb6281a0",
+    "timestampServer": "2026-10-05T14:26:41.396Z",
+    "ip": "74.125.212.40",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "http://www.google.com/search",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64)  AppleWebKit/537.36 (KHTML, like Gecko; Google Web Preview)  Chrome/153.0.8010.52 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-05T14:26:40.706Z"
+  },
+  {
+    "id": "f2b8ab84-5c65-414f-b94d-117df8d52ce7",
+    "timestampServer": "2026-10-04T23:00:33.990Z",
+    "ip": "2803:1800:4206:eb40:c95b:b172:8711:882b",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.0 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-04T23:00:33.512Z"
+  },
+  {
+    "id": "0ba8d540-4f8c-47f5-8fa2-e2fc56aaaa5b",
+    "timestampServer": "2026-10-04T22:34:12.516Z",
+    "ip": "40.77.167.55",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/136.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-04T22:34:11.305Z"
+  },
+  {
     "id": "865e840b-0f5f-4505-93a7-bbf6c029e6a0",
     "timestampServer": "2026-10-04T02:42:58.673Z",
     "ip": "2803:1800:4005:3e72:da9:4faf:ce8c:2e98",
