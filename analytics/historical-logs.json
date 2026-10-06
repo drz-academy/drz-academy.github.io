@@ -1,5 +1,108 @@
 [
   {
+    "id": "06a387d5-ad2f-444f-b9db-6145072fea3f",
+    "timestampServer": "2026-10-06T12:56:42.678Z",
+    "ip": "181.205.169.146",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-10-06T12:56:41.851Z"
+  },
+  {
+    "id": "ebc5e877-7a8b-4643-9cf9-4950d6eb2615",
+    "timestampServer": "2026-10-06T11:55:52.938Z",
+    "ip": "186.121.28.132",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-06T11:55:52.571Z"
+  },
+  {
+    "id": "17e76364-75ba-451d-b8ca-b2a9f62b9960",
+    "timestampServer": "2026-10-06T11:38:20.785Z",
+    "ip": "181.205.169.146",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-10-06T11:38:20.098Z"
+  },
+  {
+    "id": "dbd27ff8-7c98-4848-8f3c-6a8ea775cff3",
+    "timestampServer": "2026-10-05T23:54:43.556Z",
+    "ip": "186.121.28.132",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-05T23:54:43.409Z"
+  },
+  {
+    "id": "e51e05ca-e27b-4592-b692-bb254e5c5026",
+    "timestampServer": "2026-10-05T23:54:43.362Z",
+    "ip": "186.121.28.132",
+    "country": "CO",
+    "eventType": "course_click",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "cambio-climatico",
+      "targetName": "Cambio Climático",
+      "href": "cursos/cambio-climatico/",
+      "label": "Cambio Climático\n            La ciencia que nadie te explicó y el futuro que ya nos alcanzó\n            Cambio Climático"
+    },
+    "timestampClient": "2026-10-05T23:54:43.150Z"
+  },
+  {
+    "id": "4a50b051-d28d-4664-b68a-22a84f4dd17c",
+    "timestampServer": "2026-10-05T23:54:34.148Z",
+    "ip": "186.121.28.132",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-05T23:54:33.831Z"
+  },
+  {
     "id": "f0db6b33-fc4e-417a-8319-c21b79d64f69",
     "timestampServer": "2026-10-05T20:39:25.378Z",
     "ip": "2803:1800:131a:f1fe:18db:b585:249a:fc24",
