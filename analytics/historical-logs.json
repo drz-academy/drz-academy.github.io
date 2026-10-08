@@ -1,5 +1,39 @@
 [
   {
+    "id": "d8726457-2615-46fe-9d20-ad9618463e62",
+    "timestampServer": "2026-10-08T06:37:23.666Z",
+    "ip": "43.173.107.71",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-10-08T06:37:22.403Z"
+  },
+  {
+    "id": "1bf2d960-17ee-4887-b075-4cb1dee2e184",
+    "timestampServer": "2026-10-08T02:22:58.566Z",
+    "ip": "186.121.28.132",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "https://drz.academy/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-08T02:22:58.194Z"
+  },
+  {
     "id": "c5173432-b5a5-4633-a2d5-6d766e217c87",
     "timestampServer": "2026-10-06T21:41:41.974Z",
     "ip": "45.127.195.188",
