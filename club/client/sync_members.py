@@ -206,12 +206,16 @@ def build_proximo(cursos: list[dict], raw: dict, cupones: dict[str, dict]) -> di
     if not nxt:
         return None
     valor = parse_valor(nxt.get("valor"))
+    nxt_id = str(nxt.get("id") or "").strip()
+    curso_usado = str(raw.get("curso_aplicado") or "").strip()
     usado = str(raw.get("beneficio_usado") or "").strip().upper() in {"SI", "SÍ", "YES", "TRUE"}
+    # El cupón solo está no disponible si el beneficio ya se usó específicamente en este próximo curso
+    beneficio_este_curso_usado = usado and (curso_usado == nxt_id)
     try:
         desc = int(raw.get("descuento_valor") or 0)
     except (TypeError, ValueError):
         desc = 0
-    disponible = desc > 0 and not usado
+    disponible = desc > 0 and not beneficio_este_curso_usado
     if disponible and desc >= 100:
         precio_final = 0.0
     elif disponible:
@@ -329,6 +333,7 @@ def build_payload() -> tuple[list[dict], list[dict], list[dict], dict]:
                 "emoji": str(raw.get("emoji") or ""),
                 "beneficios": str(raw.get("beneficios") or ""),
                 "descuento": str(raw.get("descuento") or ""),
+                "fidelidad": bool(raw.get("fidelidad", False)),
                 "cursos": cursos_persona,
                 "proximo_curso": build_proximo(cursos, raw, cupones),
                 "documento_aliases": [TEST_DOCUMENTO, "1000100010"] if correo == TEST_EMAIL else [],
@@ -361,8 +366,19 @@ def post_sync(members: list[dict], cursos: list[dict], forms: list[dict]) -> dic
         },
         method="POST",
     )
+    ssl_ctx = None
     try:
-        with urllib.request.urlopen(req, timeout=120) as resp:
+        import ssl
+        try:
+            import certifi
+            ssl_ctx = ssl.create_default_context(cafile=certifi.where())
+        except ImportError:
+            ssl_ctx = ssl.create_default_context()
+    except Exception:
+        ssl_ctx = None
+
+    try:
+        with urllib.request.urlopen(req, timeout=120, context=ssl_ctx) as resp:
             return json.loads(resp.read().decode("utf-8"))
     except urllib.error.HTTPError as err:
         raw = err.read().decode("utf-8", errors="replace")

@@ -126,6 +126,16 @@ async function loadCategorias() {
   return categoriasCache;
 }
 
+let cursosCache = null;
+
+async function loadCursos() {
+  if (cursosCache) return cursosCache;
+  const res = await fetch("/club/cursos.json?v=" + new Date().toISOString().slice(0, 10));
+  if (!res.ok) throw new Error("cursos_failed");
+  cursosCache = await res.json();
+  return cursosCache;
+}
+
 function benefitMessage(profile, categorias) {
   const stored = String(profile.beneficios || "").trim();
   if (/beneficio ya usado/i.test(stored)) return stored;
@@ -146,10 +156,50 @@ function formatCop(value) {
   return `$${Math.round(n).toLocaleString("es-CO")}`;
 }
 
-function renderNextCourse(profile) {
+function renderNextCourse(profile, cursos) {
   const box = $("next-course");
-  const nxt = profile.proximo_curso;
+  let nxt = profile.proximo_curso;
   if (!box) return;
+
+  // Sincronizar dinámicamente con /club/cursos.json
+  if (cursos && Array.isArray(cursos)) {
+    const nextCatalog = cursos.find((c) => c.next_course) ||
+      cursos.find((c) => Number(c.numero_participantes || 0) === 0 && !String(c.id || "").includes("permanente"));
+    if (nextCatalog) {
+      const catalogValor = Number(String(nextCatalog.valor || "").replace(/,/g, "")) || 0;
+      if (!nxt) {
+        nxt = {
+          nombre: nextCatalog.nombre || "",
+          valor: catalogValor,
+          pagina_url: nextCatalog.pagina_url || nextCatalog.inscripcion_url || "",
+          inscripcion_url: nextCatalog.inscripcion_url || "",
+          cupon: { disponible: false, etiqueta: profile.categoria || "SIN CATEGORÍA" },
+        };
+      } else {
+        nxt = { ...nxt };
+        if (catalogValor > 0) {
+          nxt.valor = catalogValor;
+        }
+        if (nextCatalog.nombre) nxt.nombre = nextCatalog.nombre;
+        if (nextCatalog.pagina_url) nxt.pagina_url = nextCatalog.pagina_url;
+        if (nextCatalog.inscripcion_url) nxt.inscripcion_url = nextCatalog.inscripcion_url;
+
+        if (nxt.cupon && nxt.cupon.disponible) {
+          nxt.cupon = { ...nxt.cupon };
+          const descMatch = String(nxt.cupon.descuento || profile.descuento || "").match(/\d+/);
+          const descVal = descMatch ? parseInt(descMatch[0], 10) : 0;
+          if (descVal >= 100) {
+            nxt.cupon.precio_final = 0;
+          } else if (descVal > 0 && catalogValor > 0) {
+            nxt.cupon.precio_final = Math.round((catalogValor * (100 - descVal)) / 100);
+          } else {
+            nxt.cupon.precio_final = catalogValor;
+          }
+        }
+      }
+    }
+  }
+
   if (!nxt || !nxt.nombre) {
     box.hidden = true;
     return;
@@ -181,7 +231,7 @@ function renderNextCourse(profile) {
   }
 }
 
-async function renderProfile(profile, categorias) {
+async function renderProfile(profile, categorias, catalogoCursos) {
   $("profile-name").textContent = profile.nombre || "Participante";
   const badge = $("profile-badge");
   const artwork = sealFor(profile.categoria);
@@ -205,16 +255,24 @@ async function renderProfile(profile, categorias) {
       seal.hidden = true;
     }
   }
+
+  const fielBadge = $("profile-fiel-badge");
+  if (fielBadge) {
+    const isFiel = Boolean(profile.fidelidad);
+    fielBadge.hidden = !isFiel;
+    fielBadge.classList.toggle("hidden", !isFiel);
+  }
+
   $("profile-benefit").textContent = benefitMessage(profile, categorias);
-  renderNextCourse(profile);
+  renderNextCourse(profile, catalogoCursos);
 
   const list = $("course-list");
-  const cursos = sortCoursesNewestFirst(profile.cursos || []);
-  if (!cursos.length) {
+  const misCursos = sortCoursesNewestFirst(profile.cursos || []);
+  if (!misCursos.length) {
     list.innerHTML = `<p class="status">Aún no hay cursos asociados a esta cuenta.</p>`;
     return;
   }
-  list.innerHTML = cursos
+  list.innerHTML = misCursos
     .map((curso) => {
       const links = [];
       if (curso.classroom_url) {
@@ -347,8 +405,11 @@ async function enterDashboard(token, profile) {
   }
   showStatus($("lookup-status"), "");
   $("submit-lookup").disabled = false;
-  const categorias = await loadCategorias().catch(() => null);
-  await renderProfile(profile, categorias);
+  const [categorias, cursos] = await Promise.all([
+    loadCategorias().catch(() => null),
+    loadCursos().catch(() => null),
+  ]);
+  await renderProfile(profile, categorias, cursos);
   $("lead").classList.add("hidden");
   $("lead").hidden = true;
   setConsultaChrome(false);

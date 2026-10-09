@@ -27,6 +27,7 @@ import pandas as pd
 import argparse
 import json
 import os
+import re
 import sys
 from datetime import datetime
 
@@ -181,24 +182,43 @@ def evaluar_historial(cursos_participados, total_cursos_existentes):
     return es_oro, es_plata, es_bronce
 
 
-def clasificar_miembro(member, total_cursos_existentes, beneficio_usado=False, fecha_beneficio=""):
+def clasificar_miembro(member, total_cursos_existentes, beneficio_usado=False, info_beneficio=None):
     """
     Clasifica a un miembro según reglas actualizadas.
     """
+    if info_beneficio is None:
+        info_beneficio = {}
     cursos_participados = member.get("cursos_participados", [])
     es_oro, es_plata, es_bronce = evaluar_historial(cursos_participados, total_cursos_existentes)
 
-    # Si usó un beneficio, pierde la categoría
+    fecha_beneficio = info_beneficio.get("fecha", "")
+    curso_beneficio = info_beneficio.get("curso_aplicado", "")
+
+    # Si usó un beneficio de Oro o Plata:
+    # Pierde Oro/Plata. Si participó en el último curso dictado, pasa automáticamente
+    # a ser BRONCE y se le reinicia el conteo de cursos hacia Plata/Oro.
     if beneficio_usado:
-        return {
-            "categoria": "SIN CATEGORÍA",
-            "descuento": "0%",
-            "descuento_valor": 0,
-            "beneficios": f"Beneficio ya usado el {fecha_beneficio}. Debe acumular cursos nuevamente.",
-            "bono_transferible": "N/A",
-            "emoji": "🔄",
-            "nota": "Beneficio ya redimido",
-        }
+        if es_bronce:
+            return {
+                "categoria": "BRONCE",
+                "descuento": "15%",
+                "descuento_valor": 15,
+                "beneficios": mensaje_categoria("bronze")
+                or "15% de descuento en el próximo curso (bono transferible)",
+                "bono_transferible": "Sí",
+                "emoji": "🥉",
+                "nota": f"Beneficio redimido en {curso_beneficio or 'último curso'} (reinicio de conteo)",
+            }
+        else:
+            return {
+                "categoria": "SIN CATEGORÍA",
+                "descuento": "0%",
+                "descuento_valor": 0,
+                "beneficios": f"Beneficio ya usado el {fecha_beneficio}. Debe acumular cursos nuevamente.",
+                "bono_transferible": "N/A",
+                "emoji": "🔄",
+                "nota": "Beneficio ya redimido",
+            }
 
     # Clasificar (Oro > Plata > Bronce > Sin categoría)
     if es_oro:
@@ -250,19 +270,40 @@ def clasificar_miembro(member, total_cursos_existentes, beneficio_usado=False, f
 # ============================================================================
 
 def cargar_beneficios_usados():
-    """Carga el registro de beneficios ya redimidos."""
+    """Carga el registro de beneficios ya redimidos indexado por correos."""
     if not os.path.exists(BENEFICIOS_CSV):
-        return set()
+        return {}
 
     df = pd.read_csv(BENEFICIOS_CSV)
-    # Usar correo como identificador (normalizado)
     usados = {}
     for _, row in df.iterrows():
-        correo = str(row.get("correo", "")).strip().lower()
+        nombre = str(row.get("nombre", "")).strip()
+        correo_raw = str(row.get("correo", "")).strip().lower()
+        categoria = str(row.get("categoria", "")).strip().upper()
+        beneficio = str(row.get("beneficio", "")).strip()
         fecha = str(row.get("fecha", "")).strip()
-        if correo and correo != "nan":
-            usados[correo] = fecha
+        curso = str(row.get("curso_aplicado", "")).strip()
+        info = {
+            "nombre": nombre,
+            "categoria": categoria,
+            "beneficio": beneficio,
+            "fecha": fecha,
+            "curso_aplicado": curso,
+        }
+        for c in re.split(r"[\s,;]+", correo_raw):
+            c_norm = c.strip().lower()
+            if c_norm and c_norm != "nan":
+                usados[c_norm] = info
     return usados
+
+
+def info_beneficio_miembro(member, beneficios_usados):
+    """Determina si algún correo del miembro está en beneficios usados."""
+    correos = re.split(r"[\s,;]+", str(member.get("correo", "")).strip().lower())
+    for c in correos:
+        if c and c in beneficios_usados:
+            return True, beneficios_usados[c]
+    return False, {}
 
 
 def crear_archivo_beneficios_si_no_existe():
@@ -325,12 +366,22 @@ def main():
 
     # Clasificar cada miembro y actualizar el JSON
     for member in members:
-        correo = str(member.get("correo", "")).strip().lower()
-        uso_beneficio = correo in beneficios_usados
-        fecha_beneficio = beneficios_usados.get(correo, "")
+        uso_beneficio, info_b = info_beneficio_miembro(member, beneficios_usados)
+        fecha_beneficio = info_b.get("fecha", "")
+        curso_aplicado = info_b.get("curso_aplicado", "")
 
-        clasif = clasificar_miembro(member, args.ultimo_curso, beneficio_usado=uso_beneficio, fecha_beneficio=fecha_beneficio)
-        
+        # Estímulo de Fidelidad: miembros que alcanzan al menos una vez la categoría Plata u Oro
+        # 1. Si alcanzaron Oro o Plata en este historial
+        es_oro, es_plata, _ = evaluar_historial(member.get("cursos_participados", []), args.ultimo_curso)
+        # 2. Si ya redimieron un beneficio previo de Plata u Oro
+        beneficio_plata_oro = uso_beneficio and (info_b.get("categoria") in ["ORO", "PLATA"])
+        # 3. Si ya tenían el estímulo registrado previamente
+        tenia_fidelidad = bool(member.get("fidelidad"))
+
+        es_fiel = bool(es_oro or es_plata or beneficio_plata_oro or tenia_fidelidad)
+
+        clasif = clasificar_miembro(member, args.ultimo_curso, beneficio_usado=uso_beneficio, info_beneficio=info_b)
+
         # Actualizar campos en el miembro
         member["categoria"] = clasif["categoria"]
         member["emoji"] = clasif["emoji"]
@@ -340,8 +391,10 @@ def main():
         member["bono_transferible"] = clasif["bono_transferible"]
         member["beneficio_usado"] = "SÍ" if uso_beneficio else "NO"
         member["fecha_beneficio"] = fecha_beneficio
+        member["curso_aplicado"] = curso_aplicado
         member["proximo_curso"] = nombre_curso
         member["nota"] = clasif["nota"]
+        member["fidelidad"] = es_fiel
 
     # Ordenar: Oro primero, luego Plata, Bronce, Sin categoría
     cat_order = {"ORO": 0, "PLATA": 1, "BRONCE": 2, "SIN CATEGORÍA": 3}
@@ -363,14 +416,21 @@ def main():
         if len(subset) > 0 and cat != "SIN CATEGORÍA":
             for r in subset:
                 nota = f" ⚠️ {r['nota']}" if r.get('nota') else ""
-                print(f"    • {r['nombre']} ({r['correo']}) - {r['descuento']}{nota}")
+                fiel_tag = " [Cliente fiel 🌟]" if r.get("fidelidad") else ""
+                print(f"    • {r['nombre']} ({r['correo']}) - {r['descuento']}{fiel_tag}{nota}")
 
-    # Miembros que perdieron categoría por usar beneficio
+    # Miembros que usaron beneficio
     usados = [m for m in members if m["beneficio_usado"] == "SÍ"]
     if len(usados) > 0:
-        print(f"\n  🔄 Miembros que perdieron categoría por beneficio usado: {len(usados)}")
+        print(f"\n  🔄 Miembros que redimieron beneficio (conteo reiniciado): {len(usados)}")
         for r in usados:
-            print(f"    • {r['nombre']} ({r['correo']})")
+            print(f"    • {r['nombre']} ({r['correo']}) - Pasa a: {r['categoria']}")
+
+    # Clientes fieles
+    fieles = [m for m in members if m.get("fidelidad")]
+    print(f"\n  🌟 Clientes fieles (Estímulo Fidelidad): {len(fieles)} persona(s)")
+    for r in fieles:
+        print(f"    • {r['nombre']} ({r['correo']}) - Categoría actual: {r['categoria']}")
 
     # Resumen de contactables
     con_correo = [m for m in members if str(m.get("correo", "")).strip() != ""]

@@ -32,6 +32,10 @@
     "nombre": "Master Class Extraterrestre"
   },
   {
+    "id": "masterclass_cambio_climatico",
+    "nombre": "Master Class Cambio Climático"
+  },
+  {
     "id": "cuantica_a_pie_permanente",
     "nombre": "Cuántica a Pie (Permanente)"
   }

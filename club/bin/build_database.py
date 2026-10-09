@@ -88,6 +88,13 @@ CURSOS = [
         "sheet": "Inscritos",
         "tipo": "estandar",
     },
+    {
+        "id": "masterclass_cambio_climatico",
+        "nombre": "Master Class Cambio Climático",
+        "archivo": "Inscripciones - Master Class Cambio Climático - 2026-2.xlsx",
+        "sheet": "Inscritos",
+        "tipo": "estandar",
+    },
 ]
 
 

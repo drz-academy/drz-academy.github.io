@@ -210,6 +210,7 @@ function publicProfile(record) {
     emoji: record.emoji || "",
     beneficios: record.beneficios || "",
     descuento: record.descuento || "",
+    fidelidad: Boolean(record.fidelidad),
     cursos: Array.isArray(record.cursos) ? record.cursos : [],
     proximo_curso: record.proximo_curso && typeof record.proximo_curso === "object" ? record.proximo_curso : null,
   };
@@ -927,6 +928,7 @@ async function handleAdminSync(request, env) {
       emoji: String(member.emoji || ""),
       beneficios: String(member.beneficios || ""),
       descuento: String(member.descuento || ""),
+      fidelidad: Boolean(member.fidelidad),
       cursos: Array.isArray(member.cursos) ? member.cursos : [],
       proximo_curso: member.proximo_curso && typeof member.proximo_curso === "object" ? member.proximo_curso : null,
     };

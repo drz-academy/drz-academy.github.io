@@ -237,6 +237,29 @@ def generar_informe():
     lines.append("---")
     lines.append("")
 
+    # ── FIDELIDAD ──
+    fieles = [m for m in members if m.get("fidelidad")]
+    lines.append("## 🌟 Estímulo de Fidelidad (Clientes fieles)")
+    lines.append("")
+    lines.append("Estímulo otorgado a quienes han alcanzado al menos una vez la categoría Plata u Oro.")
+    lines.append("")
+    if len(fieles) > 0:
+        lines.append(f"**Total Clientes fieles: {len(fieles)}**")
+        lines.append("")
+        lines.append("| # | Nombre | Correo | Categoría actual | Nota |")
+        lines.append("|---|--------|--------|------------------|------|")
+        for i, f_m in enumerate(fieles, 1):
+            correo = safe_str(f_m.get("correo", ""))
+            cat = safe_str(f_m.get("categoria", ""))
+            nota = safe_str(f_m.get("nota", ""))
+            lines.append(f"| {i} | {f_m.get('nombre', '')} | {correo} | {cat} | {nota} |")
+    else:
+        lines.append("*Ningún miembro con estímulo de fidelidad registrado.*")
+
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
     # ── RESUMEN ──
     lines.append("## 📊 Resumen")
     lines.append("")

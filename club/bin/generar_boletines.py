@@ -245,6 +245,15 @@ def html_boletin(row, cat, codigo, nombre_curso, precio, inscripcion_url, pagina
     pagina = pagina_url or inscripcion_url or f"{SITE_URL}/cursos/cambio-climatico/"
     inscribe = inscripcion_url or pagina
 
+    fiel_badge = ""
+    if row.get("fidelidad"):
+        fiel_badge = (
+            '<p style="margin:0 0 14px 0;">'
+            '<span style="display:inline-block; background:#fff7e6; border:1px solid #e0b658; color:#8a5a2b; font-size:13px; font-weight:bold; padding:4px 12px; border-radius:12px;">'
+            "🌟 Cliente fiel"
+            "</span></p>"
+        )
+
     return f"""<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -262,6 +271,7 @@ def html_boletin(row, cat, codigo, nombre_curso, precio, inscripcion_url, pagina
   <div style="padding:24px 28px 8px 28px;">
     <p style="text-align:center; color:#777; font-style:italic; margin:0 0 24px 0;">Novedades del 25 de agosto de 2026</p>
     <h1 style="color:#2c3e50; font-size:22px; margin:0 0 16px 0; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">Hola {nombre}</h1>
+    {fiel_badge}
     <p>Este semestre cumplimos <strong>2 años</strong> (desde 2024) de poner a la gente a ñoñiar. Después de <strong>{n_cursos} cursos</strong> y <strong>{n_certs} personas certificadas</strong>, y a modo de celebración, nace el <strong>Dr. Z Academy Club</strong>: beneficios para quienes nos apoyan participando en los cursos.</p>
     <p>Según tu historial, tu categoría es <strong style="color:{meta['ink']};">{html.escape(cat.title())}</strong>.</p>
     {cursos_block}

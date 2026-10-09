@@ -71,7 +71,7 @@ sync-site:
 	@rm -rf $(SITE)/analytics && cp -r analytics $(SITE)/analytics
 	@rm -rf $(SITE)/club
 	@mkdir -p $(SITE)/club
-	@cp club/index.html club/portal.js club/categorias.json $(SITE)/club/
+	@cp club/index.html club/portal.js club/categorias.json club/cursos.json $(SITE)/club/
 	@python3 club/bin/generar_stats.py --out $(SITE)/club/stats.json --cursos-out club/drz-forms/cursos-opciones.json
 	@mkdir -p $(SITE)/club/drz-forms
 	@# Solo HTML/JS/JSON públicos. Nunca copiar *-respuestas.csv (datos de miembros).
