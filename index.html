@@ -585,7 +585,23 @@
       margin-top: 0.25rem;
     }
 
-    #cursos-grid-empty {
+    .course-card--past {
+      border-color: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .course-card--past:hover {
+      border-color: rgba(243, 211, 97, 0.35);
+    }
+
+    .tag-closed {
+      background: rgba(239, 68, 68, 0.14);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    #cursos-grid-empty,
+    #cursos-pasados-grid-empty {
       color: var(--text-muted);
       font-size: 0.9rem;
       grid-column: 1 / -1;
@@ -1042,6 +1058,18 @@
       <div class="courses-grid" id="cursos-grid">
         <p id="cursos-grid-empty">Cargando cursos…</p>
       </div>
+
+      <div class="section-header" style="margin-top: 4rem;">
+        <span class="section-label">Histórico de Cursos</span>
+        <h2 class="section-title">Cursos pasados</h2>
+        <p class="section-desc">
+          Hojas informativas de cursos y experiencias anteriores. Puedes consultar su contenido,
+          programa y metodología. Las inscripciones para estas cohortes ya finalizaron.
+        </p>
+      </div>
+      <div class="courses-grid" id="cursos-pasados-grid">
+        <p id="cursos-pasados-grid-empty">Cargando cursos pasados…</p>
+      </div>
     </div>
   </section>
 
@@ -1202,23 +1230,25 @@
   <script>
     (function () {
       const grid = document.getElementById('cursos-grid');
-      const empty = document.getElementById('cursos-grid-empty');
+      const gridPasados = document.getElementById('cursos-pasados-grid');
 
       function tagHtml(tags) {
         return tags.map(t => `<span class="tag">${t}</span>`).join('');
       }
 
-      function renderCard(c) {
+      function renderCard(c, isPast = false) {
         const img = c.imagen
           ? `<img class="course-card-img" src="${c.imagen}" alt="${c.titulo}" loading="lazy">`
           : `<div class="course-card-img" style="background:#111;min-height:120px;"></div>`;
-        const tags = tagHtml(c.etiquetas || []);
+        const tags = tagHtml(c.etiquetas || []) + (isPast ? '<span class="tag tag-closed">Finalizado</span>' : '');
         const meta = [
           c.instructor ? `<span>${c.instructor}</span>` : '',
           c.sesiones ? `<span class="dot">${c.sesiones} sesiones</span>` : '',
         ].filter(Boolean).join('');
+        const extraClass = isPast ? ' course-card--past' : '';
+        const linkText = isPast ? 'Ver contenido del curso' : 'Ver hoja del curso';
         return `
-        <a class="course-card" href="${c.url}" rel="noopener" data-track="course_click" data-track-id="${c.id}" data-track-name="${c.titulo}">
+        <a class="course-card${extraClass}" href="${c.url}" rel="noopener" data-track="course_click" data-track-id="${c.id}" data-track-name="${c.titulo}">
           ${img}
           <div class="course-card-body">
             <h3>${c.titulo}</h3>
@@ -1226,7 +1256,7 @@
             <div class="app-card-tags">${tags}</div>
             <div class="course-card-meta">${meta}</div>
             <span class="course-card-link">
-              Ver hoja del curso
+              ${linkText}
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                 <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -1238,13 +1268,25 @@
       fetch('cursos/courses.json')
         .then(r => r.json())
         .then(data => {
-          const activos = (data.cursos || []).filter(c => c.activo);
-          grid.innerHTML = activos.length
-            ? activos.map(renderCard).join('')
-            : '<p id="cursos-grid-empty">No hay cursos activos en este momento.</p>';
+          const all = data.cursos || [];
+          const activos = all.filter(c => c.activo);
+          const pasados = all.filter(c => !c.activo);
+
+          if (grid) {
+            grid.innerHTML = activos.length
+              ? activos.map(c => renderCard(c, false)).join('')
+              : '<p id="cursos-grid-empty">No hay cursos activos en este momento.</p>';
+          }
+
+          if (gridPasados) {
+            gridPasados.innerHTML = pasados.length
+              ? pasados.map(c => renderCard(c, true)).join('')
+              : '<p id="cursos-pasados-grid-empty">No hay cursos pasados registrados.</p>';
+          }
         })
         .catch(() => {
-          grid.innerHTML = '<p id="cursos-grid-empty">No hay cursos activos en este momento.</p>';
+          if (grid) grid.innerHTML = '<p id="cursos-grid-empty">No hay cursos activos en este momento.</p>';
+          if (gridPasados) gridPasados.innerHTML = '<p id="cursos-pasados-grid-empty">No hay cursos pasados registrados.</p>';
         });
     })();
 

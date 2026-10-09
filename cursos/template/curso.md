@@ -25,6 +25,10 @@ duracion_sesion: "2 horas"
 dia: "miércoles"
 horario: "6:30 pm a 8:30 pm"
 
+# Fechas de inicio y finalización (* opcional, para cursos con calendario específico)
+# fecha_inicio: "11 de noviembre de 2026"
+# fecha_fin: "4 de diciembre de 2026"
+
 # Lugar presencial
 lugar: "Colegio La Enseñanza, Medellín (Colombia)"
 direccion: "Cra. 43 No. 9 Sur 195"

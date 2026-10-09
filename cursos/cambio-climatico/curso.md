@@ -8,6 +8,8 @@ sesiones: 4
 duracion_sesion: "2 horas"
 dia: "lunes"
 horario: "6:30 pm a 8:30 pm"
+fecha_inicio: "14 de septiembre de 2026"
+fecha_fin: "12 de octubre de 2026"
 lugar: "Evento virtual (hora Colombia)"
 direccion: ""
 tiene_zoom: false
@@ -25,7 +27,7 @@ etiquetas:
   - "Medio Ambiente"
 email_contacto: "soydoctorz@gmail.com"
 whatsapp: "https://wa.me/573002422052"
-activo: true
+activo: false
 ---
 
 ## Presentación
@@ -61,7 +63,7 @@ Esta *Master Class* está dirigida a entusiastas, estudiantes, profesionales, do
 
 ## Metodología
 
-Las *Master Class* de la [Dr. Z Academy](https://www.drz.academy) son **espacios de formación e interacción académica con expertos o expertas en disciplinas específicas**. Tienen una duración máxima de 4 sesiones de 2 horas cada una. Este evento no es gratuito. Puedes consultar el valor y las formas de pago en el [enlace de inscripción](<!--inscripcion_url-->).
+Las *Master Class* de la [Dr. Z Academy](https://www.drz.academy) son **espacios de formación e interacción académica con expertos o expertas en disciplinas específicas**. Tienen una duración máxima de 4 sesiones de 2 horas cada una. Este evento no fue gratuito. Las inscripciones para esta edición ya están cerradas.
 
 Esta *Master Class* es **virtual**: sesiones sincrónicas que pueden seguirse en vivo mientras se graban y también en diferido. Las sesiones se realizan los **lunes de 6:30 pm a 8:30 pm (hora Colombia)**, del **14 de septiembre al 12 de octubre de 2026**.
 
@@ -85,4 +87,4 @@ Estos son los datos que no puedes olvidar sobre la *Master Class*:
 - Es un **evento virtual**; las grabaciones se transmitirán en vivo a través de **Google Meet**.
 - Todo el material (videos, presentaciones, material complementario) se comparte por [Google Classroom](https://classroom.google.com/). **Necesitas una cuenta personal en Google**.
 - Para obtener el certificado debes asistir o reproducir el 75% de las sesiones antes del **15 de octubre de 2026**.
-- Puedes inscribirte en [<!--inscripcion_url-->](<!--inscripcion_url-->).
+- **Inscripciones**: cerradas (esta edición ya concluyó).

@@ -8,6 +8,8 @@ sesiones: 4
 duracion_sesion: "2 horas"
 dia: "lunes"
 horario: "6:30 pm a 8:30 pm"
+fecha_inicio: "3 de agosto de 2026"
+fecha_fin: "31 de agosto de 2026"
 lugar: "Hibrido (virtual y presencial) con Transmisión desde el Colegio La Enseñanza, Medellín (Colombia)"
 direccion: "Cra. 43 No. 9 Sur 195"
 tiene_zoom: false

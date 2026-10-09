@@ -1,6 +1,25 @@
 {
   "cursos": [
     {
+      "id": "circulo-latino",
+      "titulo": "Círculo Latino",
+      "tagline": "¡El latín no es una lengua muerta si sabes cómo leerla!",
+      "descripcion": "Una comunidad y ciclo formativo para aprender, leer y traducir latín clásico y moderno de la mano de Antonio Bernal. ¡Únete en cualquier momento!",
+      "url": "cursos/circulo-latino/",
+      "imagen": "cursos/circulo-latino/images/header.png",
+      "etiquetas": [
+        "Latín",
+        "Humanidades",
+        "Cultura Clásica",
+        "Lingüística"
+      ],
+      "instructor": "Antonio Bernal (Grammaticus)",
+      "sesiones": 8,
+      "activo": true,
+      "fecha_inicio": "11 de noviembre de 2026",
+      "fecha_fin": "4 de diciembre de 2026"
+    },
+    {
       "id": "cambio-climatico",
       "titulo": "Cambio Climático",
       "tagline": "La ciencia que nadie te explicó y el futuro que ya nos alcanzó",
@@ -14,7 +33,9 @@
       ],
       "instructor": "Juan Fernando Salazar Villegas, Ph. D.",
       "sesiones": 4,
-      "activo": true
+      "activo": false,
+      "fecha_inicio": "14 de septiembre de 2026",
+      "fecha_fin": "12 de octubre de 2026"
     },
     {
       "id": "python-fin-del-mundo",
@@ -79,7 +100,9 @@
       ],
       "instructor": "Jorge I. Zuluaga, Dr. Z",
       "sesiones": 4,
-      "activo": false
+      "activo": false,
+      "fecha_inicio": "3 de agosto de 2026",
+      "fecha_fin": "31 de agosto de 2026"
     }
   ]
 }

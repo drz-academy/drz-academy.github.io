@@ -169,6 +169,8 @@ def substitute_meta_vars(content: str, meta: dict) -> str:
         if key not in meta:
             print(f"⚠️  Variable de metadatos desconocida: <!--{key}-->")
             return match.group(0)
+        if key == "inscripcion_url" and not meta.get("activo", False):
+            return "#inscripcion-cerrada"
         value = meta[key]
         if isinstance(value, (list, dict, bool)) or value is None:
             print(f"⚠️  <!--{key}--> no es un valor escalar sustituible")
@@ -422,16 +424,80 @@ def generate_og_images(course_dir: Path, meta: dict) -> None:
 # PLANTILLA HTML
 # ─────────────────────────────────────────────────────────────────────────────
 
+def course_dates_html(meta: dict) -> str:
+    """Genera el bloque con fechas de inicio y finalización si están definidas."""
+    inicio = str(meta.get("fecha_inicio", "")).strip()
+    fin    = str(meta.get("fecha_fin", "")).strip()
+    fechas = str(meta.get("fechas", "")).strip()
+
+    if not inicio and not fin and not fechas:
+        return ""
+
+    activo = meta.get("activo", False)
+    cls_closed = " course-dates--closed" if not activo else ""
+
+    calendar_icon = (
+        '<svg class="course-dates-icon" width="18" height="18" viewBox="0 0 24 24" '
+        'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" '
+        'stroke-linejoin="round" aria-hidden="true">'
+        '<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>'
+        '<line x1="16" y1="2" x2="16" y2="6"></line>'
+        '<line x1="8" y1="2" x2="8" y2="6"></line>'
+        '<line x1="3" y1="10" x2="21" y2="10"></line>'
+        '</svg>'
+    )
+
+    items = []
+    if inicio and fin:
+        items.append(f'<span class="course-date-item"><span class="course-date-label">Inicio:</span> <span class="course-date-val">{html.escape(inicio)}</span></span>')
+        items.append('<span class="course-date-sep" aria-hidden="true">•</span>')
+        items.append(f'<span class="course-date-item"><span class="course-date-label">Finalización:</span> <span class="course-date-val">{html.escape(fin)}</span></span>')
+    elif inicio:
+        items.append(f'<span class="course-date-item"><span class="course-date-label">Inicio:</span> <span class="course-date-val">{html.escape(inicio)}</span></span>')
+    elif fin:
+        items.append(f'<span class="course-date-item"><span class="course-date-label">Finalización:</span> <span class="course-date-val">{html.escape(fin)}</span></span>')
+    elif fechas:
+        items.append(f'<span class="course-date-item"><span class="course-date-label">Fechas:</span> <span class="course-date-val">{html.escape(fechas)}</span></span>')
+
+    content = "\n        ".join(items)
+    return f'''      <div class="course-dates{cls_closed}">
+        {calendar_icon}
+        <div class="course-dates-wrap">
+          {content}
+        </div>
+      </div>'''
+
+
 def enroll_top_block(meta: dict) -> str:
-    """Botón de inscripción al inicio del contenido."""
+    """Botón de inscripción o banner de curso finalizado al inicio del contenido."""
+    activo = meta.get("activo", False)
+    dates = course_dates_html(meta)
+    dates_part = f"\n{dates}\n" if dates else ""
+
+    if not activo:
+        return f'''
+    <div class="enroll-top">{dates_part}
+      <div class="enroll-closed-banner">
+        <span class="enroll-closed-tag">Curso finalizado</span>
+        <span class="enroll-closed-text">Las inscripciones para esta edición están cerradas</span>
+      </div>
+      <div>
+        <button type="button" class="enroll-btn enroll-btn--disabled" disabled aria-disabled="true">
+          Inscripciones cerradas
+        </button>
+      </div>
+    </div>'''
+
     url    = meta.get("inscripcion_url", "#")
     cid    = escape_attr(meta.get("id", ""))
     titulo = escape_attr(meta.get("titulo", ""))
     return f'''
-    <div class="enroll-top">
-      <a class="enroll-btn enroll-btn--top" href="{url}" target="_blank" rel="noopener" data-track="course_enroll_click" data-track-id="{cid}" data-track-name="{titulo}">
-        Inscribete ahora →
-      </a>
+    <div class="enroll-top">{dates_part}
+      <div>
+        <a class="enroll-btn enroll-btn--top" href="{url}" target="_blank" rel="noopener" data-track="course_enroll_click" data-track-id="{cid}" data-track-name="{titulo}">
+          Inscribete ahora →
+        </a>
+      </div>
     </div>'''
 
 
@@ -448,13 +514,33 @@ def hotmart_top_block(meta: dict) -> str:
 
 
 def cta_block(meta: dict) -> str:
-    """Genera el bloque de inscripción al final del contenido."""
-    url    = meta.get("inscripcion_url", "#")
-    qr     = meta.get("imagen_qr", "")
+    """Genera el bloque de inscripción o de cierre al final del contenido."""
     email  = meta.get("email_contacto", "soydoctorz@gmail.com")
     wa     = meta.get("whatsapp", "")
     cid    = escape_attr(meta.get("id", ""))
     titulo = escape_attr(meta.get("titulo", ""))
+    activo = meta.get("activo", False)
+
+    wa_html = ""
+    if wa:
+        wa_html = f'<a href="{wa}" target="_blank" rel="noopener">WhatsApp</a>'
+
+    if not activo:
+        return f'''
+    <div class="enroll-section enroll-section--closed">
+      <p><strong>Este curso ha finalizado.</strong> Las inscripciones para esta edición se encuentran cerradas.</p>
+      <button type="button" class="enroll-btn enroll-btn--disabled" disabled aria-disabled="true">
+        Inscripciones cerradas
+      </button>
+      <div class="contact-links" style="margin-top:1.5rem;">
+        <a href="mailto:{email}">{email}</a>
+        {wa_html}
+        <a href="https://drz.academy" target="_blank" rel="noopener">drz.academy</a>
+      </div>
+    </div>'''
+
+    url    = meta.get("inscripcion_url", "#")
+    qr     = meta.get("imagen_qr", "")
 
     qr_html = ""
     if qr:
@@ -463,10 +549,6 @@ def cta_block(meta: dict) -> str:
         <img src="{qr}" alt="Código QR para inscripción">
         <span>Comparte el enlace de inscripción con este QR</span>
       </div>'''
-
-    wa_html = ""
-    if wa:
-        wa_html = f'<a href="{wa}" target="_blank" rel="noopener">WhatsApp</a>'
 
     return f'''
     <div class="enroll-section">
@@ -554,8 +636,7 @@ def render_html(meta: dict, sections: list[tuple[str, str]]) -> str:
 
     # Construir el cuerpo de secciones
     body_html_parts: list[str] = []
-    if activo:
-        body_html_parts.append(enroll_top_block(meta))
+    body_html_parts.append(enroll_top_block(meta))
     first = True
     for heading, content in sections:
         if not content and not heading:
@@ -571,8 +652,7 @@ def render_html(meta: dict, sections: list[tuple[str, str]]) -> str:
         else:
             body_html_parts.append(f'    <div class="section-body">{html_content}</div>')
 
-    if activo:
-        body_html_parts.append(cta_block(meta))
+    body_html_parts.append(cta_block(meta))
 
     body_html = "\n\n".join(body_html_parts)
 
@@ -705,6 +785,93 @@ def render_html(meta: dict, sections: list[tuple[str, str]]) -> str:
     }}
     .hotmart-btn:hover {{ background: #e09410; text-decoration: none; color: #1a1a1a; }}
 
+    /* Fechas del curso (arriba) */
+    .course-dates {{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      background: #f0f7f9;
+      border: 1px solid rgba(13, 118, 147, 0.22);
+      border-radius: 100px;
+      padding: 0.55rem 1.4rem;
+      margin-bottom: 1.25rem;
+      color: var(--text);
+      font-size: 0.95rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    }}
+    .course-dates-icon {{
+      color: var(--teal);
+      flex-shrink: 0;
+      display: block;
+    }}
+    .course-dates-wrap {{
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }}
+    .course-date-item {{
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.35rem;
+      white-space: nowrap;
+    }}
+    .course-date-label {{
+      font-weight: 800;
+      color: var(--teal);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }}
+    .course-date-val {{
+      font-weight: 600;
+      color: var(--text);
+    }}
+    .course-date-sep {{
+      color: #94a3b8;
+      font-weight: 700;
+      font-size: 0.85rem;
+      user-select: none;
+    }}
+    .course-dates--closed {{
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }}
+    .course-dates--closed .course-dates-icon {{
+      color: #64748b;
+    }}
+    .course-dates--closed .course-date-label {{
+      color: #64748b;
+    }}
+
+    @media (max-width: 580px) {{
+      .course-dates {{
+        border-radius: var(--r);
+        padding: 0.6rem 0.85rem;
+        max-width: 100%;
+        box-sizing: border-box;
+        font-size: 0.875rem;
+        align-items: center;
+      }}
+      .course-date-sep {{
+        display: none;
+      }}
+      .course-dates-wrap {{
+        flex-direction: column;
+        gap: 0.15rem;
+        align-items: flex-start;
+      }}
+      .course-date-item {{
+        white-space: normal;
+        text-align: left;
+      }}
+      .course-date-label {{
+        font-size: 0.75rem;
+      }}
+    }}
+
     /* CTA / Enroll (arriba) */
     .enroll-top {{
       text-align: center; margin-bottom: 2rem;
@@ -724,6 +891,54 @@ def render_html(meta: dict, sections: list[tuple[str, str]]) -> str:
       transition: background 0.2s; margin-bottom: 1.5rem;
     }}
     .enroll-btn:hover {{ background: #0a5f77; text-decoration: none; color: #fff; }}
+    .enroll-btn--disabled {{
+      background: #4a5568 !important;
+      color: #e2e8f0 !important;
+      cursor: not-allowed !important;
+      pointer-events: none;
+      opacity: 0.85;
+      box-shadow: none !important;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      margin-bottom: 0 !important;
+    }}
+    .enroll-btn--disabled:hover {{
+      background: #4a5568 !important;
+      color: #e2e8f0 !important;
+      text-decoration: none !important;
+    }}
+    .enroll-section--closed {{
+      border: 2px dashed #94a3b8;
+      background: #f8fafc;
+    }}
+    .enroll-closed-banner {{
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+      margin-bottom: 1rem;
+      background: rgba(220, 53, 69, 0.08);
+      border: 1px solid rgba(220, 53, 69, 0.25);
+      border-radius: var(--r);
+      padding: 0.75rem 1.75rem;
+    }}
+    .enroll-closed-tag {{
+      font-weight: 800;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #b91c1c;
+    }}
+    .enroll-closed-text {{
+      font-size: 0.95rem;
+      color: var(--text-light);
+      font-weight: 600;
+    }}
+    a[href="#inscripcion-cerrada"], .link-disabled {{
+      color: #888 !important;
+      cursor: not-allowed !important;
+      pointer-events: none;
+      text-decoration: line-through;
+    }}
     .qr-wrap {{ display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }}
     .qr-wrap img {{ width: 140px; height: 140px; border: 1px solid var(--border); border-radius: var(--r); }}
     .qr-wrap span {{ font-size: 0.8rem; color: #888; }}
@@ -813,6 +1028,13 @@ def update_courses_json(meta: dict, course_dir: Path) -> None:
         "sesiones":    meta.get("sesiones", 0),
         "activo":      meta.get("activo", False),
     }
+
+    if meta.get("fecha_inicio"):
+        entry["fecha_inicio"] = str(meta["fecha_inicio"]).strip()
+    if meta.get("fecha_fin"):
+        entry["fecha_fin"] = str(meta["fecha_fin"]).strip()
+    if meta.get("fechas"):
+        entry["fechas"] = str(meta["fechas"]).strip()
 
     data: dict = {"cursos": []}
     if COURSES_JSON.exists():

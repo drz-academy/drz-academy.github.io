@@ -147,6 +147,93 @@
     }
     .hotmart-btn:hover { background: #e09410; text-decoration: none; color: #1a1a1a; }
 
+    /* Fechas del curso (arriba) */
+    .course-dates {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      background: #f0f7f9;
+      border: 1px solid rgba(13, 118, 147, 0.22);
+      border-radius: 100px;
+      padding: 0.55rem 1.4rem;
+      margin-bottom: 1.25rem;
+      color: var(--text);
+      font-size: 0.95rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    }
+    .course-dates-icon {
+      color: var(--teal);
+      flex-shrink: 0;
+      display: block;
+    }
+    .course-dates-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .course-date-item {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.35rem;
+      white-space: nowrap;
+    }
+    .course-date-label {
+      font-weight: 800;
+      color: var(--teal);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .course-date-val {
+      font-weight: 600;
+      color: var(--text);
+    }
+    .course-date-sep {
+      color: #94a3b8;
+      font-weight: 700;
+      font-size: 0.85rem;
+      user-select: none;
+    }
+    .course-dates--closed {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+    .course-dates--closed .course-dates-icon {
+      color: #64748b;
+    }
+    .course-dates--closed .course-date-label {
+      color: #64748b;
+    }
+
+    @media (max-width: 580px) {
+      .course-dates {
+        border-radius: var(--r);
+        padding: 0.6rem 0.85rem;
+        max-width: 100%;
+        box-sizing: border-box;
+        font-size: 0.875rem;
+        align-items: center;
+      }
+      .course-date-sep {
+        display: none;
+      }
+      .course-dates-wrap {
+        flex-direction: column;
+        gap: 0.15rem;
+        align-items: flex-start;
+      }
+      .course-date-item {
+        white-space: normal;
+        text-align: left;
+      }
+      .course-date-label {
+        font-size: 0.75rem;
+      }
+    }
+
     /* CTA / Enroll (arriba) */
     .enroll-top {
       text-align: center; margin-bottom: 2rem;
@@ -166,6 +253,54 @@
       transition: background 0.2s; margin-bottom: 1.5rem;
     }
     .enroll-btn:hover { background: #0a5f77; text-decoration: none; color: #fff; }
+    .enroll-btn--disabled {
+      background: #4a5568 !important;
+      color: #e2e8f0 !important;
+      cursor: not-allowed !important;
+      pointer-events: none;
+      opacity: 0.85;
+      box-shadow: none !important;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      margin-bottom: 0 !important;
+    }
+    .enroll-btn--disabled:hover {
+      background: #4a5568 !important;
+      color: #e2e8f0 !important;
+      text-decoration: none !important;
+    }
+    .enroll-section--closed {
+      border: 2px dashed #94a3b8;
+      background: #f8fafc;
+    }
+    .enroll-closed-banner {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+      margin-bottom: 1rem;
+      background: rgba(220, 53, 69, 0.08);
+      border: 1px solid rgba(220, 53, 69, 0.25);
+      border-radius: var(--r);
+      padding: 0.75rem 1.75rem;
+    }
+    .enroll-closed-tag {
+      font-weight: 800;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #b91c1c;
+    }
+    .enroll-closed-text {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      font-weight: 600;
+    }
+    a[href="#inscripcion-cerrada"], .link-disabled {
+      color: #888 !important;
+      cursor: not-allowed !important;
+      pointer-events: none;
+      text-decoration: line-through;
+    }
     .qr-wrap { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
     .qr-wrap img { width: 140px; height: 140px; border: 1px solid var(--border); border-radius: var(--r); }
     .qr-wrap span { font-size: 0.8rem; color: #888; }
@@ -212,6 +347,28 @@
   </nav>
 
   <main>
+
+    <div class="enroll-top">
+      <div class="course-dates course-dates--closed">
+        <svg class="course-dates-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        <div class="course-dates-wrap">
+          <span class="course-date-item"><span class="course-date-label">Inicio:</span> <span class="course-date-val">3 de agosto de 2026</span></span>
+        <span class="course-date-sep" aria-hidden="true">•</span>
+        <span class="course-date-item"><span class="course-date-label">Finalización:</span> <span class="course-date-val">31 de agosto de 2026</span></span>
+        </div>
+      </div>
+
+      <div class="enroll-closed-banner">
+        <span class="enroll-closed-tag">Curso finalizado</span>
+        <span class="enroll-closed-text">Las inscripciones para esta edición están cerradas</span>
+      </div>
+      <div>
+        <button type="button" class="enroll-btn enroll-btn--disabled" disabled aria-disabled="true">
+          Inscripciones cerradas
+        </button>
+      </div>
+    </div>
+
     <h1 class="section-title">Presentación</h1>
     <div class="section-body"><p><strong>Los extraterrestres están dando de que hablar otra vez</strong>. Los estamos viendo cada vez más frecuentemente en series, en el cine. Aparecen en las noticias, en redes sociales y sobre ellos se están escribiendo libros y artículos en todas partes. <strong>Sin embargo, a la fecha, no se tiene evidencia definitiva de la existencia de ninguno de ellos</strong>. La casi totalidad de lo que consumimos sobre extraterrestres es producto de la imaginación de artistas (literatura y cine), y en algunos casos de profesionales de la ciencia que investigan teóricamente el fenómeno de la vida en un contexto astronómico (astrobiología). En no pocas ocasiones, los extraterrestres son también el producto de ensoñaciones culturales, materia de teorías conspirativas o de trucos que se revelan a la larga como engaños.</p>
 <p><strong>Aún así, aquí estamos. Hablando todavía de extraterrestres</strong>. En esta <em>Master Class</em>, el profesor e investigador en astrobiología, Jorge I. Zuluaga, realiza una radiografía del <em>fenómeno Extraterrestre</em>. Desde su historia, que se remonta a más de un siglo atrás, pasando por su apogeo con el inicio de la era espacial, y su lugar privilegiado en la literatura y el cine, hasta llegar a lo que tiene que decir la ciencia sobre las verdaderas posibilidades de que existan extraterrestres.</p></div>
@@ -238,7 +395,7 @@
     <div class="section-body"><p>Esta <em>Master Class</em> está dirigida a entusiastas, estudiantes, profesionales, pensionados, que se dediquen a cualquier actividad o disciplina. <strong>No se necesitan conocimientos previos</strong> de matemáticas, física,  astronomía o de otras ciencias relacionadas con el tema, pero un conocimiento previo de estos temas pueden ayudar para profundizar en las discusiones. Pueden participar niños y jóvenes preferiblemente con una edad igual o mayor 12 años.</p></div>
 
     <h2 class="section-title">Metodología</h2>
-    <div class="section-body"><p>Las <em>Master Class</em> de la <a href="https://www.drz.academy">Dr. Z Academy</a> son <strong>espacios de formación e interacción académica con expertos o expertas en disciplinas específicas</strong>. Tienen una duración máxima de 4 sesiones de 2 horas cada una. Este evento no es gratuito. Puedes consultar el valor y las formas de pago en el <a href="https://drz.academy/producto/extraterrestres/">enlace de inscripción</a></p>
+    <div class="section-body"><p>Las <em>Master Class</em> de la <a href="https://www.drz.academy">Dr. Z Academy</a> son <strong>espacios de formación e interacción académica con expertos o expertas en disciplinas específicas</strong>. Tienen una duración máxima de 4 sesiones de 2 horas cada una. Este evento no es gratuito. Puedes consultar el valor y las formas de pago en el <a href="#inscripcion-cerrada">enlace de inscripción</a></p>
 <p>Si bien <strong>las Master Class son virtuales</strong>, con sesiones sincrónicas (asistencia a la clase mientras se graba), que pueden seguirse también en diferido (las clases son grabadas y puestas a disposición de todas las personas inscritas), hemos preparado espacios de interacción presencial (grabación de las clases) que se habilitaran dependiendo de la disponibilidad de un número suficiente de personas en la ciudad de la grabación.</p>
 <p>Estas sesiones de grabación presenciales se realizan en la ciudad de Medellín (Colombia) en las instalaciones del <strong>Colegio La Enseñanza</strong>, ubicado en la Cra. 43 No. 9 Sur 195, El Poblado. </p>
 <p><div class="photo-grid photo-grid--pair">
@@ -265,6 +422,19 @@
 <li>Todo el material (videos, presentaciones, material complementario) se comparte por <a href="https://classroom.google.com/">Google Classroom</a>. <strong>Necesitas una cuenta personal en Google</strong>.</li>
 <li>Para obtener el certificado debes asistir o reproducir el 75% de las sesiones.</li>
 </ul></div>
+
+
+    <div class="enroll-section enroll-section--closed">
+      <p><strong>Este curso ha finalizado.</strong> Las inscripciones para esta edición se encuentran cerradas.</p>
+      <button type="button" class="enroll-btn enroll-btn--disabled" disabled aria-disabled="true">
+        Inscripciones cerradas
+      </button>
+      <div class="contact-links" style="margin-top:1.5rem;">
+        <a href="mailto:SoyDoctorZ@gmail.com">SoyDoctorZ@gmail.com</a>
+        <a href="https://wa.me/573022871135" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://drz.academy" target="_blank" rel="noopener">drz.academy</a>
+      </div>
+    </div>
   </main>
 
   <footer>
