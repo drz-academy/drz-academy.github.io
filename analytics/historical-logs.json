@@ -1,5 +1,504 @@
 [
   {
+    "id": "989ca5f4-5b85-46a1-9758-4c235b8b0ca6",
+    "timestampServer": "2026-10-09T18:27:22.878Z",
+    "ip": "152.203.75.144",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "http://localhost:8000/cursos/circulo-latino/",
+    "referrer": "http://localhost:8000/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-10-09T18:27:22.736Z"
+  },
+  {
+    "id": "b2e412a9-fc68-458a-8541-2b425daeb18e",
+    "timestampServer": "2026-10-09T18:27:22.756Z",
+    "ip": "152.203.75.144",
+    "country": "CO",
+    "eventType": "course_click",
+    "page": "/",
+    "url": "http://localhost:8000/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "circulo-latino",
+      "targetName": "Círculo Latino",
+      "href": "cursos/circulo-latino/",
+      "label": "Círculo Latino\n            ¡El latín no es una lengua muerta si sabes cómo leerla!\n            LatínHumanidadesCultura C"
+    },
+    "timestampClient": "2026-10-09T18:27:22.545Z"
+  },
+  {
+    "id": "3ff7873e-6dc0-4121-a8ca-c7fce070c516",
+    "timestampServer": "2026-10-09T18:27:17.557Z",
+    "ip": "152.203.75.144",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "http://localhost:8000/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-09T18:27:17.212Z"
+  },
+  {
+    "id": "4fef2101-6bc3-41df-ab86-3310cd59ede7",
+    "timestampServer": "2026-10-09T18:23:20.173Z",
+    "ip": "152.203.75.144",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "http://localhost:8000/cursos/circulo-latino/",
+    "referrer": "http://localhost:8000/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-10-09T18:23:20.019Z"
+  },
+  {
+    "id": "da9f3fed-7fe2-4747-a96f-c2bfeadb7f2c",
+    "timestampServer": "2026-10-09T18:23:20.169Z",
+    "ip": "152.203.75.144",
+    "country": "CO",
+    "eventType": "course_click",
+    "page": "/",
+    "url": "http://localhost:8000/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "circulo-latino",
+      "targetName": "Círculo Latino",
+      "href": "cursos/circulo-latino/",
+      "label": "Círculo Latino\n            ¡El latín no es una lengua muerta si sabes cómo leerla!\n            LatínHumanidadesCultura C"
+    },
+    "timestampClient": "2026-10-09T18:23:19.966Z"
+  },
+  {
+    "id": "1ed0a775-7aae-457a-84d9-182b04c77a4a",
+    "timestampServer": "2026-10-09T18:22:52.830Z",
+    "ip": "152.203.75.144",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "http://localhost:8000/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-09T18:22:52.300Z"
+  },
+  {
+    "id": "de378748-9294-4d5f-94d6-76d64a8b2abf",
+    "timestampServer": "2026-10-09T17:26:44.138Z",
+    "ip": "152.203.75.144",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "http://localhost:8000/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-09T17:26:43.681Z"
+  },
+  {
+    "id": "694021e4-3239-46d3-b33e-38fab5394c21",
+    "timestampServer": "2026-10-09T17:21:59.942Z",
+    "ip": "152.203.75.144",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "http://localhost:8000/cursos/cambio-climatico/",
+    "referrer": "http://localhost:8000/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-09T17:21:59.772Z"
+  },
+  {
+    "id": "bc1dbcd8-ccdd-4423-9890-de9c2d5c9b34",
+    "timestampServer": "2026-10-09T17:21:59.686Z",
+    "ip": "152.203.75.144",
+    "country": "CO",
+    "eventType": "course_click",
+    "page": "/",
+    "url": "http://localhost:8000/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "cambio-climatico",
+      "targetName": "Cambio Climático",
+      "href": "cursos/cambio-climatico/",
+      "label": "Cambio Climático\n            La ciencia que nadie te explicó y el futuro que ya nos alcanzó\n            Cambio Climático"
+    },
+    "timestampClient": "2026-10-09T17:21:59.366Z"
+  },
+  {
+    "id": "93ac1b9b-7a10-4ea5-ab25-d1fb8e7bbf54",
+    "timestampServer": "2026-10-09T17:20:37.973Z",
+    "ip": "152.203.75.144",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "http://localhost:8000/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-09T17:20:37.581Z"
+  },
+  {
+    "id": "a2bec36e-59a7-4ff9-886d-ea3ceb0646ef",
+    "timestampServer": "2026-10-09T17:20:27.645Z",
+    "ip": "152.203.75.144",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "http://localhost:8000/cursos/cambio-climatico/",
+    "referrer": "http://localhost:8000/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-09T17:20:27.427Z"
+  },
+  {
+    "id": "f0f71ecf-f441-42de-a2c3-b31b8d1f9fc8",
+    "timestampServer": "2026-10-09T17:20:27.634Z",
+    "ip": "152.203.75.144",
+    "country": "CO",
+    "eventType": "course_click",
+    "page": "/",
+    "url": "http://localhost:8000/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "cambio-climatico",
+      "targetName": "Cambio Climático",
+      "href": "cursos/cambio-climatico/",
+      "label": "Cambio Climático\n            La ciencia que nadie te explicó y el futuro que ya nos alcanzó\n            Cambio Climático"
+    },
+    "timestampClient": "2026-10-09T17:20:27.384Z"
+  },
+  {
+    "id": "665bab4d-b80c-4fc5-9914-4690092a9820",
+    "timestampServer": "2026-10-09T17:20:24.571Z",
+    "ip": "2a03:2880:ff::",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/?fbclid=IwZXh0bgNhZW0CMTEAcGRvZgRzcnRjBmFwcF9pZAwyNTYyODEwNDA1NTgAAR7EySOKJwffDHe5qYGyln7coVppi5yfZNdFdrTmX40-AKM-0lPTa4VC-WCOBQ_aem_soV8U2KHgTe1k3NqbZepNw",
+    "referrer": "https://www.facebook.com/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-09T17:20:24.272Z"
+  },
+  {
+    "id": "5d43abc2-dd02-4444-8969-1866e1ffa165",
+    "timestampServer": "2026-10-09T17:20:20.236Z",
+    "ip": "152.203.75.144",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "http://localhost:8000/cursos/extraterrestres/",
+    "referrer": "http://localhost:8000/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-10-09T17:20:20.051Z"
+  },
+  {
+    "id": "70ee4998-9a97-46c4-bc4a-af6df067cc87",
+    "timestampServer": "2026-10-09T17:20:20.129Z",
+    "ip": "152.203.75.144",
+    "country": "CO",
+    "eventType": "course_click",
+    "page": "/",
+    "url": "http://localhost:8000/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "extraterrestres",
+      "targetName": "Extraterrestres",
+      "href": "cursos/extraterrestres/",
+      "label": "Extraterrestres\n            De los aspectos culturales al análisis científico de la existencia y contacto con civilizaci"
+    },
+    "timestampClient": "2026-10-09T17:20:19.870Z"
+  },
+  {
+    "id": "c923d300-da44-4a50-93dc-1ccbfaa26025",
+    "timestampServer": "2026-10-09T17:20:11.374Z",
+    "ip": "152.203.75.144",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "http://localhost:8000/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-09T17:20:10.933Z"
+  },
+  {
+    "id": "3b69919b-9f14-40aa-b1c6-fbded39ccb0e",
+    "timestampServer": "2026-10-09T17:00:53.521Z",
+    "ip": "152.203.75.144",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "http://localhost:8000/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-09T17:00:53.094Z"
+  },
+  {
+    "id": "6de52063-06f0-41f3-81e3-7f8178b48726",
+    "timestampServer": "2026-10-09T16:57:37.616Z",
+    "ip": "152.203.75.144",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "http://localhost:8000/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-09T16:57:37.228Z"
+  },
+  {
+    "id": "0064d181-ff6f-40f9-a19d-132d7c4129df",
+    "timestampServer": "2026-10-09T15:53:38.041Z",
+    "ip": "152.203.75.144",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-09T15:53:37.632Z"
+  },
+  {
+    "id": "98b164dc-b420-4799-8381-5c2d7a3d70b6",
+    "timestampServer": "2026-10-09T15:48:03.999Z",
+    "ip": "152.203.75.144",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-09T15:48:03.849Z"
+  },
+  {
+    "id": "b9f297aa-5ab7-4f71-b342-95e33c4d4d60",
+    "timestampServer": "2026-10-09T15:48:03.738Z",
+    "ip": "152.203.75.144",
+    "country": "CO",
+    "eventType": "course_click",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "cambio-climatico",
+      "targetName": "Cambio Climático",
+      "href": "cursos/cambio-climatico/",
+      "label": "Cambio Climático\n            La ciencia que nadie te explicó y el futuro que ya nos alcanzó\n            Cambio Climático"
+    },
+    "timestampClient": "2026-10-09T15:48:03.488Z"
+  },
+  {
+    "id": "20255b97-3cef-4a87-8731-ba339f281644",
+    "timestampServer": "2026-10-09T15:47:34.461Z",
+    "ip": "152.203.75.144",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-09T15:47:33.997Z"
+  },
+  {
+    "id": "f30637e8-4af3-4f6a-82bc-c427a4475b89",
+    "timestampServer": "2026-10-09T12:38:56.307Z",
+    "ip": "38.225.57.168",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6.1 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-09T12:38:55.581Z"
+  },
+  {
+    "id": "9bfa16bb-97b6-4432-8f0f-b3158cada4ee",
+    "timestampServer": "2026-10-09T02:04:52.138Z",
+    "ip": "207.46.13.141",
+    "country": "US",
+    "eventType": "demo_page_view",
+    "page": "/demos/rejilla-difraccion/",
+    "url": "https://drz-academy.github.io/demos/rejilla-difraccion/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/136.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "demoId": "rejilla-difraccion",
+      "demoName": "Rejilla de"
+    },
+    "timestampClient": "2026-10-09T02:04:50.278Z"
+  },
+  {
+    "id": "0de4c1a0-e8ec-4a01-9ce1-d268c3dfc550",
+    "timestampServer": "2026-10-08T20:42:29.520Z",
+    "ip": "45.127.195.187",
+    "country": "CO",
+    "eventType": "course_enroll_click",
+    "page": "/cursos/astropython/",
+    "url": "https://drz-academy.github.io/cursos/astropython/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:153.0) Gecko/20100101 Firefox/153.0",
+    "language": "es",
+    "details": {
+      "targetId": "astropython",
+      "targetName": "AstroPython",
+      "href": "https://go.hotmart.com/E97526567X?dp=1",
+      "label": "Inscribete ahora →"
+    },
+    "timestampClient": "2026-10-08T20:42:29.379Z"
+  },
+  {
+    "id": "1b07b98c-ff37-4e82-914e-07553257dcf5",
+    "timestampServer": "2026-10-08T20:42:10.030Z",
+    "ip": "45.127.195.187",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/astropython/",
+    "url": "https://drz-academy.github.io/cursos/astropython/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:153.0) Gecko/20100101 Firefox/153.0",
+    "language": "es",
+    "details": {
+      "courseId": "astropython",
+      "courseName": "AstroPython"
+    },
+    "timestampClient": "2026-10-08T20:42:09.979Z"
+  },
+  {
+    "id": "49b31d97-cea2-4e5b-b4d9-4ac595cbb302",
+    "timestampServer": "2026-10-08T20:42:05.895Z",
+    "ip": "45.127.195.187",
+    "country": "CO",
+    "eventType": "course_click",
+    "page": "/",
+    "url": "https://drz-academy.github.io/#cursos",
+    "referrer": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:153.0) Gecko/20100101 Firefox/153.0",
+    "language": "es",
+    "details": {
+      "targetId": "astropython",
+      "targetName": "AstroPython",
+      "href": "cursos/astropython/",
+      "label": "AstroPython\n            Aprende Python usando la astronomía como excusa\n            PythonAstronomíaProgramación\n       "
+    },
+    "timestampClient": "2026-10-08T20:42:05.247Z"
+  },
+  {
+    "id": "896c17b6-51d2-4716-a174-c332e73a0f2e",
+    "timestampServer": "2026-10-08T20:41:20.494Z",
+    "ip": "2801:1ba:d2:907:93a2:4d1f:5723:873b",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:153.0) Gecko/20100101 Firefox/153.0",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-08T20:41:20.300Z"
+  },
+  {
+    "id": "cd45f9f0-aa60-43f1-b006-f1958c4a0175",
+    "timestampServer": "2026-10-08T20:41:11.606Z",
+    "ip": "2801:1ba:d2:907:93a2:4d1f:5723:873b",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "https://l.instagram.com/",
+    "userAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:153.0) Gecko/20100101 Firefox/153.0",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-08T20:41:11.100Z"
+  },
+  {
     "id": "d8726457-2615-46fe-9d20-ad9618463e62",
     "timestampServer": "2026-10-08T06:37:23.666Z",
     "ip": "43.173.107.71",
