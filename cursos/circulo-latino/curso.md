@@ -35,15 +35,7 @@ activo: true
 
 **El latín no es una lengua muerta: late en cada frase que pronunciamos en español, en la raíz de nuestro pensamiento, en la ciencia, en el arte y en la historia de Occidente.** Y, sin embargo, a menudo se nos ha enseñado como una disciplina árida de listas interminables y castigos memorísticos.
 
-**¡El latín es, ante todo, un placer!** Saber cómo funciona es como recibir unas gafas especiales para mirar el mundo: de repente, las palabras de nuestra vida cotidiana revelan sus secretos, los nombres de las constelaciones y las especies cobran vida, y las frases grabadas en monumentos y libros antiguos dejan de ser jeroglíficos para convertirse en voces vivas que nos hablan al oído.
-
 En este curso, guiado por **Antonio Bernal**, reconocido divulgador científico, humanista y divulgador del Observatorio Fabra de Barcelona, comenzamos un camino progresivo, ameno y riguroso, pero lejos de la frialdad escolar o académica, que nos conducirá hacia el aprendizaje de los rudimentos fonéticos y gramaticales de la lengua.
-
-## El Círculo Latino de la Dr. Z Academy
-
-**Más que un curso: una comunidad viva alrededor de la lengua latina.** A semejanza de organizaciones y colectivos que en distintas ciudades del mundo reúnen a personas amantes de la cultura clásica (*circuli latini*), el **Círculo Latino de la Dr. Z Academy** busca convertirse en un punto de encuentro permanente para entusiastas y estudiosos de todos los niveles. Nuestro objetivo es cultivar juntos el estudio, la pronunciación viva, la lectura compartida y la traducción tanto de obras clásicas como de textos medievales, renacentistas y modernos.
-
-**El primer ciclo de una aventura continua.** Esta edición marca la apertura de un **ciclo continuo de cursos**. En lugar de ser este curso una iniciación corta a la lengua, esperamos que sea el primero de varios cursos similares en los que las personas puedan profundizar en aspectos de la lengua y la literatura latina. Como una característica especial, hemos previsto que **las personas que se inscriban en futuras ediciones (otros ciclos de enseñanza del Círculo Latino)** podrán disfrutar de acceso completo a los materiales, grabaciones y lecturas de los ciclos anteriores. De ese modo podrán ponerse al día y avanzar con el grupo.
 
 ## ¿Quién es el experto?
 
@@ -51,22 +43,24 @@ En este curso, guiado por **Antonio Bernal**, reconocido divulgador científico,
 
 **Antonio Bernal González** es **ingeniero mecánico** de la **Universidad Pontificia Bolivariana** (Medellín) y ha dedicado más de cuatro décadas al estudio, la docencia y la divulgación de las ciencias y las humanidades. Entre 1984 y 1999 impartió cursos y talleres en el **Planetario de Medellín**, institución de la que fue nombrado **director** en el año 2000.
 
-Desde 2001 reside en España, donde en 2003 se le encomendó la divulgación científica del histórico **Observatorio Fabra de Barcelona** (adscrito a la Real Academia de Ciencias y Artes de Barcelona), centro al que continúa vinculado. Es colaborador mensual de la revista *Astronomía* (Madrid) desde 2002 —con más de 300 artículos publicados—, autor de obras como *Guía Turística del Cielo*, *De King Kong a Einstein*, *Manual de Relojes de Sol* y *Cenit*, constructor de reconocidos relojes de sol públicos y privados en Colombia y España, y **coanfitrión, desde 2021, junto a Jorge I. Zuluaga (Doctor Z), del podcast semanal [*Punto Bernal*](https://open.spotify.com/show/2GctiC1Et0fGRaS8PYP0mJ)**.
+Desde 2001 reside en España, donde en 2003 se le encomendó la divulgación científica del histórico **Observatorio Fabra de Barcelona** (adscrito a la Real Academia de Ciencias y Artes de Barcelona), centro al que continúa vinculado. Es colaborador mensual de la revista *Astronomía* (Madrid) desde 2002 —con más de 300 artículos publicados—, autor de obras como *Guía Turística del Cielo*, *Manual de Relojes de Sol* y *Cenit*, constructor de reconocidos relojes de sol públicos y privados en Colombia y España, y **coanfitrión, desde 2021, junto a Jorge I. Zuluaga (Doctor Z), del podcast semanal [*Punto Bernal*](https://open.spotify.com/show/2GctiC1Et0fGRaS8PYP0mJ)**.
 
 En reconocimiento a su prolífica trayectoria científica y educativa, la Universidad Pontificia Bolivariana le otorgó el galardón **Talento Bolivariano** (2009) y la Unión Astronómica Internacional bautizó en su honor el asteroide **195892 Antbernal**. En este *Círculo Latino*, Antonio asume la investidura de **Grammaticus**, compartiendo su profunda devoción por la lengua clásica con la cercanía, la claridad y el entusiasmo didáctico que caracterizan su magisterio. Más sobre su trayectoria en [puntovernal.es](https://puntovernal.es/).
+
+Además de su trabajo como astrónomo y divulgador de la astronomía, las ciencias y la técnica, Antonio es un apasionado estudioso del mundo clásico y del latín en particular.  A lo largo de los años, ha seguido cultivando este interés de forma autodidacta, profundizando en la lectura de los autores clásicos y en el estudio de la gramática y la sintaxis latina.
 
 ## Un vistazo al contenido
 
 El programa está concebido de manera orgánica y progresiva para que cualquier persona, sin importar su trasfondo, empiece a leer y traducir latín desde las primeras lecciones:
 
-> **1. El latín es un placer.** Importancia del latín —en especial para el hispanoparlante—. Descubrir cómo nuestra propia lengua cobra una dimensión insospechada al rastrear sus orígenes.
-> **2. Escritores y escritos latinos.** Un panorama por los autores que forjaron la literatura clásica: de Cicerón y Virgilio a Séneca y Horacio. Ejemplo ilustrativo de latín arcaico.
-> **3. Alfabeto y pronunciación del latín.** Sonidos, acentuación y normas fonéticas clásicas. Primeras lecturas en voz alta (sin traducción previa) para educar el oído y la voz.
-> **4. El sistema de las flexiones.** El secreto arquitectónico de la lengua latina: por qué las terminaciones de las palabras cuentan la función sintáctica sin necesidad de tantas preposiciones.
-> **5. Las declinaciones.** Casos (nominativo, vocativo, acusativo, genitivo, dativo y ablativo), géneros y números explicados de forma clara, lógica e intuitiva.
-> **6. Primera declinación y vocabulario.** Estructura de sustantivos y adjetivos de la primera declinación, vocabulario base y primeros ejercicios prácticos de traducción guiada.
-> **7. Segunda declinación.** Sustantivos masculinos y neutros, concordancias y ampliación del vocabulario. Ejercicios progresivos de traducción.
-> **8. Lectura y traducción de textos reales.** Aplicación directa de los conceptos aprendidos para descifrar frases célebres, lemas, epigrafías y textos de autores clásicos.
+> **El latín es un placer.** Importancia del latín —en especial para el hispanoparlante—. Descubrir cómo nuestra propia lengua cobra una dimensión insospechada al rastrear sus orígenes.
+> **Escritores y escritos latinos.** Un panorama por los autores que forjaron la literatura clásica: de Cicerón y Virgilio a Séneca y Horacio. Ejemplo ilustrativo de latín arcaico.
+> **Alfabeto y pronunciación del latín.** Sonidos, acentuación y normas fonéticas clásicas. Primeras lecturas en voz alta (sin traducción previa) para educar el oído y la voz.
+> **El sistema de las flexiones.** El secreto arquitectónico de la lengua latina: por qué las terminaciones de las palabras cuentan la función sintáctica sin necesidad de tantas preposiciones.
+> **Las declinaciones.** Casos (nominativo, vocativo, acusativo, genitivo, dativo y ablativo), géneros y números explicados de forma clara, lógica e intuitiva.
+> **Primera declinación y vocabulario.** Estructura de sustantivos y adjetivos de la primera declinación, vocabulario base y primeros ejercicios prácticos de traducción guiada.
+> **Segunda declinación.** Sustantivos masculinos y neutros, concordancias y ampliación del vocabulario. Ejercicios progresivos de traducción.
+> **Lectura y traducción de textos reales.** Aplicación directa de los conceptos aprendidos para descifrar frases célebres, lemas, epigrafías y textos de autores clásicos.
 
 *Nota:* Este programa preliminar tomará un mínimo de 5 de las 8 sesiones previstas; el ritmo y la profundización en textos adicionales se adaptarán a la respuesta, el interés y la participación de los asistentes.
 
@@ -75,6 +69,12 @@ El programa está concebido de manera orgánica y progresiva para que cualquier 
 Este curso está dirigido a entusiastas de la lengua, lectores curiosos, estudiantes, docentes, profesionales de cualquier disciplina (humanidades, derecho, medicina, ciencias naturales, historia, filosofía, astronomía) y público general que desee descubrir la raíz de nuestra cultura y enriquecer su dominio del español.
 
 **No se requieren conocimientos previos** de latín ni nociones de gramática avanzada. Solo se necesita curiosidad, deseo de aprender y gusto por desentrañar el significado detrás de las palabras. La edad mínima recomendada es de 14 años.
+
+## El Círculo Latino de la Dr. Z Academy
+
+**Más que un curso: una comunidad viva alrededor de la lengua latina.** A semejanza de organizaciones y colectivos que en distintas ciudades del mundo reúnen a personas amantes de la cultura clásica (*circuli latini*), el **Círculo Latino de la Dr. Z Academy** busca convertirse en un punto de encuentro permanente para entusiastas y estudiosos de todos los niveles. Nuestro objetivo es cultivar juntos el estudio, la pronunciación viva, la lectura compartida y la traducción tanto de obras clásicas como de textos medievales, renacentistas y modernos.
+
+**El primer ciclo de una aventura continua.** Esta edición marca la apertura de un **ciclo continuo de cursos**. En lugar de ser este curso una iniciación corta a la lengua, esperamos que sea el primero de varios cursos similares en los que las personas puedan profundizar en aspectos de la lengua y la literatura latina. Como una característica especial, hemos previsto que **las personas que se inscriban en futuras ediciones (otros ciclos de enseñanza del Círculo Latino)** podrán disfrutar de acceso completo a los materiales, grabaciones y lecturas de los ciclos anteriores. De ese modo podrán ponerse al día y avanzar con el grupo.
 
 ## Metodología
 
