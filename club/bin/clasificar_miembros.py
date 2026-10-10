@@ -141,6 +141,40 @@ PRODUCTOS_PERMANENTES = [
 # LÓGICA DE CLASIFICACIÓN (CURSOS CONSECUTIVOS)
 # ============================================================================
 
+def calcular_consecutivos_y_regulares(cursos_participados, orden_cursos=CURSOS_ORDEN):
+    """
+    Calcula el número de cursos consecutivos y regulares (con máx. 1 pausa)
+    contando hacia atrás desde el último curso en el que el miembro está matriculado
+    e incluyéndolo.
+    """
+    if not cursos_participados:
+        return 0, 0
+    indices = [orden_cursos.index(c) for c in cursos_participados if c in orden_cursos]
+    if not indices:
+        return 0, 0
+    last_idx = max(indices)
+
+    # Consecutivos (0 pausas)
+    consecutivos = 0
+    for i in range(last_idx, -1, -1):
+        if orden_cursos[i] in cursos_participados:
+            consecutivos += 1
+        else:
+            break
+
+    # Regulares (tolerando hasta 1 pausa)
+    regulares = 0
+    pausas = 0
+    for i in range(last_idx, -1, -1):
+        if orden_cursos[i] in cursos_participados:
+            regulares += 1
+        else:
+            pausas += 1
+            if pausas > 1:
+                break
+    return consecutivos, regulares
+
+
 def evaluar_historial(cursos_participados, total_cursos_existentes):
     """
     Evalúa el historial de cursos de la persona (listas de inscripción).
@@ -148,8 +182,7 @@ def evaluar_historial(cursos_participados, total_cursos_existentes):
     Retorna (es_oro, es_plata, es_bronce).
 
     Plata y Oro se cuentan hacia atrás desde el último dictado e incluyen
-    ese último curso. Una sola pausa (p. ej. saltarse Python) no impide Plata
-    si igual se llega a 3 matrículas.
+    ese último curso. Una sola pausa no impide Plata si igual se llega a 3 matrículas.
     """
     cursos_existentes = CURSOS_ORDEN[:total_cursos_existentes]
     if not cursos_existentes:
@@ -157,27 +190,12 @@ def evaluar_historial(cursos_participados, total_cursos_existentes):
 
     ultimo_curso = cursos_existentes[-1]
     es_bronce = ultimo_curso in cursos_participados
+    if not es_bronce:
+        return False, False, False
 
-    es_oro = False
-    if len(cursos_existentes) >= 5:
-        ultimos_5 = cursos_existentes[-5:]
-        if all(c in cursos_participados for c in ultimos_5):
-            es_oro = True
-
-    es_plata = False
-    if es_bronce:
-        asistidos = 0
-        interrupciones = 0
-        for curso in reversed(cursos_existentes):
-            if curso in cursos_participados:
-                asistidos += 1
-            else:
-                interrupciones += 1
-            if asistidos == 3:
-                es_plata = interrupciones <= 1
-                break
-            if interrupciones > 1:
-                break
+    consecutivos, regulares = calcular_consecutivos_y_regulares(cursos_participados, cursos_existentes)
+    es_oro = (consecutivos >= 5)
+    es_plata = (regulares >= 3)
 
     return es_oro, es_plata, es_bronce
 
@@ -365,10 +383,17 @@ def main():
         print(f"\n✅ No hay beneficios redimidos registrados")
 
     # Clasificar cada miembro y actualizar el JSON
+    updated_members = []
     for member in members:
         uso_beneficio, info_b = info_beneficio_miembro(member, beneficios_usados)
         fecha_beneficio = info_b.get("fecha", "")
         curso_aplicado = info_b.get("curso_aplicado", "")
+
+        # Calcular cursos consecutivos y regulares
+        consecutivos, regulares = calcular_consecutivos_y_regulares(
+            member.get("cursos_participados", []),
+            CURSOS_ORDEN[:args.ultimo_curso]
+        )
 
         # Estímulo de Fidelidad: miembros que alcanzan al menos una vez la categoría Plata u Oro
         # 1. Si alcanzaron Oro o Plata en este historial
@@ -382,19 +407,36 @@ def main():
 
         clasif = clasificar_miembro(member, args.ultimo_curso, beneficio_usado=uso_beneficio, info_beneficio=info_b)
 
-        # Actualizar campos en el miembro
-        member["categoria"] = clasif["categoria"]
-        member["emoji"] = clasif["emoji"]
-        member["descuento"] = clasif["descuento"]
-        member["descuento_valor"] = clasif["descuento_valor"]
-        member["beneficios"] = clasif["beneficios"]
-        member["bono_transferible"] = clasif["bono_transferible"]
-        member["beneficio_usado"] = "SÍ" if uso_beneficio else "NO"
-        member["fecha_beneficio"] = fecha_beneficio
-        member["curso_aplicado"] = curso_aplicado
-        member["proximo_curso"] = nombre_curso
-        member["nota"] = clasif["nota"]
-        member["fidelidad"] = es_fiel
+        # Construir diccionario con 'consecutivos' y 'regulares' directamente debajo de 'total_cursos'
+        total_c = member.get("total_cursos")
+        if total_c is None:
+            total_c = len(member.get("cursos_participados", []))
+
+        m_dict = {
+            "nombre": member.get("nombre", ""),
+            "documento": member.get("documento", ""),
+            "correo": member.get("correo", ""),
+            "celular": member.get("celular", ""),
+            "cursos_participados": member.get("cursos_participados", []),
+            "total_cursos": total_c,
+            "consecutivos": consecutivos,
+            "regulares": regulares,
+            "categoria": clasif["categoria"],
+            "beneficio_usado": "SÍ" if uso_beneficio else "NO",
+            "fecha_beneficio": fecha_beneficio,
+            "curso_aplicado": curso_aplicado,
+            "emoji": clasif["emoji"],
+            "descuento": clasif["descuento"],
+            "descuento_valor": clasif["descuento_valor"],
+            "beneficios": clasif["beneficios"],
+            "bono_transferible": clasif["bono_transferible"],
+            "proximo_curso": nombre_curso,
+            "nota": clasif["nota"],
+            "fidelidad": es_fiel,
+        }
+        updated_members.append(m_dict)
+
+    members = updated_members
 
     # Ordenar: Oro primero, luego Plata, Bronce, Sin categoría
     cat_order = {"ORO": 0, "PLATA": 1, "BRONCE": 2, "SIN CATEGORÍA": 3}
@@ -417,7 +459,8 @@ def main():
             for r in subset:
                 nota = f" ⚠️ {r['nota']}" if r.get('nota') else ""
                 fiel_tag = " [Cliente fiel 🌟]" if r.get("fidelidad") else ""
-                print(f"    • {r['nombre']} ({r['correo']}) - {r['descuento']}{fiel_tag}{nota}")
+                stats = f" (total: {r.get('total_cursos')}, cons: {r.get('consecutivos')}, reg: {r.get('regulares')})"
+                print(f"    • {r['nombre']} ({r['correo']}) - {r['descuento']}{stats}{fiel_tag}{nota}")
 
     # Miembros que usaron beneficio
     usados = [m for m in members if m["beneficio_usado"] == "SÍ"]

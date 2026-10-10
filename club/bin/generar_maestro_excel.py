@@ -25,12 +25,13 @@ OUTPUT_EXCEL = os.path.join(INFO_DIR, "drz-club-members.xlsx")
 CURSOS_MAPPING = {
     'Cuántica a Pie': ['cuantica_a_pie', 'cuantica_a_pie_permanente'],
     'Catastrofísica': ['catastrofisica'],
+    'Astropython': ['astropython'],
     'Einstein Relativamente Fácil': ['einstein'],
     'Mundo Cuántico': ['mundo_cuantico'],
     'El Rompecabezas de la Materia': ['rompecabezas_materia'],
-    'Astropython': ['astropython'],
     'Python para el fin del mundo': ['python_fin_mundo'],
-    'Master Class Extraterrestre': ['masterclass_extraterrestre']
+    'Master Class Extraterrestre': ['masterclass_extraterrestre'],
+    'Master Class Cambio Climático': ['masterclass_cambio_climatico'],
 }
 
 def load_data(members_path, certs_path):
@@ -94,6 +95,8 @@ def main():
             'Cédula': doc,
             'Correo electrónico': m.get('correo', ''),
             'Número de cursos asistidos': len(cursos_asistidos),
+            'Cursos consecutivos': m.get('consecutivos', 0),
+            'Cursos regulares': m.get('regulares', 0),
             'Categoría': m.get('categoria', ''),
         }
         
@@ -124,7 +127,7 @@ def main():
     df = pd.DataFrame(rows)
     
     # Reorder columns
-    cols = ['Nombre', 'Cédula', 'Correo electrónico', 'Número de cursos asistidos', 'Número de cursos certificados', 'Categoría'] + cursos_list
+    cols = ['Nombre', 'Cédula', 'Correo electrónico', 'Número de cursos asistidos', 'Cursos consecutivos', 'Cursos regulares', 'Número de cursos certificados', 'Categoría'] + cursos_list
     df = df[cols]
     
     # Write to Excel

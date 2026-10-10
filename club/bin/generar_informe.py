@@ -145,12 +145,12 @@ def generar_informe():
     lines.append("")
 
     if len(oro) > 0:
-        lines.append("| # | Nombre | Correo | Cursos |")
-        lines.append("|---|--------|--------|--------|")
+        lines.append("| # | Nombre | Correo | Total | Consecutivos | Cursos |")
+        lines.append("|---|--------|--------|:-----:|:------------:|--------|")
         for i, r in enumerate(oro, 1):
             correo = safe_str(r.get("correo", ""))
             cursos_str = ", ".join(r.get("cursos_participados", []))
-            lines.append(f"| {i} | {r.get('nombre', '')} | {correo} | {cursos_str} |")
+            lines.append(f"| {i} | {r.get('nombre', '')} | {correo} | {r.get('total_cursos', 0)} | {r.get('consecutivos', 0)} | {cursos_str} |")
     else:
         lines.append("*Ningún miembro cumple el requisito actualmente.*")
 
@@ -166,12 +166,12 @@ def generar_informe():
     lines.append("")
 
     if len(plata) > 0:
-        lines.append("| # | Nombre | Correo | Cursos |")
-        lines.append("|---|--------|--------|--------|")
+        lines.append("| # | Nombre | Correo | Total | Regulares | Cursos |")
+        lines.append("|---|--------|--------|:-----:|:---------:|--------|")
         for i, r in enumerate(plata, 1):
             correo = safe_str(r.get("correo", ""))
             cursos_str = ", ".join(r.get("cursos_participados", []))
-            lines.append(f"| {i} | {r.get('nombre', '')} | {correo} | {cursos_str} |")
+            lines.append(f"| {i} | {r.get('nombre', '')} | {correo} | {r.get('total_cursos', 0)} | {r.get('regulares', 0)} | {cursos_str} |")
     else:
         lines.append("*Ningún miembro cumple el requisito actualmente.*")
 
@@ -187,12 +187,14 @@ def generar_informe():
     lines.append("")
 
     if len(bronce) > 0:
-        lines.append("| # | Nombre | Correo | Total cursos |")
-        lines.append("|---|--------|--------|:------------:|")
+        lines.append("| # | Nombre | Correo | Total cursos | Consecutivos | Regulares |")
+        lines.append("|---|--------|--------|:------------:|:------------:|:---------:|")
         for i, r in enumerate(bronce, 1):
             correo = safe_str(r.get("correo", ""))
             total = int(r.get("total_cursos", 0))
-            lines.append(f"| {i} | {r.get('nombre', '')} | {correo} | {total} |")
+            cons = int(r.get("consecutivos", 0))
+            reg = int(r.get("regulares", 0))
+            lines.append(f"| {i} | {r.get('nombre', '')} | {correo} | {total} | {cons} | {reg} |")
     else:
         lines.append("*Ningún miembro cumple el requisito actualmente.*")
 

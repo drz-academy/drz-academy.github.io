@@ -47,6 +47,13 @@ CURSOS = [
         "tipo": "formulario",  # formato Google Forms
     },
     {
+        "id": "astropython",
+        "nombre": "Astropython",
+        "archivo": "AstroPython - 2025-1 - Lista de Inscritos.xlsx",
+        "sheet": "INSCRITOS FINAL",
+        "tipo": "astropython",  # formato especial
+    },
+    {
         "id": "einstein",
         "nombre": "Einstein Relativamente Fácil",
         "archivo": "Inscripciones - Curso Einstein Relativamente Fácil - 2025.xlsx",
@@ -66,13 +73,6 @@ CURSOS = [
         "archivo": "Inscripciones - Curso El Rompecabezas De La Materia - 2025.xlsx",
         "sheet": "Inscritos",
         "tipo": "estandar",
-    },
-    {
-        "id": "astropython",
-        "nombre": "Astropython",
-        "archivo": "AstroPython - 2025-1 - Lista de Inscritos.xlsx",
-        "sheet": "INSCRITOS FINAL",
-        "tipo": "astropython",  # formato especial
     },
     {
         "id": "python_fin_mundo",
@@ -378,6 +378,42 @@ READERS = {
 # MOTOR DE CRUCE DE DATOS
 # ============================================================================
 
+def calcular_consecutivos_y_regulares(cursos_participados, orden_cursos=None):
+    """
+    Calcula el número de cursos consecutivos y cursos regulares (con a lo más 1 pausa)
+    que ha visto un miembro, contando hacia atrás desde el último curso en el que
+    está matriculado e incluyéndolo.
+    """
+    if orden_cursos is None:
+        orden_cursos = [c["nombre"] for c in CURSOS]
+    if not cursos_participados:
+        return 0, 0
+    indices = [orden_cursos.index(c) for c in cursos_participados if c in orden_cursos]
+    if not indices:
+        return 0, 0
+    last_idx = max(indices)
+
+    # Consecutivos (0 pausas)
+    consecutivos = 0
+    for i in range(last_idx, -1, -1):
+        if orden_cursos[i] in cursos_participados:
+            consecutivos += 1
+        else:
+            break
+
+    # Regulares (tolerando hasta 1 pausa)
+    regulares = 0
+    pausas = 0
+    for i in range(last_idx, -1, -1):
+        if orden_cursos[i] in cursos_participados:
+            regulares += 1
+        else:
+            pausas += 1
+            if pausas > 1:
+                break
+    return consecutivos, regulares
+
+
 class MemberDatabase:
     """Base de datos de miembros con deduplicación inteligente."""
 
@@ -461,10 +497,12 @@ class MemberDatabase:
     def to_list_of_dicts(self):
         """Convierte la base de datos a una lista de diccionarios con los cursos como lista de nombres."""
         rows = []
+        orden_nombres = [c["nombre"] for c in CURSOS]
         for member in self.members:
             # Lista de nombres de cursos (ordenados cronológicamente)
             cursos_nombres = [c["nombre"] for c in CURSOS if c["id"] in member["cursos"]]
-            
+            consecutivos, regulares = calcular_consecutivos_y_regulares(cursos_nombres, orden_nombres)
+
             row = {
                 "nombre": member["nombre"],
                 "documento": member["documento"] or member["celular"] or "",
@@ -472,6 +510,8 @@ class MemberDatabase:
                 "celular": member["celular"] if member["celular"] else "",
                 "cursos_participados": cursos_nombres,
                 "total_cursos": len(member["cursos"]),
+                "consecutivos": consecutivos,
+                "regulares": regulares,
                 "categoria": "SIN CATEGORÍA",
                 "beneficio_usado": "NO",
                 "fecha_beneficio": "",
