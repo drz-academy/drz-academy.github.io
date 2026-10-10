@@ -4,7 +4,7 @@ titulo: "Cuántica a Pie con Dr. Z"
 tagline: "Teoría cuántica explicada en un lenguaje sencillo, para gente de a pie"
 descripcion: "Curso virtual de mecánica cuántica con Dr. Z: superposición, entrelazamiento, computación cuántica e interpretaciones, sin ecuaciones complicadas."
 instructor: "Jorge I. Zuluaga, Dr. Z"
-sesiones: 6
+sesiones: 29
 duracion_sesion: "3–6 lecciones por módulo"
 dia: "a tu ritmo"
 horario: "acceso 24/7"

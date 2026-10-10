@@ -8,6 +8,10 @@
     "nombre": "Catastrofísica"
   },
   {
+    "id": "astropython",
+    "nombre": "Astropython"
+  },
+  {
     "id": "einstein",
     "nombre": "Einstein Relativamente Fácil"
   },
@@ -18,10 +22,6 @@
   {
     "id": "rompecabezas_materia",
     "nombre": "El Rompecabezas de la Materia"
-  },
-  {
-    "id": "astropython",
-    "nombre": "Astropython"
   },
   {
     "id": "python_fin_mundo",
