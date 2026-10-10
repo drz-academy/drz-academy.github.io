@@ -141,22 +141,36 @@ PRODUCTOS_PERMANENTES = [
 # LÓGICA DE CLASIFICACIÓN (CURSOS CONSECUTIVOS)
 # ============================================================================
 
-def calcular_consecutivos_y_regulares(cursos_participados, orden_cursos=CURSOS_ORDEN):
+def calcular_consecutivos_y_regulares(cursos_participados, bonos_usados=None, orden_cursos=CURSOS_ORDEN):
     """
-    Calcula el número de cursos consecutivos y regulares (con máx. 1 pausa)
-    contando hacia atrás desde el último curso en el que el miembro está matriculado
-    e incluyéndolo.
+    Calcula el número de cursos consecutivos y cursos regulares (con máx. 1 pausa)
+    comenzando desde el último curso dictado de la academia e incluyéndolo.
+    - Si el miembro no participó en el último curso dictado, consecutivos = 0 y regulares = 0.
+    - Si usó un bono (oro o plata), el conteo se reinicia: solo se cuentan los cursos posteriores
+      a dicho bono, sin incluir el curso donde se usó el bono.
     """
-    if not cursos_participados:
+    if not orden_cursos or not cursos_participados:
         return 0, 0
-    indices = [orden_cursos.index(c) for c in cursos_participados if c in orden_cursos]
-    if not indices:
+
+    last_idx = len(orden_cursos) - 1
+    ultimo_dictado = orden_cursos[last_idx]
+
+    # Debe haber participado en el último curso dictado
+    if ultimo_dictado not in cursos_participados:
         return 0, 0
-    last_idx = max(indices)
+
+    min_idx = 0
+    if bonos_usados:
+        bono_indices = [orden_cursos.index(b) for b in bonos_usados if b in orden_cursos]
+        if bono_indices:
+            min_idx = max(bono_indices) + 1
+
+    if last_idx < min_idx:
+        return 0, 0
 
     # Consecutivos (0 pausas)
     consecutivos = 0
-    for i in range(last_idx, -1, -1):
+    for i in range(last_idx, min_idx - 1, -1):
         if orden_cursos[i] in cursos_participados:
             consecutivos += 1
         else:
@@ -165,7 +179,7 @@ def calcular_consecutivos_y_regulares(cursos_participados, orden_cursos=CURSOS_O
     # Regulares (tolerando hasta 1 pausa)
     regulares = 0
     pausas = 0
-    for i in range(last_idx, -1, -1):
+    for i in range(last_idx, min_idx - 1, -1):
         if orden_cursos[i] in cursos_participados:
             regulares += 1
         else:
@@ -175,14 +189,14 @@ def calcular_consecutivos_y_regulares(cursos_participados, orden_cursos=CURSOS_O
     return consecutivos, regulares
 
 
-def evaluar_historial(cursos_participados, total_cursos_existentes):
+def evaluar_historial(cursos_participados, total_cursos_existentes, bonos_usados=None):
     """
     Evalúa el historial de cursos de la persona (listas de inscripción).
     Tener o no certificado no cambia el resultado.
     Retorna (es_oro, es_plata, es_bronce).
 
     Plata y Oro se cuentan hacia atrás desde el último dictado e incluyen
-    ese último curso. Una sola pausa no impide Plata si igual se llega a 3 matrículas.
+    ese último curso. Si usó un bono, el conteo se reinicia.
     """
     cursos_existentes = CURSOS_ORDEN[:total_cursos_existentes]
     if not cursos_existentes:
@@ -193,7 +207,7 @@ def evaluar_historial(cursos_participados, total_cursos_existentes):
     if not es_bronce:
         return False, False, False
 
-    consecutivos, regulares = calcular_consecutivos_y_regulares(cursos_participados, cursos_existentes)
+    consecutivos, regulares = calcular_consecutivos_y_regulares(cursos_participados, bonos_usados, cursos_existentes)
     es_oro = (consecutivos >= 5)
     es_plata = (regulares >= 3)
 
@@ -288,12 +302,13 @@ def clasificar_miembro(member, total_cursos_existentes, beneficio_usado=False, i
 # ============================================================================
 
 def cargar_beneficios_usados():
-    """Carga el registro de beneficios ya redimidos indexado por correos."""
+    """Carga el registro de beneficios ya redimidos indexado por correos y como lista completa."""
     if not os.path.exists(BENEFICIOS_CSV):
-        return {}
+        return {}, []
 
     df = pd.read_csv(BENEFICIOS_CSV)
     usados = {}
+    lista = []
     for _, row in df.iterrows():
         nombre = str(row.get("nombre", "")).strip()
         correo_raw = str(row.get("correo", "")).strip().lower()
@@ -303,16 +318,40 @@ def cargar_beneficios_usados():
         curso = str(row.get("curso_aplicado", "")).strip()
         info = {
             "nombre": nombre,
+            "correo": correo_raw,
             "categoria": categoria,
             "beneficio": beneficio,
             "fecha": fecha,
             "curso_aplicado": curso,
         }
+        lista.append(info)
         for c in re.split(r"[\s,;]+", correo_raw):
             c_norm = c.strip().lower()
             if c_norm and c_norm != "nan":
                 usados[c_norm] = info
-    return usados
+    return usados, lista
+
+
+def bonos_usados_miembro(member, lista_beneficios):
+    """
+    Retorna la lista de nombres de cursos en los que el miembro usó un bono
+    de categoría ORO o PLATA.
+    """
+    id_to_nombre = {c["id"]: c["nombre"] for c in cursos_dictados_ordenados()}
+    bonos = list(member.get("bonos_usados") or [])
+
+    correos = [c.strip().lower() for c in re.split(r"[\s,;]+", str(member.get("correo", "")).strip().lower()) if c.strip()]
+    for b in lista_beneficios:
+        cat = str(b.get("categoria", "")).strip().upper()
+        if cat not in ["ORO", "PLATA", "GOLD", "SILVER"]:
+            continue
+        b_correos = [c.strip().lower() for c in re.split(r"[\s,;]+", str(b.get("correo", "")).strip().lower()) if c.strip()]
+        if any(c in correos for c in b_correos):
+            curso_raw = str(b.get("curso_aplicado", "")).strip()
+            curso_nombre = id_to_nombre.get(curso_raw, curso_raw)
+            if curso_nombre and curso_nombre not in bonos:
+                bonos.append(curso_nombre)
+    return bonos
 
 
 def info_beneficio_miembro(member, beneficios_usados):
@@ -376,7 +415,7 @@ def main():
 
     # Cargar beneficios usados
     crear_archivo_beneficios_si_no_existe()
-    beneficios_usados = cargar_beneficios_usados()
+    beneficios_usados, lista_beneficios = cargar_beneficios_usados()
     if beneficios_usados:
         print(f"\n🔄 Beneficios ya redimidos: {len(beneficios_usados)} persona(s)")
     else:
@@ -389,17 +428,20 @@ def main():
         fecha_beneficio = info_b.get("fecha", "")
         curso_aplicado = info_b.get("curso_aplicado", "")
 
+        bonos_usados = bonos_usados_miembro(member, lista_beneficios)
+
         # Calcular cursos consecutivos y regulares
         consecutivos, regulares = calcular_consecutivos_y_regulares(
             member.get("cursos_participados", []),
+            bonos_usados,
             CURSOS_ORDEN[:args.ultimo_curso]
         )
 
         # Estímulo de Fidelidad: miembros que alcanzan al menos una vez la categoría Plata u Oro
         # 1. Si alcanzaron Oro o Plata en este historial
-        es_oro, es_plata, _ = evaluar_historial(member.get("cursos_participados", []), args.ultimo_curso)
+        es_oro, es_plata, _ = evaluar_historial(member.get("cursos_participados", []), args.ultimo_curso, bonos_usados)
         # 2. Si ya redimieron un beneficio previo de Plata u Oro
-        beneficio_plata_oro = uso_beneficio and (info_b.get("categoria") in ["ORO", "PLATA"])
+        beneficio_plata_oro = (uso_beneficio and (info_b.get("categoria") in ["ORO", "PLATA"])) or bool(bonos_usados)
         # 3. Si ya tenían el estímulo registrado previamente
         tenia_fidelidad = bool(member.get("fidelidad"))
 
@@ -421,6 +463,7 @@ def main():
             "total_cursos": total_c,
             "consecutivos": consecutivos,
             "regulares": regulares,
+            "bonos_usados": bonos_usados,
             "categoria": clasif["categoria"],
             "beneficio_usado": "SÍ" if uso_beneficio else "NO",
             "fecha_beneficio": fecha_beneficio,

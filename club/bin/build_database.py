@@ -29,6 +29,7 @@ INFO_DIR = config.get_info_dir(CLUB_DIR)
 INSCRIPCIONES_DIR = os.path.join(PERSONAL_DIR, "inscripciones")
 OUTPUT_JSON = os.path.join(INFO_DIR, "drz-club-members.json")
 CURSOS_JSON = os.path.join(CLUB_DIR, "cursos.json")
+BENEFICIOS_CSV = os.path.join(INFO_DIR, "beneficios_usados.csv")
 
 # Orden cronológico de los cursos
 CURSOS = [
@@ -378,24 +379,72 @@ READERS = {
 # MOTOR DE CRUCE DE DATOS
 # ============================================================================
 
-def calcular_consecutivos_y_regulares(cursos_participados, orden_cursos=None):
+def cargar_bonos_usados():
+    """
+    Carga el registro de bonos usados (oro/plata) desde beneficios_usados.csv.
+    Retorna un diccionario correo_normalizado -> lista de nombres de cursos.
+    """
+    if not os.path.exists(BENEFICIOS_CSV):
+        return {}
+    import pandas as pd
+    try:
+        df = pd.read_csv(BENEFICIOS_CSV)
+    except Exception:
+        return {}
+
+    id_to_nombre = {c["id"]: c["nombre"] for c in CURSOS}
+    bonos_por_correo = {}
+    for _, row in df.iterrows():
+        cat = str(row.get("categoria", "")).strip().upper()
+        if cat not in ["ORO", "PLATA", "GOLD", "SILVER"]:
+            continue
+        curso_raw = str(row.get("curso_aplicado", "")).strip()
+        curso_nombre = id_to_nombre.get(curso_raw, curso_raw)
+        if not curso_nombre:
+            continue
+        correo_raw = str(row.get("correo", "")).strip().lower()
+        for c in re.split(r"[\s,;]+", correo_raw):
+            c_norm = c.strip().lower()
+            if c_norm and c_norm != "nan":
+                if c_norm not in bonos_por_correo:
+                    bonos_por_correo[c_norm] = []
+                if curso_nombre not in bonos_por_correo[c_norm]:
+                    bonos_por_correo[c_norm].append(curso_nombre)
+    return bonos_por_correo
+
+
+def calcular_consecutivos_y_regulares(cursos_participados, bonos_usados=None, orden_cursos=None):
     """
     Calcula el número de cursos consecutivos y cursos regulares (con a lo más 1 pausa)
-    que ha visto un miembro, contando hacia atrás desde el último curso en el que
-    está matriculado e incluyéndolo.
+    comenzando desde el último curso dictado de la academia e incluyéndolo.
+    - Si el miembro no participó en el último curso dictado, consecutivos = 0 y regulares = 0.
+    - Si usó un bono (oro o plata), el conteo se reinicia: solo se cuentan los cursos posteriores
+      a dicho bono, sin incluir el curso donde se usó el bono.
     """
     if orden_cursos is None:
         orden_cursos = [c["nombre"] for c in CURSOS]
-    if not cursos_participados:
+    if not orden_cursos or not cursos_participados:
         return 0, 0
-    indices = [orden_cursos.index(c) for c in cursos_participados if c in orden_cursos]
-    if not indices:
+
+    last_idx = len(orden_cursos) - 1
+    ultimo_dictado = orden_cursos[last_idx]
+
+    # Debe haber participado en el último curso dictado
+    if ultimo_dictado not in cursos_participados:
         return 0, 0
-    last_idx = max(indices)
+
+    min_idx = 0
+    if bonos_usados:
+        bono_indices = [orden_cursos.index(b) for b in bonos_usados if b in orden_cursos]
+        if bono_indices:
+            min_idx = max(bono_indices) + 1
+
+    if last_idx < min_idx:
+        return 0, 0
 
     # Consecutivos (0 pausas)
     consecutivos = 0
-    for i in range(last_idx, -1, -1):
+    for i in range(last_idx, min_idx - 1, -1):
         if orden_cursos[i] in cursos_participados:
             consecutivos += 1
         else:
@@ -404,7 +453,7 @@ def calcular_consecutivos_y_regulares(cursos_participados, orden_cursos=None):
     # Regulares (tolerando hasta 1 pausa)
     regulares = 0
     pausas = 0
-    for i in range(last_idx, -1, -1):
+    for i in range(last_idx, min_idx - 1, -1):
         if orden_cursos[i] in cursos_participados:
             regulares += 1
         else:
@@ -497,11 +546,21 @@ class MemberDatabase:
     def to_list_of_dicts(self):
         """Convierte la base de datos a una lista de diccionarios con los cursos como lista de nombres."""
         rows = []
+        bonos_map = cargar_bonos_usados()
         orden_nombres = [c["nombre"] for c in CURSOS]
         for member in self.members:
             # Lista de nombres de cursos (ordenados cronológicamente)
             cursos_nombres = [c["nombre"] for c in CURSOS if c["id"] in member["cursos"]]
-            consecutivos, regulares = calcular_consecutivos_y_regulares(cursos_nombres, orden_nombres)
+            # Buscar bonos usados por correo
+            member_bonos = []
+            if member["correo"]:
+                for c in re.split(r"[\s,;]+", str(member["correo"]).lower()):
+                    if c in bonos_map:
+                        for b in bonos_map[c]:
+                            if b not in member_bonos:
+                                member_bonos.append(b)
+
+            consecutivos, regulares = calcular_consecutivos_y_regulares(cursos_nombres, member_bonos, orden_nombres)
 
             row = {
                 "nombre": member["nombre"],
@@ -512,10 +571,11 @@ class MemberDatabase:
                 "total_cursos": len(member["cursos"]),
                 "consecutivos": consecutivos,
                 "regulares": regulares,
+                "bonos_usados": member_bonos,
                 "categoria": "SIN CATEGORÍA",
-                "beneficio_usado": "NO",
+                "beneficio_usado": "SÍ" if member_bonos else "NO",
                 "fecha_beneficio": "",
-                "curso_aplicado": ""
+                "curso_aplicado": member_bonos[-1] if member_bonos else ""
             }
             rows.append(row)
 

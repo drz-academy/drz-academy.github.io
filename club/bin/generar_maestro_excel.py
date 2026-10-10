@@ -97,6 +97,7 @@ def main():
             'Número de cursos asistidos': len(cursos_asistidos),
             'Cursos consecutivos': m.get('consecutivos', 0),
             'Cursos regulares': m.get('regulares', 0),
+            'Bonos usados': ", ".join(m.get('bonos_usados', [])) if m.get('bonos_usados') else '',
             'Categoría': m.get('categoria', ''),
         }
         
@@ -127,7 +128,7 @@ def main():
     df = pd.DataFrame(rows)
     
     # Reorder columns
-    cols = ['Nombre', 'Cédula', 'Correo electrónico', 'Número de cursos asistidos', 'Cursos consecutivos', 'Cursos regulares', 'Número de cursos certificados', 'Categoría'] + cursos_list
+    cols = ['Nombre', 'Cédula', 'Correo electrónico', 'Número de cursos asistidos', 'Cursos consecutivos', 'Cursos regulares', 'Bonos usados', 'Número de cursos certificados', 'Categoría'] + cursos_list
     df = df[cols]
     
     # Write to Excel
