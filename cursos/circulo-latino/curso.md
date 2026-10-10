@@ -37,7 +37,7 @@ activo: true
 
 **¡El latín es, ante todo, un placer!** Saber cómo funciona es como recibir unas gafas especiales para mirar el mundo: de repente, las palabras de nuestra vida cotidiana revelan sus secretos, los nombres de las constelaciones y las especies cobran vida, y las frases grabadas en monumentos y libros antiguos dejan de ser jeroglíficos para convertirse en voces vivas que nos hablan al oído.
 
-En este curso, guiado por **Antonio Bernal**, reconocido divulgador científico, humanista y astrónomo del Observatorio Fabra de Barcelona, comenzamos un camino progresivo, ameno y riguroso, pero lejos de la frialdad escolar o académica, que nos conducirá hacia el aprendizaje de los rudimentos fonéticos y gramaticales de la lengua latina.
+En este curso, guiado por **Antonio Bernal**, reconocido divulgador científico, humanista y divulgador del Observatorio Fabra de Barcelona, comenzamos un camino progresivo, ameno y riguroso, pero lejos de la frialdad escolar o académica, que nos conducirá hacia el aprendizaje de los rudimentos fonéticos y gramaticales de la lengua.
 
 ## El Círculo Latino de la Dr. Z Academy
 
