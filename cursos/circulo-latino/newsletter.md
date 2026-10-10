@@ -1,5 +1,5 @@
 ---
-subject: "🏛️ El latín no es una lengua muerta: Descubre sus secretos - Nuevo Círculo Latino"
+subject: "🏛️ Aprende (o repasa) latín con Dr. Z Academy: Únete al nuevo Círculo Latino"
 ---
 
 <div align="center">
@@ -12,13 +12,11 @@ subject: "🏛️ El latín no es una lengua muerta: Descubre sus secretos - Nue
 
 Hola,
 
-El latín no es una lengua muerta: late en cada frase que pronunciamos en español, en la raíz de nuestro pensamiento, en la ciencia, en el arte y en la historia de Occidente. Y, sin embargo, a menudo se nos ha enseñado como una disciplina árida de listas interminables y castigos memorísticos.
+El latín no es una lengua muerta: late en cada frase que pronunciamos y es el código fuente de la ciencia. Si alguna vez te has preguntado por qué las constelaciones, las especies biológicas o los términos médicos se llaman como se llaman, el latín tiene la respuesta.
 
-Por eso te invitamos a ser parte del **Círculo Latino** de Dr. Z Academy. Más que un curso, es una comunidad viva inspirada en los *circuli latini* de todo el mundo. Un recorrido progresivo, ameno y riguroso, guiado por **Antonio Bernal**, reconocido divulgador científico, humanista y astrónomo del Observatorio Fabra de Barcelona.
+Por eso te invitamos al **Círculo Latino** de Dr. Z Academy, una comunidad viva donde aprenderemos de forma progresiva, amena y sin listas interminables. Nuestro guía será **Antonio Bernal**, reconocido astrónomo del Observatorio Fabra, divulgador científico y un apasionado estudioso del mundo clásico.
 
-Antonio ha dedicado más de cuatro décadas al estudio y la divulgación de las ciencias y las humanidades. Además de su labor científica, es un apasionado estudioso del mundo clásico, cultivando el interés por el latín de forma autodidacta a lo largo de los años, profundizando en la lectura de autores clásicos y en el estudio de su gramática y sintaxis.
-
-Saber cómo funciona el latín es como recibir unas gafas especiales para mirar el mundo: de repente, las palabras de nuestra vida cotidiana revelan sus secretos y las frases grabadas en monumentos y libros antiguos dejan de ser jeroglíficos para convertirse en voces vivas que nos hablan al oído.
+Saber cómo funciona el latín es como recibir unas gafas especiales para mirar el mundo: de repente, el lenguaje de la ciencia, las palabras cotidianas y los libros antiguos revelan sus secretos, convirtiéndose en voces vivas que nos hablan al oído.
 
 ### ¿Qué aprenderás?
 - **El latín es un placer** — Importancia del latín y sus orígenes en nuestra lengua.
@@ -35,6 +33,14 @@ Saber cómo funciona el latín es como recibir unas gafas especiales para mirar 
 - 🎓 **Certificación:** Al completar el 75% de las sesiones (antes del 15 de diciembre de 2026)
 - 💡 **No se requieren conocimientos previos** de latín ni nociones de gramática avanzada. Recomendado para mayores de 14 años.
 - 🔄 **Ciclo continuo:** Esta edición marca la apertura de un ciclo continuo de cursos. Podrás disfrutar de acceso permanente a materiales y grabaciones.
+
+---
+
+### 🏅 ¿Eres parte del Dr. Z Academy Club?
+
+Si has participado en nuestros cursos anteriores, es posible que tengas un cupón de descuento activo para este nuevo ciclo. Puedes verificarlo ingresando al **[Dr. Z Academy Club](https://drz-academy.github.io/club/)**.
+
+Para acceder, solo necesitas ingresar tu **cédula** (o documento de identidad), el **correo con el que te inscribiste**, y tu **contraseña**. Si es tu primera vez accediendo al Club, el sistema te permitirá crear la contraseña en ese mismo momento. Si tienes dudas, en **[este enlace](https://tinyurl.com/ytc264hz)** encontrarás cómo acceder.
 
 ---
 
