@@ -38,5 +38,20 @@
     "date": "2026-08-25",
     "name": "Invitacuión a los miembros del club para usar su cupón para el curso Cambio Climático",
     "description": "Se envió un boletín a los miembros del club para usar su cupón para el curso Cambio Climático."
+  },
+  {
+    "date": "2026-09-11",
+    "name": "Última invitación por correo para la master class de Cambio Climático",
+    "description": "Se envió el último correo electrónico de invitación a la Masterclass: Cambio Climático."
+  },
+  {
+    "date": "2026-10-10",
+    "name": "Anuncio por WhatsApp y correo: Lanzamiento de convocatoria curso Círculo Latino",
+    "description": "Se anuncia la convocatoria del curso Círculo Latino por WhatsApp y correo electrónico."
+  },
+  {
+    "date": "2026-10-11",
+    "name": "Anuncio en Instagram: Lanzamiento de convocatoria curso Círculo Latino",
+    "description": "Se publica post en Instagram informando de la convocatoria del curso Círculo Latino."
   }
 ]
