@@ -1,5 +1,5 @@
 ---
-subject: "🏛️ Aprende (o repasa) latín con Dr. Z Academy: Únete al nuevo Círculo Latino"
+subject: "¡Nuevo curso! 🏛️ Aprende (o repasa) latín con Antonio Bernal en la Dr. Z Academy"
 ---
 
 <div align="center">
@@ -14,7 +14,7 @@ Hola,
 
 El latín no es una lengua muerta: late en cada frase que pronunciamos y es el código fuente de la ciencia. Si alguna vez te has preguntado por qué las constelaciones, las especies biológicas o los términos médicos se llaman como se llaman, el latín tiene la respuesta.
 
-Por eso te invitamos al **Círculo Latino** de Dr. Z Academy, una comunidad viva donde aprenderemos de forma progresiva, amena y sin listas interminables. Nuestro guía será **Antonio Bernal**, reconocido astrónomo del Observatorio Fabra, divulgador científico y un apasionado estudioso del mundo clásico.
+Por eso te invitamos al **Círculo Latino** de Dr. Z Academy, una comunidad viva donde aprenderemos de forma progresiva, amena y sin listas interminables. Nuestro guía será **Antonio Bernal**, reconocido astrónomo del Observatorio Fabra, divulgador científico, coanfitrión del podcast **[Punto Bernal](https://open.spotify.com/show/2GctiC1Et0fGRaS8PYP0mJ)** y un apasionado estudioso del mundo clásico.
 
 Saber cómo funciona el latín es como recibir unas gafas especiales para mirar el mundo: de repente, el lenguaje de la ciencia, las palabras cotidianas y los libros antiguos revelan sus secretos, convirtiéndose en voces vivas que nos hablan al oído.
 
@@ -32,6 +32,7 @@ Saber cómo funciona el latín es como recibir unas gafas especiales para mirar 
 - 📍 **Modalidad:** Virtual (sesiones sincrónicas en vivo y grabadas en alta calidad para ver en diferido)
 - 🎓 **Certificación:** Al completar el 75% de las sesiones (antes del 15 de diciembre de 2026)
 - 💡 **No se requieren conocimientos previos** de latín ni nociones de gramática avanzada. Recomendado para mayores de 14 años.
+- 💰 **Valor:** Aproximadamente COP$20.000 o EUR 6 por sesión.
 - 🔄 **Ciclo continuo:** Esta edición marca la apertura de un ciclo continuo de cursos. Podrás disfrutar de acceso permanente a materiales y grabaciones.
 
 ---
