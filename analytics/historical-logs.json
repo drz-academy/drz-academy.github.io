@@ -1,5 +1,157 @@
 [
   {
+    "id": "7b1d9ec6-0f80-4e31-9a02-51d0c79cb66b",
+    "timestampServer": "2026-10-16T16:50:25.155Z",
+    "ip": "186.155.74.120",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6.1 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-10-16T16:50:24.752Z"
+  },
+  {
+    "id": "630c24b2-de0e-4291-9cde-40afacf0f6a1",
+    "timestampServer": "2026-10-16T15:32:22.904Z",
+    "ip": "186.169.219.90",
+    "country": "CO",
+    "eventType": "course_enroll_click",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "https://l.instagram.com/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 12; SM-G780G Build/SP1A.210812.016; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/146.0.7680.172 Mobile Safari/537.36 Instagram 423.0.0.47.66 Android (31/12; 420dpi; 1080x2400; samsung; SM-G780G; r8q; qcom; es_US; 923309260; IABMV/1)",
+    "language": "es",
+    "details": {
+      "targetId": "circulo-latino",
+      "targetName": "Círculo Latino",
+      "href": "https://drz.academy/producto/circulo-latino/",
+      "label": "Inscribete ahora →"
+    },
+    "timestampClient": "2026-10-16T15:32:23.728Z"
+  },
+  {
+    "id": "0ed95827-3a62-493a-a8c9-d562625ba847",
+    "timestampServer": "2026-10-16T15:32:01.508Z",
+    "ip": "186.169.219.90",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "https://l.instagram.com/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 12; SM-G780G Build/SP1A.210812.016; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/146.0.7680.172 Mobile Safari/537.36 Instagram 423.0.0.47.66 Android (31/12; 420dpi; 1080x2400; samsung; SM-G780G; r8q; qcom; es_US; 923309260; IABMV/1)",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-10-16T15:31:54.154Z"
+  },
+  {
+    "id": "42bd14f9-0e17-4715-ba6b-47f7a9c7967e",
+    "timestampServer": "2026-10-16T15:08:37.651Z",
+    "ip": "186.121.20.20",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-10-16T15:08:37.317Z"
+  },
+  {
+    "id": "b2e46d5d-b733-47a2-9103-d50ef1fc1b59",
+    "timestampServer": "2026-10-16T03:12:51.534Z",
+    "ip": "2600:1900:4090:1d:0:70d::",
+    "country": "US",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 8.1.0; Moto G (4)) AppleWebKit/537.36 (KHTML like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36 PTST/261003.223935",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-16T03:12:50.987Z"
+  },
+  {
+    "id": "a56cd3d4-c309-4a89-b563-561823b0dfcc",
+    "timestampServer": "2026-10-16T03:12:32.485Z",
+    "ip": "2600:1900:4090:1d:0:70d::",
+    "country": "US",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 8.1.0; Moto G (4)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36 PTST/261003.223935",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-16T03:12:31.852Z"
+  },
+  {
+    "id": "ed71cb8d-679e-4bc3-80e6-f5760ebbe0de",
+    "timestampServer": "2026-10-16T00:28:24.733Z",
+    "ip": "186.29.172.13",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-10-16T00:28:25.451Z"
+  },
+  {
+    "id": "1c922ac8-8b2b-4df7-b690-bebf7f593f1a",
+    "timestampServer": "2026-10-16T00:27:38.268Z",
+    "ip": "186.155.74.120",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6.1 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-10-16T00:27:37.916Z"
+  },
+  {
+    "id": "38ab23eb-8269-433e-86c2-5f733481e4de",
+    "timestampServer": "2026-10-15T18:36:52.229Z",
+    "ip": "34.138.28.200",
+    "country": "US",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 web-image-collection-research",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-15T18:36:50.994Z"
+  },
+  {
     "id": "c4b9490a-1e45-43f0-9ee1-594b8fc5a172",
     "timestampServer": "2026-10-15T16:27:01.572Z",
     "ip": "2800:e6:4000:36cd:e04c:9c8b:5093:7a87",
