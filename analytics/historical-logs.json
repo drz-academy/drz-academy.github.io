@@ -1,5 +1,56 @@
 [
   {
+    "id": "54286586-49f1-4e8f-aba7-6f402751e3cd",
+    "timestampServer": "2026-10-17T14:58:09.761Z",
+    "ip": "181.51.90.22",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/astropython/",
+    "url": "https://drz-academy.github.io/cursos/astropython/",
+    "referrer": "https://drz.academy/",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 27_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/24A446 Instagram 451.0.0.37.60 (iPhone17,2; iOS 27_0_1; en_US; en; scale=3.00; 1320x2868; IABMV/1; 1088109557) Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "astropython",
+      "courseName": "AstroPython"
+    },
+    "timestampClient": "2026-10-17T14:58:09.399Z"
+  },
+  {
+    "id": "69258cd4-6733-4aea-9219-301f343fb895",
+    "timestampServer": "2026-10-17T13:22:21.873Z",
+    "ip": "2800:e2:2500:1a09:ac6f:2f43:1945:2dcd",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-10-17T13:22:21.527Z"
+  },
+  {
+    "id": "beec3cf6-2867-41f2-b781-8482a8b81a5f",
+    "timestampServer": "2026-10-16T22:04:02.622Z",
+    "ip": "2803:1800:4016:d51e:3d0c:82e6:1757:9f87",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 27_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/155.0.8059.37 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-10-16T22:04:01.431Z"
+  },
+  {
     "id": "7b1d9ec6-0f80-4e31-9a02-51d0c79cb66b",
     "timestampServer": "2026-10-16T16:50:25.155Z",
     "ip": "186.155.74.120",
