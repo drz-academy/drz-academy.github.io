@@ -1,5 +1,123 @@
 [
   {
+    "id": "9ac9a1cc-2a62-4012-8539-24f85a1eac8b",
+    "timestampServer": "2026-10-18T13:39:48.030Z",
+    "ip": "2a03:2880:f800:7::",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 (compatible; meta-externalads/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/crawler))",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-18T13:39:47.176Z"
+  },
+  {
+    "id": "c9a4a600-04ee-4f23-bda1-92b13cb4f76a",
+    "timestampServer": "2026-10-18T12:26:08.038Z",
+    "ip": "2600:1900:4180:348:0:84::",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 8.1.0; Moto G (4)) AppleWebKit/537.36 (KHTML like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36 PTST/261003.223935",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-18T12:26:07.494Z"
+  },
+  {
+    "id": "991f9f90-8583-461e-8cfb-8f62ebe7b59e",
+    "timestampServer": "2026-10-18T12:25:44.676Z",
+    "ip": "2600:1900:4180:348:0:84::",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 8.1.0; Moto G (4)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36 PTST/261003.223935",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-10-18T12:25:44.107Z"
+  },
+  {
+    "id": "9a953fcd-338e-44f0-b264-ca7b16780cdf",
+    "timestampServer": "2026-10-18T10:28:39.895Z",
+    "ip": "34.222.98.203",
+    "country": "US",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-18T10:28:39.805Z"
+  },
+  {
+    "id": "b94b66a6-d167-4b79-a9c9-b7d05da8d276",
+    "timestampServer": "2026-10-18T03:59:36.935Z",
+    "ip": "40.77.167.25",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/cuantica-a-pie/",
+    "url": "https://drz-academy.github.io/cursos/cuantica-a-pie/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/136.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cuantica-a-pie",
+      "courseName": "Cuántica a Pie con Dr. Z"
+    },
+    "timestampClient": "2026-10-18T03:59:33.909Z"
+  },
+  {
+    "id": "f8dcb9eb-3e05-4b07-baef-9b6066597a60",
+    "timestampServer": "2026-10-18T00:04:35.621Z",
+    "ip": "181.205.169.146",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-10-18T00:04:34.376Z"
+  },
+  {
+    "id": "21c5eb4f-82ec-4fbe-9af8-0cbbe9505301",
+    "timestampServer": "2026-10-17T23:48:01.568Z",
+    "ip": "186.80.29.80",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-10-17T23:48:00.680Z"
+  },
+  {
     "id": "54286586-49f1-4e8f-aba7-6f402751e3cd",
     "timestampServer": "2026-10-17T14:58:09.761Z",
     "ip": "181.51.90.22",
