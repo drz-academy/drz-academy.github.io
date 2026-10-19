@@ -238,37 +238,49 @@ def build_proximo(cursos: list[dict], raw: dict, cupones: dict[str, dict]) -> di
     }
 
 
-TEST_EMAIL = "puntobernal@gmail.com"
-TEST_DOCUMENTO = "666666"
+DUMMY_EMAIL = "soydoctorz@gmail.com"
+DUMMY_DOCUMENTO = "666666"
+DUMMY_NOMBRE = "Doctor Z"
+
+DUMMY_SAMPLE_CERTS = {
+    "cuantica_a_pie": "https://drive.google.com/file/d/1X9qdC7akyKxhMg9iXcTD41Ha935LA8Oq/view?usp=sharing",
+    "catastrofisica": "https://drive.google.com/file/d/1nYudb8aJeeQNSm-9hHIbDxs5w8Mok4GG/view?usp=sharing",
+    "astropython": "https://drive.google.com/file/d/1zS1PGeq0O9GbObLmA2Yaae2-gZS_tDbB/view?usp=sharing",
+    "einstein": "https://drive.google.com/file/d/1Uu6VlzSW4MUTqiu_sZL3kirQzEuHkOm_/view?usp=sharing",
+    "mundo_cuantico": "https://drive.google.com/file/d/1f5-sICSFhjuv0QnTFGanH_lscMT8uB3X/view?usp=sharing",
+    "rompecabezas_materia": "https://drive.google.com/file/d/1kfx7_S1X6AzgpqGRIV0coTyiXQQZy8a9/view?usp=sharing",
+    "python_fin_mundo": "https://drive.google.com/file/d/1DUGz7tHwqKdVAcbFnlBDPTFYVujsn3eL/view?usp=sharing",
+    "masterclass_extraterrestre": "https://drive.google.com/file/d/1mIbtgRQnkzNE9s5uwfzg9tXfrEVxqwt9/view?usp=sharing",
+    "cuantica_a_pie_permanente": "https://drive.google.com/file/d/1E2ANVNa4DHuDWNTvHeFsnwtrt_jTYo1h/view?usp=sharing",
+}
 
 
 def test_member(cursos: list[dict]) -> dict:
     hechos = []
     for curso in cursos:
-        if curso.get("id") == "masterclass_cambio_climatico":
-            continue
-        n = curso.get("numero_participantes")
-        if n is not None and str(n).strip() != "" and int(n) == 0:
+        if curso.get("next_course"):
             continue
         if curso.get("nombre"):
             hechos.append(curso["nombre"])
     if not hechos:
-        hechos = [c["nombre"] for c in cursos if c.get("nombre")]
+        hechos = [c["nombre"] for c in cursos if c.get("nombre") and not c.get("next_course")]
     return {
-        "nombre": "Punto Bernal",
-        "documento": TEST_DOCUMENTO,
-        "correo": TEST_EMAIL,
+        "nombre": DUMMY_NOMBRE,
+        "documento": DUMMY_DOCUMENTO,
+        "correo": DUMMY_EMAIL,
         "cursos_participados": hechos,
         "total_cursos": len(hechos),
-        "consecutivos": len(hechos),
-        "regulares": len(hechos),
+        "consecutivos": 3,
+        "regulares": 3,
         "bonos_usados": [],
-        "categoria": "ORO",
-        "emoji": "🥇",
-        "descuento": "100%",
-        "descuento_valor": 100,
-        "beneficios": "Inscripción GRATIS al próximo curso + acceso gratis a un producto permanente",
-        "nota": "Usuario de prueba — no es un miembro real",
+        "categoria": "PLATA",
+        "emoji": "🥈",
+        "descuento": "30%",
+        "descuento_valor": 30,
+        "beneficios": "Por tu apoyo reconocido en las actividades de la Dr. Z Academy te otorgamos 30% de descuento en el próximo curso. ¡Gracias por tu constancia!",
+        "bono_transferible": "No",
+        "nota": "Usuario dummy de demostración",
+        "dummy": True,
     }
 
 
@@ -278,10 +290,24 @@ def build_payload() -> tuple[list[dict], list[dict], list[dict], dict]:
     members_raw = json.loads(MEMBERS_JSON.read_text(encoding="utf-8"))
     cursos = load_cursos()
     forms = load_forms()
-    existing = next((m for m in members_raw if first_valid_email(m.get("correo") or "") == TEST_EMAIL), None)
+    existing = next((m for m in members_raw if first_valid_email(m.get("correo") or "") in (DUMMY_EMAIL, "puntobernal@gmail.com")), None)
     if existing:
-        existing["documento"] = TEST_DOCUMENTO
-        existing["nombre"] = existing.get("nombre") or "Punto Bernal"
+        existing["documento"] = DUMMY_DOCUMENTO
+        existing["correo"] = DUMMY_EMAIL
+        existing["nombre"] = DUMMY_NOMBRE
+        existing["categoria"] = "PLATA"
+        existing["emoji"] = "🥈"
+        existing["descuento"] = "30%"
+        existing["descuento_valor"] = 30
+        existing["beneficios"] = "Por tu apoyo reconocido en las actividades de la Dr. Z Academy te otorgamos 30% de descuento en el próximo curso. ¡Gracias por tu constancia!"
+        existing["bono_transferible"] = "No"
+        existing["consecutivos"] = 3
+        existing["regulares"] = 3
+        existing["bonos_usados"] = []
+        existing["dummy"] = True
+        dummy_curs = test_member(cursos)["cursos_participados"]
+        existing["cursos_participados"] = dummy_curs
+        existing["total_cursos"] = len(dummy_curs)
     else:
         members_raw.insert(0, test_member(cursos))
     by_nombre = {c["nombre"]: c for c in cursos if c.get("nombre")}
@@ -304,15 +330,20 @@ def build_payload() -> tuple[list[dict], list[dict], list[dict], dict]:
         if not correo or "@" not in correo:
             skipped_no_email += 1
             continue
+        is_dummy = bool(correo == DUMMY_EMAIL or documento == DUMMY_DOCUMENTO or raw.get("dummy"))
         cursos_persona = []
         for nombre in raw.get("cursos_participados") or []:
             meta = by_nombre.get(nombre) or {"id": "", "nombre": nombre}
             curso_id = meta.get("id") or ""
-            cert_url = (
-                certificados.get((documento, curso_id), "")
-                or certificados.get((correo, curso_id), "")
-                or certificados.get((celular, curso_id), "")
-            )
+            if is_dummy:
+                # El usuario dummy tiene certificados de todos los cursos menos del último (masterclass_cambio_climatico)
+                cert_url = DUMMY_SAMPLE_CERTS.get(curso_id, "")
+            else:
+                cert_url = (
+                    certificados.get((documento, curso_id), "")
+                    or certificados.get((correo, curso_id), "")
+                    or certificados.get((celular, curso_id), "")
+                )
             if cert_url:
                 certs_attached += 1
             cursos_persona.append(
@@ -344,7 +375,8 @@ def build_payload() -> tuple[list[dict], list[dict], list[dict], dict]:
                 "fidelidad": bool(raw.get("fidelidad", False)),
                 "cursos": cursos_persona,
                 "proximo_curso": build_proximo(cursos, raw, cupones),
-                "documento_aliases": [TEST_DOCUMENTO, "1000100010"] if correo == TEST_EMAIL else [],
+                "documento_aliases": [DUMMY_DOCUMENTO, "1000100010"] if is_dummy else [],
+                "dummy": is_dummy,
             }
         )
     stats = {

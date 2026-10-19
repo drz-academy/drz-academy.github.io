@@ -12,8 +12,8 @@ import config
 
 import datetime
 
-# Rutas por defecto asumiendo que se corre desde el root del repositorio
-CLUB_DIR = "club"
+# Rutas por defecto
+CLUB_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PERSONAL_DIR = os.path.join(CLUB_DIR, "personal")
 CLUB_DRZ_DRIVE = os.path.normpath(os.path.join(CLUB_DIR, config.CLUB_DRZ_DRIVE))
 INFO_DIR = config.get_info_dir(CLUB_DIR)

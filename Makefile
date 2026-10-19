@@ -1,4 +1,4 @@
-.PHONY: help build cursos pages demos sync-site start stop worker-deploy update club-worker-deploy club-dev club-sync club-forms-export club-forms-reset club-base-datos club-clasificar club-informe club-boletines generar-boletines club-enviar-boletines club-certificados club-certificados-drive club-certificados-hotmart club-reset-pass portal-worker-deploy portal-dev portal-sync
+.PHONY: help build cursos pages demos sync-site start stop worker-deploy update club-worker-deploy club-dev club-sync club-forms-export club-forms-reset club-base-datos club-clasificar club-informe club-boletines generar-boletines club-enviar-boletines club-certificados club-certificados-drive club-certificados-curso club-certificados-hotmart club-reset-pass portal-worker-deploy portal-dev portal-sync
 
 PORT ?= 8000
 HOST ?= 127.0.0.1
@@ -45,6 +45,7 @@ help:
 	@echo "  make club-certificados  - Parte y nombra PDFs en personal/certificados/"
 	@echo "  make club-certificados-hotmart - Avisos Hotmart nuevos (AstroPython, Cuántica permanente)"
 	@echo "  make club-certificados-drive - Enlaces de Drive → personal/certificados.csv"
+	@echo "  make club-certificados-curso EXCEL=... - Procesa Excel de certificación, copia diplomas y actualiza cursos.json"
 	@echo ""
 	@echo "  PORT=3000 make start   - Usar otro puerto"
 
@@ -246,6 +247,13 @@ club-certificados-hotmart:
 
 club-certificados-drive:
 	@$(MAKE) -C club certificados-drive
+
+club-certificados-curso:
+	@if [ -z "$(EXCEL)" ]; then \
+		echo "Debes indicar EXCEL, ej: make club-certificados-curso EXCEL=\"club/personal/ClubDrZAcademy/Certificados/CambioClimatico-Certificación-ElaboraciónCertificados/Lista Certificación.xlsx\""; \
+		exit 1; \
+	fi
+	@$(MAKE) -C club certificados-curso EXCEL="$(EXCEL)"
 
 notify-import-csv:
 	@if [ -z "$(CSV)" ]; then \

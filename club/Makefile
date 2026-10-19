@@ -1,4 +1,4 @@
-.PHONY: clasificar generar-boletines enviar-boletines informe base-datos certificados certificados-drive certificados-hotmart reset-pass reset-forms todo
+.PHONY: clasificar generar-boletines enviar-boletines informe base-datos certificados certificados-drive certificados-curso certificados-hotmart reset-pass reset-forms todo
 
 PYTHON ?= python3
 CLUB := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
@@ -30,6 +30,13 @@ certificados:
 
 certificados-drive:
 	$(PYTHON) $(BIN)/enlazar_certificados.py
+
+certificados-curso:
+	@if [ -z "$(EXCEL)" ]; then \
+		echo "Uso: make certificados-curso EXCEL=\"ruta/al/archivo.xlsx\""; \
+		exit 1; \
+	fi
+	$(PYTHON) $(BIN)/actualizar_certificados.py "$(EXCEL)"
 
 certificados-hotmart:
 	$(PYTHON) $(BIN)/generar_certificados_hotmart.py

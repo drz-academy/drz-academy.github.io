@@ -170,26 +170,33 @@ make club-certificados-drive
 
 Cuando el curso tiene una carpeta en Drive con un PDF por persona y una lista de quién ya se certifica, no copies a mano. Usa un **Excel** (no el atajo `.gsheet`) en esa carpeta: hoja `Certificaciones`, columna `Certifica` (`SI` / `NO`). Los PDF van al lado, nombrados con el nombre (`MARTHA ALZATE.pdf`).
 
-El script copia a `personal/ClubDrZAcademy/Certificados/` **solo** a quienes tienen `SI` (los que ya están se saltan; se puede ir emitiendo de a poco):
+El script copia a `personal/ClubDrZAcademy/Certificados/CertificadosPublicos/` **solo** a quienes tienen `SI`, actualiza `cursos.json`, refresca `certificados.csv` con los enlaces de Google Drive y actualiza el Excel maestro y las estadísticas:
 
 ```bash
-cd club/personal/ClubDrZAcademy/Certificados/bin
-python3 actualizar_certificados.py \
-  Extraterrestres-Certificación-RepositorioPublico/Lista\ Certificación\ -\ Master\ Class\ Extraterrestre\ -\ 2026-2.xlsx
+# Desde la raíz del repositorio:
+python3 club/bin/actualizar_certificados.py "ruta/al/archivo.xlsx"
+
+# O usando make:
+make club-certificados-curso EXCEL="ruta/al/archivo.xlsx"
+
+# O desde Certificados/bin/:
+python3 actualizar_certificados.py "ruta/al/archivo.xlsx"
 ```
 
-Desde `Certificados/`: `python3 bin/actualizar_certificados.py <ruta-al-xlsx>`. Hace falta `openpyxl`. `--dry-run` muestra qué copiaría; `--curso <id>` fuerza el id de `cursos.json` si no lo infiere del nombre del archivo o de la carpeta.
+Parámetros útiles:
+- `--dry-run`: simula el proceso sin copiar archivos ni modificar JSONs.
+- `--curso <id>`: fuerza el ID del curso en `cursos.json` si no se infiere del nombre.
+- `--force`: reescribe diplomas existentes en `CertificadosPublicos/`.
 
-El nombre de salida es el del Club: `CURSO-CEDULA-EMAIL-NOMBRE.pdf` (ejemplo: `masterclass_extraterrestre-30399284-martha.alzate@gmail.com-Martha Cecilia Alzate Salazar.pdf`). Si la persona está en `personal/drz-club-members.json`, usa cédula, correo y nombre de esa base.
+El nombre de salida es el estándar del Club: `CURSO-CEDULA-EMAIL-NOMBRE.pdf` (ejemplo: `masterclass_cambio_climatico-70955077-fanuer21@gmail.com-Fanuer Javier Lopez Mona.pdf`). Si la persona está en `personal/drz-club-members.json`, usa cédula, correo y nombre de esa base.
 
-Para que el portal los muestre:
+Para sincronizar con el portal en producción:
 
 ```bash
-make club-certificados-drive
 make club-sync
 ```
 
-Si el curso tiene `"evaluacion": true`, el certificado sigue oculto hasta que la persona envíe el formulario `evaluacion-curso`.
+Si el curso tiene `"evaluacion": true`, el certificado sigue oculto en el portal hasta que la persona envíe el formulario `evaluacion-curso`.
 
 ### Cursos permanentes (Hotmart)
 

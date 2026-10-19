@@ -270,14 +270,22 @@ async function clientProfile(env, memberId, record) {
   const catalog = await loadCatalog(env);
   const catalogById = new Map(catalog.map((item) => [String(item.id || ""), item]));
   const cursos = Array.isArray(record.cursos) ? record.cursos : [];
+  const isDummy = normalizeEmail(record.correo) === "soydoctorz@gmail.com" || normalizeDocumento(record.documento) === "666666" || Boolean(record.dummy);
   const enriched = await Promise.all(
     cursos.map(async (curso) => {
       const evaluacion = courseRequiresEvaluation(curso, catalogById);
       const certUrl = String(curso.certificado_url || "");
       let evaluacion_completa = !evaluacion;
       if (evaluacion) {
-        const saved = await env.DRZ_CLUB.get(formResponseKey(EVAL_FORM_ID, String(curso.id || ""), memberId));
-        evaluacion_completa = Boolean(saved);
+        if (isDummy) {
+          // El usuario dummy siempre tiene la evaluación pendiente en el último curso (masterclass_cambio_climatico)
+          // y completa en los anteriores para que se muestren sus certificados
+          const isUltimo = curso.id === "masterclass_cambio_climatico";
+          evaluacion_completa = !isUltimo;
+        } else {
+          const saved = await env.DRZ_CLUB.get(formResponseKey(EVAL_FORM_ID, String(curso.id || ""), memberId));
+          evaluacion_completa = Boolean(saved);
+        }
       }
       return {
         id: curso.id || "",
@@ -729,7 +737,8 @@ async function handleFormSubmit(request, env) {
     return json(request, { ok: false, error: "not_enrolled" }, 403);
   }
 
-  const existing = await env.DRZ_CLUB.get(formResponseKey(formId, cursoId, session.memberId));
+  const isDummy = normalizeEmail(found.record.correo) === "soydoctorz@gmail.com" || normalizeDocumento(found.record.documento) === "666666" || Boolean(found.record.dummy);
+  const existing = isDummy ? null : await env.DRZ_CLUB.get(formResponseKey(formId, cursoId, session.memberId));
   const certUrl = schema.revela_certificado !== false ? String(course?.certificado_url || "") : "";
   if (existing) {
     return json(request, { ok: false, error: "already_submitted", certificado_url: certUrl }, 409);
@@ -747,7 +756,9 @@ async function handleFormSubmit(request, env) {
     submittedAt: new Date().toISOString(),
     answers: pickAnswers(schema, body.answers),
   };
-  await env.DRZ_CLUB.put(formResponseKey(formId, cursoId, session.memberId), JSON.stringify(payload));
+  if (!isDummy) {
+    await env.DRZ_CLUB.put(formResponseKey(formId, cursoId, session.memberId), JSON.stringify(payload));
+  }
   return json(request, { ok: true, certificado_url: certUrl });
 }
 
@@ -949,6 +960,14 @@ async function handleAdminSync(request, env) {
       if (!aliasDoc) continue;
       lookups[await lookupKey(aliasDoc, correo)] = memberId;
       lookups[`lookup:doc:${aliasDoc}`] = memberId;
+    }
+    if (member.dummy || correo === "soydoctorz@gmail.com" || documento === "666666") {
+      const salt = bytesToHex(crypto.getRandomValues(new Uint8Array(16)));
+      const hash = await hashPassword("DrZ*Academy", salt);
+      await env.DRZ_CLUB.put(
+        `auth:${memberId}`,
+        JSON.stringify({ salt, hash, created: Date.now() }),
+      );
     }
     stored += 1;
   }
