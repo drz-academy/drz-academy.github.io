@@ -1,5 +1,168 @@
 [
   {
+    "id": "e6aaa4c6-2cb8-4c1d-b2aa-eb81aab16226",
+    "timestampServer": "2026-10-21T09:28:15.072Z",
+    "ip": "190.159.102.17",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:157.0) Gecko/20100101 Firefox/157.0",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-21T09:28:14.739Z"
+  },
+  {
+    "id": "5ba114fe-65df-4067-9cf9-cfa8cf1e42f7",
+    "timestampServer": "2026-10-21T00:17:39.959Z",
+    "ip": "190.159.102.17",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:157.0) Gecko/20100101 Firefox/157.0",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-21T00:17:39.113Z"
+  },
+  {
+    "id": "99766184-0f30-410b-8619-37df2d93d986",
+    "timestampServer": "2026-10-21T00:17:19.160Z",
+    "ip": "190.159.102.17",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:157.0) Gecko/20100101 Firefox/157.0",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-21T00:17:17.798Z"
+  },
+  {
+    "id": "eb1ab820-a655-4269-9884-59a6d0724c0c",
+    "timestampServer": "2026-10-21T00:16:56.040Z",
+    "ip": "190.159.102.17",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:157.0) Gecko/20100101 Firefox/157.0",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-21T00:16:55.176Z"
+  },
+  {
+    "id": "2cf13242-07b8-4087-93e6-0f77bd41a192",
+    "timestampServer": "2026-10-21T00:15:34.992Z",
+    "ip": "190.159.102.17",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "https://classroom.google.com/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:157.0) Gecko/20100101 Firefox/157.0",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-10-21T00:15:33.095Z"
+  },
+  {
+    "id": "9b3214e5-0f78-4a33-a77b-be15453e62c4",
+    "timestampServer": "2026-10-20T22:05:01.406Z",
+    "ip": "190.154.112.225",
+    "country": "EC",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.3 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-10-20T22:05:00.658Z"
+  },
+  {
+    "id": "93d95053-9ba9-4fc9-a2bb-2933ac58acb4",
+    "timestampServer": "2026-10-20T19:12:10.169Z",
+    "ip": "2607:5300:205:200::3ef2",
+    "country": "CA",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-20T19:12:10.052Z"
+  },
+  {
+    "id": "549778f2-a046-4ba3-8414-88f10217d089",
+    "timestampServer": "2026-10-20T19:11:57.326Z",
+    "ip": "2607:5300:205:200::3ef2",
+    "country": "CA",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-20T19:11:57.166Z"
+  },
+  {
+    "id": "8e9df318-608b-45ec-b770-cb48c1edd696",
+    "timestampServer": "2026-10-20T19:11:53.750Z",
+    "ip": "2607:5300:205:200::3ef2",
+    "country": "CA",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-20T19:11:53.504Z"
+  },
+  {
+    "id": "0bd8506e-be8a-4178-a7e6-9314aff8e79b",
+    "timestampServer": "2026-10-20T19:00:12.619Z",
+    "ip": "186.102.67.198",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6.1 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-10-20T19:00:11.422Z"
+  },
+  {
     "id": "b349378c-f29a-4f6a-b7f1-7a6efc8d442e",
     "timestampServer": "2026-10-20T16:17:52.946Z",
     "ip": "179.50.92.98",
