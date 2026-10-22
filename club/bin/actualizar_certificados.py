@@ -28,6 +28,7 @@ import re
 import shutil
 import subprocess
 import sys
+import time
 import unicodedata
 from pathlib import Path
 
@@ -366,25 +367,45 @@ def pick_pdf(person: dict, pdfs: list[Path]) -> Path | None:
 
 def copy_pdf(src: Path, dest: Path) -> None:
     dest.parent.mkdir(parents=True, exist_ok=True)
-    # Get Drive xattr from src if present
-    src_drive_id = ""
-    try:
-        res = subprocess.run(["xattr", "-p", DRIVE_XATTR, str(src)], capture_output=True, text=True)
-        if res.returncode == 0 and res.stdout.strip():
-            src_drive_id = res.stdout.strip()
-    except Exception:
-        pass
-
+    if dest.exists():
+        dest.unlink(missing_ok=True)
     shutil.copyfile(src, dest)
+    # Clear extended attributes so Google DriveFS treats dest as a brand-new file
+    # in the public folder and assigns it a new public Drive item-id.
+    subprocess.run(["xattr", "-c", str(dest)], check=False, capture_output=True)
+
+
+def wait_for_drive_ids(files: list[Path], timeout: int = 90) -> int:
+    """Espera a que Google DriveFS sincronice los archivos copiados y asigne com.google.drivefs.item-id#S.
     
-    # If source had drive ID, write it to dest; otherwise clear xattr for DriveFS sync
-    if src_drive_id:
-        try:
-            subprocess.run(["xattr", "-w", DRIVE_XATTR, src_drive_id, str(dest)], check=False, capture_output=True)
-        except Exception:
-            pass
-    else:
-        subprocess.run(["xattr", "-c", str(dest)], check=False, capture_output=True)
+    Devuelve la cantidad de archivos que ya tienen ID.
+    """
+    if not files:
+        return 0
+    print(f"\n▶ Esperando sincronización de Google DriveFS para {len(files)} diploma(s)...")
+    start = time.time()
+    last_count = -1
+    while time.time() - start < timeout:
+        ready = []
+        for p in files:
+            res = subprocess.run(["xattr", "-p", DRIVE_XATTR, str(p)], capture_output=True, text=True)
+            if res.returncode == 0 and res.stdout.strip():
+                ready.append(p)
+        count = len(ready)
+        if count != last_count:
+            elapsed = int(time.time() - start)
+            print(f"  [{elapsed:2d}s] Sincronizados con Drive: {count}/{len(files)}")
+            last_count = count
+        if count == len(files):
+            print("  ✓ Todos los diplomas tienen ID público de Google Drive asignado.")
+            return count
+        time.sleep(3)
+
+    elapsed = int(time.time() - start)
+    print(f"  ⚠ Tiempo de espera alcanzado ({elapsed}s). Sincronizados: {last_count}/{len(files)}.")
+    print("    Google Drive aún está subiendo algunos archivos en segundo plano.")
+    print("    Una vez sincronizados, ejecuta: make -C club certificados-drive")
+    return last_count
 
 
 def update_cursos_json(curso_id: str, num_certificados: int, num_participantes: int) -> bool:
@@ -482,6 +503,7 @@ def main() -> int:
     copied = 0
     skipped = 0
     missing = 0
+    dest_files: list[Path] = []
 
     for person in certified_people:
         member = pick_member(person["nombre"], person["documento"], person["correo"], members, curso_nombre)
@@ -504,6 +526,7 @@ def main() -> int:
             target_filename = dest_name(curso_id, doc_candidate, email_candidate, name_candidate)
 
         dest_file = DRIVE_CERTS_DIR / target_filename
+        dest_files.append(dest_file)
 
         if not args.force and dest_file.exists() and dest_file.stat().st_size > 1000:
             print(f"  [=] Ya existía: {dest_file.name}")
@@ -531,8 +554,10 @@ def main() -> int:
         print("\nActualizando club/cursos.json...")
         update_cursos_json(curso_id, num_certificados=len(certified_people), num_participantes=total_participants)
 
-        # Run post updates
+        # Wait for DriveFS to assign IDs before linking
         if not args.skip_post:
+            files_to_wait = [f for f in dest_files if f.exists()]
+            wait_for_drive_ids(files_to_wait, timeout=90)
             run_post_updates()
 
     print("\n" + "=" * 70)
