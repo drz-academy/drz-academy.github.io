@@ -1,5 +1,193 @@
 [
   {
+    "id": "d22edd74-b4f2-4992-bfb3-7eed9da7c60b",
+    "timestampServer": "2026-10-23T03:05:06.257Z",
+    "ip": "186.86.32.188",
+    "country": "CO",
+    "eventType": "club_form_certificado",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=rompecabezas_materia",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "curso": "El Rompecabezas de la Materia",
+      "href": "https://drive.google.com/file/d/1n0Ts5t7GlVLT9Y4unb3qJr8MYhAo4dp8/view?usp=sharing"
+    },
+    "timestampClient": "2026-10-23T03:05:06.021Z"
+  },
+  {
+    "id": "b83fcf4a-3b4a-4a8d-9e1b-c083e1692e07",
+    "timestampServer": "2026-10-23T03:05:04.304Z",
+    "ip": "186.86.32.188",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=rompecabezas_materia",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "evaluacion-curso",
+      "curso": "El Rompecabezas de la Materia"
+    },
+    "timestampClient": "2026-10-23T03:05:04.019Z"
+  },
+  {
+    "id": "2e5eab28-ec2d-49d8-b8de-14b647465855",
+    "timestampServer": "2026-10-23T03:01:06.033Z",
+    "ip": "186.86.32.188",
+    "country": "CO",
+    "eventType": "club_click_evaluacion",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=mundo_cuantico",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "curso": "El Rompecabezas de la Materia",
+      "href": "https://drz-academy.github.io/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=rompecabezas_materia"
+    },
+    "timestampClient": "2026-10-23T03:01:05.782Z"
+  },
+  {
+    "id": "561b242f-2a58-413c-9c0b-ab27f14efc6a",
+    "timestampServer": "2026-10-23T03:00:17.122Z",
+    "ip": "186.86.32.188",
+    "country": "CO",
+    "eventType": "club_form_certificado",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=mundo_cuantico",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "curso": "Mundo Cuántico",
+      "href": "https://drive.google.com/file/d/1RVvwV4shc_k17LW98f9LUXFWQI1ugI30/view?usp=sharing"
+    },
+    "timestampClient": "2026-10-23T03:00:16.897Z"
+  },
+  {
+    "id": "37d1f241-9e4b-4a62-9bf1-797cc865fd33",
+    "timestampServer": "2026-10-23T03:00:15.760Z",
+    "ip": "186.86.32.188",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=mundo_cuantico",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "evaluacion-curso",
+      "curso": "Mundo Cuántico"
+    },
+    "timestampClient": "2026-10-23T03:00:15.378Z"
+  },
+  {
+    "id": "a78486d2-7806-4512-b6c9-91a36a58ff56",
+    "timestampServer": "2026-10-23T02:55:02.064Z",
+    "ip": "186.86.32.188",
+    "country": "CO",
+    "eventType": "club_click_evaluacion",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "https://classroom.google.com/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "curso": "Mundo Cuántico",
+      "href": "https://drz-academy.github.io/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=mundo_cuantico"
+    },
+    "timestampClient": "2026-10-23T02:55:01.771Z"
+  },
+  {
+    "id": "654e7cb4-6c79-4bc2-a2e5-cefbe2fff7b3",
+    "timestampServer": "2026-10-23T02:53:49.826Z",
+    "ip": "186.86.32.188",
+    "country": "CO",
+    "eventType": "club_form_certificado",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=masterclass_cambio_climatico",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "curso": "Master Class Cambio Climático",
+      "href": "https://drive.google.com/file/d/1F-ishtwVkpS0OJ48r62CohQO5MlsNzvK/view?usp=sharing"
+    },
+    "timestampClient": "2026-10-23T02:53:49.591Z"
+  },
+  {
+    "id": "0b7747c0-8ae1-45cb-b1f3-734c9c357245",
+    "timestampServer": "2026-10-23T02:53:45.727Z",
+    "ip": "186.86.32.188",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=masterclass_cambio_climatico",
+    "referrer": "https://drz-academy.github.io/club/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "evaluacion-curso",
+      "curso": "Master Class Cambio Climático"
+    },
+    "timestampClient": "2026-10-23T02:53:45.289Z"
+  },
+  {
+    "id": "d31baf3c-f04d-4613-9e15-f912cd72d30d",
+    "timestampServer": "2026-10-23T02:44:43.286Z",
+    "ip": "186.86.32.188",
+    "country": "CO",
+    "eventType": "club_click_evaluacion",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "https://classroom.google.com/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "curso": "Master Class Cambio Climático",
+      "href": "https://drz-academy.github.io/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=masterclass_cambio_climatico"
+    },
+    "timestampClient": "2026-10-23T02:44:43.041Z"
+  },
+  {
+    "id": "43d57db4-cd26-47eb-8787-eadecaae9b6e",
+    "timestampServer": "2026-10-23T02:44:19.169Z",
+    "ip": "186.86.32.188",
+    "country": "CO",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "https://classroom.google.com/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "memberName": "Luis Eduardo Arroyo Tovar",
+      "memberEmail": "learroyo20@gmail.com",
+      "categoria": "BRONCE"
+    },
+    "timestampClient": "2026-10-23T02:44:18.832Z"
+  },
+  {
+    "id": "c40d4f1c-ee85-4285-b03f-8beab3da899f",
+    "timestampServer": "2026-10-22T21:38:01.699Z",
+    "ip": "191.156.10.136",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-10-22T21:38:01.415Z"
+  },
+  {
     "id": "e2eae900-dd8f-4c9a-b1ba-ef5d21d47b70",
     "timestampServer": "2026-10-22T16:40:48.525Z",
     "ip": "2800:e2:f80:1651:8fa3:24d5:cd20:dbf3",
