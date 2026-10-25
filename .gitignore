@@ -36,3 +36,4 @@ club/personal/
 
 # Club worker local cache
 club/worker/.wrangler/
+.wrangler/
