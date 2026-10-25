@@ -1,5 +1,260 @@
 [
   {
+    "id": "31e59abe-a053-4444-84eb-1e0e82f0ade0",
+    "timestampServer": "2026-10-25T16:08:03.728Z",
+    "ip": "186.121.20.20",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-10-25T16:08:03.444Z"
+  },
+  {
+    "id": "0f7eb994-a682-489e-8f53-f464ffa83ec8",
+    "timestampServer": "2026-10-25T16:08:03.341Z",
+    "ip": "186.121.20.20",
+    "country": "CO",
+    "eventType": "course_click",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "circulo-latino",
+      "targetName": "Círculo Latino",
+      "href": "cursos/circulo-latino/",
+      "label": "Círculo Latino\n            ¡El latín no es una lengua muerta si sabes cómo leerla!\n            LatínHumanidadesCultura C"
+    },
+    "timestampClient": "2026-10-25T16:08:02.944Z"
+  },
+  {
+    "id": "ec16af62-76ea-4d01-9170-ccbee36cc43f",
+    "timestampServer": "2026-10-25T16:07:55.524Z",
+    "ip": "186.121.20.20",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-25T16:07:54.928Z"
+  },
+  {
+    "id": "9a57131c-e66d-4257-b28e-6ab7cfb51715",
+    "timestampServer": "2026-10-25T15:14:06.877Z",
+    "ip": "186.121.20.20",
+    "country": "CO",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "memberName": "Mateo Gil Vizcaino",
+      "memberEmail": "mgilv26@gmail.com",
+      "categoria": "BRONCE"
+    },
+    "timestampClient": "2026-10-25T15:14:06.613Z"
+  },
+  {
+    "id": "b4237718-1f26-4eba-9d07-ead771d50fc7",
+    "timestampServer": "2026-10-25T14:50:54.205Z",
+    "ip": "186.155.16.136",
+    "country": "CO",
+    "eventType": "demo_page_view",
+    "page": "/demos/apilado-imagenes/",
+    "url": "https://drz-academy.github.io/demos/apilado-imagenes/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 27_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/155.0.8059.37 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "demoId": "apilado-imagenes",
+      "demoName": "Apilado de"
+    },
+    "timestampClient": "2026-10-25T14:50:53.774Z"
+  },
+  {
+    "id": "3a4f0bc0-dcb4-487a-8523-da9a48c22e77",
+    "timestampServer": "2026-10-25T14:49:52.354Z",
+    "ip": "186.121.20.20",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-25T14:49:51.941Z"
+  },
+  {
+    "id": "4c83271e-d3cd-4115-92af-a5ad3f37136a",
+    "timestampServer": "2026-10-25T14:46:02.124Z",
+    "ip": "186.155.16.136",
+    "country": "CO",
+    "eventType": "demo_page_view",
+    "page": "/demos/apilado-imagenes/",
+    "url": "https://drz-academy.github.io/demos/apilado-imagenes/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 27_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/155.0.8059.37 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "demoId": "apilado-imagenes",
+      "demoName": "Apilado de"
+    },
+    "timestampClient": "2026-10-25T14:46:01.599Z"
+  },
+  {
+    "id": "e73153b6-045d-432f-8f1a-154886f4c7c0",
+    "timestampServer": "2026-10-25T14:43:41.164Z",
+    "ip": "186.155.16.136",
+    "country": "CO",
+    "eventType": "demo_page_view",
+    "page": "/demos/apilado-imagenes/",
+    "url": "https://drz-academy.github.io/demos/apilado-imagenes/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "demoId": "apilado-imagenes",
+      "demoName": "Apilado de"
+    },
+    "timestampClient": "2026-10-25T14:43:41.071Z"
+  },
+  {
+    "id": "63ca25ab-b621-4cbd-842e-5c265d4955cd",
+    "timestampServer": "2026-10-25T14:43:40.573Z",
+    "ip": "186.155.16.136",
+    "country": "CO",
+    "eventType": "demo_click",
+    "page": "/",
+    "url": "https://drz-academy.github.io/#demos",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "targetId": "apilado-imagenes",
+      "targetName": "Apilado de imágenes",
+      "href": "demos/apilado-imagenes/",
+      "label": "Abrir demo"
+    },
+    "timestampClient": "2026-10-25T14:43:40.319Z"
+  },
+  {
+    "id": "e7a79b30-23fa-4708-95fd-d83b00f36210",
+    "timestampServer": "2026-10-25T14:42:54.506Z",
+    "ip": "186.155.16.136",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/#demos",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-25T14:42:49.278Z"
+  },
+  {
+    "id": "20209d26-8660-4b32-ad9c-9bb5c7673a22",
+    "timestampServer": "2026-10-25T14:38:52.660Z",
+    "ip": "186.155.16.136",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-25T14:38:52.299Z"
+  },
+  {
+    "id": "54c3674a-a5a3-4057-bdde-1f6ec3f65a14",
+    "timestampServer": "2026-10-25T14:35:20.382Z",
+    "ip": "186.155.16.136",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-10-25T14:35:20.042Z"
+  },
+  {
+    "id": "8c776727-d817-4c71-9a85-6be0815e0477",
+    "timestampServer": "2026-10-25T14:03:03.840Z",
+    "ip": "186.155.16.136",
+    "country": "CO",
+    "eventType": "demo_page_view",
+    "page": "/demos/apilado-imagenes/",
+    "url": "http://localhost:8000/demos/apilado-imagenes/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "demoId": "apilado-imagenes",
+      "demoName": "Apilado de"
+    },
+    "timestampClient": "2026-10-25T14:03:03.351Z"
+  },
+  {
+    "id": "8bbd2110-118f-4672-9cf9-66667364f1d6",
+    "timestampServer": "2026-10-24T18:10:15.062Z",
+    "ip": "161.10.197.38",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "https://classroom.google.com/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:157.0) Gecko/20100101 Firefox/157.0",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-10-24T18:10:14.224Z"
+  },
+  {
+    "id": "90543959-6e96-4e3e-81fc-01d083a8c56d",
+    "timestampServer": "2026-10-24T17:57:35.950Z",
+    "ip": "152.203.75.163",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/astropython/",
+    "url": "https://drz-academy.github.io/cursos/astropython/",
+    "referrer": "https://drz.academy/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/156.0.0.0 Mobile Safari/537.36 Instagram 452.1.0.53.64 Android (37/17; 450dpi; 1080x2340; samsung; SM-S938B; pa3q; qcom; es_CO; 1096920925; IABMV/1)",
+    "language": "es",
+    "details": {
+      "courseId": "astropython",
+      "courseName": "AstroPython"
+    },
+    "timestampClient": "2026-10-24T17:57:35.502Z"
+  },
+  {
     "id": "d22edd74-b4f2-4992-bfb3-7eed9da7c60b",
     "timestampServer": "2026-10-23T03:05:06.257Z",
     "ip": "186.86.32.188",
