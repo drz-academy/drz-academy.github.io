@@ -1,6 +1,20 @@
 {
   "demos": [
     {
+      "id": "apilado-imagenes",
+      "titulo": "Apilado de imágenes",
+      "descripcion": "Descubre cómo mejora una imagen astronómica al combinar múltiples exposiciones.",
+      "url": "demos/apilado-imagenes/",
+      "icono": "🌌",
+      "etiquetas": [
+        "Astrofotografía",
+        "Apilado",
+        "Señal y ruido"
+      ],
+      "categoria": "Astrofotografía",
+      "activo": true
+    },
+    {
       "id": "campo-vision",
       "titulo": "Campo de visión del telescopio",
       "descripcion": "Simula el campo de visión de tu configuración telescopio+cámara y verifica si objetos como la Luna, M42 o M31 caben en el encuadre.",

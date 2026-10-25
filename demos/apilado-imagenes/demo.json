@@ -1,0 +1,17 @@
+{
+  "id": "apilado-imagenes",
+  "titulo": "Apilado de",
+  "titulo_destacado": "imágenes",
+  "categoria": "Astrofotografía",
+  "descripcion": "Explora de forma interactiva cómo el apilado de múltiples exposiciones reduce el ruido y permite revelar objetos astronómicos débiles.",
+  "descripcion_corta": "Descubre cómo mejora una imagen astronómica al combinar múltiples exposiciones.",
+  "icono": "🌌",
+  "etiquetas": [
+    "Astrofotografía",
+    "Apilado",
+    "Señal y ruido"
+  ],
+  "activo": true,
+  "teoria_titulo": "¿Por qué apilamos imágenes astronómicas?",
+  "qr_imagen": "images/qr-demo.png"
+}

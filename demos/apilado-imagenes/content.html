@@ -1,0 +1,343 @@
+<style>
+.demo-widget{--y:#FAD246;--dk:#0c0c0c;--gray:#888;--brd:#1e1e1e}
+.demo-widget *{box-sizing:border-box;margin:0;padding:0}
+.demo-widget{background:var(--dk);color:#ddd;font-family:system-ui,-apple-system,sans-serif;font-size:13px}
+.demo-widget .widget{max-width:660px;margin:0 auto;padding:18px 14px}
+.demo-widget h1{font-size:14.5px;font-weight:500;color:var(--y);text-align:center;margin-bottom:3px;letter-spacing:.02em}
+.demo-widget .sub{font-size:10.5px;color:var(--gray);text-align:center;margin-bottom:16px}
+
+.demo-widget .panels{display:flex;gap:12px;margin-bottom:16px}
+.demo-widget .panel{flex:1;display:flex;flex-direction:column;gap:6px}
+.demo-widget .panel-lbl{font-size:11px;color:var(--gray);text-align:center}
+.demo-widget canvas.view{width:100%;aspect-ratio:1;border-radius:4px 4px 0 0;border:1px solid #1a1a1a;border-bottom:none;display:block}
+.demo-widget canvas.prof{width:100%;height:56px;border-radius:0 0 4px 4px;border:1px solid #1a1a1a;border-top:none;display:block;background:#070707}
+.demo-widget .prof-lbl{font-size:9px;color:#555;text-align:center;margin-top:-2px}
+
+.demo-widget .slider-wrap{background:#0f0f0f;border:1px solid var(--brd);border-radius:6px;padding:14px 16px;margin-bottom:11px}
+.demo-widget .slider-wrap label{font-size:12px;color:#aaa;display:block;margin-bottom:9px;text-align:center}
+.demo-widget .slider-wrap label b{color:var(--y);font-weight:700;font-size:15px}
+.demo-widget input[type=range]{width:100%;accent-color:var(--y);cursor:pointer}
+.demo-widget .ticks{display:flex;justify-content:space-between;font-size:9px;color:#555;margin-top:5px}
+
+.demo-widget .stats{display:flex;gap:9px;margin-bottom:12px}
+.demo-widget .stat{flex:1;background:#0f0f0f;border:1px solid var(--brd);border-radius:6px;padding:10px 6px;text-align:center}
+.demo-widget .stat .v{font-size:15px;font-weight:700;color:var(--y);margin-bottom:3px;line-height:1.2}
+.demo-widget .stat .v small{font-size:9.5px;font-weight:500;color:var(--gray);display:block}
+.demo-widget .stat .l{font-size:9px;color:var(--gray);line-height:1.35}
+
+.demo-widget .note{font-size:11px;color:#999;text-align:center;line-height:1.6;background:#0d0d0d;
+      border-left:3px solid var(--y);border-radius:0 4px 4px 0;padding:9px 13px}
+.demo-widget .note b{color:var(--y)}
+
+@media (max-width:560px){
+  .demo-widget .panels{flex-direction:column}
+  .demo-widget .stats{flex-wrap:wrap}
+  .demo-widget .stat{flex:1 1 calc(50% - 5px)}
+  .demo-widget .ticks span.alt{display:none}
+}
+</style>
+
+<div class="demo-widget">
+<div class="widget">
+  <h1>Apilado de imágenes astronómicas</h1>
+  <p class="sub">Cómo emerge una galaxia del ruido · Dr. Z Academy</p>
+
+  <div class="panels">
+    <div class="panel">
+      <span class="panel-lbl">Una sola exposición</span>
+      <canvas class="view" id="cvSingle" width="200" height="200"></canvas>
+      <canvas class="prof" id="pfSingle" width="200" height="56"></canvas>
+      <span class="prof-lbl">perfil de brillo por el centro</span>
+    </div>
+    <div class="panel">
+      <span class="panel-lbl">N exposiciones apiladas</span>
+      <canvas class="view" id="cvStack" width="200" height="200"></canvas>
+      <canvas class="prof" id="pfStack" width="200" height="56"></canvas>
+      <span class="prof-lbl">perfil de brillo por el centro</span>
+    </div>
+  </div>
+
+  <div class="slider-wrap">
+    <label>Exposiciones apiladas: <b id="nVal">1</b></label>
+    <input type="range" id="nSlider" min="0" max="9" value="0" step="1">
+    <div class="ticks">
+      <span>1</span><span class="alt">2</span><span>4</span><span class="alt">8</span><span>16</span>
+      <span class="alt">32</span><span>64</span><span class="alt">100</span><span>200</span><span class="alt">400</span>
+    </div>
+  </div>
+
+  <div class="slider-wrap">
+    <label>Brillo del cielo: <b id="skyVal">cielo oscuro</b></label>
+    <input type="range" id="skySlider" min="0" max="100" value="12" step="1">
+    <div class="ticks"><span>oscuro (rural)</span><span>urbano</span></div>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="v" id="sN">1</div>
+      <div class="l">exposiciones<br>apiladas (N)</div>
+    </div>
+    <div class="stat">
+      <div class="v" id="sObjSnr">—</div>
+      <div class="l">SNR del objeto<br>(señal / ruido)</div>
+    </div>
+    <div class="stat">
+      <div class="v" id="sMeas">1.0×</div>
+      <div class="l">mejora medida<br>(teórica √N)</div>
+    </div>
+    <div class="stat">
+      <div class="v" id="sTime">10 s</div>
+      <div class="l">tiempo total<br>(10 s/toma)</div>
+    </div>
+  </div>
+
+  <p class="note">
+    El telescopio nunca cambia: solo se suman más tomas. Duplicar N no duplica la mejora
+    —de <b>1 a 4</b> la duplica, de <b>1 a 100</b> la multiplica por diez: la relación entre
+    señal y ruido mejora como <b>√N</b>. Sube el <b>brillo del cielo</b> y verás que la
+    contaminación lumínica añade ruido; apilar lo compensa en parte, pero no del todo.
+    La mejora medida no coincide exactamente con la teórica porque medir el ruido también
+    tiene su propio margen de error.
+  </p>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════════
+//  Parámetros
+// ════════════════════════════════════════════════════════════
+const SIZE = 200;
+const N_STEPS = [1,2,4,8,16,32,64,100,200,400];
+const SEC_PER = 10;
+const READ_NOISE = 0.55;     // ruido de lectura/térmico (independiente del cielo)
+const SIGNAL_PEAK = 0.60;    // brillo máximo de la galaxia
+const SKY_BASE = 0.12;       // pedestal: ruido simétrico sin recortar a 0
+const PEDESTAL = 0.12;       // nivel mostrado tras restar el cielo (mantiene ruido simétrico)
+
+const cvS=document.getElementById('cvSingle'), ctxS=cvS.getContext('2d');
+const cvK=document.getElementById('cvStack'),  ctxK=cvK.getContext('2d');
+const pfS=document.getElementById('pfSingle'), pctxS=pfS.getContext('2d');
+const pfK=document.getElementById('pfStack'),  pctxK=pfK.getContext('2d');
+
+// ════════════════════════════════════════════════════════════
+//  Señal base: galaxia limpia + estrellas, en [0,1]
+// ════════════════════════════════════════════════════════════
+const signal = new Float32Array(SIZE*SIZE);
+
+// Región vacía para medir σ: esquina superior izquierda (sin galaxia ni estrellas)
+const EMPTY = {x0:6, y0:6, x1:46, y1:46};
+
+function buildSignal() {
+  const cx=SIZE*0.5, cy=SIZE*0.5;
+  const incl=0.5, ang=-0.5, scale=17;
+  const ca=Math.cos(ang), sa=Math.sin(ang);
+  for(let y=0;y<SIZE;y++) for(let x=0;x<SIZE;x++){
+    const dx=x-cx, dy=y-cy;
+    const xr=dx*ca+dy*sa, yr=(-dx*sa+dy*ca)/incl;
+    const r=Math.sqrt(xr*xr+yr*yr);
+    let v=SIGNAL_PEAK*Math.exp(-r/scale) + SIGNAL_PEAK*0.5*Math.exp(-r/5);
+    signal[y*SIZE+x]=v;
+  }
+  // Estrellas de fondo (deterministas). Se rechaza y recoloca cualquiera cuyo
+  // halo (±2 px) caiga dentro de la región EMPTY donde se mide el ruido.
+  let s=12345;
+  const rnd=()=>{s=(s*1103515245+12345)&0x7fffffff;return s/0x7fffffff;};
+  const HALO=2;
+  const inEmpty=(sx,sy)=>(
+    sx+HALO>=EMPTY.x0 && sx-HALO<EMPTY.x1 &&
+    sy+HALO>=EMPTY.y0 && sy-HALO<EMPTY.y1
+  );
+  let placed=0, guard=0;
+  while(placed<10 && guard<500){
+    guard++;
+    const sx=Math.floor(rnd()*SIZE), sy=Math.floor(rnd()*SIZE), br=0.4+rnd()*0.5;
+    if(inEmpty(sx,sy)) continue;         // cae en la zona de medición → descartar
+    for(let dy=-HALO;dy<=HALO;dy++)for(let dx=-HALO;dx<=HALO;dx++){
+      const px=sx+dx,py=sy+dy;
+      if(px<0||px>=SIZE||py<0||py>=SIZE)continue;
+      signal[py*SIZE+px]+=br*Math.exp(-(dx*dx+dy*dy)/2.0);
+    }
+    placed++;
+  }
+}
+
+function measureSigma(buf, divisor){
+  let sum=0,sum2=0,n=0;
+  for(let y=EMPTY.y0;y<EMPTY.y1;y++)for(let x=EMPTY.x0;x<EMPTY.x1;x++){
+    const v=buf[y*SIZE+x]/divisor; sum+=v; sum2+=v*v; n++;
+  }
+  const mean=sum/n;
+  return Math.sqrt(Math.max(0,sum2/n-mean*mean));
+}
+
+// Brillo medio del centro de la galaxia (núcleo), sobre el promedio apilado,
+// con el nivel de cielo restado. Promedia un pequeño parche central para
+// reducir el efecto del propio ruido en el píxel central.
+const CORE={x0:SIZE/2-3, y0:SIZE/2-3, x1:SIZE/2+3, y1:SIZE/2+3};
+function measureCore(buf, divisor){
+  let sum=0,n=0;
+  for(let y=CORE.y0;y<CORE.y1;y++)for(let x=CORE.x0;x<CORE.x1;x++){
+    sum+=buf[y*SIZE+x]/divisor; n++;
+  }
+  return sum/n - skySubtract;   // brillo del objeto, sin cielo
+}
+
+// ════════════════════════════════════════════════════════════
+//  Ruido: suma de 3 uniformes (aprox. gaussiana, ~3× más barato
+//  que Box-Muller, sin log ni cos). Media 0, varianza 1
+//  (la suma centrada de 3 uniformes tiene σ=0.5; ×2 la normaliza).
+// ════════════════════════════════════════════════════════════
+function noise(){ return (Math.random()+Math.random()+Math.random()-1.5)*2.0; }
+
+// ════════════════════════════════════════════════════════════
+//  Acumulación con INSTANTÁNEAS por cada paso del deslizador.
+//  snapshots[k] = suma de las N_STEPS[k] primeras exposiciones.
+//  Al bajar el deslizador se recupera la instantánea correcta.
+//  Se reconstruye entero cuando cambia el brillo del cielo.
+// ════════════════════════════════════════════════════════════
+let snapshots = [];      // Float32Array por cada paso
+let firstExp = new Float32Array(SIZE*SIZE);
+let sigmaSnap = [];      // σ medida en la región vacía, por paso
+let coreSnap = [];       // señal del núcleo (sin cielo), por paso
+
+function totalNoiseSigma(skyLevel){
+  // Ruido por exposición: lectura (fijo) + fotónico del cielo (~√cielo)
+  return Math.sqrt(READ_NOISE*READ_NOISE + skyLevel*1.6);
+}
+
+function rebuild(skyLevel){
+  snapshots = N_STEPS.map(()=>new Float32Array(SIZE*SIZE));
+  sigmaSnap = new Array(N_STEPS.length);
+  coreSnap  = new Array(N_STEPS.length);
+  const sigma = totalNoiseSigma(skyLevel);
+  const sky = SKY_BASE + skyLevel;
+  skySubtract = sky;                    // el render restará este nivel conocido
+  // Escala del perfil (compartida por ambas franjas): cubre el pico de señal
+  // con pedestal y la excursión del ruido de una sola exposición (~3σ).
+  const peakSignal = SIGNAL_PEAK*1.5 + PEDESTAL;
+  const noiseExcursion = PEDESTAL + 3*sigma;
+  profMax = Math.max(1.15, peakSignal, noiseExcursion);
+  const sum = new Float32Array(SIZE*SIZE);
+  let done=0, stepIdx=0;
+  const maxN = N_STEPS[N_STEPS.length-1];
+  for(let k=1;k<=maxN;k++){
+    for(let i=0;i<SIZE*SIZE;i++){
+      const noisy = signal[i] + sky + noise()*sigma;
+      sum[i]+=noisy;
+      if(k===1) firstExp[i]=noisy;
+    }
+    done++;
+    if(done===N_STEPS[stepIdx]){
+      snapshots[stepIdx].set(sum);                  // copiar suma acumulada
+      sigmaSnap[stepIdx]=measureSigma(sum,done);    // σ del promedio actual
+      coreSnap[stepIdx]=measureCore(sum,done);      // señal del núcleo, sin cielo
+      stepIdx++;
+    }
+  }
+}
+
+// ════════════════════════════════════════════════════════════
+//  Render de imagen
+// ════════════════════════════════════════════════════════════
+// El cielo conocido se RESTA antes de mostrar (como en astrofotografía real):
+// lo que queda no es un fondo más claro, sino la fluctuación sobre un pedestal.
+let skySubtract = SKY_BASE + 0.12;   // nivel de cielo a restar (se actualiza en rebuild)
+function renderBuffer(ctx,buf,divisor){
+  const img=ctx.createImageData(SIZE,SIZE), d=img.data;
+  for(let i=0;i<SIZE*SIZE;i++){
+    let v=buf[i]/divisor - skySubtract + PEDESTAL;   // restar cielo, dejar pedestal
+    v=Math.max(0,Math.min(1,v));
+    const g=Math.round(Math.pow(v,0.85)*255);
+    d[i*4]=Math.round(g*0.92); d[i*4+1]=Math.round(g*0.96);
+    d[i*4+2]=Math.min(255,Math.round(g*1.08)); d[i*4+3]=255;
+  }
+  ctx.putImageData(img,0,0);
+}
+
+// ════════════════════════════════════════════════════════════
+//  Render de perfil de brillo (corte horizontal por el centro)
+//  Ambas franjas comparten la MISMA escala vertical.
+// ════════════════════════════════════════════════════════════
+const PROF_H=56;
+// Escala vertical del perfil: se fija por reconstrucción y la COMPARTEN las dos
+// franjas. Debe cubrir tanto el pico de la señal como la excursión del ruido de
+// una sola exposición (que crece con el cielo), para que la curva siempre quepa.
+let profMax=1.15;
+function renderProfile(ctx,buf,divisor){
+  ctx.clearRect(0,0,SIZE,PROF_H);
+  ctx.fillStyle='#070707'; ctx.fillRect(0,0,SIZE,PROF_H);
+  const yc=Math.floor(SIZE/2);
+  ctx.beginPath();
+  for(let x=0;x<SIZE;x++){
+    const v=buf[yc*SIZE+x]/divisor - skySubtract + PEDESTAL;  // mismo ajuste que la imagen
+    const py=PROF_H-2-(v/profMax)*(PROF_H-4);
+    x===0?ctx.moveTo(x,py):ctx.lineTo(x,py);
+  }
+  ctx.strokeStyle='#FAD246'; ctx.lineWidth=1; ctx.stroke();
+}
+
+// ════════════════════════════════════════════════════════════
+//  Actualización
+// ════════════════════════════════════════════════════════════
+let curSky=12;
+function update(stepIdx){
+  const N=N_STEPS[stepIdx];
+  const snap=snapshots[stepIdx];
+  renderBuffer(ctxK,snap,N);
+  renderProfile(pctxK,snap,N);
+
+  document.getElementById('nVal').textContent=N;
+  document.getElementById('sN').textContent=N;
+
+  // SNR absoluta del objeto: señal del núcleo / σ del ruido, ambas medidas.
+  const objSnr = coreSnap[stepIdx]/sigmaSnap[stepIdx];
+  document.getElementById('sObjSnr').textContent=objSnr.toFixed(1);
+
+  // Mejora medida con la teórica entre paréntesis (fusión de los dos antiguos).
+  const measured = sigmaSnap[0]/sigmaSnap[stepIdx];
+  document.getElementById('sMeas').innerHTML=
+    measured.toFixed(1)+'×<small>teórica '+Math.sqrt(N).toFixed(1)+'×</small>';
+
+  const t=N*SEC_PER;
+  document.getElementById('sTime').textContent=
+    t<60?t+' s':t<3600?(t/60).toFixed(t%60?1:0)+' min':(t/3600).toFixed(1)+' h';
+}
+
+function skyLabel(v){
+  if(v<20)return'cielo oscuro';
+  if(v<45)return'cielo rural claro';
+  if(v<70)return'suburbano';
+  return'urbano';
+}
+
+function refreshAll(){
+  rebuild(curSky/100);
+  renderBuffer(ctxS,firstExp,1);
+  renderProfile(pctxS,firstExp,1);
+  update(+document.getElementById('nSlider').value);
+}
+
+// ════════════════════════════════════════════════════════════
+//  Eventos
+// ════════════════════════════════════════════════════════════
+document.getElementById('nSlider').addEventListener('input',function(){
+  update(+this.value);
+});
+// El deslizador de cielo reconstruye las 400 exposiciones: caro.
+// Se actualiza la etiqueta al instante, pero la reconstrucción espera
+// 150 ms tras el último movimiento (debounce) para no congelar el arrastre.
+let skyTimer=null;
+document.getElementById('skySlider').addEventListener('input',function(){
+  curSky=+this.value;
+  document.getElementById('skyVal').textContent=skyLabel(curSky)+' …';
+  if(skyTimer) clearTimeout(skyTimer);
+  skyTimer=setTimeout(function(){
+    refreshAll();
+    document.getElementById('skyVal').textContent=skyLabel(curSky);
+  },150);
+});
+
+// ── Inicio ──────────────────────────────────────────────────
+buildSignal();
+refreshAll();
+</script>
+</div>
