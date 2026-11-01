@@ -1,5 +1,126 @@
 [
   {
+    "id": "ce9d3870-e64d-460a-ba65-086f051d826e",
+    "timestampServer": "2026-10-31T23:12:27.328Z",
+    "ip": "2800:e2:cf80:24cc:6819:27d6:9052:8bf0",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "https://drz.academy/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-10-31T23:12:26.785Z"
+  },
+  {
+    "id": "a505792e-d4b6-45a4-9a9f-0a4c24c92f35",
+    "timestampServer": "2026-10-31T22:37:31.466Z",
+    "ip": "2800:e2:cf80:24cc:6819:27d6:9052:8bf0",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "https://drz.academy/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-10-31T22:37:31.025Z"
+  },
+  {
+    "id": "06d9d375-ec4b-4605-af1a-dd59b0ef20e1",
+    "timestampServer": "2026-10-31T22:12:12.141Z",
+    "ip": "2800:c70:115:65cb:49e1:a8d5:7e06:4837",
+    "country": "PY",
+    "eventType": "demo_page_view",
+    "page": "/demos/difraccion/",
+    "url": "https://drz-academy.github.io/demos/difraccion/",
+    "referrer": "https://www.bing.com/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+    "language": "es",
+    "details": {
+      "demoId": "difraccion",
+      "demoName": "Difracción y criterio de"
+    },
+    "timestampClient": "2026-10-31T22:12:12.163Z"
+  },
+  {
+    "id": "067679d7-11ca-4e51-977d-948faa3e422e",
+    "timestampServer": "2026-10-31T19:51:17.269Z",
+    "ip": "191.95.34.13",
+    "country": "CO",
+    "eventType": "course_enroll_click",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.7.7 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "targetId": "circulo-latino",
+      "targetName": "Círculo Latino",
+      "href": "https://drz.academy/producto/circulo-latino/",
+      "label": "Inscribete ahora →"
+    },
+    "timestampClient": "2026-10-31T19:51:17.067Z"
+  },
+  {
+    "id": "361870d4-751f-4e56-b9c6-aa2e1e81654a",
+    "timestampServer": "2026-10-31T19:50:55.155Z",
+    "ip": "191.95.34.13",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.7.7 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-10-31T19:50:53.973Z"
+  },
+  {
+    "id": "ed4f21d1-9caf-48b6-9039-00f097a3067d",
+    "timestampServer": "2026-10-31T18:51:17.627Z",
+    "ip": "2800:e2:cf80:24cc:6819:27d6:9052:8bf0",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-10-31T18:51:15.850Z"
+  },
+  {
+    "id": "f8c21141-024a-4c14-b7eb-5666b2ee996a",
+    "timestampServer": "2026-10-31T18:00:20.222Z",
+    "ip": "186.155.75.138",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6.1 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-10-31T18:00:19.488Z"
+  },
+  {
     "id": "76cd9618-a292-47ed-9c32-e123a3159f13",
     "timestampServer": "2026-10-31T14:11:14.578Z",
     "ip": "2a02:26f7:f7c2:e161:0:1000:0:d",
