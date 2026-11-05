@@ -1,5 +1,111 @@
 [
   {
+    "id": "b203e29f-ba5d-46aa-b425-aa5c062b05a0",
+    "timestampServer": "2026-11-05T19:20:24.842Z",
+    "ip": "2803:1800:400b:89b4:18e3:f92a:7e2d:b963",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAafYvQ1EnI0sZ6SHN757oDfuUHgb1pIf2kDbBAC7RP7Sriu7QC0gKKxdENRWdQ_aem_1CgancxDtMW1akn3Owmprg",
+    "referrer": "https://l.instagram.com/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 16; 23117RA68G Build/BP2A.250605.031.A3; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/157.0.8103.31 Mobile Safari/537.36 Instagram 454.0.0.54.77 Android (36/16; 440dpi; 1080x2400; Xiaomi/Redmi; 23117RA68G; emerald; mt6789; es_US; 1105698528; IABMV/1) NV/501",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-11-05T19:20:24.246Z"
+  },
+  {
+    "id": "f2b0d089-58ef-4fb9-a2ac-a766ed6e8da2",
+    "timestampServer": "2026-11-05T19:20:21.018Z",
+    "ip": "2803:1800:400b:89b4:18e3:f92a:7e2d:b963",
+    "country": "CO",
+    "eventType": "course_enroll_click",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAafYvQ1EnI0sZ6SHN757oDfuUHgb1pIf2kDbBAC7RP7Sriu7QC0gKKxdENRWdQ_aem_1CgancxDtMW1akn3Owmprg",
+    "referrer": "https://l.instagram.com/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 16; 23117RA68G Build/BP2A.250605.031.A3; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/157.0.8103.31 Mobile Safari/537.36 Instagram 454.0.0.54.77 Android (36/16; 440dpi; 1080x2400; Xiaomi/Redmi; 23117RA68G; emerald; mt6789; es_US; 1105698528; IABMV/1)",
+    "language": "es",
+    "details": {
+      "targetId": "circulo-latino",
+      "targetName": "Círculo Latino",
+      "href": "https://drz.academy/producto/circulo-latino/",
+      "label": "Inscribete ahora →"
+    },
+    "timestampClient": "2026-11-05T19:20:15.728Z"
+  },
+  {
+    "id": "ae09c237-de83-4335-a3e5-d5a4ad1d61aa",
+    "timestampServer": "2026-11-05T19:20:04.912Z",
+    "ip": "2803:1800:400b:89b4:18e3:f92a:7e2d:b963",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAafYvQ1EnI0sZ6SHN757oDfuUHgb1pIf2kDbBAC7RP7Sriu7QC0gKKxdENRWdQ_aem_1CgancxDtMW1akn3Owmprg",
+    "referrer": "https://l.instagram.com/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 16; 23117RA68G Build/BP2A.250605.031.A3; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/157.0.8103.31 Mobile Safari/537.36 Instagram 454.0.0.54.77 Android (36/16; 440dpi; 1080x2400; Xiaomi/Redmi; 23117RA68G; emerald; mt6789; es_US; 1105698528; IABMV/1)",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-11-05T19:20:04.065Z"
+  },
+  {
+    "id": "c4b48431-c5d9-47f9-91f7-59137b7c34fd",
+    "timestampServer": "2026-11-05T19:19:52.649Z",
+    "ip": "2803:1800:400b:89b4:18e3:f92a:7e2d:b963",
+    "country": "CO",
+    "eventType": "course_enroll_click",
+    "page": "/cursos/python-fin-del-mundo/",
+    "url": "https://drz-academy.github.io/cursos/python-fin-del-mundo/",
+    "referrer": "https://drz.academy/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 16; 23117RA68G Build/BP2A.250605.031.A3; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/157.0.8103.31 Mobile Safari/537.36 Instagram 454.0.0.54.77 Android (36/16; 440dpi; 1080x2400; Xiaomi/Redmi; 23117RA68G; emerald; mt6789; es_US; 1105698528; IABMV/1)",
+    "language": "es",
+    "details": {
+      "targetId": "python-fin-del-mundo",
+      "targetName": "Python para el fin del mundo",
+      "href": "https://drz.academy/producto/python-fin-del-mundo/",
+      "label": "Inscribete ahora →"
+    },
+    "timestampClient": "2026-11-05T19:19:52.040Z"
+  },
+  {
+    "id": "92b98528-ea79-496b-9df4-d8686eec67ae",
+    "timestampServer": "2026-11-05T19:18:44.463Z",
+    "ip": "2803:1800:400b:89b4:18e3:f92a:7e2d:b963",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/python-fin-del-mundo/",
+    "url": "https://drz-academy.github.io/cursos/python-fin-del-mundo/",
+    "referrer": "https://drz.academy/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 16; 23117RA68G Build/BP2A.250605.031.A3; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/157.0.8103.31 Mobile Safari/537.36 Instagram 454.0.0.54.77 Android (36/16; 440dpi; 1080x2400; Xiaomi/Redmi; 23117RA68G; emerald; mt6789; es_US; 1105698528; IABMV/1)",
+    "language": "es",
+    "details": {
+      "courseId": "python-fin-del-mundo",
+      "courseName": "Python para el fin del mundo"
+    },
+    "timestampClient": "2026-11-05T19:18:41.132Z"
+  },
+  {
+    "id": "f55e85dd-5b84-494e-bb5e-0471d0d26d7b",
+    "timestampServer": "2026-11-05T19:02:25.631Z",
+    "ip": "45.127.195.187",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-11-05T19:02:23.453Z"
+  },
+  {
     "id": "46ab74fa-cf22-4e47-9e8b-1eea6adaa040",
     "timestampServer": "2026-11-04T13:26:56.766Z",
     "ip": "72.152.84.1",
