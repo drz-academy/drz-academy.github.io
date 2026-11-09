@@ -8,6 +8,7 @@ from pathlib import Path
 import markdown
 from course_notify_client import list_subscribers, worker_base
 from course_notify_gmail import send_gmail_bulk
+from subscribe_from_file import extract_emails
 
 def wrap_html(html_content: str) -> str:
     """Envuelve el contenido HTML renderizado con estilos básicos de email."""
@@ -37,7 +38,9 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Enviar una newsletter desde un archivo Markdown.")
     parser.add_argument("markdown_file", type=Path, help="Ruta al archivo .md (ej. cursos/extraterrestres/newsletter.md)")
     parser.add_argument("--subject", required=False, help="Asunto del correo electrónico (sobrescribe el del markdown)")
-    parser.add_argument("--test-emails", type=str, default="", help="Lista de correos separados por coma (ej. a@a.com,b@b.com) para enviar una prueba")
+    recipients = parser.add_mutually_exclusive_group()
+    recipients.add_argument("--test-emails", type=str, default="", help="Lista de correos separados por coma (ej. a@a.com,b@b.com) para enviar una prueba")
+    recipients.add_argument("--emails-file", type=Path, help="Archivo con las direcciones de los destinatarios")
     parser.add_argument("--dry-run", action="store_true", help="Solo muestra a quiénes se enviaría, no envía nada")
     parser.add_argument("--preview", action="store_true", help="Genera un archivo preview.html y lo abre en el navegador sin enviar correos")
 
@@ -81,7 +84,19 @@ def main() -> int:
         webbrowser.open(f"file://{preview_file.absolute()}")
         return 0
 
-    if args.test_emails:
+    if args.emails_file:
+        try:
+            file_content = args.emails_file.read_text(encoding="utf-8")
+        except (OSError, UnicodeError) as e:
+            print(f"Error al leer el archivo de destinatarios {args.emails_file}: {e}", file=sys.stderr)
+            return 1
+        file_emails = sorted({email.lower() for email in extract_emails(file_content)})
+        if not file_emails:
+            print(f"Error: No se encontraron correos en {args.emails_file}.", file=sys.stderr)
+            return 1
+        subscribers = [{"email": email, "unsubscribeToken": ""} for email in file_emails]
+        print(f"Destinatarios: {len(file_emails)} correos de {args.emails_file}.")
+    elif args.test_emails:
         test_emails_list = [e.strip() for e in args.test_emails.split(",") if e.strip()]
         subscribers = [{"email": email, "unsubscribeToken": ""} for email in test_emails_list]
         print(f"MODO TEST: Enviar prueba solo a: {', '.join(test_emails_list)}.")
@@ -103,10 +118,10 @@ def main() -> int:
     log_file = args.markdown_file.with_name(f".{args.markdown_file.name}.sent.log")
     already_sent = set()
     if log_file.exists():
-        already_sent = {line.strip() for line in log_file.read_text(encoding="utf-8").splitlines() if line.strip()}
+        already_sent = {line.strip().lower() for line in log_file.read_text(encoding="utf-8").splitlines() if line.strip()}
         
     if already_sent and not args.test_emails:
-        emails_to_send = [e for e in emails if e not in already_sent]
+        emails_to_send = [e for e in emails if e.lower() not in already_sent]
         skipped = len(emails) - len(emails_to_send)
         print(f"Nota: Se saltarán {skipped} correos que ya fueron enviados previamente según {log_file.name}.")
         emails = emails_to_send

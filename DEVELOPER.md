@@ -220,7 +220,7 @@ make notify-list
 
 ### 3. Crear, Probar y Enviar un Newsletter
 
-Para enviar un boletín (newsletter), debes crear un archivo Markdown. El script convierte este archivo a HTML compatible con clientes de correo e inyecta un enlace único de desuscripción al final para cada destinatario.
+Para enviar un boletín (newsletter), debes crear un archivo Markdown. El script convierte este archivo a HTML compatible con clientes de correo e inyecta un enlace único de desuscripción para los destinatarios de la lista de suscriptores.
 
 **Paso 1: Preparar la newsletter**
 Crea un archivo `.md` (p. ej. `notify/mi-newsletter.md`) con la siguiente estructura. Es importante incluir el `subject` en el frontmatter y usar HTML con CSS en línea (inline CSS) para garantizar compatibilidad con los clientes de correo:
@@ -249,8 +249,17 @@ Envía una prueba a tu propio correo (o a varios separados por comas) para verif
 make notify-send-newsletter FILE=notify/mi-newsletter.md TEST_EMAILS=tucorreo@gmail.com,otro@gmail.com
 ```
 
+**Envío a una lista de destinatarios**
+Para enviar solo a los correos de un archivo, sin modificar la lista de suscriptores:
+
+```bash
+make notify-send-newsletter FILE=notify/mi-newsletter.md EMAILS=cursos/mi-curso/inscritos.md
+```
+
+El archivo puede contener varios correos por línea; se eliminan los duplicados. Este envío se registra para evitar repetirlo y pide confirmación. Como las direcciones del archivo no incluyen tokens de suscripción, estos correos no llevan enlace de desuscripción. Añade `DRY_RUN=1` para revisar los destinatarios sin enviar. No combines `EMAILS` y `TEST_EMAILS`.
+
 **Paso 4: Envío a todos los suscriptores**
-Cuando estés satisfecho con el resultado, ejecuta el comando final (sin `TEST_EMAILS`) para enviar la newsletter a la base de datos completa guardada en Cloudflare:
+Cuando estés satisfecho con el resultado, ejecuta el comando final (sin `TEST_EMAILS` ni `EMAILS`) para enviar la newsletter a la base de datos completa guardada en Cloudflare:
 
 ```bash
 make notify-send-newsletter FILE=notify/mi-newsletter.md

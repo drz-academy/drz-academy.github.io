@@ -28,7 +28,7 @@ help:
 	@echo "  make notify-number - Muestra la cantidad total de suscriptores guardados"
 	@echo "  make notify-reset - Borra la lista de todos los suscriptores guardados"
 	@echo "  make subscribe [FILE=...] - Suscribe los correos de un archivo (por defecto .secrets/subscribers.md)"
-	@echo "  make notify-send-newsletter FILE=notify/newsletter.md [TEST_EMAILS=a@b.com] - Envía un newsletter (usa TEST_EMAILS para enviar solo a esos correos de prueba)"
+	@echo "  make notify-send-newsletter FILE=notify/newsletter.md [TEST_EMAILS=a@b.com | EMAILS=lista.md] - Envía un newsletter"
 	@echo "  make notify-preview-newsletter FILE=notify/newsletter.md - Previsualiza el newsletter en el navegador antes de enviarlo"
 	@echo ""
 	@echo "  make club-worker-deploy - Despliega el Worker del Club"
@@ -290,7 +290,7 @@ notify-send-newsletter:
 		echo "Debes indicar FILE. Ej: make notify-send-newsletter FILE=cursos/extraterrestres/newsletter.md"; \
 		exit 1; \
 	fi
-	@python3 notify/client/send_newsletter.py "$(FILE)" $(if $(SUBJECT),--subject "$(SUBJECT)",) $(if $(TEST_EMAILS),--test-emails "$(TEST_EMAILS)",) $(if $(DRY_RUN),--dry-run,)
+	@python3 notify/client/send_newsletter.py "$(FILE)" $(if $(SUBJECT),--subject "$(SUBJECT)",) $(if $(TEST_EMAILS),--test-emails "$(TEST_EMAILS)",) $(if $(EMAILS),--emails-file "$(EMAILS)",) $(if $(DRY_RUN),--dry-run,)
 
 notify-preview-newsletter:
 	@if [ -z "$(FILE)" ]; then \
