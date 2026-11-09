@@ -37,17 +37,9 @@ activo: true
 
 En este curso, guiado por **Antonio Bernal**, reconocido divulgador científico, humanista y divulgador del Observatorio Fabra de Barcelona, comenzamos un camino progresivo, ameno y riguroso, pero lejos de la frialdad escolar o académica, que nos conducirá hacia el aprendizaje de los rudimentos fonéticos y gramaticales de la lengua.
 
-## ¿Quién es el experto?
-
-<!-- fotos1 -->
-
-**Antonio Bernal González** es **ingeniero mecánico** de la **Universidad Pontificia Bolivariana** (Medellín) y ha dedicado más de cuatro décadas al estudio, la docencia y la divulgación de las ciencias y las humanidades. Entre 1984 y 1999 impartió cursos y talleres en el **Planetario de Medellín**, institución de la que fue nombrado **director** en el año 2000.
-
-Desde 2001 reside en España, donde en 2003 se le encomendó la divulgación científica del histórico **Observatorio Fabra de Barcelona** (adscrito a la Real Academia de Ciencias y Artes de Barcelona), centro al que continúa vinculado. Es colaborador mensual de la revista *Astronomía* (Madrid) desde 2002 —con más de 300 artículos publicados—, autor de obras como *Guía Turística del Cielo*, *Manual de Relojes de Sol* y *Cenit*, constructor de reconocidos relojes de sol públicos y privados en Colombia y España, y **coanfitrión, desde 2021, junto a Jorge I. Zuluaga (Doctor Z), del podcast semanal [*Punto Bernal*](https://open.spotify.com/show/2GctiC1Et0fGRaS8PYP0mJ)**.
-
-En reconocimiento a su prolífica trayectoria científica y educativa, la Universidad Pontificia Bolivariana le otorgó el galardón **Talento Bolivariano** (2009) y la Unión Astronómica Internacional bautizó en su honor el asteroide **195892 Antbernal**. En este *Círculo Latino*, Antonio asume la investidura de **Grammaticus**, compartiendo su profunda devoción por la lengua clásica con la cercanía, la claridad y el entusiasmo didáctico que caracterizan su magisterio. Más sobre su trayectoria en [puntovernal.es](https://puntovernal.es/).
-
-Además de su trabajo como astrónomo y divulgador de la astronomía, las ciencias y la técnica, Antonio es un apasionado estudioso del mundo clásico y del latín en particular.  A lo largo de los años, ha seguido cultivando este interés de forma autodidacta, profundizando en la lectura de los autores clásicos y en el estudio de la gramática y la sintaxis latina.
+<div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%; overflow: hidden; border-radius: 10px;">
+  <iframe src="https://www.youtube-nocookie.com/embed/sIiBnaY9OUU" title="Video de invitación al Círculo Latino" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"></iframe>
+</div>
 
 ## Un vistazo al contenido
 
@@ -63,6 +55,18 @@ El programa está concebido de manera orgánica y progresiva para que cualquier 
 > **Lectura y traducción de textos reales.** Aplicación directa de los conceptos aprendidos para descifrar frases célebres, lemas, epigrafías y textos de autores clásicos.
 
 *Nota:* Este programa preliminar tomará un mínimo de 5 de las 8 sesiones previstas; el ritmo y la profundización en textos adicionales se adaptarán a la respuesta, el interés y la participación de los asistentes.
+
+## ¿Quién es el experto?
+
+<!-- fotos1 -->
+
+**Antonio Bernal González** es **ingeniero mecánico** de la **Universidad Pontificia Bolivariana** (Medellín) y ha dedicado más de cuatro décadas al estudio, la docencia y la divulgación de las ciencias y las humanidades. Entre 1984 y 1999 impartió cursos y talleres en el **Planetario de Medellín**, institución de la que fue nombrado **director** en el año 2000.
+
+Desde 2001 reside en España, donde en 2003 se le encomendó la divulgación científica del histórico **Observatorio Fabra de Barcelona** (adscrito a la Real Academia de Ciencias y Artes de Barcelona), centro al que continúa vinculado. Es colaborador mensual de la revista *Astronomía* (Madrid) desde 2002 —con más de 300 artículos publicados—, autor de obras como *Guía Turística del Cielo*, *Manual de Relojes de Sol* y *Cenit*, constructor de reconocidos relojes de sol públicos y privados en Colombia y España, y **coanfitrión, desde 2021, junto a Jorge I. Zuluaga (Doctor Z), del podcast semanal [*Punto Bernal*](https://open.spotify.com/show/2GctiC1Et0fGRaS8PYP0mJ)**.
+
+En reconocimiento a su prolífica trayectoria científica y educativa, la Universidad Pontificia Bolivariana le otorgó el galardón **Talento Bolivariano** (2009) y la Unión Astronómica Internacional bautizó en su honor el asteroide **195892 Antbernal**. En este *Círculo Latino*, Antonio asume la investidura de **Grammaticus**, compartiendo su profunda devoción por la lengua clásica con la cercanía, la claridad y el entusiasmo didáctico que caracterizan su magisterio. Más sobre su trayectoria en [puntovernal.es](https://puntovernal.es/).
+
+Además de su trabajo como astrónomo y divulgador de la astronomía, las ciencias y la técnica, Antonio es un apasionado estudioso del mundo clásico y del latín en particular.  A lo largo de los años, ha seguido cultivando este interés de forma autodidacta, profundizando en la lectura de los autores clásicos y en el estudio de la gramática y la sintaxis latina.
 
 ## A quién va dirigida esta actividad
 

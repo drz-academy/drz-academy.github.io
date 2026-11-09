@@ -1,4 +1,4 @@
-.PHONY: help build cursos pages demos sync-site start stop worker-deploy update club-worker-deploy club-dev club-sync club-forms-export club-forms-reset club-base-datos club-clasificar club-informe club-boletines generar-boletines club-enviar-boletines club-certificados club-certificados-drive club-certificados-curso club-certificados-hotmart club-reset-pass portal-worker-deploy portal-dev portal-sync
+.PHONY: help build cursos pages demos sync-site quickstart start stop worker-deploy update club-worker-deploy club-dev club-sync club-forms-export club-forms-reset club-base-datos club-clasificar club-informe club-boletines generar-boletines club-enviar-boletines club-certificados club-certificados-drive club-certificados-curso club-certificados-hotmart club-reset-pass portal-worker-deploy portal-dev portal-sync
 
 PORT ?= 8000
 HOST ?= 127.0.0.1
@@ -11,6 +11,7 @@ help:
 	@echo "  make cursos     - Regenera HTML y QR de todos los cursos"
 	@echo "  make demos      - Regenera HTML y QR de todos los demos"
 	@echo "  make sync-site  - Copia index, assets y cursos/ a $(SITE)/"
+	@echo "  make quickstart - Sirve la raíz del repo sin compilar ni preparar las apps"
 	@echo "  make start      - Arranca http://$(HOST):$(PORT) (actualiza cursos si hace falta)"
 	@echo "  make stop       - Detiene el servidor en el puerto $(PORT)"
 	@echo "  make stash      - Guarda cambios locales temporalmente (git stash)"
@@ -100,6 +101,13 @@ build: cursos demos
 	@cp -r apps/drake-calculator/out $(SITE)/apps/drake-calculator
 	@cp -r apps/star-trek/out $(SITE)/apps/star-trek
 	@echo "✓  Site ready in $(SITE)/"
+
+quickstart:
+	@echo "Starting server on http://$(HOST):$(PORT) (repository root; apps are not built)"
+	@nohup python3 -m http.server "$(PORT)" --bind "$(HOST)" >/dev/null 2>&1 &
+	@sleep 0.2
+	@echo "Started. Stop with: make stop"
+	@echo "  Home:  http://$(HOST):$(PORT)/"
 
 start:
 	@if [ ! -f $(SITE)/apps/cloud_academy/index.html ] || [ ! -f $(SITE)/apps/lighting-black-holes/index.html ] || [ ! -f $(SITE)/apps/drake-calculator/index.html ] || [ ! -f $(SITE)/apps/star-trek/index.html ]; then $(MAKE) build; fi

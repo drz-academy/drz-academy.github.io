@@ -27,12 +27,13 @@ Dependencias Python (`requirements.txt`):
 ## Probar el sitio en local
 
 ```bash
+make quickstart # sirve la raíz del repo sin compilar ni preparar las apps
 make build    # compila apps Next.js y ensambla _site/
 make start    # sirve _site/ en http://127.0.0.1:8000
 make stop     # detiene el servidor
 ```
 
-El sitio local replica lo que publica GitHub Pages: página principal, cursos en `/cursos/<id>/`, demos en `/demos/<id>/` y apps en `/apps/...`.
+`make quickstart` sirve directamente los archivos estáticos del repositorio en `http://127.0.0.1:8000`; las apps de `/apps/...` no estarán compiladas. Para probar el sitio completo como lo publica GitHub Pages —página principal, cursos, demos y apps— usa `make build && make start`.
 
 ---
 
