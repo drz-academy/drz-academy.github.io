@@ -41,6 +41,12 @@ En este curso, guiado por **Antonio Bernal**, reconocido divulgador científico,
   <iframe src="https://www.youtube-nocookie.com/embed/sIiBnaY9OUU" title="Video de invitación al Círculo Latino" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"></iframe>
 </div>
 
+## El Círculo Latino de la Dr. Z Academy
+
+**Más que un curso: una comunidad viva alrededor de la lengua latina.** A semejanza de organizaciones y colectivos que en distintas ciudades del mundo reúnen a personas amantes de la cultura clásica (*circuli latini*), el **Círculo Latino de la Dr. Z Academy** busca convertirse en un punto de encuentro permanente para entusiastas y estudiosos de todos los niveles. Nuestro objetivo es cultivar juntos el estudio, la pronunciación viva, la lectura compartida y la traducción tanto de obras clásicas como de textos medievales, renacentistas y modernos.
+
+**El primer ciclo de una aventura continua.** Esta edición marca la apertura de un **ciclo continuo de cursos**. En lugar de ser este curso una iniciación corta a la lengua, esperamos que sea el primero de varios cursos similares en los que las personas puedan profundizar en aspectos de la lengua y la literatura latina. Como una característica especial, hemos previsto que **las personas que se inscriban en futuras ediciones (otros ciclos de enseñanza del Círculo Latino)** podrán disfrutar de acceso completo a los materiales, grabaciones y lecturas de los ciclos anteriores. De ese modo podrán ponerse al día y avanzar con el grupo.
+
 ## Un vistazo al contenido
 
 El programa está concebido de manera orgánica y progresiva para que cualquier persona, sin importar su trasfondo, empiece a leer y traducir latín desde las primeras lecciones:
@@ -73,12 +79,6 @@ Además de su trabajo como astrónomo y divulgador de la astronomía, las cienci
 Este curso está dirigido a entusiastas de la lengua, lectores curiosos, estudiantes, docentes, profesionales de cualquier disciplina (humanidades, derecho, medicina, ciencias naturales, historia, filosofía, astronomía) y público general que desee descubrir la raíz de nuestra cultura y enriquecer su dominio del español.
 
 **No se requieren conocimientos previos** de latín ni nociones de gramática avanzada. Solo se necesita curiosidad, deseo de aprender y gusto por desentrañar el significado detrás de las palabras. La edad mínima recomendada es de 14 años.
-
-## El Círculo Latino de la Dr. Z Academy
-
-**Más que un curso: una comunidad viva alrededor de la lengua latina.** A semejanza de organizaciones y colectivos que en distintas ciudades del mundo reúnen a personas amantes de la cultura clásica (*circuli latini*), el **Círculo Latino de la Dr. Z Academy** busca convertirse en un punto de encuentro permanente para entusiastas y estudiosos de todos los niveles. Nuestro objetivo es cultivar juntos el estudio, la pronunciación viva, la lectura compartida y la traducción tanto de obras clásicas como de textos medievales, renacentistas y modernos.
-
-**El primer ciclo de una aventura continua.** Esta edición marca la apertura de un **ciclo continuo de cursos**. En lugar de ser este curso una iniciación corta a la lengua, esperamos que sea el primero de varios cursos similares en los que las personas puedan profundizar en aspectos de la lengua y la literatura latina. Como una característica especial, hemos previsto que **las personas que se inscriban en futuras ediciones (otros ciclos de enseñanza del Círculo Latino)** podrán disfrutar de acceso completo a los materiales, grabaciones y lecturas de los ciclos anteriores. De ese modo podrán ponerse al día y avanzar con el grupo.
 
 ## Metodología
 
