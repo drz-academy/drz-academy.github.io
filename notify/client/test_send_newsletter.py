@@ -57,6 +57,19 @@ class SendNewsletterTests(unittest.TestCase):
         self.assertEqual(self.log.read_text(encoding="utf-8"), "ONE@example.com\ntwo@example.com\n")
         list_subscribers.assert_not_called()
 
+    def test_send_reports_successful_email_number_and_total(self):
+        def fake_send(*, messages: list, delay_sec, progress_callback):
+            for message in messages:
+                progress_callback(message["to"], True, None)
+
+        with patch.object(send_newsletter, "worker_base", return_value="https://example.com"), \
+             patch.object(send_newsletter, "send_gmail_bulk", side_effect=fake_send), \
+             patch("builtins.input", return_value="y"):
+            result, output, _ = self.run_newsletter("--emails-file", str(self.recipients))
+        self.assertEqual(result, 0)
+        self.assertIn("Enviado 1 de 2: one@example.com", output)
+        self.assertIn("Enviado 2 de 2: two@example.com", output)
+
     def test_missing_and_empty_files_fail_without_falling_back(self):
         for path in (self.directory / "missing.md", self.directory / "empty.md"):
             if path.name == "empty.md":

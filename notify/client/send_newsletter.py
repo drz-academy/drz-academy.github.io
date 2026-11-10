@@ -166,7 +166,7 @@ def main() -> int:
     def on_progress(email: str, success: bool, error: str | None):
         if success:
             sent_count[0] += 1
-            print(f"Enviado a {email}")
+            print(f"Enviado {sent_count[0]} de {len(emails)}: {email}")
             if not args.test_emails:
                 with open(log_file, "a", encoding="utf-8") as f:
                     f.write(f"{email}\n")
