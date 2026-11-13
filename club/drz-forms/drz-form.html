@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Evaluación — Dr. Z Academy Club</title>
+  <title>Dr. Z Academy Club</title>
   <meta name="description" content="Formulario de evaluación del Club. Completa las preguntas para obtener tu certificado.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" href="/assets/favicon.ico" sizes="any">
@@ -15,6 +15,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <script>
+    document.documentElement.dataset.theme = "dark";
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -30,6 +33,24 @@
       --text-dim: #555;
       --radius: 8px;
       --max-width: 720px;
+      --header-bg: rgba(12, 12, 12, 0.92);
+      --on-gold: #0c0c0c;
+      color-scheme: dark;
+    }
+
+    :root[data-theme="light"] {
+      --gold: #9a7400;
+      --gold-dim: #7d5e00;
+      --bg: #f6f4ee;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f0ede4;
+      --border: #d9d4c4;
+      --text: #1d1d1d;
+      --text-muted: #5c5c5c;
+      --text-dim: #7a7a7a;
+      --header-bg: rgba(246, 244, 238, 0.92);
+      --on-gold: #ffffff;
+      color-scheme: light;
     }
 
     body {
@@ -50,7 +71,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(12, 12, 12, 0.92);
+      background: var(--header-bg);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
@@ -74,6 +95,23 @@
     }
 
     .logo span { color: var(--text); font-weight: 300; }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .logo img {
+      height: 38px;
+      width: 38px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
 
     .page {
       flex: 1;
@@ -301,6 +339,26 @@
       gap: 0.55rem;
     }
 
+    .question[data-tipo="completar"] .question-label { font-style: italic; }
+
+    .completar {
+      line-height: 2.8;
+      font-size: 1.05rem;
+    }
+
+    .completar .blank {
+      display: inline-block;
+      width: auto;
+      min-width: 8.5rem;
+      max-width: 100%;
+      margin: 0 0.25rem;
+      padding: 0.3rem 2rem 0.3rem 0.6rem;
+      font-size: 0.9rem;
+      vertical-align: baseline;
+    }
+
+    .completar input.blank { padding-right: 0.6rem; }
+
     .options {
       display: flex;
       flex-direction: row;
@@ -370,7 +428,7 @@
     .score-opt:has(input:focus-visible) {
       background: var(--gold);
       border-color: var(--gold);
-      color: #0c0c0c;
+      color: var(--on-gold);
     }
 
     .btn {
@@ -425,6 +483,170 @@
       margin-bottom: 0.6rem;
     }
 
+    .answers-summary {
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .answers-summary > h3 {
+      font-family: Raleway, sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .answer-section {
+      font-family: Raleway, sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin: 1.25rem 0 0.65rem;
+    }
+
+    .answer-section:first-child { margin-top: 0; }
+
+    .answer-item {
+      padding: 0.75rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .answer-item:first-child { border-top: none; padding-top: 0; }
+
+    .answer-q {
+      font-family: Raleway, sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .answer-a {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .answer-a .answer-blank {
+      color: var(--text);
+      font-weight: 600;
+      padding: 0 0.15em;
+      border-bottom: 1px solid var(--gold);
+    }
+
+    .answer-a .answer-blank.empty {
+      color: var(--text-dim);
+      font-weight: 400;
+      border-bottom-style: dotted;
+    }
+
+    .answer-a .muted { color: var(--text-dim); font-style: italic; }
+
+    .done-receipt {
+      margin: 0.75rem 0 1rem;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg);
+    }
+
+    .done-receipt p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    .done-receipt p + p { margin-top: 0.45rem; }
+
+    .done-receipt strong {
+      color: var(--text);
+      font-family: Raleway, sans-serif;
+      letter-spacing: 0.04em;
+    }
+
+    .done-receipt a { font-size: 0.9rem; }
+
+    .done-receipt .receipt-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 0.75rem;
+    }
+
+    .keep-link {
+      margin-top: 0.75rem;
+    }
+
+    .keep-link .keep-link-url {
+      display: inline;
+      word-break: break-all;
+      font-size: 0.85rem;
+    }
+
+    .keep-link .receipt-actions { margin-top: 0.55rem; }
+
+    .teacher-bar {
+      margin-bottom: 1.25rem;
+      padding: 1rem 1.1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg-card);
+    }
+
+    .teacher-bar-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 0.85rem 1.25rem;
+    }
+
+    .teacher-bar label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      flex: 1 1 16rem;
+      min-width: 12rem;
+    }
+
+    .teacher-bar select {
+      width: 100%;
+      padding: 0.65rem 0.75rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font: inherit;
+    }
+
+    .teacher-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .teacher-nav .btn {
+      min-width: 2.6rem;
+      padding-left: 0.7rem;
+      padding-right: 0.7rem;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .teacher-nav #teacher-position {
+      min-width: 4.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .teacher-meta {
+      width: 100%;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
     .cert-box {
       margin-top: 1.25rem;
       padding: 1.1rem 1.2rem;
@@ -475,13 +697,15 @@
 <body>
   <header>
     <div class="header-inner">
-      <a href="/club/" class="logo">Dr.Z Academy <span>- Club</span></a>
-      <a href="/club/" class="btn btn-ghost">Volver al Club</a>
+      <a href="/club/" class="logo"><img src="/assets/DrZ-Logos/logo-firma.webp" alt="" width="38" height="38"><span class="logo-text">Dr.Z Academy <span>- Club</span></span></a>
+      <div class="header-actions">
+        <a href="/club/" class="btn btn-ghost">Volver al Club</a>
+      </div>
     </div>
   </header>
 
   <main class="page">
-    <span class="hero-label">Evaluación</span>
+    <span class="hero-label" id="form-label">Evaluación</span>
     <h1 id="form-title">Evaluación del <em>curso</em></h1>
     <p class="lead" id="form-intro">Cargando el formulario…</p>
 
@@ -508,8 +732,41 @@
     </section>
 
     <section id="view-done" class="card done hidden" hidden>
-      <h2>Gracias por tu evaluación</h2>
-      <p class="lead" id="done-lead" style="margin-bottom: 0;">Ya registramos tus respuestas.</p>
+      <div id="teacher-bar" class="teacher-bar hidden" hidden>
+        <div class="teacher-bar-inner">
+          <label>
+            Correo electrónico
+            <select id="teacher-email" aria-label="Elegir envío por correo"></select>
+          </label>
+          <div class="teacher-nav" role="group" aria-label="Navegar envíos">
+            <button type="button" class="btn btn-ghost" id="teacher-prev" aria-label="Anterior">‹</button>
+            <span id="teacher-position">0 / 0</span>
+            <button type="button" class="btn btn-ghost" id="teacher-next" aria-label="Siguiente">›</button>
+          </div>
+          <p class="teacher-meta" id="teacher-meta"></p>
+        </div>
+      </div>
+      <h2 id="done-title">Gracias por tu evaluación</h2>
+      <p class="lead" id="done-lead">Ya registramos tus respuestas.</p>
+      <div id="done-receipt" class="done-receipt" hidden>
+        <p>Código de tu envío: <strong id="done-response-id"></strong></p>
+        <p>Guárdalo para volver a ver tus respuestas. <a id="done-response-link" href="#">Abrir este envío</a></p>
+        <div class="receipt-actions">
+          <a id="done-edit-link" class="btn btn-ghost" href="#">Editar tus respuestas</a>
+        </div>
+        <div id="keep-link-box" class="keep-link" hidden>
+          <p>Copia este enlace y consérvalo para editar tus respuestas:</p>
+          <p><a id="keep-link-url" class="keep-link-url" href="#" target="_blank" rel="noopener"></a></p>
+          <div class="receipt-actions">
+            <button type="button" class="btn btn-ghost" id="keep-link-copy">Copiar enlace</button>
+          </div>
+          <p class="status" id="keep-link-status" hidden></p>
+        </div>
+      </div>
+      <div id="done-answers" class="answers-summary" hidden>
+        <h3 id="done-answers-heading">Tus respuestas</h3>
+        <div id="done-answers-list"></div>
+      </div>
       <div class="cert-box" id="cert-box" hidden>
         <p>Tu certificado está listo:</p>
         <div class="actions">
@@ -545,7 +802,7 @@
     </div>
   </footer>
 
-  <script src="/club/drz-forms/drz-form.js?v=20260831l" type="module"></script>
+  <script src="/club/drz-forms/drz-form.js?v=20261113u" type="module"></script>
 </body>
 
 </html>

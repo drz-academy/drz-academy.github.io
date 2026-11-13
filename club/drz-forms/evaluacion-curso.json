@@ -2,6 +2,7 @@
   "id": "evaluacion-curso",
   "titulo": "Evaluación del curso",
   "intro": "Antes de descargar tu certificado, cuéntanos cómo te fue. Las preguntas marcadas con * son obligatorias.",
+  "fondo": "oscuro",
   "requiere_curso": true,
   "revela_certificado": true,
   "prueba_curso_nombre": "El Rompecabezas de la Materia",

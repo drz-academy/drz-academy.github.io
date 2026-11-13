@@ -4,7 +4,35 @@ const TOKEN_KEY = "drz-club-token";
 const ADMIN_TOKEN_KEY = "drz-forms-export-token";
 const WORKER_URL = "https://drz-club-portal.drz-academy.workers.dev";
 const FORM_ID_RE = /^[a-z0-9][a-z0-9_-]{0,63}$/;
-const SCHEMA_VERSION = "20260831l";
+const SCHEMA_VERSION = "20261113u";
+
+function applyFormTheme(schema) {
+  const fondo = String(schema?.fondo || "oscuro").trim().toLowerCase();
+  const theme = fondo === "claro" || fondo === "light" ? "light" : "dark";
+  document.documentElement.dataset.theme = theme;
+}
+
+function formAccessToken(schema) {
+  return String(schema?.token || "").trim();
+}
+
+function formAccessGranted(schema) {
+  const expected = formAccessToken(schema);
+  if (!expected) return false;
+  return String(qs("token") || "").trim() === expected;
+}
+
+function teacherAccessGranted(schema) {
+  const expected = String(schema?.token_docente || schema?.token_profesor || "").trim();
+  if (!expected) return false;
+  const got = String(qs("token_docente") || qs("token_profesor") || "").trim();
+  return got === expected;
+}
+
+function wantsEditMode() {
+  const raw = String(qs("edit") || "").trim().toLowerCase();
+  return raw === "1" || raw === "true" || raw === "si" || raw === "sí";
+}
 
 function workerEndpoint() {
   const params = new URLSearchParams(location.search);
@@ -61,6 +89,21 @@ function escapeHtml(value) {
     .replaceAll('"', "&quot;");
 }
 
+const ALLOWED_TAGS = "b|i|em|strong|u|br|sub|sup|mark";
+
+// Markdown mínimo (**negrilla**, *itálica*, `código`, saltos de línea) más unas pocas etiquetas HTML seguras.
+function richText(value) {
+  let html = escapeHtml(value);
+  html = html.replace(new RegExp(`&lt;(/?)(${ALLOWED_TAGS})\\s*/?&gt;`, "gi"), (m, close, tag) =>
+    tag.toLowerCase() === "br" ? "<br>" : `<${close}${tag}>`);
+  html = html
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/(^|[^*])\*(?!\s)(.+?)(?<!\s)\*(?!\*)/g, "$1<em>$2</em>")
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\r?\n/g, "<br>");
+  return html;
+}
+
 function isRequired(question) {
   return question?.obligatoria !== false;
 }
@@ -82,12 +125,12 @@ function loginRedirect() {
   location.replace(`/club/?next=${next}`);
 }
 
-function takeTokenFromUrl() {
-  const fromUrl = qs("TOKEN") || qs("token");
+function takeAdminTokenFromUrl() {
+  // Solo TOKEN mayúscula: `token` queda reservado al acceso del formulario.
+  const fromUrl = qs("TOKEN");
   if (fromUrl) {
     const url = new URL(location.href);
     url.searchParams.delete("TOKEN");
-    url.searchParams.delete("token");
     history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
   }
   return fromUrl;
@@ -133,7 +176,7 @@ async function verifyExportToken(token) {
 }
 
 async function unlockAdminIfPresent() {
-  const fromUrl = takeTokenFromUrl();
+  const fromUrl = takeAdminTokenFromUrl();
   const candidate = fromUrl || storedAdminToken();
   if (!candidate) {
     adminUnlocked = false;
@@ -167,9 +210,27 @@ async function api(path, { method = "GET", body, token } = {}) {
     err.code = data.error;
     err.status = res.status;
     err.certificado_url = data.certificado_url || "";
+    err.response_id = data.id || "";
+    err.answers = data.answers || null;
+    err.curso_nombre = data.curso_nombre || "";
     throw err;
   }
   return data;
+}
+
+function sanitizeResponseId(raw) {
+  const value = String(raw || "").trim().toLowerCase();
+  return /^[a-z0-9]{8,32}$/.test(value) ? value : "";
+}
+
+function responseRecoveryUrl(responseId, { edit = false } = {}) {
+  const url = new URL(location.href);
+  url.searchParams.delete("TOKEN");
+  url.searchParams.delete("preview");
+  url.searchParams.delete("edit");
+  url.searchParams.set("respuesta", responseId);
+  if (edit) url.searchParams.set("edit", "true");
+  return `${url.pathname}${url.search}${url.hash}`;
 }
 
 function mapError(err) {
@@ -177,6 +238,7 @@ function mapError(err) {
   if (code === "unauthorized") return "Tu sesión venció. Entra de nuevo al Club para continuar.";
   if (code === "not_enrolled") return "No encontramos este curso en tu historial del Club.";
   if (code === "already_submitted") return "Ya enviaste esta evaluación.";
+  if (code === "not_found") return "No encontramos ese envío.";
   if (code === "invalid_answers" || String(code).startsWith("missing:") || String(code).startsWith("invalid:")) {
     return "Falta responder alguna pregunta obligatoria, o una respuesta no es válida.";
   }
@@ -259,9 +321,52 @@ function renderChoiceOptions(question, { name, id, labelId, required, selected, 
   }).join("");
 }
 
-function renderQuestion(question, index, { cursos = [], prefill = {} } = {}) {
+const BLANK_RE = /\[([^\]]+)\]/g;
+const BLANK_SEP = "|";
+
+function blankOptions(question, listas, key) {
+  const raw = (question.listas || {})[key] || (listas || {})[key];
+  if (!Array.isArray(raw)) return null;
+  return raw.map((opt) => {
+    if (opt && typeof opt === "object") {
+      const value = String(opt.value ?? opt.id ?? opt.label ?? "");
+      return { value, label: String(opt.label ?? value) };
+    }
+    return { value: String(opt), label: String(opt) };
+  }).filter((opt) => opt.value);
+}
+
+function renderCompletar(question, { id, name, labelId, required, filled, listas }) {
+  const texto = String(question.texto || question.enunciado || "");
+  const saved = isBlank(filled) ? [] : String(filled).split(BLANK_SEP);
+  const reqAttr = required ? "required" : "";
+  let html = "";
+  let last = 0;
+  let slot = 0;
+  for (const match of texto.matchAll(BLANK_RE)) {
+    html += escapeHtml(texto.slice(last, match.index));
+    last = match.index + match[0].length;
+    const key = match[1].trim();
+    const value = saved[slot] || "";
+    const fieldId = `${name}-${slot}`;
+    const options = blankOptions(question, listas, key);
+    if (options) {
+      const opts = [`<option value="">${escapeHtml(key)}…</option>`].concat(
+        options.map((opt) => `<option value="${escapeHtml(opt.value)}" ${opt.value === value ? "selected" : ""}>${escapeHtml(opt.label)}</option>`),
+      );
+      html += `<select class="blank" id="${fieldId}" data-blank="${slot}" ${reqAttr} aria-label="${escapeHtml(key)} ${slot + 1}">${opts.join("")}</select>`;
+    } else {
+      html += `<input class="blank" type="text" id="${fieldId}" data-blank="${slot}" placeholder="${escapeHtml(key)}" value="${escapeHtml(value)}" ${reqAttr} aria-label="${escapeHtml(key)} ${slot + 1}">`;
+    }
+    slot += 1;
+  }
+  html += escapeHtml(texto.slice(last));
+  return `<div class="completar" data-completar="${escapeHtml(id)}" aria-labelledby="${labelId}">${html}</div>`;
+}
+
+function renderQuestion(question, index, { cursos = [], prefill = {}, listas = {}, number = null } = {}) {
   const id = String(question.id || "").trim();
-  const enunciado = escapeHtml(question.enunciado || `Pregunta ${index + 1}`);
+  const enunciado = richText(question.enunciado || `Pregunta ${index + 1}`);
   const tipo = String(question.tipo || "texto").trim();
   const required = isRequired(question);
   const name = `q-${id}`;
@@ -270,7 +375,9 @@ function renderQuestion(question, index, { cursos = [], prefill = {} } = {}) {
   const filled = initialValue(question, prefill);
   let control = "";
 
-  if (tipo === "parrafo") {
+  if (tipo === "completar") {
+    control = renderCompletar(question, { id, name, labelId, required, filled, listas });
+  } else if (tipo === "parrafo") {
     control = `<textarea id="${name}" name="${id}" ${reqAttr} aria-labelledby="${labelId}">${escapeHtml(filled)}</textarea>`;
   } else if (tipo === "radio" || tipo === "seleccion_unica") {
     const selected = isBlank(filled) ? [] : [String(filled)];
@@ -333,10 +440,10 @@ function renderQuestion(question, index, { cursos = [], prefill = {} } = {}) {
     ? `<span class="required" aria-hidden="true">*</span>`
     : `<span class="optional-tag">(opcional)</span>`;
   const helpText = question.explicacion || question.ayuda || "";
-  const help = helpText ? `<span class="question-help">${escapeHtml(helpText)}</span>` : "";
+  const help = helpText ? `<span class="question-help">${richText(helpText)}</span>` : "";
 
   return `<div class="question" data-id="${escapeHtml(id)}" data-tipo="${escapeHtml(tipo)}" data-required="${required ? "1" : "0"}">
-    <span class="question-label" id="${labelId}">${index + 1}. ${enunciado}${mark}</span>
+    <span class="question-label" id="${labelId}">${number ? `${number}. ` : ""}${enunciado}${mark}</span>
     ${help}
     ${control}
   </div>`;
@@ -344,14 +451,19 @@ function renderQuestion(question, index, { cursos = [], prefill = {} } = {}) {
 
 function renderForm(schema, { cursos = [], prefill = {} } = {}) {
   let index = 0;
+  let number = 0;
   return formSections(schema)
     .map((section) => {
-      const title = section.titulo ? `<h2 class="section-title">${escapeHtml(section.titulo)}</h2>` : "";
+      const title = section.titulo ? `<h2 class="section-title">${richText(section.titulo)}</h2>` : "";
       const introText = section.explicacion || section.intro || "";
-      const intro = introText ? `<p class="section-intro">${escapeHtml(introText)}</p>` : "";
+      const intro = introText ? `<p class="section-intro">${richText(introText)}</p>` : "";
       const questions = (section.preguntas || [])
         .map((question) => {
-          const html = renderQuestion(question, index, { cursos, prefill });
+          const numbered = schema.numerar_preguntas !== false && question.numerar !== false;
+          if (numbered) number += 1;
+          const html = renderQuestion(question, index, {
+            cursos, prefill, listas: schema.listas, number: numbered ? number : null,
+          });
           index += 1;
           return html;
         })
@@ -410,6 +522,14 @@ function collectAnswers(schema) {
       } else {
         answers[id] = selected;
       }
+    } else if (tipo === "completar") {
+      const fields = [...document.querySelectorAll(`[data-completar="${CSS.escape(id)}"] [data-blank]`)];
+      const values = fields.map((el) => String(el.value || "").replaceAll(BLANK_SEP, " ").trim());
+      const anyFilled = values.some(Boolean);
+      const allFilled = values.length > 0 && values.every(Boolean);
+      // Opcional: se puede enviar vacía o a medias. Obligatoria: todos los huecos.
+      if (required && !allFilled) missing.push(id);
+      else if (anyFilled) answers[id] = values.join(BLANK_SEP);
     } else if (tipo === "puntaje" || tipo === "radio" || tipo === "seleccion_unica") {
       const selected = document.querySelector(`input[name="${CSS.escape(id)}"]:checked`);
       if (!selected) {
@@ -448,15 +568,343 @@ function pruebaDoneStatus(schema, answers, catalog, cursoId) {
   };
 }
 
-function showDone(status) {
+let certificateExpected = true;
+let formLabel = "Evaluación";
+let activeSchema = null;
+let teacherMode = false;
+let teacherRows = [];
+let teacherIndex = 0;
+
+function formatCompletarAnswer(question, value) {
+  const slots = String(value ?? "").split(BLANK_SEP);
+  const texto = String(question.texto || question.enunciado || "");
+  let html = "";
+  let last = 0;
+  let i = 0;
+  let any = false;
+  for (const match of texto.matchAll(BLANK_RE)) {
+    html += escapeHtml(texto.slice(last, match.index));
+    last = match.index + match[0].length;
+    const filled = String(slots[i++] || "").trim();
+    if (filled) {
+      any = true;
+      html += `<strong class="answer-blank">${escapeHtml(filled)}</strong>`;
+    } else {
+      html += `<span class="answer-blank empty">[…]</span>`;
+    }
+  }
+  html += escapeHtml(texto.slice(last));
+  if (!any) return '<span class="muted">Sin responder</span>';
+  return html || escapeHtml(String(value ?? ""));
+}
+
+function formatAnswerValue(question, value, schema) {
+  if (value === undefined || value === null || value === "") {
+    return '<span class="muted">Sin responder</span>';
+  }
+  const tipo = String(question.tipo || "texto").trim();
+  if (Array.isArray(value)) {
+    return value.length
+      ? escapeHtml(value.map(String).join(", "))
+      : '<span class="muted">Sin responder</span>';
+  }
+  if (tipo === "completar") return formatCompletarAnswer(question, value);
+  if (tipo === "escala_scroll" || tipo === "puntaje") {
+    const n = Number(value);
+    if (!Number.isFinite(n)) return escapeHtml(String(value));
+    if (tipo === "escala_scroll") {
+      const { min, max, step } = scoreRange(question);
+      const emotions = Array.isArray(question.emotions) ? question.emotions.map((item) => String(item)) : [];
+      const idx = emotions.length ? emotionIndexForValue(n, min, max, emotions.length) : -1;
+      const face = idx >= 0 ? emotions[idx] : "";
+      const label = formatScaleValue(n, step);
+      return escapeHtml(face ? `${label} ${face}` : label);
+    }
+    return escapeHtml(String(n));
+  }
+  return escapeHtml(String(value));
+}
+
+function wantsAnswerSummary(schema) {
+  const flag = schema?.mostrar_respuestas;
+  return flag === true || flag === 1 || String(flag || "").trim().toLowerCase() === "true";
+}
+
+function ensureAnswersSummaryBox() {
+  let box = $("done-answers");
+  let list = $("done-answers-list");
+  if (box && list) return { box, list };
+  const done = $("view-done");
+  const lead = $("done-lead");
+  if (!done || !lead) return { box: null, list: null };
+  box = document.createElement("div");
+  box.id = "done-answers";
+  box.className = "answers-summary";
+  box.hidden = true;
+  box.innerHTML = `<h3>Tus respuestas</h3><div id="done-answers-list"></div>`;
+  lead.insertAdjacentElement("afterend", box);
+  list = $("done-answers-list");
+  return { box, list };
+}
+
+function renderAnswersSummary(schema, answers) {
+  const { box, list } = ensureAnswersSummaryBox();
+  if (!box || !list) return;
+  if (!wantsAnswerSummary(schema) || !answers || typeof answers !== "object") {
+    box.hidden = true;
+    list.innerHTML = "";
+    return;
+  }
+  const blocks = [];
+  for (const section of formSections(schema)) {
+    const items = [];
+    for (const question of section.preguntas || []) {
+      const id = String(question.id || "").trim();
+      if (!id) continue;
+      const val = answers[id];
+      const unanswered = val === undefined || val === null || val === "" || (Array.isArray(val) && !val.length);
+      items.push(
+        `<div class="answer-item${unanswered ? " unanswered" : ""}">` +
+          `<div class="answer-q">${richText(question.enunciado || id)}</div>` +
+          `<div class="answer-a">${formatAnswerValue(question, val, schema)}</div>` +
+        `</div>`,
+      );
+    }
+    if (!items.length) continue;
+    const title = String(section.titulo || "").trim()
+      ? `<h3 class="answer-section">${richText(section.titulo)}</h3>`
+      : "";
+    blocks.push(`${title}${items.join("")}`);
+  }
+  list.innerHTML = blocks.join("");
+  box.hidden = !blocks.length;
+}
+
+function applyThanksCopy(schema, status) {
+  const titulo = String(schema?.titulo_gracias || "").trim()
+    || `Gracias por tu ${formLabel.toLowerCase()}`;
+  $("done-title").innerHTML = richText(titulo);
+
+  const custom = String(schema?.mensaje_gracias || "").trim();
   const cursoNombre = status.curso_nombre || "";
   if (status.prueba) {
     $("done-lead").textContent = cursoNombre
       ? `Prueba con ${cursoNombre}: las respuestas no se guardaron.`
       : "Prueba: las respuestas no se guardaron.";
+  } else if (custom) {
+    $("done-lead").innerHTML = richText(custom);
   } else if (cursoNombre) {
     $("done-lead").textContent = `Ya registramos tus respuestas sobre ${cursoNombre}.`;
+  } else {
+    $("done-lead").textContent = "Ya registramos tus respuestas.";
   }
+}
+
+function absoluteRecoveryUrl(responseId, { edit = false } = {}) {
+  const path = responseRecoveryUrl(responseId, { edit });
+  try {
+    return new URL(path, location.origin).href;
+  } catch {
+    return path;
+  }
+}
+
+function showKeepLinkBox(responseId, { allowEdit = true } = {}) {
+  const box = $("keep-link-box");
+  const urlEl = $("keep-link-url");
+  const copyBtn = $("keep-link-copy");
+  const status = $("keep-link-status");
+  const id = sanitizeResponseId(responseId);
+  if (!box || !urlEl) return;
+  if (!id || !allowEdit || teacherMode) {
+    box.hidden = true;
+    urlEl.textContent = "";
+    urlEl.removeAttribute("href");
+    if (status) {
+      status.hidden = true;
+      status.textContent = "";
+    }
+    return;
+  }
+  const href = absoluteRecoveryUrl(id, { edit: true });
+  urlEl.href = href;
+  urlEl.textContent = href;
+  if (copyBtn) {
+    copyBtn.onclick = async () => {
+      try {
+        await navigator.clipboard.writeText(href);
+        showStatus(status, "Enlace copiado.", "ok");
+      } catch {
+        showStatus(status, "No se pudo copiar. Selecciona el enlace y cópialo a mano.", "error");
+      }
+    };
+  }
+  if (status) {
+    status.hidden = true;
+    status.textContent = "";
+    status.classList.remove("error", "ok");
+  }
+  box.hidden = false;
+}
+
+function showReceipt(responseId, { allowEdit = true } = {}) {
+  const receipt = $("done-receipt");
+  const idEl = $("done-response-id");
+  const link = $("done-response-link");
+  const editLink = $("done-edit-link");
+  const id = sanitizeResponseId(responseId);
+  if (!receipt || !idEl || !link) return;
+  if (!id) {
+    receipt.hidden = true;
+    idEl.textContent = "";
+    link.removeAttribute("href");
+    if (editLink) {
+      editLink.hidden = true;
+      editLink.removeAttribute("href");
+    }
+    showKeepLinkBox("");
+    return;
+  }
+  idEl.textContent = id;
+  link.href = responseRecoveryUrl(id);
+  if (editLink) {
+    if (allowEdit && !teacherMode) {
+      editLink.href = responseRecoveryUrl(id, { edit: true });
+      editLink.hidden = false;
+    } else {
+      editLink.hidden = true;
+      editLink.removeAttribute("href");
+    }
+  }
+  receipt.hidden = false;
+  showKeepLinkBox(id, { allowEdit });
+}
+
+function setTeacherBarVisible(on) {
+  const bar = $("teacher-bar");
+  if (!bar) return;
+  bar.hidden = !on;
+  bar.classList.toggle("hidden", !on);
+}
+
+function formatTeacherWhen(iso) {
+  const raw = String(iso || "").trim();
+  if (!raw) return "";
+  const date = new Date(raw);
+  if (Number.isNaN(date.getTime())) return raw;
+  return date.toLocaleString("es-CO", { dateStyle: "medium", timeStyle: "short" });
+}
+
+function teacherOptionLabel(row, index) {
+  const mail = String(row.correo || "").trim();
+  const name = String(row.nombre || "").trim();
+  if (mail && name) return `${mail} — ${name}`;
+  if (mail) return mail;
+  if (name) return name;
+  if (row.id) return `Código ${row.id}`;
+  return `Envío ${index + 1}`;
+}
+
+function syncTeacherControls() {
+  const select = $("teacher-email");
+  const pos = $("teacher-position");
+  const prev = $("teacher-prev");
+  const next = $("teacher-next");
+  const meta = $("teacher-meta");
+  const total = teacherRows.length;
+  if (pos) pos.textContent = total ? `${teacherIndex + 1} / ${total}` : "0 / 0";
+  if (prev) prev.disabled = teacherIndex <= 0;
+  if (next) next.disabled = teacherIndex >= total - 1;
+  if (select && select.options.length) {
+    select.value = String(teacherIndex);
+  }
+  const row = teacherRows[teacherIndex];
+  if (meta) {
+    if (!row) {
+      meta.textContent = "No hay envíos todavía.";
+    } else {
+      const bits = [
+        row.id ? `Código ${row.id}` : "",
+        row.submittedAt ? `Enviado ${formatTeacherWhen(row.submittedAt)}` : "",
+        row.updatedAt && row.updatedAt !== row.submittedAt
+          ? `Actualizado ${formatTeacherWhen(row.updatedAt)}`
+          : "",
+      ].filter(Boolean);
+      meta.textContent = bits.join(" · ");
+    }
+  }
+}
+
+function showTeacherSubmission(index) {
+  if (!teacherRows.length) {
+    teacherIndex = 0;
+    setTeacherBarVisible(true);
+    $("done-title").textContent = "Revisión del profesor";
+    $("done-lead").textContent = "Todavía no hay respuestas para este formulario.";
+    const heading = $("done-answers-heading");
+    if (heading) heading.textContent = "Respuestas";
+    renderAnswersSummary({ ...activeSchema, mostrar_respuestas: true }, {});
+    showReceipt("");
+    $("cert-box").hidden = true;
+    $("cert-pending").hidden = true;
+    syncTeacherControls();
+    showView("view-done");
+    return;
+  }
+  teacherIndex = Math.max(0, Math.min(index, teacherRows.length - 1));
+  const row = teacherRows[teacherIndex];
+  setTeacherBarVisible(true);
+  const heading = $("done-answers-heading");
+  if (heading) heading.textContent = "Respuestas del estudiante";
+  $("done-title").textContent = teacherOptionLabel(row, teacherIndex);
+  $("done-lead").textContent = row.curso_nombre
+    ? `Curso: ${row.curso_nombre}`
+    : "Revisión de respuestas enviadas.";
+  renderAnswersSummary({ ...activeSchema, mostrar_respuestas: true }, row.answers || {});
+  showReceipt(row.id || "");
+  $("cert-box").hidden = true;
+  $("cert-pending").hidden = true;
+  syncTeacherControls();
+  showView("view-done");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function bindTeacherControls() {
+  const select = $("teacher-email");
+  const prev = $("teacher-prev");
+  const next = $("teacher-next");
+  if (select) {
+    select.innerHTML = teacherRows.map((row, i) => (
+      `<option value="${i}">${escapeHtml(teacherOptionLabel(row, i))}</option>`
+    )).join("");
+    select.onchange = () => showTeacherSubmission(Number(select.value) || 0);
+  }
+  if (prev) prev.onclick = () => showTeacherSubmission(teacherIndex - 1);
+  if (next) next.onclick = () => showTeacherSubmission(teacherIndex + 1);
+}
+
+async function startTeacherReview(schema, formId) {
+  teacherMode = true;
+  setTeacherBarVisible(true);
+  $("form-label").textContent = "Revisión profesor";
+  $("form-intro").textContent = "Navega las respuestas con el correo o con las flechas.";
+  const token = String(qs("token_docente") || qs("token_profesor") || "").trim();
+  const data = await api(
+    `/forms/submissions?form=${encodeURIComponent(formId)}&token_docente=${encodeURIComponent(token)}`,
+  );
+  teacherRows = Array.isArray(data.submissions) ? data.submissions : [];
+  bindTeacherControls();
+  showTeacherSubmission(0);
+}
+
+function showDone(status, answers = null) {
+  if (!teacherMode) setTeacherBarVisible(false);
+  const cursoNombre = status.curso_nombre || "";
+  applyThanksCopy(activeSchema, status);
+  const heading = $("done-answers-heading");
+  if (heading && !teacherMode) heading.textContent = "Tus respuestas";
+  renderAnswersSummary(activeSchema, answers);
+  showReceipt(status.response_id || status.id || "");
   const certUrl = String(status.certificado_url || "").trim();
   if (certUrl) {
     $("cert-link").href = certUrl;
@@ -468,7 +916,7 @@ function showDone(status) {
     };
   } else {
     $("cert-box").hidden = true;
-    $("cert-pending").hidden = false;
+    $("cert-pending").hidden = !certificateExpected;
   }
   showView("view-done");
 }
@@ -568,26 +1016,47 @@ function enableAdminBar(formId) {
   });
 }
 
-function paintForm(schema, { cursos, prefill, submitMode }) {
+function markPrefillTouched(root = document) {
+  root.querySelectorAll(".scale-scroll input[type='range'][data-touched='1']").forEach((input) => {
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+}
+
+function paintForm(schema, { cursos, prefill, submitMode, editing = false }) {
   $("questions").innerHTML = renderForm(schema, { cursos, prefill });
   bindScales($("questions"));
+  markPrefillTouched($("questions"));
   showView("view-form");
   const submit = $("submit-form");
+  const etiqueta = formLabel.toLowerCase();
   if (submitMode === "preview") {
     submit.disabled = true;
     submit.textContent = "Vista previa (no se envía)";
     showStatus($("form-status"), "Vista previa: las respuestas no se guardan.", "ok");
   } else if (submitMode === "prueba") {
     submit.disabled = false;
-    submit.textContent = "Enviar evaluación (prueba)";
+    submit.textContent = `Enviar ${etiqueta} (prueba)`;
     showStatus($("form-status"), "Modo prueba: puedes enviar, pero las respuestas no se guardan.", "ok");
+  } else if (editing) {
+    submit.disabled = false;
+    submit.textContent = "Guardar cambios";
+    showStatus($("form-status"), "Estás editando un envío anterior. Al guardar se actualizará.", "ok");
   } else {
     submit.disabled = false;
-    submit.textContent = "Enviar evaluación";
+    submit.textContent = `Enviar ${etiqueta}`;
   }
 }
 
-function bindFormSubmit(schema, { formId, cursoId, catalog = [], sessionToken = "", submitMode = "live", status = {} } = {}) {
+function bindFormSubmit(schema, {
+  formId,
+  cursoId,
+  catalog = [],
+  sessionToken = "",
+  accessToken = "",
+  editResponseId = "",
+  submitMode = "live",
+  status = {},
+} = {}) {
   $("drz-form").addEventListener("submit", async (event) => {
     event.preventDefault();
     const submit = $("submit-form");
@@ -599,17 +1068,20 @@ function bindFormSubmit(schema, { formId, cursoId, catalog = [], sessionToken = 
       return;
     }
     if (submitMode === "prueba") {
-      showDone(pruebaDoneStatus(schema, answers, catalog, cursoId));
+      showDone(pruebaDoneStatus(schema, answers, catalog, cursoId), answers);
       return;
     }
     submit.disabled = true;
-    showStatus($("form-status"), "Enviando…");
+    showStatus($("form-status"), editResponseId ? "Guardando cambios…" : "Enviando…");
     const chosenCurso = sanitizeId(answers.curso) || cursoId;
+    const body = { formId, cursoId: chosenCurso, answers };
+    if (accessToken && !sessionToken) body.accessToken = accessToken;
+    if (editResponseId) body.responseId = editResponseId;
     try {
       const data = await api("/forms/submit", {
         method: "POST",
-        token: sessionToken,
-        body: { formId, cursoId: chosenCurso, answers },
+        token: sessionToken || undefined,
+        body,
       });
       if (!isAdmin()) {
         trackEvent("club_form_submit", { form: formId, curso: status.curso_nombre || chosenCurso });
@@ -618,16 +1090,25 @@ function bindFormSubmit(schema, { formId, cursoId, catalog = [], sessionToken = 
       showDone({
         curso_nombre: chosen?.nombre || status.curso_nombre,
         certificado_url: data.certificado_url || "",
-      });
+        response_id: data.id || editResponseId || "",
+      }, answers);
+      if (data.id || editResponseId) {
+        history.replaceState({}, "", responseRecoveryUrl(data.id || editResponseId));
+      }
     } catch (err) {
       if (err.code === "already_submitted") {
+        const savedAnswers = err.answers && typeof err.answers === "object" ? err.answers : answers;
         showDone({
-          curso_nombre: status.curso_nombre,
+          curso_nombre: err.curso_nombre || status.curso_nombre,
           certificado_url: err.certificado_url || "",
-        });
+          response_id: err.response_id || "",
+        }, savedAnswers);
+        if (err.response_id) {
+          history.replaceState({}, "", responseRecoveryUrl(err.response_id));
+        }
         return;
       }
-      if (err.status === 401 || err.code === "unauthorized") {
+      if ((err.status === 401 || err.code === "unauthorized") && sessionToken) {
         loginRedirect();
         return;
       }
@@ -657,11 +1138,76 @@ async function boot() {
     return;
   }
 
-  $("form-title").innerHTML = escapeHtml(schema.titulo || "Formulario").replace(
+  activeSchema = schema;
+  applyFormTheme(schema);
+  $("form-title").innerHTML = richText(schema.titulo || "Formulario").replace(
     /^(Evaluación del )(.*)$/i,
     "$1<em>$2</em>",
   );
-  $("form-intro").textContent = schema.intro || "Las preguntas marcadas con * son obligatorias.";
+  const etiqueta = String(schema.etiqueta || "Evaluación").trim();
+  formLabel = etiqueta;
+  document.title = `${etiqueta} — Dr. Z Academy Club`;
+  $("form-label").textContent = etiqueta;
+  $("submit-form").textContent = `Enviar ${etiqueta.toLowerCase()}`;
+  $("done-title").innerHTML = richText(
+    String(schema.titulo_gracias || "").trim() || `Gracias por tu ${etiqueta.toLowerCase()}`,
+  );
+  certificateExpected = schema.revela_certificado !== false;
+  $("form-intro").innerHTML = richText(schema.intro || "Las preguntas marcadas con * son obligatorias.");
+
+  if (teacherAccessGranted(schema)) {
+    try {
+      await startTeacherReview(schema, formId);
+    } catch (err) {
+      failBoot(mapError(err));
+    }
+    return;
+  }
+
+  const responseId = sanitizeResponseId(qs("respuesta"));
+  const editMode = wantsEditMode();
+  if (responseId) {
+    try {
+      const data = await api(
+        `/forms/response?id=${encodeURIComponent(responseId)}&form=${encodeURIComponent(formId)}`,
+      );
+      if (editMode) {
+        const cursos = await loadCursos();
+        const sessionToken = currentToken();
+        const accessToken = formAccessGranted(schema) ? String(qs("token") || "").trim() : "";
+        $("form-label").textContent = "Editar envío";
+        $("form-intro").textContent = "Corrige lo que necesites y guarda los cambios.";
+        paintForm(schema, {
+          cursos,
+          prefill: { ...(data.answers || {}), ...(cursoId ? { curso: cursoId } : {}) },
+          submitMode: "live",
+          editing: true,
+        });
+        bindFormSubmit(schema, {
+          formId,
+          cursoId,
+          catalog: cursos,
+          sessionToken,
+          accessToken,
+          editResponseId: data.id || responseId,
+          submitMode: "live",
+          status: { curso_nombre: data.curso_nombre || "" },
+        });
+        return;
+      }
+      showDone({
+        curso_nombre: data.curso_nombre || "",
+        response_id: data.id || responseId,
+      }, data.answers || {});
+    } catch (err) {
+      if (err.code === "not_found" || err.status === 404) {
+        failBoot("No encontramos un envío con ese código.");
+      } else {
+        failBoot(mapError(err));
+      }
+    }
+    return;
+  }
 
   if (admin) enableAdminBar(formId);
 
@@ -683,6 +1229,23 @@ async function boot() {
       cursos,
       prefill: cursoId ? { curso: cursoId } : {},
       submitMode: "preview",
+    });
+    return;
+  }
+
+  if (formAccessGranted(schema) && !sessionToken) {
+    const accessToken = String(qs("token") || "").trim();
+    paintForm(schema, {
+      cursos,
+      prefill: cursoId ? { curso: cursoId } : {},
+      submitMode: "live",
+    });
+    bindFormSubmit(schema, {
+      formId,
+      cursoId,
+      catalog: cursos,
+      accessToken,
+      submitMode: "live",
     });
     return;
   }
@@ -716,7 +1279,7 @@ async function boot() {
   if (status.curso_nombre) {
     $("course-name").textContent = status.curso_nombre;
     $("course-name").hidden = false;
-    document.title = `Evaluación: ${status.curso_nombre} — Dr. Z Academy Club`;
+    document.title = `${formLabel}: ${status.curso_nombre} — Dr. Z Academy Club`;
   }
 
   if (status.completed && cursoId) {

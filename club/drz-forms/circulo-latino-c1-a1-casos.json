@@ -1,0 +1,127 @@
+{
+  "id": "circulo-latino-c1-a1-casos",
+  "etiqueta": "Actividad de Curso",
+  "titulo": "Círculo Latino Ciclo 1\n\nActividad 1: Casos en Español",
+  "intro": "Identifica el caso de cada sustantivo, adjetivo, pronombre y verbo marcado. Elige en cada menú: Nominativo, Vocativo, Genitivo, Dativo, Acusativo o Ablativo. Recuerda: el adjetivo lleva el mismo caso que el sustantivo al que califica.\n**Nominativo**: sujeto. Vocativo: llamado o exclamación. Genitivo: pertenencia (¿de quién?). Dativo: complemento indirecto (¿a quién?, ¿para quién?). Acusativo: complemento directo (¿qué?). Ablativo: complemento circunstancial (con, por, de, en…).",
+  "fondo": "claro",
+  "token": "seneca",
+  "token_docente": "armavirumquecanotroiaequiprimusaboris",
+  "titulo_gracias": "¡Gracias por completar tu actividad!",
+  "mensaje_gracias": "Ya registramos tus respuestas. Abajo puedes revisar lo que enviaste. Conserva el enlace para ver tus respuestas en el futuro o para enviar tus respuestas de nuevo.",
+  "mostrar_respuestas": true,
+  "requiere_curso": false,
+  "revela_certificado": false,
+  "numerar_preguntas": false,
+  "prueba_curso_nombre": "Círculo Latino",
+  "listas": {
+    "caso": [
+      "Nominativo",
+      "Vocativo",
+      "Genitivo",
+      "Dativo",
+      "Acusativo",
+      "Ablativo",
+      "(Verbo)"
+    ]
+  },
+  "secciones": [
+    {
+      "id": "identificacion",
+      "titulo": "Identificación",
+      "explicacion": "Usaremos estos datos solo para identificar tu actividad.",
+      "preguntas": [
+        {
+          "id": "correo",
+          "enunciado": "Correo electrónico",
+          "explicacion": "El mismo con el que te inscribiste en el curso.",
+          "tipo": "texto",
+          "obligatoria": true
+        },
+        {
+          "id": "cedula",
+          "enunciado": "Cédula",
+          "explicacion": "Número de documento, sin puntos ni espacios.",
+          "tipo": "texto",
+          "obligatoria": true
+        }
+      ]
+    },
+    {
+      "id": "casos",
+      "titulo": "Casos en español: sustantivos, adjetivos, pronombres y **verbos**",
+      "explicacion": "Identifica el caso de cada sustantivo, adjetivo y pronombre marcado. **También debes identificar los verbos:** en su menú elige **(verbo)**. Recuerda: el adjetivo lleva el mismo caso que el sustantivo al que califica.",
+      "preguntas": [
+        {
+          "id": "frase_01",
+          "enunciado": "**Frase 1**:\n*La gota horada la piedra, no por la fuerza, sino cayendo continuamente*",
+          "tipo": "completar",
+          "texto": "La gota [caso] horada [caso] la piedra [caso], no por la fuerza [caso], sino cayendo [caso] continuamente [caso]",
+          "obligatoria": false
+        },
+        {
+          "id": "frase_02",
+          "enunciado": "**Frase 2**:\n*El padre trabaja para sus hijos en la oficina*",
+          "tipo": "completar",
+          "texto": "El padre [caso] trabaja [caso] para sus [caso] hijos [caso] en la oficina [caso]",
+          "obligatoria": false
+        },
+        {
+          "id": "frase_03",
+          "enunciado": "**Frase 3**:\n*Los cónsules informan sobre la situación política de la república*",
+          "tipo": "completar",
+          "texto": "Los cónsules [caso] informan [caso] sobre la situación [caso] política [caso] de la república [caso]",
+          "obligatoria": false
+        },
+        {
+          "id": "frase_04",
+          "enunciado": "**Frase 4**:\n*Los principiantes de la lengua latina traducen una carta de Cicerón a su esposa Terencia*",
+          "tipo": "completar",
+          "texto": "Los principiantes [caso] de la lengua [caso] latina [caso] traducen [caso] una carta [caso] de Cicerón [caso] a su [caso] esposa [caso] Terencia [caso]",
+          "obligatoria": false
+        },
+        {
+          "id": "frase_05",
+          "enunciado": "**Frase 5**:\n*Alejandro Magno ciñó su cabeza con la corona de los reyes persas*",
+          "tipo": "completar",
+          "texto": "Alejandro [caso] Magno [caso] ciñó [caso] su [caso] cabeza [caso] con la corona [caso] de los reyes [caso] persas [caso]",
+          "obligatoria": false
+        },
+        {
+          "id": "frase_06",
+          "enunciado": "**Frase 6**:\n*Yo soy el dueño de estos animales*",
+          "tipo": "completar",
+          "texto": "Yo [caso] soy [caso] el dueño [caso] de estos [caso] animales [caso]",
+          "obligatoria": false
+        },
+        {
+          "id": "frase_07",
+          "enunciado": "**Frase 7**:\n*Mi patria es todo este mundo*",
+          "tipo": "completar",
+          "texto": "Mi [caso] patria [caso] es [caso] todo [caso] este [caso] mundo [caso]",
+          "obligatoria": false
+        },
+        {
+          "id": "frase_08",
+          "enunciado": "**Frase 8**:\n*Fidias esculpió una Minerva de marfil*",
+          "tipo": "completar",
+          "texto": "Fidias [caso] esculpió [caso] una Minerva [caso] de marfil [caso]",
+          "obligatoria": false
+        },
+        {
+          "id": "frase_09",
+          "enunciado": "**Frase 9**:\n*Epicuro identifica todo mal con el dolor y todo bien con el placer*",
+          "tipo": "completar",
+          "texto": "Epicuro [caso] identifica [caso] todo [caso] mal [caso] con el dolor [caso] y todo [caso] bien [caso] con el placer [caso]",
+          "obligatoria": false
+        },
+        {
+          "id": "frase_10",
+          "enunciado": "**Frase 10**:\n*Ningún hombre es sabio a todas horas*",
+          "tipo": "completar",
+          "texto": "Ningún [caso] hombre [caso] es [caso] sabio [caso] a todas [caso] horas [caso]",
+          "obligatoria": false
+        }
+      ]
+    }
+  ]
+}

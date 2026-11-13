@@ -10,6 +10,11 @@
  * POST /logout              Authorization: Bearer <session>
  * GET  /forms/status        Authorization: Bearer <session>
  * POST /forms/submit        Authorization: Bearer <session>
+ *                           o body.accessToken = schema.token (formularios con enlace compartido)
+ *                           → { id } código único para recuperar el envío
+ * GET  /forms/response      ?id=&form=  recupera un envío por su código
+ * GET  /forms/submissions   ?form=&token_docente=  lista envíos (revisión docente)
+ * POST /forms/email-response { formId, responseId }  envía el resumen al correo del envío
  * GET  /forms/catalog       lista pública de cursos (id, nombre)
  * GET  /forms/export-auth   Authorization: Bearer CLUB_ADMIN_MASTER
  * GET  /forms/export        CSV; Authorization: Bearer CLUB_ADMIN_MASTER o CLUB_ADMIN_TOKEN
@@ -232,7 +237,60 @@ function sanitizeId(raw) {
 }
 
 function formResponseKey(formId, cursoId, memberId) {
-  return `form:${formId}:${cursoId}:${memberId}`;
+  return `form:${formId}:${cursoId || "_"}:${memberId}`;
+}
+
+function formResponseByIdKey(responseId) {
+  return `form-by-id:${responseId}`;
+}
+
+function sanitizeResponseId(raw) {
+  const value = String(raw || "").trim().toLowerCase();
+  if (!/^[a-z0-9]{8,32}$/.test(value)) return "";
+  return value;
+}
+
+function newResponseId() {
+  const alphabet = "23456789abcdefghjkmnpqrstuvwxyz";
+  const bytes = crypto.getRandomValues(new Uint8Array(10));
+  return Array.from(bytes, (b) => alphabet[b % alphabet.length]).join("");
+}
+
+function guestRespondentId(answers) {
+  const correo = normalizeEmail(answers?.correo || "");
+  if (correo) return `mail:${correo}`;
+  const doc = normalizeDocumento(answers?.cedula || answers?.documento || "");
+  if (doc) return `doc:${doc}`;
+  return `anon:${crypto.randomUUID()}`;
+}
+
+function formAccessAuthorized(schema, body) {
+  const expected = String(schema?.token || "").trim();
+  if (!expected) return false;
+  const got = String(body?.accessToken || body?.token || "").trim();
+  return Boolean(got) && timingSafeEqual(got, expected);
+}
+
+function teacherTokenAuthorized(schema, request) {
+  const expected = String(schema?.token_docente || schema?.token_profesor || "").trim();
+  if (!expected) return false;
+  const url = new URL(request.url);
+  const got = String(
+    url.searchParams.get("token_docente")
+    || url.searchParams.get("token_profesor")
+    || bearerToken(request)
+    || "",
+  ).trim();
+  return Boolean(got) && timingSafeEqual(got, expected);
+}
+
+async function ensureResponseId(env, storageKey, payload) {
+  if (payload.id && sanitizeResponseId(payload.id)) return payload;
+  payload.id = newResponseId();
+  const raw = JSON.stringify(payload);
+  await env.DRZ_CLUB.put(storageKey, raw);
+  await env.DRZ_CLUB.put(formResponseByIdKey(payload.id), raw);
+  return payload;
 }
 
 async function loadCatalog(env) {
@@ -333,6 +391,28 @@ function optionValues(question) {
   }).filter(Boolean);
 }
 
+function completarError(question, schema, val, required) {
+  const slots = [...String(question.texto || "").matchAll(/\[([^\]]+)\]/g)].map((m) => m[1].trim());
+  if (!slots.length) return required ? "invalid" : "";
+  const values = String(val ?? "").split("|").map((v) => v.trim());
+  while (values.length < slots.length) values.push("");
+  if (values.length > slots.length) return "invalid";
+  const anyFilled = values.some(Boolean);
+  if (!anyFilled) return required ? "missing" : "";
+  for (let i = 0; i < slots.length; i += 1) {
+    const list = (question.listas || {})[slots[i]] || (schema.listas || {})[slots[i]];
+    if (!values[i]) {
+      if (required) return "missing";
+      continue;
+    }
+    if (Array.isArray(list)) {
+      const allowed = list.map((opt) => (opt && typeof opt === "object" ? String(opt.value ?? opt.id ?? opt.label ?? "") : String(opt)));
+      if (!allowed.includes(values[i])) return "invalid";
+    }
+  }
+  return "";
+}
+
 function validateAnswers(schema, answers, catalogById) {
   if (!answers || typeof answers !== "object" || Array.isArray(answers)) return "invalid_answers";
   const questions = formQuestions(schema);
@@ -372,6 +452,10 @@ function validateAnswers(schema, answers, catalogById) {
       const ticks = (n - min) / step;
       if (Math.abs(ticks - Math.round(ticks)) > 1e-6) return `invalid:${id}`;
       if (tipo === "puntaje" && !Number.isInteger(n)) return `invalid:${id}`;
+    } else if (tipo === "completar") {
+      if (typeof val !== "string" || val.length > MAX_ANSWER_LEN) return `invalid:${id}`;
+      const err = completarError(question, schema, val, required);
+      if (err) return `${err}:${id}`;
     } else if (tipo === "radio" || tipo === "seleccion_unica" || tipo === "lista_desplegable") {
       let allowed;
       if (question.fuente === "cursos") {
@@ -714,10 +798,6 @@ async function handleFormSubmit(request, env) {
   if (!(await rateLimit(request, "forms", 30, 3600))) {
     return json(request, { ok: false, error: "too_many_requests" }, 429);
   }
-  const session = await readSession(env, request);
-  if (!session) return json(request, { ok: false, error: "unauthorized" }, 401);
-  const found = await loadProfile(env, session.memberId);
-  if (!found) return json(request, { ok: false, error: "unauthorized" }, 401);
 
   const body = await readJson(request);
   const formId = sanitizeId(body?.formId);
@@ -729,37 +809,172 @@ async function handleFormSubmit(request, env) {
   const catalog = await loadCatalog(env);
   const catalogById = new Map(catalog.map((item) => [String(item.id || ""), item]));
 
+  const session = await readSession(env, request);
+  let found = null;
+  let guest = false;
+  let editPrev = null;
+  const editId = sanitizeResponseId(body?.responseId || body?.editId);
+
+  if (session) {
+    found = await loadProfile(env, session.memberId);
+    if (!found) return json(request, { ok: false, error: "unauthorized" }, 401);
+  } else if (formAccessAuthorized(schema, body)) {
+    guest = true;
+  } else if (editId) {
+    const editRaw = await env.DRZ_CLUB.get(formResponseByIdKey(editId));
+    if (editRaw) {
+      try {
+        editPrev = JSON.parse(editRaw);
+      } catch {
+        editPrev = null;
+      }
+    }
+    if (editPrev && editPrev.formId === formId) {
+      guest = true;
+    } else {
+      return json(request, { ok: false, error: "unauthorized" }, 401);
+    }
+  } else {
+    return json(request, { ok: false, error: "unauthorized" }, 401);
+  }
+
   if (schema.requiere_curso !== false && !cursoId) {
     return json(request, { ok: false, error: "invalid_input" }, 400);
   }
-  const course = cursoId ? findMemberCourse(found.record, cursoId) : null;
-  if (schema.requiere_curso !== false && !course) {
+
+  const course = !guest && cursoId ? findMemberCourse(found.record, cursoId) : null;
+  if (!guest && schema.requiere_curso !== false && !course) {
     return json(request, { ok: false, error: "not_enrolled" }, 403);
   }
 
-  const isDummy = normalizeEmail(found.record.correo) === "soydoctorz@gmail.com" || normalizeDocumento(found.record.documento) === "666666" || Boolean(found.record.dummy);
-  const existing = isDummy ? null : await env.DRZ_CLUB.get(formResponseKey(formId, cursoId, session.memberId));
-  const certUrl = schema.revela_certificado !== false ? String(course?.certificado_url || "") : "";
-  if (existing) {
-    return json(request, { ok: false, error: "already_submitted", certificado_url: certUrl }, 409);
+  const respondentId = guest
+    ? (editPrev?.respondentId || guestRespondentId(body?.answers || {}))
+    : session.memberId;
+  const resolvedCursoId = cursoId || sanitizeId(editPrev?.cursoId) || "";
+  const isDummy = !guest && (
+    normalizeEmail(found.record.correo) === "soydoctorz@gmail.com"
+    || normalizeDocumento(found.record.documento) === "666666"
+    || Boolean(found.record.dummy)
+  );
+  const storageKey = formResponseKey(formId, resolvedCursoId, respondentId);
+  const existingRaw = isDummy ? null : await env.DRZ_CLUB.get(storageKey);
+  const certUrl = !guest && schema.revela_certificado !== false ? String(course?.certificado_url || "") : "";
+  let prev = editPrev;
+  if (!prev && existingRaw) {
+    try {
+      prev = JSON.parse(existingRaw);
+    } catch {
+      prev = {};
+    }
+  }
+  if (prev && !guest) {
+    // Formularios del Club (sesión): un solo envío.
+    prev = await ensureResponseId(env, storageKey, prev);
+    return json(request, {
+      ok: false,
+      error: "already_submitted",
+      certificado_url: certUrl,
+      id: prev.id || "",
+      answers: prev.answers || {},
+      curso_nombre: prev.cursoNombre || "",
+      submittedAt: prev.submittedAt || "",
+    }, 409);
   }
 
   const invalid = validateAnswers(schema, body?.answers, catalogById);
   if (invalid) return json(request, { ok: false, error: invalid }, 400);
 
+  const answers = pickAnswers(schema, body.answers);
+  const responseId = sanitizeResponseId(editId) || sanitizeResponseId(prev?.id) || newResponseId();
+  const now = new Date().toISOString();
   const payload = {
+    id: responseId,
     formId,
-    cursoId,
-    cursoNombre: course?.nombre || catalogById.get(cursoId)?.nombre || "",
-    nombre: found.record.nombre || "",
-    correo: found.record.correo || "",
-    submittedAt: new Date().toISOString(),
-    answers: pickAnswers(schema, body.answers),
+    cursoId: resolvedCursoId,
+    cursoNombre: course?.nombre || catalogById.get(resolvedCursoId)?.nombre || prev?.cursoNombre || "",
+    nombre: guest
+      ? String(answers.nombre || answers.evaluador || "").trim()
+      : (found.record.nombre || ""),
+    correo: guest
+      ? normalizeEmail(answers.correo || "")
+      : (found.record.correo || ""),
+    respondentId,
+    submittedAt: prev?.submittedAt || now,
+    answers,
   };
+  if (guest) payload.acceso = "token";
+  if (prev) payload.updatedAt = now;
   if (!isDummy) {
-    await env.DRZ_CLUB.put(formResponseKey(formId, cursoId, session.memberId), JSON.stringify(payload));
+    const raw = JSON.stringify(payload);
+    await env.DRZ_CLUB.put(storageKey, raw);
+    await env.DRZ_CLUB.put(formResponseByIdKey(responseId), raw);
   }
-  return json(request, { ok: true, certificado_url: certUrl });
+  return json(request, { ok: true, certificado_url: certUrl, id: responseId, updated: Boolean(prev) });
+}
+
+async function handleFormResponse(request, env) {
+  if (!(await rateLimit(request, "forms-response", 60, 3600))) {
+    return json(request, { ok: false, error: "too_many_requests" }, 429);
+  }
+  const url = new URL(request.url);
+  const responseId = sanitizeResponseId(url.searchParams.get("id") || url.searchParams.get("respuesta"));
+  const formId = sanitizeId(url.searchParams.get("form"));
+  if (!responseId) return json(request, { ok: false, error: "invalid_input" }, 400);
+
+  const raw = await env.DRZ_CLUB.get(formResponseByIdKey(responseId));
+  if (!raw) return json(request, { ok: false, error: "not_found" }, 404);
+  let data;
+  try {
+    data = JSON.parse(raw);
+  } catch {
+    return json(request, { ok: false, error: "not_found" }, 404);
+  }
+  if (formId && data.formId && data.formId !== formId) {
+    return json(request, { ok: false, error: "not_found" }, 404);
+  }
+  return json(request, {
+    ok: true,
+    id: data.id || responseId,
+    formId: data.formId || formId || "",
+    curso_nombre: data.cursoNombre || "",
+    submittedAt: data.submittedAt || "",
+    answers: data.answers || {},
+  });
+}
+
+async function handleFormSubmissions(request, env) {
+  if (!(await rateLimit(request, "forms-submissions", 60, 3600))) {
+    return json(request, { ok: false, error: "too_many_requests" }, 429);
+  }
+  const url = new URL(request.url);
+  const formId = sanitizeId(url.searchParams.get("form"));
+  if (!formId) return json(request, { ok: false, error: "invalid_input" }, 400);
+
+  const schema = await loadFormSchema(env, formId);
+  if (!schema) return json(request, { ok: false, error: "schema_missing" }, 503);
+  if (!teacherTokenAuthorized(schema, request)) {
+    return json(request, { ok: false, error: "unauthorized" }, 401);
+  }
+
+  const cursoId = sanitizeId(url.searchParams.get("curso"));
+  const rows = await listFormSubmissions(env, formId, cursoId || "");
+  const submissions = rows.map((row) => ({
+    id: row.id || "",
+    formId: row.formId || formId,
+    cursoId: row.cursoId || "",
+    curso_nombre: row.cursoNombre || "",
+    nombre: row.nombre || "",
+    correo: row.correo || "",
+    submittedAt: row.submittedAt || "",
+    updatedAt: row.updatedAt || "",
+    answers: row.answers || {},
+  }));
+  submissions.sort((a, b) => {
+    const mail = String(a.correo || "").localeCompare(String(b.correo || ""), "es");
+    if (mail) return mail;
+    return String(a.submittedAt || "").localeCompare(String(b.submittedAt || ""));
+  });
+  return json(request, { ok: true, formId, total: submissions.length, submissions });
 }
 
 async function listFormSubmissions(env, formId, cursoId) {
@@ -793,18 +1008,43 @@ function csvEscape(value) {
   return text;
 }
 
-function submissionsToCsv(schema, submissions) {
+function formResponsePageUrl(site, schema, responseId, { edit = false } = {}) {
+  const formId = sanitizeId(schema?.id) || sanitizeId(schema?.formId) || "";
+  const id = sanitizeResponseId(responseId);
+  if (!formId || !id) return "";
+  const params = new URLSearchParams({ form: formId, respuesta: id });
+  const token = String(schema?.token || "").trim();
+  if (token) params.set("token", token);
+  if (edit) params.set("edit", "true");
+  return `${String(site || "").replace(/\/$/, "")}/club/drz-forms/drz-form.html?${params.toString()}`;
+}
+
+function submissionsToCsv(schema, submissions, site = "https://drz-academy.github.io") {
   const questions = formQuestions(schema);
-  const headers = ["fecha", "nombre", "correo", "curso_id", "curso", ...questions.map((q) => q.enunciado || q.id)];
+  const headers = [
+    "id",
+    "fecha",
+    "nombre",
+    "correo",
+    "curso_id",
+    "curso",
+    "enlace_abrir",
+    "enlace_editar",
+    ...questions.map((q) => q.enunciado || q.id),
+  ];
   const lines = [headers.map(csvEscape).join(",")];
   for (const row of submissions) {
     const answers = row.answers || {};
+    const responseId = row.id || "";
     const cells = [
+      responseId,
       row.submittedAt || "",
       row.nombre || "",
       row.correo || "",
       row.cursoId || "",
       row.cursoNombre || "",
+      formResponsePageUrl(site, schema, responseId),
+      formResponsePageUrl(site, schema, responseId, { edit: true }),
       ...questions.map((q) => {
         const id = String(q.id || "").trim();
         const val = answers[id];
@@ -866,8 +1106,10 @@ async function handleFormsExport(request, env) {
     loadFormSchema(env, formId),
     listFormSubmissions(env, formId, cursoId),
   ]);
+  const schemaWithId = { ...(schema || { preguntas: [] }), id: formId };
+  const site = String(env.SITE_BASE_URL || "https://drz-academy.github.io").replace(/\/$/, "");
   const filename = `${formId}${cursoId ? `-${cursoId}` : ""}-${new Date().toISOString().slice(0, 10)}.csv`;
-  return new Response(submissionsToCsv(schema || { preguntas: [] }, submissions), {
+  return new Response(submissionsToCsv(schemaWithId, submissions, site), {
     status: 200,
     headers: {
       "content-type": "text/csv; charset=utf-8",
@@ -1056,6 +1298,181 @@ async function sendResetEmail(env, to, nombre, resetUrl) {
   });
 }
 
+function formatAnswerForEmail(question, value) {
+  if (value === undefined || value === null || value === "") return "Sin responder";
+  const tipo = String(question.tipo || "texto").trim();
+  if (Array.isArray(value)) return value.length ? value.map(String).join(", ") : "Sin responder";
+  if (tipo === "completar") {
+    const slots = String(value).split("|");
+    const texto = String(question.texto || question.enunciado || "");
+    let out = "";
+    let last = 0;
+    let i = 0;
+    let any = false;
+    for (const match of texto.matchAll(/\[([^\]]+)\]/g)) {
+      out += texto.slice(last, match.index);
+      last = match.index + match[0].length;
+      const filled = String(slots[i++] || "").trim();
+      if (filled) {
+        any = true;
+        out += `[${filled}]`;
+      } else {
+        out += "[…]";
+      }
+    }
+    out += texto.slice(last);
+    return any ? out : "Sin responder";
+  }
+  return String(value);
+}
+
+function buildFormResponseEmail({ schema, row, openUrl, editUrl }) {
+  const title = String(schema?.titulo || schema?.etiqueta || "Formulario").replace(/\s+/g, " ").trim();
+  const code = String(row.id || "").trim();
+  const questions = formQuestions(schema);
+  const answers = row.answers || {};
+  const itemsHtml = questions.map((q) => {
+    const label = String(q.enunciado || q.id || "").replace(/\*\*/g, "").trim();
+    const val = formatAnswerForEmail(q, answers[String(q.id || "").trim()]);
+    return `<tr>
+      <td style="padding:10px 0;border-top:1px solid #2a2a2a;vertical-align:top">
+        <div style="color:#F3D361;font-size:13px;font-weight:bold;margin-bottom:4px">${escapeHtml(label)}</div>
+        <div style="color:#e2e2e2;font-size:14px;white-space:pre-wrap">${escapeHtml(val)}</div>
+      </td>
+    </tr>`;
+  }).join("");
+  const itemsText = questions.map((q) => {
+    const label = String(q.enunciado || q.id || "").replace(/\*\*/g, "").trim();
+    const val = formatAnswerForEmail(q, answers[String(q.id || "").trim()]);
+    return `- ${label}\n  ${val}`;
+  }).join("\n\n");
+
+  const html = `<div style="max-width:640px;margin:0 auto;font-family:Arial,sans-serif;background:#0c0c0c;color:#e2e2e2;padding:24px;border:1px solid #242424">
+  <p style="color:#F3D361;font-weight:bold;letter-spacing:0.04em">Dr. Z Academy Club</p>
+  <h1 style="font-size:20px;color:#fff;margin:0 0 8px">Tus respuestas</h1>
+  <p style="color:#aaa;margin:0 0 16px">${escapeHtml(title)}</p>
+  <p style="margin:0 0 8px">Código de tu envío: <strong style="color:#fff">${escapeHtml(code)}</strong></p>
+  <p style="margin:0 0 18px">
+    <a href="${escapeHtml(openUrl)}" style="color:#F3D361">Abrir este envío</a>
+    &nbsp;·&nbsp;
+    <a href="${escapeHtml(editUrl)}" style="color:#F3D361">Editar tus respuestas</a>
+  </p>
+  <table style="width:100%;border-collapse:collapse">${itemsHtml}</table>
+  <p style="color:#888;font-size:12px;margin-top:20px">Si no pediste este correo, puedes ignorarlo.</p>
+</div>`;
+  const text = `Tus respuestas — ${title}\nCódigo: ${code}\nAbrir: ${openUrl}\nEditar: ${editUrl}\n\n${itemsText}\n`;
+  return { html, text, subject: `Tus respuestas — ${title}` };
+}
+
+async function sendViaResend(env, to, { subject, html, text }) {
+  const key = String(env.RESEND_API_KEY || "").trim();
+  if (!key) return false;
+  const from = String(env.RESEND_FROM || env.GMAIL_SMTP_USER || "Dr. Z Academy Club <onboarding@resend.dev>").trim();
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${key}`,
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({ from, to: [to], subject, html, text }),
+  });
+  if (!res.ok) {
+    const detail = await res.text().catch(() => "");
+    throw new Error(`resend_${res.status}:${detail.slice(0, 160)}`);
+  }
+  return true;
+}
+
+async function sendFormResponseEmail(env, to, { schema, row, openUrl, editUrl }) {
+  const { html, text, subject } = buildFormResponseEmail({ schema, row, openUrl, editUrl });
+  // Preferir Resend (HTTP). Gmail SMTP desde Workers suele cerrar la conexión.
+  if (await sendViaResend(env, to, { subject, html, text })) return "resend";
+
+  const user = String(env.GMAIL_SMTP_USER || "").trim();
+  const pass = String(env.GMAIL_APP_PASSWORD || "").replace(/\s+/g, "");
+  if (!user || !pass) throw new Error("email_not_configured");
+  await smtpSend({
+    host: "smtp.gmail.com",
+    port: 465,
+    user,
+    pass,
+    from: user,
+    to,
+    subject,
+    html,
+    text,
+  });
+  return "gmail";
+}
+
+async function handleFormEmailResponse(request, env) {
+  if (!(await rateLimit(request, "forms-email", 20, 3600))) {
+    return json(request, { ok: false, error: "too_many_requests" }, 429);
+  }
+  const body = await readJson(request);
+  const formId = sanitizeId(body?.formId);
+  const responseId = sanitizeResponseId(body?.responseId || body?.id);
+  if (!formId || !responseId) return json(request, { ok: false, error: "invalid_input" }, 400);
+
+  const raw = await env.DRZ_CLUB.get(formResponseByIdKey(responseId));
+  if (!raw) return json(request, { ok: false, error: "not_found" }, 404);
+  let row;
+  try {
+    row = JSON.parse(raw);
+  } catch {
+    return json(request, { ok: false, error: "not_found" }, 404);
+  }
+  if (row.formId && row.formId !== formId) {
+    return json(request, { ok: false, error: "not_found" }, 404);
+  }
+
+  const correo = normalizeEmail(row.correo || row.answers?.correo || "");
+  if (!correo || !isValidEmail(correo)) {
+    return json(request, { ok: false, error: "no_email" }, 400);
+  }
+
+  const schema = await loadFormSchema(env, formId);
+  if (!schema) return json(request, { ok: false, error: "schema_missing" }, 503);
+
+  const site = String(env.SITE_BASE_URL || "https://drz-academy.github.io").replace(/\/$/, "");
+  const params = new URLSearchParams({ form: formId, respuesta: responseId });
+  if (schema.token) params.set("token", String(schema.token));
+  const openUrl = `${site}/club/drz-forms/drz-form.html?${params.toString()}`;
+  const editParams = new URLSearchParams(params);
+  editParams.set("edit", "true");
+  const editUrl = `${site}/club/drz-forms/drz-form.html?${editParams.toString()}`;
+  const title = String(schema?.titulo || schema?.etiqueta || "Formulario").replace(/\s+/g, " ").trim();
+  const mailtoBody = [
+    `Código de tu envío: ${responseId}`,
+    "",
+    `Abrir este envío:`,
+    openUrl,
+    "",
+    `Editar tus respuestas:`,
+    editUrl,
+  ].join("\n");
+  const mailto = `mailto:${encodeURIComponent(correo)}?subject=${encodeURIComponent(`Tus respuestas — ${title}`)}&body=${encodeURIComponent(mailtoBody)}`;
+
+  try {
+    const via = await sendFormResponseEmail(env, correo, { schema, row, openUrl, editUrl });
+    return json(request, { ok: true, sent_to: correo, via });
+  } catch (err) {
+    console.log(JSON.stringify({
+      event: "form_email_failed",
+      message: err instanceof Error ? err.message : String(err),
+    }));
+    return json(request, {
+      ok: false,
+      error: "email_failed",
+      sent_to: correo,
+      mailto,
+      open_url: openUrl,
+      edit_url: editUrl,
+    }, 503);
+  }
+}
+
 function escapeHtml(value) {
   return String(value)
     .replace(/&/g, "&amp;")
@@ -1071,22 +1488,45 @@ function encodeSubject(subject) {
   return `=?UTF-8?B?${btoa(binary)}?=`;
 }
 
+function smtpDotStuff(body) {
+  return String(body || "")
+    .replace(/\r\n/g, "\n")
+    .replace(/\r/g, "\n")
+    .split("\n")
+    .map((line) => (line.startsWith(".") ? `.${line}` : line))
+    .join("\r\n");
+}
+
+function smtpB64(value) {
+  const bytes = new TextEncoder().encode(String(value || ""));
+  let binary = "";
+  for (const b of bytes) binary += String.fromCharCode(b);
+  return btoa(binary);
+}
+
 async function smtpSend({ host, port, user, pass, from, to, subject, html, text }) {
-  const socket = connect({ hostname: host, port, secureTransport: "on" });
+  const socket = connect({
+    hostname: host,
+    port,
+    secureTransport: "on",
+    allowHalfOpen: true,
+  });
   const writer = socket.writable.getWriter();
   const reader = socket.readable.getReader();
   const enc = new TextEncoder();
   const dec = new TextDecoder();
   let buffer = "";
+  let lastLine = "";
 
   async function readReply() {
     while (true) {
       const { value, done } = await reader.read();
-      if (done) throw new Error("smtp_closed");
+      if (done) throw new Error(`smtp_closed:${lastLine || "no_reply"}`);
       buffer += dec.decode(value, { stream: true });
       const parts = buffer.split("\r\n");
       buffer = parts.pop() || "";
       for (const line of parts) {
+        lastLine = line;
         const m = line.match(/^(\d{3})([\s-])/);
         if (m && m[2] === " ") return { code: parseInt(m[1], 10), line };
       }
@@ -1097,48 +1537,57 @@ async function smtpSend({ host, port, user, pass, from, to, subject, html, text 
     await writer.write(enc.encode(line + "\r\n"));
     const reply = await readReply();
     if (expected && reply.code !== expected) {
-      throw new Error(`smtp_${reply.code}`);
+      throw new Error(`smtp_${reply.code}:${reply.line.slice(0, 120)}`);
     }
     return reply;
   }
 
-  const greet = await readReply();
-  if (greet.code !== 220) throw new Error(`smtp_${greet.code}`);
-  await cmd(`EHLO drz-academy.github.io`, 250);
-  await cmd("AUTH LOGIN", 334);
-  await cmd(btoa(user), 334);
-  await cmd(btoa(pass), 235);
-  await cmd(`MAIL FROM:<${from}>`, 250);
-  await cmd(`RCPT TO:<${to}>`, 250);
-  await cmd("DATA", 354);
-
-  const boundary = `b${randomToken(8)}`;
-  const data = [
-    `From: Dr. Z Academy Club <${from}>`,
-    `To: ${to}`,
-    `Subject: ${encodeSubject(subject)}`,
-    "MIME-Version: 1.0",
-    `Content-Type: multipart/alternative; boundary="${boundary}"`,
-    "",
-    `--${boundary}`,
-    'Content-Type: text/plain; charset="UTF-8"',
-    "",
-    text,
-    `--${boundary}`,
-    'Content-Type: text/html; charset="UTF-8"',
-    "",
-    html,
-    `--${boundary}--`,
-    ".",
-  ].join("\r\n");
-  await cmd(data, 250);
-  await cmd("QUIT", 221).catch(() => {});
   try {
-    writer.releaseLock();
-    reader.releaseLock();
-    socket.close();
-  } catch {
-    /* ignore */
+    const greet = await readReply();
+    if (greet.code !== 220) throw new Error(`smtp_${greet.code}:${greet.line.slice(0, 120)}`);
+    await cmd("EHLO drz-club-portal.workers.dev", 250);
+    await cmd("AUTH LOGIN", 334);
+    await cmd(smtpB64(user), 334);
+    await cmd(smtpB64(pass), 235);
+    await cmd(`MAIL FROM:<${from}>`, 250);
+    await cmd(`RCPT TO:<${to}>`, 250);
+    await cmd("DATA", 354);
+
+    const boundary = `b${randomToken(8)}`;
+    const data = [
+      `From: Dr. Z Academy Club <${from}>`,
+      `To: ${to}`,
+      `Subject: ${encodeSubject(subject)}`,
+      "MIME-Version: 1.0",
+      `Content-Type: multipart/alternative; boundary="${boundary}"`,
+      "",
+      `--${boundary}`,
+      'Content-Type: text/plain; charset="UTF-8"',
+      "Content-Transfer-Encoding: 8bit",
+      "",
+      smtpDotStuff(text),
+      `--${boundary}`,
+      'Content-Type: text/html; charset="UTF-8"',
+      "Content-Transfer-Encoding: 8bit",
+      "",
+      smtpDotStuff(html),
+      `--${boundary}--`,
+      ".",
+    ].join("\r\n");
+    await writer.write(enc.encode(data + "\r\n"));
+    const dataReply = await readReply();
+    if (dataReply.code !== 250) {
+      throw new Error(`smtp_${dataReply.code}:${dataReply.line.slice(0, 120)}`);
+    }
+    await cmd("QUIT", 221).catch(() => {});
+  } finally {
+    try {
+      writer.releaseLock();
+      reader.releaseLock();
+      socket.close();
+    } catch {
+      /* ignore */
+    }
   }
 }
 
@@ -1158,6 +1607,9 @@ export default {
       if (request.method === "POST" && url.pathname === "/logout") return handleLogout(request, env);
       if (request.method === "GET" && url.pathname === "/forms/status") return handleFormStatus(request, env);
       if (request.method === "POST" && url.pathname === "/forms/submit") return handleFormSubmit(request, env);
+      if (request.method === "GET" && url.pathname === "/forms/response") return handleFormResponse(request, env);
+      if (request.method === "GET" && url.pathname === "/forms/submissions") return handleFormSubmissions(request, env);
+      if (request.method === "POST" && url.pathname === "/forms/email-response") return handleFormEmailResponse(request, env);
       if (request.method === "GET" && url.pathname === "/forms/catalog") return handleFormsCatalog(request, env);
       if (request.method === "GET" && url.pathname === "/forms/export-auth") return handleFormsExportAuth(request, env);
       if (request.method === "GET" && url.pathname === "/forms/export") return handleFormsExport(request, env);

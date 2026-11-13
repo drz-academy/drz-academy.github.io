@@ -295,6 +295,10 @@ URL de un formulario:
 
 Vista previa sin login: añade `&preview=1`.
 
+Enlace compartido sin Club: pon `"token": "clave"` en el JSON y reparte
+`…?form=<id>&token=clave`. Sin ese `token` en la URL, el formulario pide entrar al Club.
+El admin sigue usando `TOKEN=` (mayúscula).
+
 El `id` del JSON (y del archivo) solo admite minúsculas, números, `_` y `-` (máx. 64 caracteres). El archivo tiene que llamarse `<id>.json`.
 
 ### 1. Crear un formulario
@@ -306,6 +310,8 @@ Copia `evaluacion-curso.json` o parte de cero. Estructura:
   "id": "mi-formulario",
   "titulo": "Título que ve la persona",
   "intro": "Texto bajo el título.",
+  "fondo": "oscuro",
+  "token": "opcional-para-enlace-compartido",
   "requiere_curso": true,
   "revela_certificado": true,
   "secciones": [
@@ -321,6 +327,14 @@ Copia `evaluacion-curso.json` o parte de cero. Estructura:
 
 | Campo del formulario | Qué hace |
 |----------------------|----------|
+| `fondo` | `"claro"` u `"oscuro"` (por defecto oscuro). |
+| `token` | Clave del enlace compartido (`?token=`). Si falta o no coincide, pide login al Club. |
+| `token_docente` | Clave de revisión docente (`?token_docente=`). Lista y navega todas las respuestas. |
+| (edición) | `?respuesta=<id>&edit=true` reabre el formulario para corregir un envío. |
+| `titulo_gracias` | Título de la pantalla final (opcional). |
+| `mensaje_gracias` | Texto bajo el título al enviar (opcional; admite `**negrita**`). |
+| `mostrar_respuestas` | `true`: tras enviar, muestra un resumen de las respuestas. |
+| (automático) | Cada envío recibe un `id` único. La persona puede reabrir el resumen con `?respuesta=<id>`. |
 | `requiere_curso` | `true`: hay que estar inscrito en el curso del enlace (o elegido en el desplegable). |
 | `revela_certificado` | `true`: al enviar, si hay certificado, se muestra el enlace. |
 | `prueba_certificado_url` | Solo modo `TOKEN`: enlace de certificado de ejemplo al enviar sin guardar. |
@@ -357,6 +371,7 @@ Vista previa local (con el servidor de `make start` o sirviendo la raíz del rep
 
 ```
 http://127.0.0.1:8000/club/drz-forms/drz-form.html?form=mi-formulario&preview=1
+http://127.0.0.1:8000/club/drz-forms/drz-form.html?form=mi-formulario&token=opcional-para-enlace-compartido
 ```
 
 ### 2. Desplegarlo

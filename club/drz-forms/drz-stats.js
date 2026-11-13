@@ -1,7 +1,7 @@
 const ADMIN_TOKEN_KEY = "drz-forms-export-token";
 const WORKER_URL = "https://drz-club-portal.drz-academy.workers.dev";
 const FORM_ID_RE = /^[a-z0-9][a-z0-9_-]{0,63}$/;
-const SCHEMA_VERSION = "20260831n";
+const SCHEMA_VERSION = "20261113a";
 const NAME_QUESTION_IDS = new Set(["evaluador", "nombre"]);
 const PIE_COLORS = ["#F3D361", "#7eb8c9", "#e07a5f", "#81b29a", "#9b8ec4", "#f2cc8f", "#c9ae4a", "#888888"];
 const CHOICE_TYPES = new Set([
@@ -13,7 +13,7 @@ const CHOICE_TYPES = new Set([
   "puntaje",
   "escala_scroll",
 ]);
-const TEXT_TYPES = new Set(["texto", "parrafo"]);
+const TEXT_TYPES = new Set(["texto", "parrafo", "completar"]);
 
 function workerEndpoint() {
   const params = new URLSearchParams(location.search);

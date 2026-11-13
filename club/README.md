@@ -221,6 +221,7 @@ Resumen operativo:
 
 - Esquema: `club/drz-forms/evaluacion-curso.json`
 - Página: `/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=<id>` (`&preview=1` sin login)
+- Enlace compartido: `"token"` en el JSON + `&token=clave` (sin Club); admin sigue con `TOKEN=`
 - Admin: `TOKEN=` → **Analizar resultados** (`drz-stats.html`, anónimo) y CSV; modo prueba no guarda respuestas
 - Export local: `make club-forms-export` → JSON gitignored y `club/drz-forms/evaluacion-curso-respuestas.csv`
 - Backup diario (GitHub Actions): el mismo CSV se actualiza cada mañana en el repo
