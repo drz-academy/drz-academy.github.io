@@ -1,5 +1,173 @@
 [
   {
+    "id": "1f80a9e5-e3bc-48db-8c0c-c1af7879ba3f",
+    "timestampServer": "2026-11-13T19:45:23.678Z",
+    "ip": "186.121.20.20",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "http://127.0.0.1:8000/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-13T19:45:23.226Z"
+  },
+  {
+    "id": "4a71ea05-31d8-454c-bba8-f80f8e89645a",
+    "timestampServer": "2026-11-13T10:03:30.939Z",
+    "ip": "2a03:2880:f814:31::",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 (compatible; meta-externalads/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/crawler))",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-11-13T10:03:29.566Z"
+  },
+  {
+    "id": "58cfad3d-3d3d-42e7-a26b-d6eddcbe0cf7",
+    "timestampServer": "2026-11-13T07:20:04.166Z",
+    "ip": "47.82.54.108",
+    "country": "SG",
+    "eventType": "course_page_view",
+    "page": "/cursos/python-fin-del-mundo/",
+    "url": "https://drz-academy.github.io/cursos/python-fin-del-mundo/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "python-fin-del-mundo",
+      "courseName": "Python para el fin del mundo"
+    },
+    "timestampClient": "2026-11-13T07:20:03.944Z"
+  },
+  {
+    "id": "3ac0cf11-915f-45e5-99ba-5ef761bd0582",
+    "timestampServer": "2026-11-13T05:51:53.479Z",
+    "ip": "47.79.11.217",
+    "country": "SG",
+    "eventType": "demo_page_view",
+    "page": "/demos/rejilla-difraccion/",
+    "url": "https://drz-academy.github.io/demos/rejilla-difraccion/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "demoId": "rejilla-difraccion",
+      "demoName": "Rejilla de"
+    },
+    "timestampClient": "2026-11-13T05:51:52.949Z"
+  },
+  {
+    "id": "3e907f97-7b5b-4938-968b-faed139358e2",
+    "timestampServer": "2026-11-13T05:46:19.660Z",
+    "ip": "185.89.42.114",
+    "country": "FI",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-13T05:46:19.328Z"
+  },
+  {
+    "id": "efdecf1e-cba8-4a82-b7a3-fc74f7c3fd6d",
+    "timestampServer": "2026-11-13T05:08:13.600Z",
+    "ip": "47.79.11.138",
+    "country": "SG",
+    "eventType": "demo_page_view",
+    "page": "/demos/apilado-imagenes/",
+    "url": "https://drz-academy.github.io/demos/apilado-imagenes/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "demoId": "apilado-imagenes",
+      "demoName": "Apilado de"
+    },
+    "timestampClient": "2026-11-13T05:08:13.132Z"
+  },
+  {
+    "id": "f48e7020-6017-4cad-880e-432b7295fb25",
+    "timestampServer": "2026-11-13T04:54:30.435Z",
+    "ip": "47.82.13.8",
+    "country": "SG",
+    "eventType": "demo_page_view",
+    "page": "/demos/campo-vision/",
+    "url": "https://drz-academy.github.io/demos/campo-vision/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "demoId": "campo-vision",
+      "demoName": "Campo de visión"
+    },
+    "timestampClient": "2026-11-13T04:54:17.441Z"
+  },
+  {
+    "id": "61393a20-2913-4810-bd12-7832409f8049",
+    "timestampServer": "2026-11-13T00:33:02.695Z",
+    "ip": "47.82.50.73",
+    "country": "SG",
+    "eventType": "demo_page_view",
+    "page": "/demos/difraccion/",
+    "url": "https://drz-academy.github.io/demos/difraccion/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "demoId": "difraccion",
+      "demoName": "Difracción y criterio de"
+    },
+    "timestampClient": "2026-11-13T00:33:02.629Z"
+  },
+  {
+    "id": "95eb9b95-ccb3-4ba4-87ac-91443c808f4d",
+    "timestampServer": "2026-11-12T23:41:01.731Z",
+    "ip": "47.82.8.105",
+    "country": "SG",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-11-12T23:41:01.316Z"
+  },
+  {
+    "id": "a551e6ec-c2a9-4be6-abf7-114d957e8998",
+    "timestampServer": "2026-11-12T22:13:11.768Z",
+    "ip": "47.82.13.106",
+    "country": "SG",
+    "eventType": "demo_page_view",
+    "page": "/demos/optica-activa/",
+    "url": "https://drz-academy.github.io/demos/optica-activa/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "demoId": "optica-activa",
+      "demoName": "Óptica activa — Espejo segmentado"
+    },
+    "timestampClient": "2026-11-12T22:13:11.383Z"
+  },
+  {
     "id": "588a2808-982c-4a23-b0de-558d205e92f9",
     "timestampServer": "2026-11-12T19:20:09.824Z",
     "ip": "47.82.48.173",
