@@ -4,7 +4,7 @@ const TOKEN_KEY = "drz-club-token";
 const ADMIN_TOKEN_KEY = "drz-forms-export-token";
 const WORKER_URL = "https://drz-club-portal.drz-academy.workers.dev";
 const FORM_ID_RE = /^[a-z0-9][a-z0-9_-]{0,63}$/;
-const SCHEMA_VERSION = "20261113u";
+const SCHEMA_VERSION = "20261113w";
 
 function applyFormTheme(schema) {
   const fondo = String(schema?.fondo || "oscuro").trim().toLowerCase();
@@ -14,6 +14,27 @@ function applyFormTheme(schema) {
 
 function formAccessToken(schema) {
   return String(schema?.token || "").trim();
+}
+
+function formButtonMode(schema) {
+  const raw = String(schema?.boton || "enviar").trim().toLowerCase();
+  if (raw === "grabar" || raw === "guardar") return "grabar";
+  return "enviar";
+}
+
+function submitButtonLabel(schema, { editing = false, submitMode = "live", etiqueta = "" } = {}) {
+  const label = String(etiqueta || formLabel || "evaluación").trim().toLowerCase() || "evaluación";
+  if (submitMode === "preview") return "Vista previa (no se envía)";
+  if (submitMode === "prueba") {
+    return formButtonMode(schema) === "grabar"
+      ? "Grabar respuestas (prueba)"
+      : `Enviar ${label} (prueba)`;
+  }
+  if (editing) {
+    return formButtonMode(schema) === "grabar" ? "Grabar cambios" : "Guardar cambios";
+  }
+  if (formButtonMode(schema) === "grabar") return "Grabar respuestas";
+  return `Enviar ${label}`;
 }
 
 function formAccessGranted(schema) {
@@ -235,6 +256,9 @@ function responseRecoveryUrl(responseId, { edit = false } = {}) {
 
 function mapError(err) {
   const code = err.code || "";
+  if (code === "teacher_unauthorized") {
+    return "El enlace del profesor no es válido o aún no está sincronizado. Pide un enlace nuevo.";
+  }
   if (code === "unauthorized") return "Tu sesión venció. Entra de nuevo al Club para continuar.";
   if (code === "not_enrolled") return "No encontramos este curso en tu historial del Club.";
   if (code === "already_submitted") return "Ya enviaste esta evaluación.";
@@ -805,13 +829,21 @@ function teacherOptionLabel(row, index) {
   return `Envío ${index + 1}`;
 }
 
+function teacherCountLabel(total) {
+  if (total <= 0) return "Todavía no ha contestado nadie.";
+  if (total === 1) return "1 persona ha contestado.";
+  return `${total} personas han contestado.`;
+}
+
 function syncTeacherControls() {
   const select = $("teacher-email");
   const pos = $("teacher-position");
   const prev = $("teacher-prev");
   const next = $("teacher-next");
   const meta = $("teacher-meta");
+  const count = $("teacher-count");
   const total = teacherRows.length;
+  if (count) count.textContent = teacherCountLabel(total);
   if (pos) pos.textContent = total ? `${teacherIndex + 1} / ${total}` : "0 / 0";
   if (prev) prev.disabled = teacherIndex <= 0;
   if (next) next.disabled = teacherIndex >= total - 1;
@@ -887,12 +919,21 @@ async function startTeacherReview(schema, formId) {
   teacherMode = true;
   setTeacherBarVisible(true);
   $("form-label").textContent = "Revisión profesor";
-  $("form-intro").textContent = "Navega las respuestas con el correo o con las flechas.";
   const token = String(qs("token_docente") || qs("token_profesor") || "").trim();
-  const data = await api(
-    `/forms/submissions?form=${encodeURIComponent(formId)}&token_docente=${encodeURIComponent(token)}`,
-  );
+  let data;
+  try {
+    data = await api(
+      `/forms/submissions?form=${encodeURIComponent(formId)}&token_docente=${encodeURIComponent(token)}`,
+    );
+  } catch (err) {
+    if (err.code === "unauthorized") {
+      throw Object.assign(new Error("teacher_unauthorized"), { code: "teacher_unauthorized" });
+    }
+    throw err;
+  }
   teacherRows = Array.isArray(data.submissions) ? data.submissions : [];
+  const total = Number(data.total) || teacherRows.length;
+  $("form-intro").textContent = `${teacherCountLabel(total)} Navega con el correo o con las flechas.`;
   bindTeacherControls();
   showTeacherSubmission(0);
 }
@@ -1028,22 +1069,18 @@ function paintForm(schema, { cursos, prefill, submitMode, editing = false }) {
   markPrefillTouched($("questions"));
   showView("view-form");
   const submit = $("submit-form");
-  const etiqueta = formLabel.toLowerCase();
+  submit.textContent = submitButtonLabel(schema, { editing, submitMode, etiqueta: formLabel });
   if (submitMode === "preview") {
     submit.disabled = true;
-    submit.textContent = "Vista previa (no se envía)";
     showStatus($("form-status"), "Vista previa: las respuestas no se guardan.", "ok");
   } else if (submitMode === "prueba") {
     submit.disabled = false;
-    submit.textContent = `Enviar ${etiqueta} (prueba)`;
     showStatus($("form-status"), "Modo prueba: puedes enviar, pero las respuestas no se guardan.", "ok");
   } else if (editing) {
     submit.disabled = false;
-    submit.textContent = "Guardar cambios";
-    showStatus($("form-status"), "Estás editando un envío anterior. Al guardar se actualizará.", "ok");
+    showStatus($("form-status"), "Estás editando un envío anterior. Al grabar se actualizará.", "ok");
   } else {
     submit.disabled = false;
-    submit.textContent = `Enviar ${etiqueta}`;
   }
 }
 
@@ -1148,7 +1185,7 @@ async function boot() {
   formLabel = etiqueta;
   document.title = `${etiqueta} — Dr. Z Academy Club`;
   $("form-label").textContent = etiqueta;
-  $("submit-form").textContent = `Enviar ${etiqueta.toLowerCase()}`;
+  $("submit-form").textContent = submitButtonLabel(schema, { etiqueta });
   $("done-title").innerHTML = richText(
     String(schema.titulo_gracias || "").trim() || `Gracias por tu ${etiqueta.toLowerCase()}`,
   );
