@@ -31,6 +31,12 @@ __pycache__/
 *.sent.log
 inscritos.md
 
+# Newsletters privadas del curso (memorias, enlaces de clase, borradores WhatsApp).
+# En el repo solo van las de información general: newsletter.md,
+# newsletter-informacion-practica*.md, newsletter-final.md, whatsapp.md, etc.
+**/newsletter-memorias*.md
+**/newsletter-*_whatsapp.md
+
 # Datos confidenciales del Club (no publicar)
 club/personal/
 

@@ -223,7 +223,9 @@ make notify-list
 Para enviar un boletín (newsletter), debes crear un archivo Markdown. El script convierte este archivo a HTML compatible con clientes de correo e inyecta un enlace único de desuscripción para los destinatarios de la lista de suscriptores.
 
 **Paso 1: Preparar la newsletter**
-Crea un archivo `.md` (p. ej. `notify/mi-newsletter.md`) con la siguiente estructura. Es importante incluir el `subject` en el frontmatter y usar HTML con CSS en línea (inline CSS) para garantizar compatibilidad con los clientes de correo:
+Crea un archivo `.md` (p. ej. `notify/mi-newsletter.md` o `cursos/mi-curso/newsletter.md`) con la siguiente estructura. Es importante incluir el `subject` en el frontmatter y usar HTML con CSS en línea (inline CSS) para garantizar compatibilidad con los clientes de correo.
+
+**Privacidad:** en el repositorio público solo versionamos newsletters de **información general** (`newsletter.md`, `newsletter-informacion-practica*.md`, `newsletter-final.md`, `whatsapp.md` promocional, etc.). Las de **memorias de clase**, enlaces de Classroom/Meet/Drive y borradores `newsletter-*_whatsapp.md` son privadas: viven en tu disco y están en `.gitignore` (`newsletter-memorias*.md`, `newsletter-*_whatsapp.md`).
 
 ```markdown
 ---

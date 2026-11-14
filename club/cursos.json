@@ -111,6 +111,20 @@
     "numero_certificados": 13
   },
   {
+    "id": "circulo_latino",
+    "nombre": "Círculo Latino - Ciclo 1",
+    "fecha_inicio": "2026-11-11",
+    "fecha_fin": "2026-12-04",
+    "evaluacion": true,
+    "classroom_url": "https://classroom.google.com/c/ODcwMTM1ODExNzY0?cjc=x3lp4ybw",
+    "certificados_folder": "https://drive.google.com/drive/folders/1LxnTHykCiabylnCg12kciWji7eIf35Ip",
+    "pagina_url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "inscripcion_url": "https://drz.academy/producto/circulo-latino/",
+    "valor": "157079",
+    "numero_participantes": 25,
+    "numero_certificados": 0
+  },
+  {
     "id": "cuantica_a_pie_permanente",
     "nombre": "Cuántica a Pie (Permanente)",
     "fecha_inicio": "",
@@ -122,20 +136,5 @@
     "pagina_url": "https://drz-academy.github.io/cursos/cuantica-a-pie/",
     "numero_participantes": 8,
     "numero_certificados": 8
-  },
-  {
-    "id": "circulo_latino",
-    "nombre": "Círculo Latino",
-    "fecha_inicio": "2026-11-11",
-    "fecha_fin": "2026-12-04",
-    "evaluacion": true,
-    "classroom_url": "",
-    "certificados_folder": "https://drive.google.com/drive/folders/1LxnTHykCiabylnCg12kciWji7eIf35Ip",
-    "pagina_url": "https://drz-academy.github.io/cursos/circulo-latino/",
-    "inscripcion_url": "https://drz.academy/producto/circulo-latino/",
-    "valor": "157079",
-    "numero_participantes": 0,
-    "numero_certificados": 0,
-    "next_course": true
   }
 ]

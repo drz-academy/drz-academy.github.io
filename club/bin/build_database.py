@@ -96,6 +96,13 @@ CURSOS = [
         "sheet": "Inscritos",
         "tipo": "estandar",
     },
+    {
+        "id": "circulo_latino",
+        "nombre": "Círculo Latino - Ciclo 1",
+        "archivo": "Inscripciones - Círculo Latino - Ciclo 1 - 2026.xlsx",
+        "sheet": "Inscritos",
+        "tipo": "estandar",
+    },
 ]
 
 
@@ -635,28 +642,32 @@ def main():
     # Estadísticas por curso y actualizar cursos.json
     print("  Participación por curso:")
     
-    # Cargar cursos.json si existe para preservar fechas
-    cursos_meta = {}
+    # Cargar cursos.json si existe para preservar fechas (por id o nombre)
+    cursos_meta_by_id = {}
+    cursos_meta_by_nombre = {}
     if os.path.exists(CURSOS_JSON):
         try:
             with open(CURSOS_JSON, "r", encoding="utf-8") as f:
                 cursos_meta_list = json.load(f)
                 for c in cursos_meta_list:
-                    cursos_meta[c["nombre"]] = c
+                    if c.get("id"):
+                        cursos_meta_by_id[c["id"]] = c
+                    if c.get("nombre"):
+                        cursos_meta_by_nombre[c["nombre"]] = c
         except Exception:
             pass
 
     cursos_output = []
     
-    cursos_procesados = set()
+    cursos_procesados_ids = set()
     for curso in CURSOS:
-        cursos_procesados.add(curso["nombre"])
+        cursos_procesados_ids.add(curso["id"])
         # Contar cuántos participaron
         count = sum(1 for m in db.members if curso["id"] in m["cursos"])
         print(f"    - {curso['nombre']}: {count} participantes")
         
         # Generar metadata para cursos.json (preservando otros campos como 'valor')
-        meta = dict(cursos_meta.get(curso["nombre"], {}))
+        meta = dict(cursos_meta_by_id.get(curso["id"]) or cursos_meta_by_nombre.get(curso["nombre"]) or {})
         meta["id"] = curso["id"]
         meta["nombre"] = curso["nombre"]
         meta["fecha_inicio"] = meta.get("fecha_inicio", "2025-01-01")
@@ -665,11 +676,13 @@ def main():
         meta["certificados_folder"] = meta.get("certificados_folder", "")
         meta["pagina_url"] = meta.get("pagina_url", "")
         meta["numero_participantes"] = count
+        # Ya no es el "próximo": tiene inscritos
+        meta.pop("next_course", None)
         cursos_output.append(meta)
 
-    # Agregar cualquier curso extra que estaba en cursos.json (cursos futuros)
-    for nombre_curso, meta in cursos_meta.items():
-        if nombre_curso not in cursos_procesados:
+    # Agregar cualquier curso extra que estaba en cursos.json (permanentes / futuros)
+    for cid, meta in cursos_meta_by_id.items():
+        if cid not in cursos_procesados_ids:
             cursos_output.append(meta)
         
     with open(CURSOS_JSON, "w", encoding="utf-8") as f:

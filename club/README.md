@@ -151,6 +151,7 @@ make club-sync
 | python_fin_mundo | Python para el fin del mundo | 2026-03-18 | 2026-04-29 | https://drz-academy.github.io/cursos/python-fin-del-mundo/ |
 | masterclass_extraterrestre | Master Class Extraterrestre | 2026-08-03 | 2026-08-31 | https://drz-academy.github.io/cursos/extraterrestres/ |
 | masterclass_cambio_climatico | Master Class Cambio Climático | 2026-09-14 | 2026-10-05 | https://drz-academy.github.io/cursos/cambio-climatico/ |
+| circulo_latino | Círculo Latino - Ciclo 1 | 2026-11-11 | 2026-12-04 | https://drz-academy.github.io/cursos/circulo-latino/ |
 
 Los `id` de esa tabla son los `curso_id` de `personal/certificados.csv`.
 
