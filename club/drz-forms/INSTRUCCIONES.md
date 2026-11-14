@@ -82,36 +82,206 @@ Cada envío recibe un `id` único. La persona puede reabrir el resumen con `?res
 | `explicacion` | no | Texto gris bajo el enunciado |
 | `default` | no | Valor inicial (`lista_desplegable`, `escala_scroll`, `radio`, `opciones`) |
 
-### Tipos de pregunta
+### Tipos de pregunta (resumen)
 
-| `tipo` | Campos extra |
-|--------|----------------|
-| `texto` | Una línea |
-| `parrafo` | Varias líneas |
-| `radio` / `seleccion_unica` | `opciones`: strings o `{ "id", "label" }` |
-| `opciones` / `seleccion_multiple` | Checkboxes. `opciones` igual que `radio` |
-| `puntaje` | `min`, `max` (enteros; por defecto 1–5) |
-| `lista_desplegable` | `opciones`, o `"fuente": "cursos"` para el catálogo |
-| `escala_scroll` | `min`, `max`, `step`, `min_label`, `max_label`, `emotions`, `flip_aleatorio` |
-| `completar` | Frase con huecos `[clave]`. Opciones en `listas` del form o de la pregunta. Ver abajo. |
+| `tipo` | Qué es | Campos extra |
+|--------|--------|----------------|
+| `texto` | Una línea | — |
+| `parrafo` | Varias líneas | — |
+| `radio` / `seleccion_unica` | Una sola opción (botones) | `opciones`, `default` |
+| `opciones` / `seleccion_multiple` | Varias a la vez (checkboxes) | `opciones`, `default` |
+| `puntaje` | Estrellas / números enteros | `min`, `max` (por defecto 1–5) |
+| `lista_desplegable` | Menú desplegable | `opciones` **o** `"fuente": "cursos"` |
+| `escala_scroll` | Barra continua con etiquetas | `min`, `max`, `step`, `min_label`, `max_label`, `emotions`, `flip_aleatorio`, `default` |
+| `completar` | Frase con huecos `[clave]` | `texto`; opciones en `listas` |
 
-### Tipo `completar` (frases con menús)
+`seleccion_unica` es alias de `radio`. `seleccion_multiple` es alias de `opciones`.
 
-Útil para actividades (p. ej. casos en español). En `texto`, marca cada hueco con `[nombre_lista]`:
+### Ejemplos de cada tipo
+
+#### `texto`
 
 ```json
 {
-  "id": "frase_01",
-  "enunciado": "**Frase 1**:\n*La gota horada la piedra…*",
-  "tipo": "completar",
-  "texto": "La gota [caso] horada [caso] la piedra [caso]",
+  "id": "correo",
+  "enunciado": "Correo electrónico",
+  "explicacion": "El mismo con el que te inscribiste.",
+  "tipo": "texto",
+  "obligatoria": true
+}
+```
+
+#### `parrafo`
+
+```json
+{
+  "id": "lo_mejor",
+  "enunciado": "¿Qué es lo que más te gustó?",
+  "explicacion": "Un tema, un momento o un ejemplo.",
+  "tipo": "parrafo",
+  "obligatoria": true
+}
+```
+
+#### `radio` / `seleccion_unica`
+
+Opciones como objetos `{ "id", "label" }` (recomendado) o como strings:
+
+```json
+{
+  "id": "finalizado",
+  "enunciado": "¿Concluiste el curso?",
+  "tipo": "radio",
+  "opciones": [
+    { "id": "si", "label": "Sí, todo" },
+    { "id": "falto", "label": "Casi todo" },
+    { "id": "no", "label": "Lo dejé a medias" }
+  ],
+  "default": "si",
+  "obligatoria": true
+}
+```
+
+```json
+{
+  "id": "turno",
+  "enunciado": "¿En qué turno preferirías la próxima clase?",
+  "tipo": "seleccion_unica",
+  "opciones": ["Mañana", "Tarde", "Noche"],
+  "obligatoria": true
+}
+```
+
+#### `opciones` / `seleccion_multiple`
+
+```json
+{
+  "id": "temas_interes",
+  "enunciado": "¿Qué temas te interesan? (puedes marcar varios)",
+  "tipo": "opciones",
+  "opciones": [
+    { "id": "astro", "label": "Astronomía" },
+    { "id": "fisica", "label": "Física" },
+    { "id": "latin", "label": "Latín" },
+    { "id": "prog", "label": "Programación" }
+  ],
+  "default": ["astro", "latin"],
   "obligatoria": false
 }
 ```
 
-Las opciones de `[caso]` salen de `listas.caso` en el JSON del formulario. En pantalla, cada fragmento queda junto a su menú (`La gota [menú]`, `horada [menú]`, …).
+```json
+{
+  "id": "dias",
+  "enunciado": "Días en los que puedes asistir",
+  "tipo": "seleccion_multiple",
+  "opciones": ["Lunes", "Miércoles", "Viernes"],
+  "obligatoria": true
+}
+```
 
-Ejemplo completo: [`circulo-latino-c1-a1-casos.json`](circulo-latino-c1-a1-casos.json).
+#### `puntaje`
+
+Enteros; por defecto de 1 a 5 si no pones `min`/`max`:
+
+```json
+{
+  "id": "claridad",
+  "enunciado": "Claridad de las explicaciones",
+  "tipo": "puntaje",
+  "min": 1,
+  "max": 5,
+  "obligatoria": true
+}
+```
+
+#### `lista_desplegable`
+
+Con opciones fijas:
+
+```json
+{
+  "id": "nivel",
+  "enunciado": "Tu nivel con el tema",
+  "tipo": "lista_desplegable",
+  "opciones": [
+    { "id": "nuevo", "label": "Empiezo de cero" },
+    { "id": "medio", "label": "Algo de base" },
+    { "id": "avanzado", "label": "Ya lo he estudiado" }
+  ],
+  "default": "nuevo",
+  "obligatoria": true
+}
+```
+
+Con el catálogo de cursos del Club (`cursos.json` vía sync):
+
+```json
+{
+  "id": "curso",
+  "enunciado": "Nombre del curso",
+  "explicacion": "Selecciona el curso que evalúas.",
+  "tipo": "lista_desplegable",
+  "fuente": "cursos",
+  "obligatoria": true
+}
+```
+
+#### `escala_scroll`
+
+Barra deslizante. `emotions` son caras en los enteros (no tienen que coincidir con cada `step`). `flip_aleatorio: true` invierte al azar la dirección visual (el valor guardado sigue siendo de `min` a `max`):
+
+```json
+{
+  "id": "apreciacion_general",
+  "enunciado": "Apreciación general del curso",
+  "explicacion": "¿Qué tanto te gustó el curso, tomándolo en conjunto?",
+  "tipo": "escala_scroll",
+  "min": 1,
+  "max": 7,
+  "step": 0.5,
+  "emotions": ["🤔", "😐", "🙂", "😊", "😍", "🤩", "🤯"],
+  "flip_aleatorio": true,
+  "min_label": "No me gustó nada",
+  "max_label": "Me gustó muchísimo",
+  "default": 4,
+  "obligatoria": true
+}
+```
+
+#### `completar`
+
+Frase con huecos `[nombre_lista]`. Las opciones salen de `listas` del formulario (o de la pregunta). En pantalla, cada fragmento queda junto a su menú (`La gota [menú]`, `horada [menú]`, …).
+
+En el formulario (una sola vez):
+
+```json
+"listas": {
+  "caso": [
+    "Nominativo",
+    "Vocativo",
+    "Genitivo",
+    "Dativo",
+    "Acusativo",
+    "Ablativo",
+    "(Verbo)"
+  ]
+}
+```
+
+En la pregunta:
+
+```json
+{
+  "id": "frase_01",
+  "enunciado": "**Frase 1**:\n*La gota horada la piedra, no por la fuerza…*",
+  "tipo": "completar",
+  "texto": "La gota [caso] horada [caso] la piedra [caso], no por la fuerza [caso]",
+  "obligatoria": false
+}
+```
+
+Ejemplo completo: [`circulo-latino-c1-a1-casos.json`](circulo-latino-c1-a1-casos.json). Más tipos en contexto real: [`evaluacion-curso.json`](evaluacion-curso.json) (`texto`, `parrafo`, `radio`, `lista_desplegable` + `fuente: cursos`, `escala_scroll`).
 
 ### Vista previa local
 
