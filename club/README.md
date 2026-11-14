@@ -216,7 +216,7 @@ Las fuentes no se borran. El portal usa esos enlaces cuando el miembro entra al 
 
 Si un curso tiene `"evaluacion": true` en `cursos.json`, el portal muestra **Evaluación** y no revela el certificado hasta que la persona complete el formulario `evaluacion-curso`.
 
-La guía completa (crear un JSON, tipos de pregunta, desplegar, asociar a un curso, CSV y reset) está en [`DEVELOPER.md`](../DEVELOPER.md#formularios-del-club-clubdrz-forms).
+La guía completa (crear un JSON, tipos de pregunta, `make club-sync`, CSV, reset y Google Sheets / Apps Script) está en [`drz-forms/INSTRUCCIONES.md`](drz-forms/INSTRUCCIONES.md). Resumen también en [`DEVELOPER.md`](../DEVELOPER.md#formularios-del-club-clubdrz-forms).
 
 Resumen operativo:
 

@@ -277,6 +277,8 @@ Los participantes consultan categoría, cursos, Classroom y certificados en `/cl
 
 ## Formularios del Club (`club/drz-forms/`)
 
+Guía práctica completa (crear JSON, sincronizar con `make club-sync`, exportar y Google Sheets / Apps Script): [`club/drz-forms/INSTRUCCIONES.md`](club/drz-forms/INSTRUCCIONES.md).
+
 El motor es genérico: una sola página (`drz-form.html` + `drz-form.js`) pinta cualquier esquema JSON. Las respuestas se guardan en Cloudflare KV (no en GitHub). El formulario de evaluación de cursos es el que desbloquea el certificado.
 
 ```
