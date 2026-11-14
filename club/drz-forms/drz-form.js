@@ -4,7 +4,8 @@ const TOKEN_KEY = "drz-club-token";
 const ADMIN_TOKEN_KEY = "drz-forms-export-token";
 const WORKER_URL = "https://drz-club-portal.drz-academy.workers.dev";
 const FORM_ID_RE = /^[a-z0-9][a-z0-9_-]{0,63}$/;
-const SCHEMA_VERSION = "20261113w";
+const SCHEMA_VERSION = "20261113z";
+const CLASSROOM_REF_KEY = "drz-form-classroom-ref";
 
 function applyFormTheme(schema) {
   const fondo = String(schema?.fondo || "oscuro").trim().toLowerCase();
@@ -144,6 +145,55 @@ function formSections(schema) {
 function loginRedirect() {
   const next = encodeURIComponent(`${location.pathname}${location.search}`);
   location.replace(`/club/?next=${next}`);
+}
+
+function isClassroomUrl(raw) {
+  try {
+    const host = new URL(String(raw || "")).hostname.toLowerCase();
+    return host === "classroom.google.com" || host.endsWith(".classroom.google.com");
+  } catch {
+    return false;
+  }
+}
+
+function classroomRefStorageKey(formId) {
+  const id = sanitizeId(formId) || "form";
+  return `${CLASSROOM_REF_KEY}:${id}`;
+}
+
+function captureClassroomReferrer(formId) {
+  const ref = String(document.referrer || "").trim();
+  if (!isClassroomUrl(ref)) return getClassroomReferrer(formId);
+  try {
+    sessionStorage.setItem(classroomRefStorageKey(formId), ref);
+  } catch {
+    /* ignore quota / private mode */
+  }
+  return ref;
+}
+
+function getClassroomReferrer(formId) {
+  try {
+    const stored = String(sessionStorage.getItem(classroomRefStorageKey(formId)) || "").trim();
+    return isClassroomUrl(stored) ? stored : "";
+  } catch {
+    return "";
+  }
+}
+
+function applyClubBackLinks(formId, { thanks = false } = {}) {
+  const classroomUrl = getClassroomReferrer(formId);
+  const useClassroom = Boolean(classroomUrl) && thanks;
+  for (const el of document.querySelectorAll("[data-club-back]")) {
+    const kind = el.getAttribute("data-club-back");
+    if (useClassroom) {
+      el.href = classroomUrl;
+      el.textContent = "Volver a Classroom";
+      continue;
+    }
+    el.href = "/club/";
+    el.textContent = kind === "error" ? "Ir al Club" : "Volver al Club";
+  }
 }
 
 function takeAdminTokenFromUrl() {
@@ -360,30 +410,43 @@ function blankOptions(question, listas, key) {
   }).filter((opt) => opt.value);
 }
 
+function renderCompletarBlank(question, { name, required, filled, listas, slot, key }) {
+  const value = filled[slot] || "";
+  const fieldId = `${name}-${slot}`;
+  const reqAttr = required ? "required" : "";
+  const options = blankOptions(question, listas, key);
+  if (options) {
+    const opts = [`<option value="">${escapeHtml(key)}…</option>`].concat(
+      options.map((opt) => `<option value="${escapeHtml(opt.value)}" ${opt.value === value ? "selected" : ""}>${escapeHtml(opt.label)}</option>`),
+    );
+    return `<select class="blank" id="${fieldId}" data-blank="${slot}" ${reqAttr} aria-label="${escapeHtml(key)} ${slot + 1}">${opts.join("")}</select>`;
+  }
+  return `<input class="blank" type="text" id="${fieldId}" data-blank="${slot}" placeholder="${escapeHtml(key)}" value="${escapeHtml(value)}" ${reqAttr} aria-label="${escapeHtml(key)} ${slot + 1}">`;
+}
+
 function renderCompletar(question, { id, name, labelId, required, filled, listas }) {
   const texto = String(question.texto || question.enunciado || "");
   const saved = isBlank(filled) ? [] : String(filled).split(BLANK_SEP);
-  const reqAttr = required ? "required" : "";
+  const matches = [...texto.matchAll(BLANK_RE)];
   let html = "";
   let last = 0;
-  let slot = 0;
-  for (const match of texto.matchAll(BLANK_RE)) {
+  matches.forEach((match, slot) => {
     html += escapeHtml(texto.slice(last, match.index));
     last = match.index + match[0].length;
-    const key = match[1].trim();
-    const value = saved[slot] || "";
-    const fieldId = `${name}-${slot}`;
-    const options = blankOptions(question, listas, key);
-    if (options) {
-      const opts = [`<option value="">${escapeHtml(key)}…</option>`].concat(
-        options.map((opt) => `<option value="${escapeHtml(opt.value)}" ${opt.value === value ? "selected" : ""}>${escapeHtml(opt.label)}</option>`),
-      );
-      html += `<select class="blank" id="${fieldId}" data-blank="${slot}" ${reqAttr} aria-label="${escapeHtml(key)} ${slot + 1}">${opts.join("")}</select>`;
-    } else {
-      html += `<input class="blank" type="text" id="${fieldId}" data-blank="${slot}" placeholder="${escapeHtml(key)}" value="${escapeHtml(value)}" ${reqAttr} aria-label="${escapeHtml(key)} ${slot + 1}">`;
-    }
-    slot += 1;
-  }
+    const nextAt = slot + 1 < matches.length ? matches[slot + 1].index : texto.length;
+    const trailing = texto.slice(last, nextAt);
+    last = nextAt;
+    const blank = renderCompletarBlank(question, {
+      name,
+      required,
+      filled: saved,
+      listas,
+      slot,
+      key: match[1].trim(),
+    });
+    // Menú + texto hasta el siguiente hueco van juntos (en móvil cada bloque inicia línea).
+    html += `<span class="blank-chunk">${blank}${escapeHtml(trailing)}</span>`;
+  });
   html += escapeHtml(texto.slice(last));
   return `<div class="completar" data-completar="${escapeHtml(id)}" aria-labelledby="${labelId}">${html}</div>`;
 }
@@ -778,7 +841,8 @@ function showReceipt(responseId, { allowEdit = true } = {}) {
   const editLink = $("done-edit-link");
   const id = sanitizeResponseId(responseId);
   if (!receipt || !idEl || !link) return;
-  if (!id) {
+  // En revisión docente no hace falta el recibo ni el enlace para editar.
+  if (teacherMode || !id) {
     receipt.hidden = true;
     idEl.textContent = "";
     link.removeAttribute("href");
@@ -792,7 +856,7 @@ function showReceipt(responseId, { allowEdit = true } = {}) {
   idEl.textContent = id;
   link.href = responseRecoveryUrl(id);
   if (editLink) {
-    if (allowEdit && !teacherMode) {
+    if (allowEdit) {
       editLink.href = responseRecoveryUrl(id, { edit: true });
       editLink.hidden = false;
     } else {
@@ -918,6 +982,7 @@ function bindTeacherControls() {
 async function startTeacherReview(schema, formId) {
   teacherMode = true;
   setTeacherBarVisible(true);
+  applyClubBackLinks(formId, { thanks: false });
   $("form-label").textContent = "Revisión profesor";
   const token = String(qs("token_docente") || qs("token_profesor") || "").trim();
   let data;
@@ -959,12 +1024,16 @@ function showDone(status, answers = null) {
     $("cert-box").hidden = true;
     $("cert-pending").hidden = !certificateExpected;
   }
+  const formId = sanitizeId(activeSchema?.id || qs("form") || "");
+  applyClubBackLinks(formId, { thanks: !teacherMode });
   showView("view-done");
 }
 
 function failBoot(message) {
   $("boot-error").textContent = message;
   $("form-intro").textContent = "No pudimos abrir el formulario.";
+  const formId = sanitizeId(qs("form") || "");
+  applyClubBackLinks(formId, { thanks: true });
   showView("view-error");
 }
 
@@ -1162,6 +1231,8 @@ async function boot() {
   const preview = qs("preview") === "1";
   const adminToken = await unlockAdminIfPresent();
   const admin = Boolean(adminToken);
+  if (formId) captureClassroomReferrer(formId);
+  applyClubBackLinks(formId, { thanks: false });
   if (!formId) {
     failBoot("El enlace del formulario no es válido.");
     return;

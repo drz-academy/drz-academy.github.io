@@ -342,22 +342,40 @@
     .question[data-tipo="completar"] .question-label { font-style: italic; }
 
     .completar {
-      line-height: 2.8;
+      line-height: 2.45;
       font-size: 1.05rem;
+    }
+
+    .completar .blank-chunk {
+      display: inline;
     }
 
     .completar .blank {
       display: inline-block;
-      width: auto;
-      min-width: 8.5rem;
+      /* Ancho del placeholder "caso…", no del caso más largo. */
+      width: 5.6rem;
+      min-width: 5.6rem;
       max-width: 100%;
-      margin: 0 0.25rem;
-      padding: 0.3rem 2rem 0.3rem 0.6rem;
-      font-size: 0.9rem;
+      margin: 0 0.2rem;
+      padding: 0.25rem 1.7rem 0.25rem 0.45rem;
+      font-size: 0.85rem;
       vertical-align: baseline;
+      box-sizing: border-box;
     }
 
-    .completar input.blank { padding-right: 0.6rem; }
+    .completar input.blank {
+      width: 6.5rem;
+      min-width: 6.5rem;
+      padding-right: 0.45rem;
+    }
+
+    @media (max-width: 640px) {
+      /* Cada menú abre línea con el texto que le sigue. */
+      .completar .blank-chunk {
+        display: block;
+        white-space: normal;
+      }
+    }
 
     .options {
       display: flex;
@@ -706,7 +724,7 @@
     <div class="header-inner">
       <a href="/club/" class="logo"><img src="/assets/DrZ-Logos/logo-firma.webp" alt="" width="38" height="38"><span class="logo-text">Dr.Z Academy <span>- Club</span></span></a>
       <div class="header-actions">
-        <a href="/club/" class="btn btn-ghost">Volver al Club</a>
+        <a href="/club/" class="btn btn-ghost" id="header-back" data-club-back="header">Volver al Club</a>
       </div>
     </div>
   </header>
@@ -723,7 +741,7 @@
     <section id="view-error" class="card hidden" hidden>
       <p class="status error" id="boot-error"></p>
       <div class="actions">
-        <a class="btn btn-primary" href="/club/">Ir al Club</a>
+        <a class="btn btn-primary" href="/club/" id="error-back" data-club-back="error">Ir al Club</a>
       </div>
     </section>
 
@@ -783,7 +801,7 @@
       </div>
       <p class="status" id="cert-pending" hidden>El certificado aparecerá aquí y en tu página del Club cuando se emita.</p>
       <div class="actions">
-        <a class="btn btn-ghost" href="/club/">Volver al Club</a>
+        <a class="btn btn-ghost" href="/club/" id="done-back" data-club-back="done">Volver al Club</a>
       </div>
     </section>
 
@@ -810,7 +828,7 @@
     </div>
   </footer>
 
-  <script src="/club/drz-forms/drz-form.js?v=20261113w" type="module"></script>
+  <script src="/club/drz-forms/drz-form.js?v=20261113z" type="module"></script>
 </body>
 
 </html>
