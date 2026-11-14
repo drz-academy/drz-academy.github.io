@@ -4,7 +4,7 @@ const TOKEN_KEY = "drz-club-token";
 const ADMIN_TOKEN_KEY = "drz-forms-export-token";
 const WORKER_URL = "https://drz-club-portal.drz-academy.workers.dev";
 const FORM_ID_RE = /^[a-z0-9][a-z0-9_-]{0,63}$/;
-const SCHEMA_VERSION = "20261113z";
+const SCHEMA_VERSION = "20261113aa";
 const CLASSROOM_REF_KEY = "drz-form-classroom-ref";
 
 function applyFormTheme(schema) {
@@ -431,11 +431,8 @@ function renderCompletar(question, { id, name, labelId, required, filled, listas
   let html = "";
   let last = 0;
   matches.forEach((match, slot) => {
-    html += escapeHtml(texto.slice(last, match.index));
+    const preceding = texto.slice(last, match.index);
     last = match.index + match[0].length;
-    const nextAt = slot + 1 < matches.length ? matches[slot + 1].index : texto.length;
-    const trailing = texto.slice(last, nextAt);
-    last = nextAt;
     const blank = renderCompletarBlank(question, {
       name,
       required,
@@ -444,8 +441,8 @@ function renderCompletar(question, { id, name, labelId, required, filled, listas
       slot,
       key: match[1].trim(),
     });
-    // Menú + texto hasta el siguiente hueco van juntos (en móvil cada bloque inicia línea).
-    html += `<span class="blank-chunk">${blank}${escapeHtml(trailing)}</span>`;
+    // Texto anotado + menú van juntos (en móvil cada bloque inicia línea).
+    html += `<span class="blank-chunk">${escapeHtml(preceding)}${blank}</span>`;
   });
   html += escapeHtml(texto.slice(last));
   return `<div class="completar" data-completar="${escapeHtml(id)}" aria-labelledby="${labelId}">${html}</div>`;
