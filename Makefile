@@ -78,6 +78,7 @@ sync-site:
 	@mkdir -p $(SITE)/club/drz-forms
 	@# Solo HTML/JS/JSON públicos. Nunca copiar *-respuestas.csv (datos de miembros).
 	@cp club/drz-forms/*.html club/drz-forms/*.js club/drz-forms/*.json $(SITE)/club/drz-forms/
+	@python3 club/bin/generar_forms_preview.py --out $(SITE)/club/drz-forms/p
 	@rm -rf $(SITE)/portal
 	@mkdir -p $(SITE)/portal
 	@printf '%s\n' '<!doctype html><meta http-equiv="refresh" content="0;url=/club/"><link rel="canonical" href="/club/">' > $(SITE)/portal/index.html

@@ -332,6 +332,8 @@ Copia `evaluacion-curso.json` o parte de cero. Estructura:
 | Campo del formulario | Qué hace |
 |----------------------|----------|
 | `fondo` | `"claro"` u `"oscuro"` (por defecto oscuro). |
+| `curso` | Slug bajo `cursos/` (p. ej. `circulo-latino`) para la imagen OG de WhatsApp. |
+| `og_imagen` / `og_descripcion` | Anulan imagen o texto del preview. Ver `club/drz-forms/INSTRUCCIONES.md`. |
 | `token` | Clave del enlace compartido (`?token=`). Si falta o no coincide, pide login al Club. |
 | `token_docente` | Clave de revisión docente (`?token_docente=`). Lista y navega todas las respuestas. |
 | (edición) | `?respuesta=<id>&edit=true` reabre el formulario para corregir un envío. |

@@ -4,7 +4,7 @@ const TOKEN_KEY = "drz-club-token";
 const ADMIN_TOKEN_KEY = "drz-forms-export-token";
 const WORKER_URL = "https://drz-club-portal.drz-academy.workers.dev";
 const FORM_ID_RE = /^[a-z0-9][a-z0-9_-]{0,63}$/;
-const SCHEMA_VERSION = "20261113aa";
+const SCHEMA_VERSION = "20261114b";
 const CLASSROOM_REF_KEY = "drz-form-classroom-ref";
 
 function applyFormTheme(schema) {
@@ -294,11 +294,31 @@ function sanitizeResponseId(raw) {
   return /^[a-z0-9]{8,32}$/.test(value) ? value : "";
 }
 
-function responseRecoveryUrl(responseId, { edit = false } = {}) {
-  const url = new URL(location.href);
-  url.searchParams.delete("TOKEN");
-  url.searchParams.delete("preview");
-  url.searchParams.delete("edit");
+function formSharePath(formId) {
+  const id = sanitizeId(formId || qs("form") || activeSchema?.id || "");
+  if (!id) return `${location.pathname}`;
+  // Página estática con meta OG (WhatsApp/Facebook no ejecutan JS de la SPA).
+  return `/club/drz-forms/p/${encodeURIComponent(id)}.html`;
+}
+
+function formAccessTokenValue(schema = activeSchema) {
+  return String(schema?.token || qs("token") || "").trim();
+}
+
+function responseRecoveryUrl(responseId, { edit = false, forStudent = false } = {}) {
+  const formId = sanitizeId(qs("form") || activeSchema?.id || "");
+  const url = new URL(formSharePath(formId), location.origin);
+  url.search = "";
+  // Enlace para el estudiante: solo token de acceso del formulario (sin token_docente).
+  if (forStudent || teacherMode) {
+    const token = formAccessTokenValue();
+    if (token) url.searchParams.set("token", token);
+  } else {
+    const token = String(qs("token") || "").trim();
+    const tokenDocente = String(qs("token_docente") || qs("token_profesor") || "").trim();
+    if (token) url.searchParams.set("token", token);
+    if (tokenDocente) url.searchParams.set("token_docente", tokenDocente);
+  }
   url.searchParams.set("respuesta", responseId);
   if (edit) url.searchParams.set("edit", "true");
   return `${url.pathname}${url.search}${url.hash}`;
@@ -784,8 +804,8 @@ function applyThanksCopy(schema, status) {
   }
 }
 
-function absoluteRecoveryUrl(responseId, { edit = false } = {}) {
-  const path = responseRecoveryUrl(responseId, { edit });
+function absoluteRecoveryUrl(responseId, { edit = false, forStudent = false } = {}) {
+  const path = responseRecoveryUrl(responseId, { edit, forStudent });
   try {
     return new URL(path, location.origin).href;
   } catch {
@@ -793,14 +813,15 @@ function absoluteRecoveryUrl(responseId, { edit = false } = {}) {
   }
 }
 
-function showKeepLinkBox(responseId, { allowEdit = true } = {}) {
+function showKeepLinkBox(responseId, { allowEdit = true, teacherShare = false } = {}) {
   const box = $("keep-link-box");
+  const label = $("keep-link-label");
   const urlEl = $("keep-link-url");
   const copyBtn = $("keep-link-copy");
   const status = $("keep-link-status");
   const id = sanitizeResponseId(responseId);
   if (!box || !urlEl) return;
-  if (!id || !allowEdit || teacherMode) {
+  if (!id || !allowEdit) {
     box.hidden = true;
     urlEl.textContent = "";
     urlEl.removeAttribute("href");
@@ -810,7 +831,12 @@ function showKeepLinkBox(responseId, { allowEdit = true } = {}) {
     }
     return;
   }
-  const href = absoluteRecoveryUrl(id, { edit: true });
+  const href = absoluteRecoveryUrl(id, { edit: true, forStudent: teacherShare || teacherMode });
+  if (label) {
+    label.textContent = teacherShare || teacherMode
+      ? "Enlace para que el estudiante edite sus respuestas (puedes enviárselo):"
+      : "Copia este enlace y consérvalo para editar tus respuestas:";
+  }
   urlEl.href = href;
   urlEl.textContent = href;
   if (copyBtn) {
@@ -838,8 +864,34 @@ function showReceipt(responseId, { allowEdit = true } = {}) {
   const editLink = $("done-edit-link");
   const id = sanitizeResponseId(responseId);
   if (!receipt || !idEl || !link) return;
-  // En revisión docente no hace falta el recibo ni el enlace para editar.
-  if (teacherMode || !id) {
+
+  const codeLine = $("done-response-code-line");
+  const hint = $("done-response-hint");
+
+  // Revisión docente: código + enlace copiable para enviarle al estudiante.
+  if (teacherMode) {
+    if (!id) {
+      receipt.hidden = true;
+      showKeepLinkBox("");
+      return;
+    }
+    idEl.textContent = id;
+    if (codeLine) {
+      codeLine.innerHTML = `Código del envío: <strong id="done-response-id">${escapeHtml(id)}</strong>`;
+    }
+    if (hint) {
+      hint.innerHTML = `Puedes enviarle al estudiante el enlace de abajo para que corrija. <a id="done-response-link" href="${escapeHtml(absoluteRecoveryUrl(id, { forStudent: true }))}" target="_blank" rel="noopener">Abrir envío del estudiante</a>`;
+    }
+    if (editLink) {
+      editLink.hidden = true;
+      editLink.removeAttribute("href");
+    }
+    receipt.hidden = false;
+    showKeepLinkBox(id, { allowEdit: true, teacherShare: true });
+    return;
+  }
+
+  if (!id) {
     receipt.hidden = true;
     idEl.textContent = "";
     link.removeAttribute("href");
@@ -851,7 +903,12 @@ function showReceipt(responseId, { allowEdit = true } = {}) {
     return;
   }
   idEl.textContent = id;
-  link.href = responseRecoveryUrl(id);
+  if (codeLine) {
+    codeLine.innerHTML = `Código de tu envío: <strong id="done-response-id">${escapeHtml(id)}</strong>`;
+  }
+  if (hint) {
+    hint.innerHTML = `Guárdalo para volver a ver tus respuestas. <a id="done-response-link" href="${escapeHtml(responseRecoveryUrl(id))}">Abrir este envío</a>`;
+  }
   if (editLink) {
     if (allowEdit) {
       editLink.href = responseRecoveryUrl(id, { edit: true });

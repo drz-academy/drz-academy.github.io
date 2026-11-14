@@ -1036,9 +1036,11 @@ function submissionsToCsv(schema, submissions, site = "https://drz-academy.githu
   for (const row of submissions) {
     const answers = row.answers || {};
     const responseId = row.id || "";
+    // fecha = última escritura (actualización si hubo; si no, el envío original)
+    const fecha = row.updatedAt || row.submittedAt || "";
     const cells = [
       responseId,
-      row.submittedAt || "",
+      fecha,
       row.nombre || "",
       row.correo || "",
       row.cursoId || "",

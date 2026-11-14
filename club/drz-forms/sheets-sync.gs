@@ -9,8 +9,11 @@
  *      CLUB_FORM_ID       = circulo-latino-c1-a1-casos
  *      CLUB_WORKER_URL    = https://drz-club-portal.drz-academy.workers.dev  (opcional)
  *      CLUB_SHEET_NAME    = Respuestas   (opcional)
- * 4. Ejecuta syncClubFormResponses y autoriza.
- * 5. Activadores → reloj → syncClubFormResponses (cada hora / cada día).
+ * 4. Ejecuta syncClubFormResponses (o onOpen) y autoriza.
+ * 5. Recarga la hoja: menú «Club Dr. Z» → «Actualizar respuestas».
+ * 6. (Opcional) Activadores → reloj → syncClubFormResponses (cada hora / cada día).
+ * 7. (Opcional) Botón en la hoja: Insertar → Dibujo → «Actualizar» →
+ *    Asignar secuencia → actualizarRespuestasDesdeMenu
  *
  * Si el proyecto ya es independiente (no ligado a una hoja), añade también:
  *      CLUB_SPREADSHEET_ID = el id de la URL de la hoja
@@ -89,6 +92,38 @@ function ensureSyncStamp_(ss, formId, count) {
     meta.getRange(1, 1, 1, 3).setValues([["form_id", "synced_at", "respuestas"]]);
   }
   meta.getRange(2, 1, 1, 3).setValues([[formId, new Date().toISOString(), count]]);
+}
+
+/**
+ * Menú en la hoja (recarga la pestaña tras pegar/actualizar el script).
+ * Club Dr. Z → Actualizar respuestas
+ */
+function onOpen() {
+  SpreadsheetApp.getUi()
+    .createMenu("Club Dr. Z")
+    .addItem("Actualizar respuestas", "actualizarRespuestasDesdeMenu")
+    .addToUi();
+}
+
+/**
+ * Entrada del menú / botón dibujado en la hoja.
+ * Muestra un aviso al terminar o si falla.
+ */
+function actualizarRespuestasDesdeMenu() {
+  var ui = SpreadsheetApp.getUi();
+  try {
+    syncClubFormResponses();
+    var props = PropertiesService.getScriptProperties();
+    var formId = String(props.getProperty("CLUB_FORM_ID") || "").trim();
+    var sheetName = String(props.getProperty("CLUB_SHEET_NAME") || DEFAULT_SHEET).trim() || DEFAULT_SHEET;
+    ui.alert(
+      "Respuestas actualizadas",
+      "Formulario: " + formId + "\nPestaña: " + sheetName + "\nHora: " + new Date().toLocaleString(),
+      ui.ButtonSet.OK
+    );
+  } catch (err) {
+    ui.alert("Error al sincronizar", String(err && err.message ? err.message : err), ui.ButtonSet.OK);
+  }
 }
 
 /** Prueba manual desde el editor de Apps Script. */

@@ -64,7 +64,10 @@ club/drz-forms/
 | `revela_certificado` | `true`: al enviar, si hay certificado, se muestra el enlace. |
 | `numerar_preguntas` | `false` para no numerar (p. ej. frases de una actividad). |
 | `listas` | Diccionario de opciones reutilizables (p. ej. casos gramaticales) para tipo `completar`. |
-| `etiqueta` | Texto corto de contexto (p. ej. «Actividad de Curso»). |
+| `etiqueta` | Texto corto de contexto (p. ej. «Actividad de Curso»). También es el **título** del preview en WhatsApp. |
+| `curso` | Slug de la carpeta del curso (`circulo-latino`). Sirve para la **imagen** del preview (usa `cursos/<curso>/images/og-share.jpg` o `og-preview.jpg`). |
+| `og_imagen` | URL absoluta (o ruta del sitio) que anula la imagen del curso. |
+| `og_descripcion` | Texto del preview; si falta, se usa el `titulo` del formulario. |
 
 Cada envío recibe un `id` único. La persona puede reabrir el resumen con `?respuesta=<id>` o editar con `?respuesta=<id>&edit=true`.
 
@@ -169,12 +172,31 @@ El HTML/JS/JSON estáticos se publican con el deploy de GitHub Pages (unos minut
 
 ### Checklist típico de un form nuevo
 
-1. Crear `club/drz-forms/<id>.json`
+1. Crear `club/drz-forms/<id>.json` (incluye `curso` si quieres banner del curso en WhatsApp)
 2. Probar en local con `?preview=1` o `?token=…`
-3. Commit + push a `main`
-4. `make club-sync`
-5. Abrir la URL de producción y enviar una respuesta de prueba
-6. (Opcional) Conectar Google Sheets con `sheets-sync.gs` (sección 5)
+3. Regenerar previews OG: `python3 club/bin/generar_forms_preview.py`
+4. Commit + push a `main`
+5. `make club-sync`
+6. Abrir la URL de producción y enviar una respuesta de prueba
+7. (Opcional) Conectar Google Sheets con `sheets-sync.gs` (sección 5)
+
+### Preview en WhatsApp / redes
+
+WhatsApp no ejecuta JavaScript: no puede leer el título del JSON desde `drz-form.html`. Por eso el build genera una página estática por formulario:
+
+```
+/club/drz-forms/p/<id>.html
+```
+
+Esa página lleva `og:title`, `og:description` y `og:image`, y redirige al formulario conservando `token`, `respuesta`, `edit`, etc. El enlace que se copia tras enviar ya usa esa URL.
+
+```bash
+python3 club/bin/generar_forms_preview.py
+# o al armar el sitio:
+make sync-site
+```
+
+Tras publicar, si WhatsApp sigue mostrando la tarjeta vieja, refresca la caché en el [Depurador de contenido compartido de Meta](https://developers.facebook.com/tools/debug/).
 
 ---
 
@@ -244,8 +266,18 @@ El archivo [`sheets-sync.gs`](sheets-sync.gs) descarga el CSV del Worker y lo vu
 | `CLUB_WORKER_URL` | Opcional. Por defecto: `https://drz-club-portal.drz-academy.workers.dev` |
 | `CLUB_SHEET_NAME` | Opcional. Pestaña destino; por defecto `Respuestas` |
 
-6. Selecciona la función `syncClubFormResponses` (o `testSyncClubFormResponses`) → **Ejecutar** → autoriza el acceso.
-7. (Opcional) **Activadores** → añadir activador de reloj → `syncClubFormResponses` (cada hora o cada día).
+6. Selecciona la función `syncClubFormResponses` (o `onOpen`) → **Ejecutar** → autoriza el acceso.
+7. Vuelve a la hoja y **recarga** (F5). Debe aparecer el menú **Club Dr. Z** → **Actualizar respuestas**.
+8. (Opcional) **Activadores** → añadir activador de reloj → `syncClubFormResponses` (cada hora o cada día).
+
+### Botón en la hoja (además del menú)
+
+1. En la hoja: **Insertar → Dibujo** (o una forma). Escribe «Actualizar respuestas» y guarda.
+2. Clic en el dibujo → menú ⋮ → **Asignar secuencia de comandos**.
+3. Escribe exactamente: `actualizarRespuestasDesdeMenu`
+4. Acepta. Al hacer clic en el dibujo, baja de nuevo el CSV del Worker.
+
+Si no ves el menú **Club Dr. Z**, abre Apps Script, ejecuta `onOpen` una vez y recarga la hoja.
 
 ### Si el proyecto Apps Script no está ligado a una hoja
 
