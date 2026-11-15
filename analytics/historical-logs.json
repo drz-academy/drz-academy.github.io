@@ -1,5 +1,73 @@
 [
   {
+    "id": "a92861bc-4eb7-4a68-9efa-f9b92d2c966f",
+    "timestampServer": "2026-11-15T16:17:19.380Z",
+    "ip": "2800:e2:b680:107f:1a58:ed61:193e:87e6",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA85MDU1OTM4NTMxNTA3NTQAAaeCGnEyVidWIBGGShhFhl8-JPCF-ibyzTx8XAt-n2h4367iiZdASfXeCY2Ssw_aem_qAp8eb6WJUSEFnGnsYQnLw",
+    "referrer": "https://l.instagram.com/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-11-15T16:17:19.456Z"
+  },
+  {
+    "id": "9e91650d-61b2-4bca-b19b-005fcfdf0497",
+    "timestampServer": "2026-11-15T14:34:00.390Z",
+    "ip": "2a0c:5a81:d404:5900:a081:1a8d:c795:9939",
+    "country": "ES",
+    "eventType": "demo_page_view",
+    "page": "/demos/difraccion/",
+    "url": "https://drz-academy.github.io/demos/difraccion/",
+    "referrer": "https://www.bing.com/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+    "language": "es",
+    "details": {
+      "demoId": "difraccion",
+      "demoName": "Difracción y criterio de"
+    },
+    "timestampClient": "2026-11-15T14:34:00.184Z"
+  },
+  {
+    "id": "a914b89f-8d0a-4aaf-bc3e-94545d64d1cb",
+    "timestampServer": "2026-11-15T13:01:30.832Z",
+    "ip": "40.77.167.131",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/136.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-11-15T13:01:28.262Z"
+  },
+  {
+    "id": "d21fa6ab-02c7-45a1-8ccf-9aff3f1d4746",
+    "timestampServer": "2026-11-15T02:22:51.831Z",
+    "ip": "47.82.13.121",
+    "country": "SG",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-11-15T02:22:51.350Z"
+  },
+  {
     "id": "d5b884e9-affc-4757-bb97-ca3a3d177c0d",
     "timestampServer": "2026-11-14T16:11:16.124Z",
     "ip": "186.121.20.20",
