@@ -1,5 +1,56 @@
 [
   {
+    "id": "52f964b7-1248-469e-abed-beb644e7e390",
+    "timestampServer": "2026-11-17T16:51:24.653Z",
+    "ip": "62.36.118.151",
+    "country": "ES",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.0.1 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-11-17T16:51:23.632Z"
+  },
+  {
+    "id": "a589fa0f-231c-4607-ba16-3c06be1a99b2",
+    "timestampServer": "2026-11-17T14:25:05.786Z",
+    "ip": "206.203.59.205",
+    "country": "CR",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 27_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/157.0.8103.37 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-11-17T14:25:05.406Z"
+  },
+  {
+    "id": "c9be9214-3d3a-4abd-bac3-a93dabd59537",
+    "timestampServer": "2026-11-17T02:14:43.465Z",
+    "ip": "170.55.53.50",
+    "country": "US",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?form=circulo-latino-c1-a1-casos&token=seneca",
+    "referrer": "https://classroom.google.com/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6.2 Safari/605.1.15",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a1-casos",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-17T02:14:43.204Z"
+  },
+  {
     "id": "0d0f1adc-0817-43f9-8f35-3d0dcc51b2ae",
     "timestampServer": "2026-11-16T19:12:58.249Z",
     "ip": "194.220.123.204",
