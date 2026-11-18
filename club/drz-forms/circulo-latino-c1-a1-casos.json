@@ -13,7 +13,7 @@
   "mostrar_respuestas": true,
   "examen": true,
   "muestra_puntaje": true,
-  "muestra_respuestas": "correctas",
+  "muestra_respuestas": "todas",
   "repeticiones": 0,
   "requiere_curso": false,
   "revela_certificado": false,
