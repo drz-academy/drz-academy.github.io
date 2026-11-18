@@ -4,7 +4,7 @@ const TOKEN_KEY = "drz-club-token";
 const ADMIN_TOKEN_KEY = "drz-forms-export-token";
 const WORKER_URL = "https://drz-club-portal.drz-academy.workers.dev";
 const FORM_ID_RE = /^[a-z0-9][a-z0-9_-]{0,63}$/;
-const SCHEMA_VERSION = "20261118i";
+const SCHEMA_VERSION = "20261118j";
 const CLASSROOM_REF_KEY = "drz-form-classroom-ref";
 
 function applyFormTheme(schema) {
@@ -326,6 +326,49 @@ function responseRecoveryUrl(responseId, { edit = false, forStudent = false } = 
   url.searchParams.set("respuesta", responseId);
   if (edit) url.searchParams.set("edit", "true");
   return `${url.pathname}${url.search}${url.hash}`;
+}
+
+function normalizeTeacherEmail(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
+/** Enlace de revisión docente apuntando a un envío concreto (compartible entre profesores). */
+function teacherReviewUrl(row = null) {
+  const formId = sanitizeId(qs("form") || activeSchema?.id || "");
+  const url = new URL(location.pathname, location.origin);
+  url.search = "";
+  if (formId) url.searchParams.set("form", formId);
+  const tokenDocente = String(qs("token_docente") || qs("token_profesor") || "").trim();
+  if (tokenDocente) url.searchParams.set("token_docente", tokenDocente);
+  const responseId = sanitizeResponseId(row?.id || "");
+  if (responseId) url.searchParams.set("respuesta", responseId);
+  const correo = normalizeTeacherEmail(row?.correo);
+  if (correo) url.searchParams.set("correo", correo);
+  return `${url.pathname}${url.search}${url.hash}`;
+}
+
+function syncTeacherUrl(row = null) {
+  if (!teacherMode) return;
+  const next = teacherReviewUrl(row);
+  const current = `${location.pathname}${location.search}${location.hash}`;
+  if (next === current) return;
+  history.replaceState({}, "", next);
+}
+
+function findTeacherIndexFromUrl() {
+  const responseId = sanitizeResponseId(qs("respuesta"));
+  if (responseId) {
+    const byId = teacherRows.findIndex((row) => sanitizeResponseId(row?.id) === responseId);
+    if (byId >= 0) return byId;
+  }
+  const correo = normalizeTeacherEmail(qs("correo") || qs("email"));
+  if (correo) {
+    const byMail = teacherRows.findIndex(
+      (row) => normalizeTeacherEmail(row?.correo) === correo,
+    );
+    if (byMail >= 0) return byMail;
+  }
+  return 0;
 }
 
 function mapError(err) {
@@ -1169,6 +1212,7 @@ function showTeacherSubmission(index) {
     $("cert-box").hidden = true;
     $("cert-pending").hidden = true;
     syncTeacherControls();
+    syncTeacherUrl(null);
     showView("view-done");
     return;
   }
@@ -1195,6 +1239,7 @@ function showTeacherSubmission(index) {
   $("cert-box").hidden = true;
   $("cert-pending").hidden = true;
   syncTeacherControls();
+  syncTeacherUrl(row);
   showView("view-done");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -1232,9 +1277,9 @@ async function startTeacherReview(schema, formId) {
   }
   teacherRows = Array.isArray(data.submissions) ? data.submissions : [];
   const total = Number(data.total) || teacherRows.length;
-  $("form-intro").textContent = `${teacherCountLabel(total)} Navega con el correo o con las flechas.`;
+  $("form-intro").textContent = `${teacherCountLabel(total)} Navega con el correo o con las flechas. Puedes copiar la URL para compartir este envío con otro profesor.`;
   bindTeacherControls();
-  showTeacherSubmission(0);
+  showTeacherSubmission(findTeacherIndexFromUrl());
 }
 
 function renderScoreBox(status = {}) {

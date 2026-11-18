@@ -56,7 +56,7 @@ club/drz-forms/
 |-------|----------|
 | `fondo` | `"claro"` u `"oscuro"` (por defecto oscuro). |
 | `token` | Clave del enlace compartido (`?token=`). Si falta o no coincide, pide login al Club. |
-| `token_docente` | Clave de revisión docente (`?token_docente=`). Lista y navega todas las respuestas. |
+| `token_docente` | Clave de revisión docente (`?token_docente=`). Lista y navega todas las respuestas. Al cambiar de estudiante, la URL se actualiza con `respuesta=<id>` y `correo=` para poder compartir ese envío con otro profesor. |
 | `boton` | `"Grabar"` cambia las etiquetas del botón (útil en actividades). |
 | `titulo_gracias` / `mensaje_gracias` | Pantalla final tras enviar. |
 | `mostrar_respuestas` | `true`: tras enviar, muestra un resumen. |
