@@ -1,4 +1,4 @@
-.PHONY: help build cursos pages demos sync-site quickstart start stop worker-deploy update club-worker-deploy club-dev club-sync club-forms-export club-forms-reset club-base-datos club-clasificar club-informe club-boletines generar-boletines club-enviar-boletines club-certificados club-certificados-drive club-certificados-curso club-certificados-hotmart club-reset-pass portal-worker-deploy portal-dev portal-sync
+.PHONY: help build cursos pages demos sync-site quickstart start stop worker-deploy update club-worker-deploy club-dev club-sync club-forms-export club-forms-recalificar club-forms-reset club-base-datos club-clasificar club-informe club-boletines generar-boletines club-enviar-boletines club-certificados club-certificados-drive club-certificados-curso club-certificados-hotmart club-reset-pass portal-worker-deploy portal-dev portal-sync
 
 PORT ?= 8000
 HOST ?= 127.0.0.1
@@ -34,6 +34,7 @@ help:
 	@echo "  make club-worker-deploy - Despliega el Worker del Club"
 	@echo "  make club-sync          - Sube miembros, catálogo y formularios de club/ a Cloudflare KV"
 	@echo "  make club-forms-export  - Descarga respuestas (JSON en personal/ y CSV en club/drz-forms/)"
+	@echo "  make club-forms-recalificar FORM=id - Recalcula puntajes tras cambiar claves del examen"
 	@echo "  make club-forms-reset   - Borra todas las evaluaciones en el Worker (pide confirmación)"
 	@echo "  make club-reset-pass    - Borra todas las claves del Club (vuelven a crearla)"
 	@echo "  make club-dev           - Worker local en http://127.0.0.1:8787"
@@ -226,6 +227,10 @@ club-sync portal-sync:
 
 club-forms-export:
 	@python3 club/client/export_forms.py --csv-repo $(if $(FORM),--form $(FORM),) $(if $(CURSO),--curso $(CURSO),)
+
+club-forms-recalificar:
+	@test -n "$(FORM)" || (echo "Uso: make club-forms-recalificar FORM=circulo-latino-c1-a1-casos"; exit 1)
+	@python3 club/drz-forms/recalificar.py $(FORM)
 
 club-forms-reset:
 	@python3 club/client/reset_forms.py $(if $(FORM),--form $(FORM),)

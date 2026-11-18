@@ -479,6 +479,18 @@ Usa `.secrets/club-admin-token` y `.secrets/club-worker-url`.
 - JSON: `club/personal/formularios/` (gitignored)  
 - CSV: `club/drz-forms/<id>-respuestas.csv` (no se publica en Pages)
 
+### Recalificar tras cambiar claves
+
+Si editaste `respuesta` / `puntaje` en el JSON de un examen, sincroniza el esquema y recalcula los puntajes ya guardados:
+
+```bash
+python3 club/drz-forms/recalificar.py circulo-latino-c1-a1-casos.json
+# o:
+make club-forms-recalificar FORM=circulo-latino-c1-a1-casos
+```
+
+Por defecto ejecuta `club-sync` y luego `POST /admin/regrade-forms`. Con `--solo-recalificar` omite el sync (usa el esquema que ya está en KV).
+
 ### Borrar respuestas (pruebas)
 
 ```bash
@@ -567,6 +579,7 @@ Repite el setup en otra hoja (u otro proyecto Apps Script) con otro `CLUB_FORM_I
 | `make club-sync` | Sube miembros, `cursos.json` y esquemas `drz-forms/*.json` a KV |
 | `make club-worker-deploy` | Publica el Worker |
 | `make club-forms-export` | Baja respuestas (JSON en `personal/`, CSV en `drz-forms/`) |
+| `make club-forms-recalificar FORM=…` | Sync + recalcula puntajes de un examen |
 | `make club-forms-reset` | Borra respuestas en KV (pide confirmación) |
 | Push a `main` | Publica HTML/JS/JSON estáticos en GitHub Pages |
 
