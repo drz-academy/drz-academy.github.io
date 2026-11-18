@@ -4,7 +4,7 @@ const TOKEN_KEY = "drz-club-token";
 const ADMIN_TOKEN_KEY = "drz-forms-export-token";
 const WORKER_URL = "https://drz-club-portal.drz-academy.workers.dev";
 const FORM_ID_RE = /^[a-z0-9][a-z0-9_-]{0,63}$/;
-const SCHEMA_VERSION = "20261118e";
+const SCHEMA_VERSION = "20261118f";
 const CLASSROOM_REF_KEY = "drz-form-classroom-ref";
 
 function applyFormTheme(schema) {
@@ -800,9 +800,17 @@ function gradeExam(schema, answers) {
   return { ok: earned, total: max, puntaje: `${earned}/${max}`, detalles };
 }
 
+function muestraRespuestasOff(schema) {
+  const v = schema?.muestra_respuestas;
+  if (v === false || v === 0) return true;
+  const raw = String(v ?? "").trim().toLowerCase();
+  return raw === "false" || raw === "no" || raw === "off" || raw === "ninguna" || raw === "0";
+}
+
 function examFeedbackMode(schema) {
-  // El profesor siempre ve claves y comentarios, aunque el form diga "correctas".
+  // El profesor siempre ve claves y comentarios, aunque el form diga "correctas" o false.
   if (teacherMode) return "todas";
+  if (muestraRespuestasOff(schema)) return "";
   const raw = String(schema?.muestra_respuestas || "").trim().toLowerCase();
   if (raw === "correctas" || raw === "todas") return raw;
   return "";
@@ -842,6 +850,8 @@ function formatAnswerValue(question, value, schema) {
 }
 
 function wantsAnswerSummary(schema) {
+  // false en muestra_respuestas oculta el listado (salvo vista docente).
+  if (!teacherMode && muestraRespuestasOff(schema)) return false;
   if (examFeedbackMode(schema)) return true;
   const flag = schema?.mostrar_respuestas;
   return flag === true || flag === 1 || String(flag || "").trim().toLowerCase() === "true";

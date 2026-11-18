@@ -70,7 +70,7 @@ club/drz-forms/
 | `og_descripcion` | Texto del preview; si falta, se usa el `titulo` del formulario. |
 | `examen` | `true`: el formulario se califica. Guarda el puntaje (`36/62`) en el envío. Por defecto `false`. |
 | `muestra_puntaje` | `true`: al terminar muestra el puntaje obtenido. |
-| `muestra_respuestas` | Feedback tras enviar: `"correctas"` (todas las preguntas; verde/rojo **sin** revelar claves ni comentarios) o `"todas"` (igual + `[clave]` en errores y el `comentario`). Vacío = sin feedback de examen. Con `token_docente` siempre se comporta como `"todas"`. |
+| `muestra_respuestas` | Feedback tras enviar: `"correctas"` (verde/rojo sin claves) o `"todas"` (igual + `[clave]` y `comentario`). `false` = **no muestra las respuestas** (ni el resumen). Vacío = sin feedback de examen (sí puede mostrarse el resumen si `mostrar_respuestas` es `true`). Con `token_docente` siempre se comporta como `"todas"`. |
 | `repeticiones` | `0` (default) = editar sin límite. Si es `N>0`, tras `N` envíos ya no aparece el enlace de edición. |
 
 Cada envío recibe un `id` único. La persona puede reabrir el resumen con `?respuesta=<id>` o editar con `?respuesta=<id>&edit=true`.
