@@ -4,7 +4,7 @@ const TOKEN_KEY = "drz-club-token";
 const ADMIN_TOKEN_KEY = "drz-forms-export-token";
 const WORKER_URL = "https://drz-club-portal.drz-academy.workers.dev";
 const FORM_ID_RE = /^[a-z0-9][a-z0-9_-]{0,63}$/;
-const SCHEMA_VERSION = "20261118j";
+const SCHEMA_VERSION = "20261118k";
 const CLASSROOM_REF_KEY = "drz-form-classroom-ref";
 
 function applyFormTheme(schema) {
@@ -1238,6 +1238,7 @@ function showTeacherSubmission(index) {
   showReceipt(row.id || "");
   $("cert-box").hidden = true;
   $("cert-pending").hidden = true;
+  bindTeacherControls();
   syncTeacherControls();
   syncTeacherUrl(row);
   showView("view-done");
@@ -1248,10 +1249,13 @@ function bindTeacherControls() {
   const select = $("teacher-email");
   const prev = $("teacher-prev");
   const next = $("teacher-next");
+  setTeacherBarVisible(true);
   if (select) {
+    const current = String(teacherIndex);
     select.innerHTML = teacherRows.map((row, i) => (
       `<option value="${i}">${escapeHtml(teacherOptionLabel(row, i))}</option>`
     )).join("");
+    if (select.options.length) select.value = current;
     select.onchange = () => showTeacherSubmission(Number(select.value) || 0);
   }
   if (prev) prev.onclick = () => showTeacherSubmission(teacherIndex - 1);
