@@ -3,6 +3,7 @@
   "etiqueta": "Actividad de Curso",
   "titulo": "Círculo Latino Ciclo 1\n\nActividad 2: Casos en Español",
   "curso": "circulo-latino",
+  "og_imagen": "/cursos/circulo-latino/images/og-actividades.webp",
   "intro": "Si las siguientes oraciones estuvieran en latín, ¿qué caso tendría cada sustantivo, adjetivo o pronombre? Señala también los verbos.\n\n**Recuerda:** el verbo *ser* (*sum*) rige nominativo. Los adverbios son indeclinables.\n\n**Casos**: *Nominativo*: sujeto (o atributo con *ser*). Vocativo: llamado o exclamación. Genitivo: pertenencia (¿de quién?). Dativo: complemento indirecto (¿a quién?, ¿para quién?). Acusativo: complemento directo (¿qué?). Ablativo: complemento circunstancial (con, por, de, en…).\n\n**Importante:** puedes dejar el formulario a medias. Pulsa *Grabar respuestas*, conserva el enlace y vuelve más tarde para continuar.",
   "fondo": "claro",
   "token": "seneca",
