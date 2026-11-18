@@ -11,7 +11,8 @@ club/drz-forms/
 ├── drz-stats.html / .js       Estadísticas anónimas (admin)
 ├── sheets-sync.gs             Apps Script: respuestas → Google Sheets
 ├── evaluacion-curso.json      Evaluación que desbloquea certificados
-├── circulo-latino-c1-a1-casos.json   Ejemplo de actividad de curso
+├── circulo-latino-c1-a1-casos.json   Actividad 1 (casos)
+├── circulo-latino-c1-a2-casos.json   Actividad 2 (casos)
 └── *-respuestas.csv           Backup local / CI (no se publica en Pages)
 ```
 
@@ -590,5 +591,6 @@ Repite el setup en otra hoja (u otro proyecto Apps Script) con otro `CLUB_FORM_I
 | Archivo | Uso |
 |---------|-----|
 | [`evaluacion-curso.json`](evaluacion-curso.json) | Evaluación post-curso; desbloquea certificado |
-| [`circulo-latino-c1-a1-casos.json`](circulo-latino-c1-a1-casos.json) | Actividad con `token`, `completar` y `listas` |
+| [`circulo-latino-c1-a1-casos.json`](circulo-latino-c1-a1-casos.json) | Actividad 1: casos (`completar` + claves) |
+| [`circulo-latino-c1-a2-casos.json`](circulo-latino-c1-a2-casos.json) | Actividad 2: casos (sin claves aún; no muestra puntaje ni respuestas) |
 | [`sheets-sync.gs`](sheets-sync.gs) | Sync automático a Google Sheets |

@@ -1,0 +1,146 @@
+{
+  "id": "circulo-latino-c1-a2-casos",
+  "etiqueta": "Actividad de Curso",
+  "titulo": "Círculo Latino Ciclo 1\n\nActividad 2: Casos en Español",
+  "curso": "circulo-latino",
+  "intro": "Si las siguientes oraciones estuvieran en latín, ¿qué caso tendría cada sustantivo, adjetivo o pronombre? Señala también los verbos.\n\n**Recuerda:** el verbo *ser* (*sum*) rige nominativo. Los adverbios son indeclinables.\n\n**Casos**: *Nominativo*: sujeto (o atributo con *ser*). Vocativo: llamado o exclamación. Genitivo: pertenencia (¿de quién?). Dativo: complemento indirecto (¿a quién?, ¿para quién?). Acusativo: complemento directo (¿qué?). Ablativo: complemento circunstancial (con, por, de, en…).\n\n**Importante:** puedes dejar el formulario a medias. Pulsa *Grabar respuestas*, conserva el enlace y vuelve más tarde para continuar.",
+  "fondo": "claro",
+  "token": "seneca",
+  "token_docente": "armavirumquecanotroiaequiprimusaboris",
+  "boton": "Grabar",
+  "titulo_gracias": "¡Gracias por completar tu actividad!",
+  "mensaje_gracias": "Ya registramos tus respuestas. Conserva el enlace para volver a editarlas más tarde.",
+  "mostrar_respuestas": false,
+  "examen": true,
+  "muestra_puntaje": false,
+  "muestra_respuestas": false,
+  "repeticiones": 0,
+  "requiere_curso": false,
+  "revela_certificado": false,
+  "numerar_preguntas": false,
+  "prueba_curso_nombre": "Círculo Latino",
+  "listas": {
+    "caso": [
+      "Nominativo",
+      "Vocativo",
+      "Genitivo",
+      "Dativo",
+      "Acusativo",
+      "Ablativo",
+      "(Verbo)",
+      "(Indeclinable)"
+    ]
+  },
+  "secciones": [
+    {
+      "id": "identificacion",
+      "titulo": "Identificación",
+      "explicacion": "Usaremos estos datos solo para identificar tu actividad.",
+      "preguntas": [
+        {
+          "id": "correo",
+          "enunciado": "Correo electrónico",
+          "explicacion": "El mismo con el que te inscribiste en el curso.",
+          "tipo": "texto",
+          "obligatoria": true,
+          "puntaje": 0
+        },
+        {
+          "id": "cedula",
+          "enunciado": "Cédula",
+          "explicacion": "Número de documento, sin puntos ni espacios.",
+          "tipo": "texto",
+          "obligatoria": true,
+          "puntaje": 0
+        }
+      ]
+    },
+    {
+      "id": "casos",
+      "titulo": "Casos en español: sustantivos, adjetivos, pronombres y **verbos**",
+      "explicacion": "Identifica el caso de cada sustantivo, adjetivo y pronombre marcado. **También debes identificar los verbos:** en su menú elige **(Verbo)**. Si es un adverbio u otra palabra indeclinable, elige **(Indeclinable)**. Recuerda: el adjetivo lleva el mismo caso que el sustantivo al que califica.",
+      "preguntas": [
+        {
+          "id": "frase_01",
+          "enunciado": "**Frase 1**:\n*Las madres lavan a sus niños con agua tibia*",
+          "tipo": "completar",
+          "texto": "Las madres [caso] lavan [caso] a sus [caso] niños [caso] con agua [caso] tibia [caso]",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "frase_02",
+          "enunciado": "**Frase 2**:\n*La estrella de los navegantes señala el norte*",
+          "tipo": "completar",
+          "texto": "La estrella [caso] de los navegantes [caso] señala [caso] el norte [caso]",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "frase_03",
+          "enunciado": "**Frase 3**:\n*Hija mía, la violencia se supera con la paciencia*",
+          "tipo": "completar",
+          "texto": "Hija [caso] mía [caso], la violencia [caso] se [caso] supera [caso] con la paciencia [caso]",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "frase_04",
+          "enunciado": "**Frase 4**:\n*La sabiduría de los padres se transmite a los hijos*",
+          "tipo": "completar",
+          "texto": "La sabiduría [caso] de los padres [caso] se [caso] transmite [caso] a los hijos [caso]",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "frase_05",
+          "enunciado": "**Frase 5**:\n*Las acciones de las personas buenas son un ejemplo*",
+          "tipo": "completar",
+          "texto": "Las acciones [caso] de las personas [caso] buenas [caso] son [caso] un ejemplo [caso]",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "frase_06",
+          "enunciado": "**Frase 6**:\n*Los turistas admiran el anfiteatro de Tarragona*",
+          "tipo": "completar",
+          "texto": "Los turistas [caso] admiran [caso] el anfiteatro [caso] de Tarragona [caso]",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "frase_07",
+          "enunciado": "**Frase 7**:\n*Escuchamos con paciencia el largo discurso del jefe*",
+          "tipo": "completar",
+          "texto": "Escuchamos [caso] con paciencia [caso] el largo [caso] discurso [caso] del jefe [caso]",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "frase_08",
+          "enunciado": "**Frase 8**:\n*Descansamos por la tarde a la sombra de un árbol*",
+          "tipo": "completar",
+          "texto": "Descansamos [caso] por la tarde [caso] a la sombra [caso] de un árbol [caso]",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "frase_09",
+          "enunciado": "**Frase 9**:\n*Los atacantes iban armados con puñales afilados*",
+          "tipo": "completar",
+          "texto": "Los atacantes [caso] iban [caso] armados [caso] con puñales [caso] afilados [caso]",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "frase_10",
+          "enunciado": "**Frase 10**:\n*De vez en cuando se despierta el león del zoológico*",
+          "tipo": "completar",
+          "texto": "De vez en cuando [caso] se [caso] despierta [caso] el león [caso] del zoológico [caso]",
+          "obligatoria": false,
+          "puntaje": 1
+        }
+      ]
+    }
+  ]
+}
