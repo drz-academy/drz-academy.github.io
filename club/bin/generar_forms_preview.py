@@ -68,8 +68,23 @@ def resolve_image(schema: dict) -> str:
     return resolve_course_image(curso) or f"{SITE}/assets/og-drz.png"
 
 
+def titulo_lines(schema: dict) -> list[str]:
+    raw = str(schema.get("titulo") or "")
+    return [flatten_text(line) for line in raw.splitlines() if flatten_text(line)]
+
+
 def resolve_title(schema: dict) -> str:
-    """Línea principal del preview (negrita en WhatsApp)."""
+    """Línea principal del preview / favorito (p. ej. «Actividad 2: Casos en Español»)."""
+    custom = flatten_text(schema.get("og_titulo") or schema.get("og_title") or "")
+    if custom:
+        return custom
+    lines = titulo_lines(schema)
+    if lines:
+        # Si hay varias líneas («Círculo…» + «Actividad N…»), prioriza la de actividad.
+        for line in reversed(lines):
+            if line.lower().startswith("actividad"):
+                return line
+        return lines[-1]
     etiqueta = flatten_text(schema.get("etiqueta") or "")
     if etiqueta:
         return etiqueta
@@ -80,16 +95,22 @@ def resolve_title(schema: dict) -> str:
 
 
 def resolve_description(schema: dict) -> str:
-    """Texto bajo el título: el título del formulario (lo que pedimos en WhatsApp)."""
+    """Texto bajo el título en WhatsApp."""
     custom = str(schema.get("og_descripcion") or schema.get("og_description") or "").strip()
     if custom:
         return first_sentence(custom)
-    titulo = flatten_text(schema.get("titulo") or "")
-    if titulo:
-        return first_sentence(titulo, limit=200)
+    lines = titulo_lines(schema)
+    title = resolve_title(schema)
+    # Descripción = resto del título del form (p. ej. «Círculo Latino Ciclo 1»).
+    extras = [line for line in lines if line != title]
+    if extras:
+        return first_sentence(" — ".join(extras), limit=200)
     intro = first_sentence(schema.get("intro") or "")
     if intro:
         return intro
+    etiqueta = flatten_text(schema.get("etiqueta") or "")
+    if etiqueta and etiqueta != title:
+        return etiqueta
     return "Formulario del Dr. Z Academy Club"
 
 

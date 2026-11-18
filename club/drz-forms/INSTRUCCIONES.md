@@ -65,10 +65,11 @@ club/drz-forms/
 | `revela_certificado` | `true`: al enviar, si hay certificado, se muestra el enlace. |
 | `numerar_preguntas` | `false` para no numerar (p. ej. frases de una actividad). |
 | `listas` | Diccionario de opciones reutilizables (p. ej. casos gramaticales) para tipo `completar`. |
-| `etiqueta` | Texto corto de contexto (p. ej. «Actividad de Curso»). También es el **título** del preview en WhatsApp. |
+| `etiqueta` | Texto corto de contexto en la página (p. ej. «Actividad de Curso»). |
 | `curso` | Slug de la carpeta del curso (`circulo-latino`). Sirve para la **imagen** del preview (usa `cursos/<curso>/images/og-share.jpg` o `og-preview.jpg`). |
-| `og_imagen` | URL absoluta (o ruta del sitio) que anula la imagen del curso. |
-| `og_descripcion` | Texto del preview; si falta, se usa el `titulo` del formulario. |
+| `og_imagen` | URL absoluta (o ruta del sitio) que anula la imagen del curso. Preferir **JPG/PNG** (WhatsApp a veces no muestra WebP). |
+| `og_titulo` | Anula el título del preview / favorito. Si falta, se usa la línea «Actividad…» del `titulo`. |
+| `og_descripcion` | Texto del preview; si falta, el resto del `titulo` o el `intro`. |
 | `examen` | `true`: el formulario se califica. Guarda el puntaje (`36/62`) en el envío. Por defecto `false`. |
 | `muestra_puntaje` | `true`: al terminar muestra el puntaje obtenido. |
 | `muestra_respuestas` | Tras enviar: `"respuestas"` (solo lo enviado; sin corrección ni puntaje, también en vista docente), `"correctas"` (verde/rojo sin claves) o `"todas"` (igual + `[clave]` y `comentario`). `false` = no muestra el listado. Vacío = sin feedback de examen (sí puede mostrarse el resumen si `mostrar_respuestas` es `true`). Con `token_docente`, `"correctas"`/`false`/vacío se elevan a `"todas"`; `"respuestas"` se respeta. |
@@ -437,7 +438,7 @@ WhatsApp no ejecuta JavaScript: no puede leer el título del JSON desde `drz-for
 /club/drz-forms/p/<id>.html
 ```
 
-Esa página lleva `og:title`, `og:description` y `og:image`, y redirige al formulario conservando `token`, `respuesta`, `edit`, etc. El enlace que se copia tras enviar ya usa esa URL.
+Esa página lleva `og:title`, `og:description` y `og:image`, y redirige al formulario conservando `token`, `token_docente`, `respuesta`, `edit`, etc. Los enlaces de estudiante y la URL de revisión docente (barra de dirección) usan `/p/…` para que WhatsApp muestre la tarjeta correcta. Si pegas `drz-form.html?…` verás el preview genérico del Club.
 
 ```bash
 python3 club/bin/generar_forms_preview.py

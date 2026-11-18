@@ -4,7 +4,7 @@ const TOKEN_KEY = "drz-club-token";
 const ADMIN_TOKEN_KEY = "drz-forms-export-token";
 const WORKER_URL = "https://drz-club-portal.drz-academy.workers.dev";
 const FORM_ID_RE = /^[a-z0-9][a-z0-9_-]{0,63}$/;
-const SCHEMA_VERSION = "20261118k";
+const SCHEMA_VERSION = "20261118m";
 const CLASSROOM_REF_KEY = "drz-form-classroom-ref";
 
 function applyFormTheme(schema) {
@@ -305,6 +305,21 @@ function formSharePath(formId) {
   return `/club/drz-forms/p/${encodeURIComponent(id)}.html`;
 }
 
+/** Título corto para favoritos / pestaña (p. ej. «Actividad 2: Casos en Español»). */
+function formDocumentTitle(schema) {
+  const custom = String(schema?.og_titulo || schema?.og_title || "").trim();
+  if (custom) return custom.replace(/\s+/g, " ");
+  const lines = String(schema?.titulo || "")
+    .split(/\n+/)
+    .map((line) => line.replace(/[*_`]+/g, "").trim())
+    .filter(Boolean);
+  for (let i = lines.length - 1; i >= 0; i -= 1) {
+    if (/^actividad\b/i.test(lines[i])) return lines[i];
+  }
+  if (lines.length) return lines[lines.length - 1];
+  return String(schema?.etiqueta || "Formulario").trim() || "Formulario";
+}
+
 function formAccessTokenValue(schema = activeSchema) {
   return String(schema?.token || qs("token") || "").trim();
 }
@@ -332,12 +347,13 @@ function normalizeTeacherEmail(value) {
   return String(value || "").trim().toLowerCase();
 }
 
-/** Enlace de revisión docente apuntando a un envío concreto (compartible entre profesores). */
+/** Enlace de revisión docente apuntando a un envío concreto (compartible entre profesores).
+ *  Usa /p/<id>.html para que WhatsApp lea og:title / og:image (drz-form.html no tiene metas por form).
+ */
 function teacherReviewUrl(row = null) {
   const formId = sanitizeId(qs("form") || activeSchema?.id || "");
-  const url = new URL(location.pathname, location.origin);
+  const url = new URL(formSharePath(formId), location.origin);
   url.search = "";
-  if (formId) url.searchParams.set("form", formId);
   const tokenDocente = String(qs("token_docente") || qs("token_profesor") || "").trim();
   if (tokenDocente) url.searchParams.set("token_docente", tokenDocente);
   const responseId = sanitizeResponseId(row?.id || "");
@@ -1573,7 +1589,7 @@ async function boot() {
   );
   const etiqueta = String(schema.etiqueta || "Evaluación").trim();
   formLabel = etiqueta;
-  document.title = `${etiqueta} — Dr. Z Academy Club`;
+  document.title = `${formDocumentTitle(schema)} — Dr. Z Academy Club`;
   $("form-label").textContent = etiqueta;
   $("submit-form").textContent = submitButtonLabel(schema, { etiqueta });
   $("done-title").innerHTML = richText(
