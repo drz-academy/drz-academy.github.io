@@ -11,6 +11,10 @@
   "titulo_gracias": "¡Gracias por completar tu actividad!",
   "mensaje_gracias": "Ya registramos tus respuestas. Abajo puedes revisar lo que enviaste. Conserva el enlace para ver tus respuestas en el futuro o para enviar tus respuestas de nuevo.",
   "mostrar_respuestas": true,
+  "examen": true,
+  "muestra_puntaje": true,
+  "muestra_respuestas": "correctas",
+  "repeticiones": 0,
   "requiere_curso": false,
   "revela_certificado": false,
   "numerar_preguntas": false,
@@ -37,14 +41,16 @@
           "enunciado": "Correo electrónico",
           "explicacion": "El mismo con el que te inscribiste en el curso.",
           "tipo": "texto",
-          "obligatoria": true
+          "obligatoria": true,
+          "puntaje": 0
         },
         {
           "id": "cedula",
           "enunciado": "Cédula",
           "explicacion": "Número de documento, sin puntos ni espacios.",
           "tipo": "texto",
-          "obligatoria": true
+          "obligatoria": true,
+          "puntaje": 0
         }
       ]
     },
@@ -58,70 +64,100 @@
           "enunciado": "**Frase 1**:\n*La gota horada la piedra, no por la fuerza, sino cayendo continuamente*",
           "tipo": "completar",
           "texto": "La gota [caso] horada [caso] la piedra [caso], no por la fuerza [caso], sino cayendo [caso] continuamente [caso]",
-          "obligatoria": false
+          "obligatoria": false,
+          "puntaje": 1,
+          "respuesta": "Nominativo|(Verbo)|Dativo|Ablativo|Ablativo|Ablativo",
+          "comentario": "La gota [Nominativo] horada [(Verbo)] la piedra [Dativo], no por la fuerza [Ablativo], sino cayendo [Ablativo] continuamente [Ablativo]."
         },
         {
           "id": "frase_02",
           "enunciado": "**Frase 2**:\n*El padre trabaja para sus hijos en la oficina*",
           "tipo": "completar",
           "texto": "El padre [caso] trabaja [caso] para sus [caso] hijos [caso] en la oficina [caso]",
-          "obligatoria": false
+          "obligatoria": false,
+          "puntaje": 1,
+          "respuesta": "Nominativo|(Verbo)|Dativo|Dativo|Ablativo",
+          "comentario": "El padre [Nominativo] trabaja [(Verbo)] para sus [Dativo] hijos [Dativo] en la oficina [Ablativo]."
         },
         {
           "id": "frase_03",
           "enunciado": "**Frase 3**:\n*Los cónsules informan sobre la situación política de la república*",
           "tipo": "completar",
           "texto": "Los cónsules [caso] informan [caso] sobre la situación [caso] política [caso] de la república [caso]",
-          "obligatoria": false
+          "obligatoria": false,
+          "puntaje": 1,
+          "respuesta": "Nominativo|(Verbo)|Acusativo|Acusativo|Ablativo",
+          "comentario": "Los cónsules [Nominativo] informan [(Verbo)] sobre la situación [Acusativo] política [Acusativo] de la república [Ablativo]."
         },
         {
           "id": "frase_04",
           "enunciado": "**Frase 4**:\n*Los principiantes de la lengua latina traducen una carta de Cicerón a su esposa Terencia*",
           "tipo": "completar",
           "texto": "Los principiantes [caso] de la lengua [caso] latina [caso] traducen [caso] una carta [caso] de Cicerón [caso] a su [caso] esposa [caso] Terencia [caso]",
-          "obligatoria": false
+          "obligatoria": false,
+          "puntaje": 1,
+          "respuesta": "Nominativo|Ablativo|Ablativo|(Verbo)|Dativo|Genitivo|Ablativo|Ablativo|Ablativo",
+          "comentario": "Los principiantes [Nominativo] de la lengua [Ablativo] latina [Ablativo] traducen [(Verbo)] una carta [Dativo] de Cicerón [Genitivo] a su [Ablativo] esposa [Ablativo] Terencia [Ablativo]."
         },
         {
           "id": "frase_05",
           "enunciado": "**Frase 5**:\n*Alejandro Magno ciñó su cabeza con la corona de los reyes persas*",
           "tipo": "completar",
           "texto": "Alejandro [caso] Magno [caso] ciñó [caso] su [caso] cabeza [caso] con la corona [caso] de los reyes [caso] persas [caso]",
-          "obligatoria": false
+          "obligatoria": false,
+          "puntaje": 1,
+          "respuesta": "Nominativo|Nominativo|(Verbo)|Dativo|Dativo|Ablativo|Ablativo|Ablativo",
+          "comentario": "Alejandro [Nominativo] Magno [Nominativo] ciñó [(Verbo)] su [Dativo] cabeza [Dativo] con la corona [Ablativo] de los reyes [Ablativo] persas [Ablativo]."
         },
         {
           "id": "frase_06",
           "enunciado": "**Frase 6**:\n*Yo soy el dueño de estos animales*",
           "tipo": "completar",
           "texto": "Yo [caso] soy [caso] el dueño [caso] de estos [caso] animales [caso]",
-          "obligatoria": false
+          "obligatoria": false,
+          "puntaje": 1,
+          "respuesta": "Nominativo|(Verbo)|Dativo|Genitivo|Genitivo",
+          "comentario": "Yo [Nominativo] soy [(Verbo)] el dueño [Dativo] de estos [Genitivo] animales [Genitivo]."
         },
         {
           "id": "frase_07",
           "enunciado": "**Frase 7**:\n*Mi patria es todo este mundo*",
           "tipo": "completar",
           "texto": "Mi [caso] patria [caso] es [caso] todo [caso] este [caso] mundo [caso]",
-          "obligatoria": false
+          "obligatoria": false,
+          "puntaje": 1,
+          "respuesta": "Nominativo|Nominativo|(Verbo)|Acusativo|Acusativo|Acusativo",
+          "comentario": "Mi [Nominativo] patria [Nominativo] es [(Verbo)] todo [Acusativo] este [Acusativo] mundo [Acusativo]."
         },
         {
           "id": "frase_08",
           "enunciado": "**Frase 8**:\n*Fidias esculpió una Minerva de marfil*",
           "tipo": "completar",
           "texto": "Fidias [caso] esculpió [caso] una Minerva [caso] de marfil [caso]",
-          "obligatoria": false
+          "obligatoria": false,
+          "puntaje": 1,
+          "respuesta": "Nominativo|(Verbo)|Acusativo|Ablativo",
+          "comentario": "Fidias [Nominativo] esculpió [(Verbo)] una Minerva [Acusativo] de marfil [Ablativo]."
         },
         {
           "id": "frase_09",
           "enunciado": "**Frase 9**:\n*Epicuro identifica todo mal con el dolor y todo bien con el placer*",
           "tipo": "completar",
           "texto": "Epicuro [caso] identifica [caso] todo [caso] mal [caso] con el dolor [caso] y todo [caso] bien [caso] con el placer [caso]",
-          "obligatoria": false
+          "obligatoria": false,
+          "puntaje": 1,
+          "respuesta": "Nominativo|(Verbo)|Acusativo|Acusativo|Ablativo|Acusativo|Acusativo|Ablativo",
+          "comentario": "Epicuro [Nominativo] identifica [(Verbo)] todo [Acusativo] mal [Acusativo] con el dolor [Ablativo] y todo [Acusativo] bien [Acusativo] con el placer [Ablativo]."
         },
         {
           "id": "frase_10",
           "enunciado": "**Frase 10**:\n*Ningún hombre es sabio a todas horas*",
           "tipo": "completar",
           "texto": "Ningún [caso] hombre [caso] es [caso] sabio [caso] a todas [caso] horas [caso]",
-          "obligatoria": false
+          "obligatoria": false,
+          "puntaje": 1,
+          "respuesta": "Nominativo|Nominativo|(Verbo)|Acusativo|Ablativo|Ablativo",
+          "comentario": "Ningún [Nominativo] hombre [Nominativo] es [(Verbo)] sabio [Acusativo] a todas [Ablativo] horas [Ablativo]."
         }
       ]
     }

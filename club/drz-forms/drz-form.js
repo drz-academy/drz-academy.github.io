@@ -4,7 +4,7 @@ const TOKEN_KEY = "drz-club-token";
 const ADMIN_TOKEN_KEY = "drz-forms-export-token";
 const WORKER_URL = "https://drz-club-portal.drz-academy.workers.dev";
 const FORM_ID_RE = /^[a-z0-9][a-z0-9_-]{0,63}$/;
-const SCHEMA_VERSION = "20261114b";
+const SCHEMA_VERSION = "20261118e";
 const CLASSROOM_REF_KEY = "drz-form-classroom-ref";
 
 function applyFormTheme(schema) {
@@ -282,8 +282,12 @@ async function api(path, { method = "GET", body, token } = {}) {
     err.status = res.status;
     err.certificado_url = data.certificado_url || "";
     err.response_id = data.id || "";
+    err.id = data.id || "";
     err.answers = data.answers || null;
     err.curso_nombre = data.curso_nombre || "";
+    err.puntaje = data.puntaje || "";
+    err.intentos = data.intentos || 0;
+    err.puede_editar = data.puede_editar;
     throw err;
   }
   return data;
@@ -332,6 +336,7 @@ function mapError(err) {
   if (code === "unauthorized") return "Tu sesión venció. Entra de nuevo al Club para continuar.";
   if (code === "not_enrolled") return "No encontramos este curso en tu historial del Club.";
   if (code === "already_submitted") return "Ya enviaste esta evaluación.";
+  if (code === "too_many_attempts") return "Ya usaste todos los intentos permitidos para este formulario.";
   if (code === "not_found") return "No encontramos ese envío.";
   if (code === "invalid_answers" || String(code).startsWith("missing:") || String(code).startsWith("invalid:")) {
     return "Falta responder alguna pregunta obligatoria, o una respuesta no es válida.";
@@ -679,7 +684,7 @@ let teacherMode = false;
 let teacherRows = [];
 let teacherIndex = 0;
 
-function formatCompletarAnswer(question, value) {
+function formatCompletarAnswer(question, value, slotFeedback = null) {
   const slots = String(value ?? "").split(BLANK_SEP);
   const texto = String(question.texto || question.enunciado || "");
   let html = "";
@@ -687,19 +692,126 @@ function formatCompletarAnswer(question, value) {
   let i = 0;
   let any = false;
   for (const match of texto.matchAll(BLANK_RE)) {
-    html += escapeHtml(texto.slice(last, match.index));
+    const preceding = texto.slice(last, match.index);
     last = match.index + match[0].length;
-    const filled = String(slots[i++] || "").trim();
+    html += escapeHtml(preceding);
+    const filled = String(slots[i] || "").trim();
+    const fb = Array.isArray(slotFeedback) ? slotFeedback[i] : null;
+    i += 1;
+    const mark = fb == null ? null : Boolean(fb.correct);
+    const expected = String(fb?.expected || "").trim();
+    let cls = "answer-blank";
+    if (!filled) cls += " empty";
+    if (mark === true) cls += " ok";
+    if (mark === false) cls += " wrong";
     if (filled) {
       any = true;
-      html += `<strong class="answer-blank">${escapeHtml(filled)}</strong>`;
+      html += `<strong class="${cls}">${escapeHtml(filled)}</strong>`;
     } else {
-      html += `<span class="answer-blank empty">[…]</span>`;
+      html += `<span class="${cls}">[…]</span>`;
+    }
+    // Respuesta correcta entre corchetes solo si el hueco falló.
+    if (mark === false && expected) {
+      html += ` <span class="answer-expected">[${escapeHtml(expected)}]</span>`;
     }
   }
   html += escapeHtml(texto.slice(last));
   if (!any) return '<span class="muted">Sin responder</span>';
   return html || escapeHtml(String(value ?? ""));
+}
+
+function questionPuntaje(question) {
+  const n = Number(question?.puntaje);
+  return Number.isFinite(n) && n > 0 ? n : 0;
+}
+
+function answerTokensEqual(a, b) {
+  return String(a ?? "").trim().toLowerCase() === String(b ?? "").trim().toLowerCase();
+}
+
+function expectedAnswerRaw(question) {
+  return String(question?.respuesta ?? question?.respuestas ?? "").trim();
+}
+
+function gradeQuestion(question, value) {
+  const points = questionPuntaje(question);
+  if (points <= 0) return null;
+  const expectedRaw = expectedAnswerRaw(question);
+  if (!expectedRaw) return null;
+  const id = String(question.id || "").trim();
+  const tipo = String(question.tipo || "texto").trim();
+  const comentario = String(question.comentario || "").trim();
+
+  if (tipo === "completar") {
+    const expected = expectedRaw.split(BLANK_SEP).map((s) => s.trim());
+    const got = String(value ?? "").split(BLANK_SEP).map((s) => s.trim());
+    while (got.length < expected.length) got.push("");
+    const slots = [];
+    let ok = 0;
+    for (let i = 0; i < expected.length; i += 1) {
+      const correct = Boolean(expected[i]) && answerTokensEqual(expected[i], got[i]);
+      if (correct) ok += 1;
+      slots.push({ index: i, expected: expected[i], got: got[i] || "", correct });
+    }
+    return {
+      id,
+      tipo,
+      correct: ok === expected.length && expected.length > 0,
+      earned: ok * points,
+      max: expected.length * points,
+      slots,
+      comentario,
+      expected: expectedRaw,
+    };
+  }
+
+  let correct = false;
+  if (tipo === "opciones" || tipo === "seleccion_multiple") {
+    const expected = expectedRaw.split(BLANK_SEP).map((s) => s.trim().toLowerCase()).filter(Boolean).sort();
+    const got = (Array.isArray(value) ? value : String(value || "").split(BLANK_SEP))
+      .map((s) => String(s).trim().toLowerCase()).filter(Boolean).sort();
+    correct = expected.length === got.length && expected.every((e, i) => e === got[i]);
+  } else {
+    correct = answerTokensEqual(expectedRaw, value);
+  }
+  return {
+    id,
+    tipo,
+    correct,
+    earned: correct ? points : 0,
+    max: points,
+    comentario,
+    expected: expectedRaw,
+  };
+}
+
+function gradeExam(schema, answers) {
+  if (!schema?.examen) return null;
+  const detalles = [];
+  let earned = 0;
+  let max = 0;
+  for (const question of formQuestions(schema)) {
+    const graded = gradeQuestion(question, answers?.[question.id]);
+    if (!graded) continue;
+    detalles.push(graded);
+    earned += graded.earned;
+    max += graded.max;
+  }
+  return { ok: earned, total: max, puntaje: `${earned}/${max}`, detalles };
+}
+
+function examFeedbackMode(schema) {
+  // El profesor siempre ve claves y comentarios, aunque el form diga "correctas".
+  if (teacherMode) return "todas";
+  const raw = String(schema?.muestra_respuestas || "").trim().toLowerCase();
+  if (raw === "correctas" || raw === "todas") return raw;
+  return "";
+}
+
+function canEditByRepeticiones(schema, intentos) {
+  const lim = Number(schema?.repeticiones);
+  if (!Number.isFinite(lim) || lim <= 0) return true;
+  return Number(intentos || 0) < lim;
 }
 
 function formatAnswerValue(question, value, schema) {
@@ -730,6 +842,7 @@ function formatAnswerValue(question, value, schema) {
 }
 
 function wantsAnswerSummary(schema) {
+  if (examFeedbackMode(schema)) return true;
   const flag = schema?.mostrar_respuestas;
   return flag === true || flag === 1 || String(flag || "").trim().toLowerCase() === "true";
 }
@@ -751,7 +864,7 @@ function ensureAnswersSummaryBox() {
   return { box, list };
 }
 
-function renderAnswersSummary(schema, answers) {
+function renderAnswersSummary(schema, answers, calificacion = null) {
   const { box, list } = ensureAnswersSummaryBox();
   if (!box || !list) return;
   if (!wantsAnswerSummary(schema) || !answers || typeof answers !== "object") {
@@ -759,6 +872,14 @@ function renderAnswersSummary(schema, answers) {
     list.innerHTML = "";
     return;
   }
+  const mode = examFeedbackMode(schema);
+  const grade = calificacion || (mode ? gradeExam(schema, answers) : null);
+  const byId = new Map((grade?.detalles || []).map((d) => [d.id, d]));
+  const heading = $("done-answers-heading");
+  if (heading) {
+    heading.textContent = mode ? "Revisión de respuestas" : "Tus respuestas";
+  }
+
   const blocks = [];
   for (const section of formSections(schema)) {
     const items = [];
@@ -766,11 +887,39 @@ function renderAnswersSummary(schema, answers) {
       const id = String(question.id || "").trim();
       if (!id) continue;
       const val = answers[id];
+      const graded = byId.get(id);
+
       const unanswered = val === undefined || val === null || val === "" || (Array.isArray(val) && !val.length);
+      let itemClass = "answer-item";
+      if (unanswered) itemClass += " unanswered";
+      if (graded?.correct) itemClass += " correct";
+      if (graded && !graded.correct) itemClass += " incorrect";
+
+      let answerHtml = "";
+      if (question.tipo === "completar" && graded?.slots) {
+        // "correctas": color ok/wrong, sin revelar la clave.
+        // "todas": además pone [clave] junto a cada hueco fallido.
+        const feedback = graded.slots.map((s) => (
+          mode === "todas"
+            ? s
+            : { correct: s.correct, expected: "" }
+        ));
+        answerHtml = `<div class="answer-a">${formatCompletarAnswer(question, val, feedback)}</div>`;
+      } else {
+        let body = formatAnswerValue(question, val, schema);
+        if (mode === "todas" && graded && !graded.correct && graded.expected) {
+          body += ` <span class="answer-expected">[${escapeHtml(graded.expected)}]</span>`;
+        }
+        answerHtml = `<div class="answer-a">${body}</div>`;
+      }
+      if (mode === "todas" && graded?.comentario) {
+        answerHtml += `<div class="answer-comment"><strong>Comentario:</strong> ${escapeHtml(graded.comentario)}</div>`;
+      }
+
       items.push(
-        `<div class="answer-item${unanswered ? " unanswered" : ""}">` +
+        `<div class="${itemClass}" data-qid="${escapeHtml(id)}">` +
           `<div class="answer-q">${richText(question.enunciado || id)}</div>` +
-          `<div class="answer-a">${formatAnswerValue(question, val, schema)}</div>` +
+          answerHtml +
         `</div>`,
       );
     }
@@ -979,6 +1128,8 @@ function syncTeacherControls() {
         row.updatedAt && row.updatedAt !== row.submittedAt
           ? `Actualizado ${formatTeacherWhen(row.updatedAt)}`
           : "",
+        row.puntaje ? `Puntaje ${row.puntaje}` : "",
+        row.intentos ? `Intentos ${row.intentos}` : "",
       ].filter(Boolean);
       meta.textContent = bits.join(" · ");
     }
@@ -994,6 +1145,7 @@ function showTeacherSubmission(index) {
     const heading = $("done-answers-heading");
     if (heading) heading.textContent = "Respuestas";
     renderAnswersSummary({ ...activeSchema, mostrar_respuestas: true }, {});
+    renderScoreBox({});
     showReceipt("");
     $("cert-box").hidden = true;
     $("cert-pending").hidden = true;
@@ -1010,7 +1162,16 @@ function showTeacherSubmission(index) {
   $("done-lead").textContent = row.curso_nombre
     ? `Curso: ${row.curso_nombre}`
     : "Revisión de respuestas enviadas.";
-  renderAnswersSummary({ ...activeSchema, mostrar_respuestas: true }, row.answers || {});
+  const teacherGrade = gradeExam(activeSchema, row.answers || {});
+  renderScoreBox({
+    puntaje: row.puntaje || teacherGrade?.puntaje || "",
+    muestra: true,
+  });
+  renderAnswersSummary(
+    { ...activeSchema, mostrar_respuestas: true },
+    row.answers || {},
+    teacherGrade,
+  );
   showReceipt(row.id || "");
   $("cert-box").hidden = true;
   $("cert-pending").hidden = true;
@@ -1057,14 +1218,34 @@ async function startTeacherReview(schema, formId) {
   showTeacherSubmission(0);
 }
 
+function renderScoreBox(status = {}) {
+  const box = $("done-score");
+  if (!box) return;
+  const show = Boolean(activeSchema?.muestra_puntaje) || teacherMode;
+  const puntaje = String(status.puntaje || "").trim();
+  if (!show || !puntaje) {
+    box.hidden = true;
+    box.textContent = "";
+    return;
+  }
+  box.hidden = false;
+  box.innerHTML = `Puntaje: <strong>${escapeHtml(puntaje)}</strong>`;
+}
+
 function showDone(status, answers = null) {
   if (!teacherMode) setTeacherBarVisible(false);
   const cursoNombre = status.curso_nombre || "";
   applyThanksCopy(activeSchema, status);
   const heading = $("done-answers-heading");
   if (heading && !teacherMode) heading.textContent = "Tus respuestas";
-  renderAnswersSummary(activeSchema, answers);
-  showReceipt(status.response_id || status.id || "");
+  const grade = status.calificacion || gradeExam(activeSchema, answers || {});
+  const puntaje = status.puntaje || grade?.puntaje || "";
+  renderScoreBox({ ...status, puntaje });
+  renderAnswersSummary(activeSchema, answers, grade);
+  const intentos = Number(status.intentos) || 0;
+  const allowEdit = status.puede_editar !== false
+    && (status.puede_editar === true || canEditByRepeticiones(activeSchema, intentos || 1));
+  showReceipt(status.response_id || status.id || "", { allowEdit: teacherMode ? true : allowEdit });
   const certUrl = String(status.certificado_url || "").trim();
   if (certUrl) {
     $("cert-link").href = certUrl;
@@ -1228,7 +1409,13 @@ function bindFormSubmit(schema, {
       return;
     }
     if (submitMode === "prueba") {
-      showDone(pruebaDoneStatus(schema, answers, catalog, cursoId), answers);
+      const grade = gradeExam(schema, answers);
+      showDone({
+        ...pruebaDoneStatus(schema, answers, catalog, cursoId),
+        puntaje: grade?.puntaje || "",
+        calificacion: grade,
+        puede_editar: false,
+      }, answers);
       return;
     }
     submit.disabled = true;
@@ -1251,20 +1438,27 @@ function bindFormSubmit(schema, {
         curso_nombre: chosen?.nombre || status.curso_nombre,
         certificado_url: data.certificado_url || "",
         response_id: data.id || editResponseId || "",
+        puntaje: data.puntaje || "",
+        calificacion: data.calificacion || null,
+        intentos: data.intentos || 1,
+        puede_editar: data.puede_editar !== false,
       }, answers);
       if (data.id || editResponseId) {
         history.replaceState({}, "", responseRecoveryUrl(data.id || editResponseId));
       }
     } catch (err) {
-      if (err.code === "already_submitted") {
+      if (err.code === "already_submitted" || err.code === "too_many_attempts") {
         const savedAnswers = err.answers && typeof err.answers === "object" ? err.answers : answers;
         showDone({
           curso_nombre: err.curso_nombre || status.curso_nombre,
           certificado_url: err.certificado_url || "",
-          response_id: err.response_id || "",
+          response_id: err.response_id || err.id || "",
+          puntaje: err.puntaje || "",
+          intentos: err.intentos || 1,
+          puede_editar: false,
         }, savedAnswers);
-        if (err.response_id) {
-          history.replaceState({}, "", responseRecoveryUrl(err.response_id));
+        if (err.response_id || err.id) {
+          history.replaceState({}, "", responseRecoveryUrl(err.response_id || err.id));
         }
         return;
       }
@@ -1333,6 +1527,20 @@ async function boot() {
       const data = await api(
         `/forms/response?id=${encodeURIComponent(responseId)}&form=${encodeURIComponent(formId)}`,
       );
+      const puedeEditar = data.puede_editar !== false
+        && canEditByRepeticiones(schema, data.intentos || 1);
+      if (editMode && !puedeEditar) {
+        showDone({
+          curso_nombre: data.curso_nombre || "",
+          response_id: data.id || responseId,
+          puntaje: data.puntaje || "",
+          calificacion: data.calificacion || null,
+          intentos: data.intentos || 1,
+          puede_editar: false,
+        }, data.answers || {});
+        showStatus($("form-status"), "Ya usaste todos los intentos; no puedes editar este envío.", "error");
+        return;
+      }
       if (editMode) {
         const cursos = await loadCursos();
         const sessionToken = currentToken();
@@ -1360,6 +1568,10 @@ async function boot() {
       showDone({
         curso_nombre: data.curso_nombre || "",
         response_id: data.id || responseId,
+        puntaje: data.puntaje || "",
+        calificacion: data.calificacion || null,
+        intentos: data.intentos || 1,
+        puede_editar: puedeEditar,
       }, data.answers || {});
     } catch (err) {
       if (err.code === "not_found" || err.status === 404) {

@@ -23,6 +23,8 @@
  * GET  /admin/forms         Authorization: Bearer CLUB_ADMIN_TOKEN
  * POST /admin/reset-pass    Authorization: Bearer CLUB_ADMIN_TOKEN
  * POST /admin/reset-forms   Authorization: Bearer CLUB_ADMIN_TOKEN
+ * POST /admin/regrade-forms Authorization: Bearer CLUB_ADMIN_TOKEN
+ *                           body: { form }  recalcula puntaje de envíos ya guardados
  * GET  /health
  */
 
@@ -411,6 +413,106 @@ function completarError(question, schema, val, required) {
     }
   }
   return "";
+}
+
+function questionPuntaje(question) {
+  const n = Number(question?.puntaje);
+  return Number.isFinite(n) && n > 0 ? n : 0;
+}
+
+function answerTokensEqual(a, b) {
+  return String(a ?? "").trim().toLowerCase() === String(b ?? "").trim().toLowerCase();
+}
+
+function expectedAnswerRaw(question) {
+  return String(question?.respuesta ?? question?.respuestas ?? "").trim();
+}
+
+function gradeQuestion(question, value) {
+  const points = questionPuntaje(question);
+  if (points <= 0) return null;
+  const expectedRaw = expectedAnswerRaw(question);
+  if (!expectedRaw) return null;
+  const id = String(question.id || "").trim();
+  const tipo = String(question.tipo || "texto").trim();
+  const comentario = String(question.comentario || "").trim();
+
+  if (tipo === "completar") {
+    const expected = expectedRaw.split("|").map((s) => s.trim());
+    const got = String(value ?? "").split("|").map((s) => s.trim());
+    while (got.length < expected.length) got.push("");
+    const slots = [];
+    let ok = 0;
+    for (let i = 0; i < expected.length; i += 1) {
+      const correct = Boolean(expected[i]) && answerTokensEqual(expected[i], got[i]);
+      if (correct) ok += 1;
+      slots.push({
+        index: i,
+        expected: expected[i],
+        got: got[i] || "",
+        correct,
+      });
+    }
+    // En completar, puntaje = puntos por cada hueco.
+    const max = expected.length * points;
+    const earned = ok * points;
+    return {
+      id,
+      tipo,
+      correct: ok === expected.length && expected.length > 0,
+      earned,
+      max,
+      slots,
+      comentario,
+      expected: expectedRaw,
+    };
+  }
+
+  let correct = false;
+  if (tipo === "opciones" || tipo === "seleccion_multiple") {
+    const expected = expectedRaw.split("|").map((s) => s.trim()).filter(Boolean)
+      .map((s) => s.toLowerCase()).sort();
+    const got = (Array.isArray(value) ? value : String(value || "").split("|"))
+      .map((s) => String(s).trim().toLowerCase()).filter(Boolean).sort();
+    correct = expected.length === got.length && expected.every((e, i) => e === got[i]);
+  } else {
+    correct = answerTokensEqual(expectedRaw, value);
+  }
+  return {
+    id,
+    tipo,
+    correct,
+    earned: correct ? points : 0,
+    max: points,
+    comentario,
+    expected: expectedRaw,
+  };
+}
+
+function gradeExam(schema, answers) {
+  if (!schema?.examen) return null;
+  const detalles = [];
+  let earned = 0;
+  let max = 0;
+  for (const question of formQuestions(schema)) {
+    const graded = gradeQuestion(question, answers?.[question.id]);
+    if (!graded) continue;
+    detalles.push(graded);
+    earned += graded.earned;
+    max += graded.max;
+  }
+  return {
+    ok: earned,
+    total: max,
+    puntaje: `${earned}/${max}`,
+    detalles,
+  };
+}
+
+function canEditByRepeticiones(schema, intentos) {
+  const lim = Number(schema?.repeticiones);
+  if (!Number.isFinite(lim) || lim <= 0) return true;
+  return Number(intentos || 0) < lim;
 }
 
 function validateAnswers(schema, answers, catalogById) {
@@ -878,6 +980,21 @@ async function handleFormSubmit(request, env) {
       answers: prev.answers || {},
       curso_nombre: prev.cursoNombre || "",
       submittedAt: prev.submittedAt || "",
+      puntaje: prev.puntaje || "",
+      intentos: prev.intentos || 1,
+      puede_editar: false,
+    }, 409);
+  }
+
+  if (prev && guest && !canEditByRepeticiones(schema, prev.intentos || 1)) {
+    return json(request, {
+      ok: false,
+      error: "too_many_attempts",
+      id: prev.id || "",
+      answers: prev.answers || {},
+      puntaje: prev.puntaje || "",
+      intentos: prev.intentos || 1,
+      puede_editar: false,
     }, 409);
   }
 
@@ -887,6 +1004,8 @@ async function handleFormSubmit(request, env) {
   const answers = pickAnswers(schema, body.answers);
   const responseId = sanitizeResponseId(editId) || sanitizeResponseId(prev?.id) || newResponseId();
   const now = new Date().toISOString();
+  const intentos = (Number(prev?.intentos) || 0) + 1;
+  const grade = gradeExam(schema, answers);
   const payload = {
     id: responseId,
     formId,
@@ -900,16 +1019,34 @@ async function handleFormSubmit(request, env) {
       : (found.record.correo || ""),
     respondentId,
     submittedAt: prev?.submittedAt || now,
+    intentos,
     answers,
   };
   if (guest) payload.acceso = "token";
   if (prev) payload.updatedAt = now;
+  if (grade) {
+    payload.puntaje = grade.puntaje;
+    payload.puntaje_ok = grade.ok;
+    payload.puntaje_total = grade.total;
+  }
   if (!isDummy) {
     const raw = JSON.stringify(payload);
     await env.DRZ_CLUB.put(storageKey, raw);
     await env.DRZ_CLUB.put(formResponseByIdKey(responseId), raw);
   }
-  return json(request, { ok: true, certificado_url: certUrl, id: responseId, updated: Boolean(prev) });
+  const puedeEditar = canEditByRepeticiones(schema, intentos);
+  return json(request, {
+    ok: true,
+    certificado_url: certUrl,
+    id: responseId,
+    updated: Boolean(prev),
+    puntaje: grade?.puntaje || "",
+    puntaje_ok: grade?.ok ?? null,
+    puntaje_total: grade?.total ?? null,
+    calificacion: grade,
+    intentos,
+    puede_editar: puedeEditar,
+  });
 }
 
 async function handleFormResponse(request, env) {
@@ -932,13 +1069,23 @@ async function handleFormResponse(request, env) {
   if (formId && data.formId && data.formId !== formId) {
     return json(request, { ok: false, error: "not_found" }, 404);
   }
+  const schema = data.formId ? await loadFormSchema(env, data.formId) : null;
+  const grade = schema ? gradeExam(schema, data.answers || {}) : null;
+  const intentos = Number(data.intentos) || 1;
   return json(request, {
     ok: true,
     id: data.id || responseId,
     formId: data.formId || formId || "",
     curso_nombre: data.cursoNombre || "",
     submittedAt: data.submittedAt || "",
+    updatedAt: data.updatedAt || "",
     answers: data.answers || {},
+    puntaje: data.puntaje || grade?.puntaje || "",
+    puntaje_ok: data.puntaje_ok ?? grade?.ok ?? null,
+    puntaje_total: data.puntaje_total ?? grade?.total ?? null,
+    calificacion: grade,
+    intentos,
+    puede_editar: schema ? canEditByRepeticiones(schema, intentos) : true,
   });
 }
 
@@ -967,6 +1114,8 @@ async function handleFormSubmissions(request, env) {
     correo: row.correo || "",
     submittedAt: row.submittedAt || "",
     updatedAt: row.updatedAt || "",
+    puntaje: row.puntaje || "",
+    intentos: row.intentos || 1,
     answers: row.answers || {},
   }));
   submissions.sort((a, b) => {
@@ -1028,6 +1177,8 @@ function submissionsToCsv(schema, submissions, site = "https://drz-academy.githu
     "correo",
     "curso_id",
     "curso",
+    "puntaje",
+    "intentos",
     "enlace_abrir",
     "enlace_editar",
     ...questions.map((q) => q.enunciado || q.id),
@@ -1045,6 +1196,8 @@ function submissionsToCsv(schema, submissions, site = "https://drz-academy.githu
       row.correo || "",
       row.cursoId || "",
       row.cursoNombre || "",
+      row.puntaje || "",
+      row.intentos || "",
       formResponsePageUrl(site, schema, responseId),
       formResponsePageUrl(site, schema, responseId, { edit: true }),
       ...questions.map((q) => {
@@ -1269,6 +1422,81 @@ async function handleAdminResetForms(request, env) {
   const prefix = formId ? `form:${formId}:` : "form:";
   const deleted = await deleteByPrefix(env, prefix);
   return json(request, { ok: true, deleted, prefix });
+}
+
+async function handleAdminRegradeForms(request, env) {
+  const admin = requireAdmin(request, env);
+  if (!admin.ok) return json(request, { ok: false, error: admin.error }, admin.status);
+  const body = await readJson(request);
+  const formId = sanitizeId(body?.form || body?.formId);
+  if (!formId) return json(request, { ok: false, error: "invalid_input" }, 400);
+
+  const schema = await loadFormSchema(env, formId);
+  if (!schema) return json(request, { ok: false, error: "schema_missing" }, 503);
+  if (!schema.examen) return json(request, { ok: false, error: "not_exam" }, 400);
+
+  const prefix = `form:${formId}:`;
+  let scanned = 0;
+  let updated = 0;
+  let unchanged = 0;
+  const results = [];
+  let cursor;
+  for (;;) {
+    const page = await env.DRZ_CLUB.list({ prefix, cursor, limit: 1000 });
+    for (const key of page.keys) {
+      const storageKey = key.name;
+      const raw = await env.DRZ_CLUB.get(storageKey);
+      if (!raw) continue;
+      scanned += 1;
+      let data;
+      try {
+        data = JSON.parse(raw);
+      } catch {
+        continue;
+      }
+      const grade = gradeExam(schema, data.answers || {});
+      if (!grade) {
+        unchanged += 1;
+        continue;
+      }
+      const nextPuntaje = grade.puntaje;
+      const nextOk = grade.ok;
+      const nextTotal = grade.total;
+      if (
+        data.puntaje === nextPuntaje
+        && data.puntaje_ok === nextOk
+        && data.puntaje_total === nextTotal
+      ) {
+        unchanged += 1;
+        results.push({ id: data.id || "", puntaje: nextPuntaje, changed: false });
+        continue;
+      }
+      data.puntaje = nextPuntaje;
+      data.puntaje_ok = nextOk;
+      data.puntaje_total = nextTotal;
+      if (!Number.isFinite(Number(data.intentos)) || Number(data.intentos) < 1) {
+        data.intentos = 1;
+      }
+      const encoded = JSON.stringify(data);
+      const puts = [env.DRZ_CLUB.put(storageKey, encoded)];
+      const responseId = sanitizeResponseId(data.id);
+      if (responseId) puts.push(env.DRZ_CLUB.put(formResponseByIdKey(responseId), encoded));
+      await Promise.all(puts);
+      updated += 1;
+      results.push({ id: data.id || "", puntaje: nextPuntaje, changed: true });
+    }
+    if (page.list_complete) break;
+    cursor = page.cursor;
+  }
+
+  return json(request, {
+    ok: true,
+    form: formId,
+    scanned,
+    updated,
+    unchanged,
+    results,
+  });
 }
 
 async function sendResetEmail(env, to, nombre, resetUrl) {
@@ -1620,6 +1848,7 @@ export default {
       if (request.method === "GET" && url.pathname === "/admin/forms") return handleAdminForms(request, env);
       if (request.method === "POST" && url.pathname === "/admin/reset-pass") return handleAdminResetPass(request, env);
       if (request.method === "POST" && url.pathname === "/admin/reset-forms") return handleAdminResetForms(request, env);
+      if (request.method === "POST" && url.pathname === "/admin/regrade-forms") return handleAdminRegradeForms(request, env);
       if (request.method === "GET" && url.pathname === "/health") {
         return json(request, { ok: true, service: "drz-club-portal" });
       }

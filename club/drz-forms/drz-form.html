@@ -557,6 +557,66 @@
       border-bottom-style: dotted;
     }
 
+    .answer-a .answer-blank.ok {
+      color: #1e7a3a;
+      border-bottom-color: #1e7a3a;
+      background: rgba(30, 122, 58, 0.08);
+    }
+
+    .answer-a .answer-blank.wrong {
+      color: #b42318;
+      border-bottom-color: #b42318;
+      background: rgba(180, 35, 24, 0.08);
+    }
+
+    .answer-item.correct .answer-q { color: #1e7a3a; }
+    .answer-item.incorrect .answer-q { color: #b42318; }
+
+    .answer-item.correct {
+      border-left: 3px solid #1e7a3a;
+      padding-left: 0.75rem;
+    }
+
+    .answer-item.incorrect {
+      border-left: 3px solid #b42318;
+      padding-left: 0.75rem;
+    }
+
+    .answer-expected {
+      color: #b42318;
+      font-weight: 600;
+      font-size: 0.92em;
+    }
+
+    .answer-comment {
+      margin-top: 0.45rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .answer-comment strong {
+      font-style: normal;
+      color: var(--text);
+    }
+
+    .answer-flag.ok {
+      color: #1e7a3a;
+      font-weight: 600;
+    }
+
+    .done-score {
+      margin: 0.5rem 0 1rem;
+      font-family: Raleway, sans-serif;
+      font-size: 1.15rem;
+      color: var(--text);
+    }
+
+    .done-score strong {
+      color: var(--gold-dim);
+      letter-spacing: 0.03em;
+    }
+
     .answer-a .muted { color: var(--text-dim); font-style: italic; }
 
     .done-receipt {
@@ -774,6 +834,7 @@
       </div>
       <h2 id="done-title">Gracias por tu evaluación</h2>
       <p class="lead" id="done-lead">Ya registramos tus respuestas.</p>
+      <p class="done-score" id="done-score" hidden></p>
       <div id="done-receipt" class="done-receipt" hidden>
         <p id="done-response-code-line">Código de tu envío: <strong id="done-response-id"></strong></p>
         <p id="done-response-hint">Guárdalo para volver a ver tus respuestas. <a id="done-response-link" href="#">Abrir este envío</a></p>
@@ -828,7 +889,7 @@
     </div>
   </footer>
 
-  <script src="/club/drz-forms/drz-form.js?v=20261114b" type="module"></script>
+  <script src="/club/drz-forms/drz-form.js?v=20261118e" type="module"></script>
 </body>
 
 </html>

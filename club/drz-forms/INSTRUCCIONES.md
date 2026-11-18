@@ -68,8 +68,80 @@ club/drz-forms/
 | `curso` | Slug de la carpeta del curso (`circulo-latino`). Sirve para la **imagen** del preview (usa `cursos/<curso>/images/og-share.jpg` o `og-preview.jpg`). |
 | `og_imagen` | URL absoluta (o ruta del sitio) que anula la imagen del curso. |
 | `og_descripcion` | Texto del preview; si falta, se usa el `titulo` del formulario. |
+| `examen` | `true`: el formulario se califica. Guarda el puntaje (`36/62`) en el envío. Por defecto `false`. |
+| `muestra_puntaje` | `true`: al terminar muestra el puntaje obtenido. |
+| `muestra_respuestas` | Feedback tras enviar: `"correctas"` (todas las preguntas; verde/rojo **sin** revelar claves ni comentarios) o `"todas"` (igual + `[clave]` en errores y el `comentario`). Vacío = sin feedback de examen. Con `token_docente` siempre se comporta como `"todas"`. |
+| `repeticiones` | `0` (default) = editar sin límite. Si es `N>0`, tras `N` envíos ya no aparece el enlace de edición. |
 
 Cada envío recibe un `id` único. La persona puede reabrir el resumen con `?respuesta=<id>` o editar con `?respuesta=<id>&edit=true`.
+
+### Examen: `puntaje`, `respuesta` y `comentario`
+
+Con `"examen": true`, cada pregunta calificable lleva estos tres campos (opcionales; si faltan, esa pregunta no suma):
+
+| Campo | Qué hace |
+|-------|----------|
+| `puntaje` | Puntos que vale la pregunta. `0` o ausente = no cuenta. En `completar`, es el valor **por cada hueco** (`puntaje: 1` y 6 huecos → máximo 6). |
+| `respuesta` | Clave correcta. Comparación **sin distinguir mayúsculas**. Ver formato por tipo abajo. |
+| `comentario` | Nota del profesor. Solo se muestra con `muestra_respuestas: "todas"` (o en la vista docente). |
+
+**Formato de `respuesta` según el tipo:**
+
+| Tipo | Valor de `respuesta` |
+|------|----------------------|
+| `texto`, `parrafo`, `radio`, `seleccion_unica`, `lista_desplegable` | El texto exacto o el `id` de la opción correcta. |
+| `opciones` / `seleccion_multiple` | Los ids/valores correctos separados por `\|` (orden indiferente). |
+| `completar` | Un valor por hueco, en orden, separados por `\|`. |
+
+Ejemplo `radio`:
+
+```json
+{
+  "id": "caso_sujeto",
+  "enunciado": "¿Qué caso marca el sujeto?",
+  "tipo": "radio",
+  "opciones": [
+    { "id": "nom", "label": "Nominativo" },
+    { "id": "acu", "label": "Acusativo" },
+    { "id": "dat", "label": "Dativo" }
+  ],
+  "puntaje": 2,
+  "respuesta": "nom",
+  "comentario": "El nominativo es el caso del sujeto."
+}
+```
+
+Ejemplo `opciones` (varias correctas):
+
+```json
+{
+  "id": "casos_oblicuos",
+  "enunciado": "Marca los casos oblicuos",
+  "tipo": "opciones",
+  "opciones": ["Nominativo", "Genitivo", "Dativo", "Acusativo", "Ablativo"],
+  "puntaje": 3,
+  "respuesta": "Genitivo|Dativo|Acusativo|Ablativo",
+  "comentario": "Oblicuos = todos menos nominativo (y vocativo)."
+}
+```
+
+Ejemplo `completar` (un punto por hueco):
+
+```json
+{
+  "id": "frase_01",
+  "enunciado": "**Frase 1**",
+  "tipo": "completar",
+  "texto": "La gota [caso] horada [caso] la piedra [caso]",
+  "puntaje": 1,
+  "respuesta": "Nominativo|(Verbo)|Dativo",
+  "comentario": "La gota [Nominativo] horada [(Verbo)] la piedra [Dativo]."
+}
+```
+
+Con ese ejemplo el máximo de la pregunta es `3` (tres huecos × `puntaje: 1`). El total del examen es la suma de los máximos de todas las preguntas con `puntaje` > 0 y `respuesta` definida.
+
+Referencia real: [`circulo-latino-c1-a1-casos.json`](circulo-latino-c1-a1-casos.json).
 
 ### Campos de cada pregunta
 
@@ -81,6 +153,9 @@ Cada envío recibe un `id` único. La persona puede reabrir el resumen con `?res
 | `obligatoria` | no | Por defecto `true`. Pon `false` para opcional |
 | `explicacion` | no | Texto gris bajo el enunciado |
 | `default` | no | Valor inicial (`lista_desplegable`, `escala_scroll`, `radio`, `opciones`) |
+| `puntaje` | no | Solo con `examen: true`. Puntos; en `completar`, por hueco |
+| `respuesta` | no | Solo con `examen: true`. Clave correcta (ver sección Examen) |
+| `comentario` | no | Solo con `examen: true`. Nota visible con `muestra_respuestas: "todas"` |
 
 ### Tipos de pregunta (resumen)
 
@@ -269,7 +344,7 @@ En el formulario (una sola vez):
 }
 ```
 
-En la pregunta:
+En la pregunta (con calificación de examen):
 
 ```json
 {
@@ -277,7 +352,10 @@ En la pregunta:
   "enunciado": "**Frase 1**:\n*La gota horada la piedra, no por la fuerza…*",
   "tipo": "completar",
   "texto": "La gota [caso] horada [caso] la piedra [caso], no por la fuerza [caso]",
-  "obligatoria": false
+  "obligatoria": false,
+  "puntaje": 1,
+  "respuesta": "Nominativo|(Verbo)|Dativo|Ablativo",
+  "comentario": "La gota [Nominativo] horada [(Verbo)] la piedra [Dativo], no por la fuerza [Ablativo]."
 }
 ```
 
