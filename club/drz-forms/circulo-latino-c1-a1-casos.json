@@ -12,8 +12,8 @@
   "mensaje_gracias": "Ya registramos tus respuestas. Abajo puedes revisar lo que enviaste. Conserva el enlace para ver tus respuestas en el futuro o para enviar tus respuestas de nuevo.",
   "mostrar_respuestas": true,
   "examen": true,
-  "muestra_puntaje": false,
-  "muestra_respuestas": "respuestas",
+  "muestra_puntaje": true,
+  "muestra_respuestas": "correctas",
   "repeticiones": 0,
   "requiere_curso": false,
   "revela_certificado": false,
@@ -27,7 +27,8 @@
       "Dativo",
       "Acusativo",
       "Ablativo",
-      "(Verbo)"
+      "(Verbo)",
+      "(Indeclinable)"
     ]
   },
   "secciones": [
@@ -66,8 +67,8 @@
           "texto": "La gota [caso] horada [caso] la piedra [caso], no por la fuerza [caso], sino cayendo [caso] continuamente [caso]",
           "obligatoria": false,
           "puntaje": 1,
-          "respuesta": "Nominativo|(Verbo)|Dativo|Ablativo|Ablativo|Ablativo",
-          "comentario": "La gota [Nominativo] horada [(Verbo)] la piedra [Dativo], no por la fuerza [Ablativo], sino cayendo [Ablativo] continuamente [Ablativo]."
+          "respuesta": "Nominativo|(Verbo)|Acusativo|Ablativo|(Verbo)|(Indeclinable)",
+          "comentario": "La gota [Nominativo] horada [(Verbo)] la piedra [Acusativo], no por la fuerza [Ablativo], sino cayendo [(Verbo)] continuamente [(Indeclinable)]."
         },
         {
           "id": "frase_02",
@@ -86,8 +87,8 @@
           "texto": "Los cónsules [caso] informan [caso] sobre la situación [caso] política [caso] de la república [caso]",
           "obligatoria": false,
           "puntaje": 1,
-          "respuesta": "Nominativo|(Verbo)|Acusativo|Acusativo|Ablativo",
-          "comentario": "Los cónsules [Nominativo] informan [(Verbo)] sobre la situación [Acusativo] política [Acusativo] de la república [Ablativo]."
+          "respuesta": "Nominativo|(Verbo)|Ablativo|Ablativo|Genitivo",
+          "comentario": "Los cónsules [Nominativo] informan [(Verbo)] sobre la situación [Ablativo] política [Ablativo] de la república [Genitivo]."
         },
         {
           "id": "frase_04",
@@ -96,8 +97,8 @@
           "texto": "Los principiantes [caso] de la lengua [caso] latina [caso] traducen [caso] una carta [caso] de Cicerón [caso] a su [caso] esposa [caso] Terencia [caso]",
           "obligatoria": false,
           "puntaje": 1,
-          "respuesta": "Nominativo|Ablativo|Ablativo|(Verbo)|Dativo|Genitivo|Ablativo|Ablativo|Ablativo",
-          "comentario": "Los principiantes [Nominativo] de la lengua [Ablativo] latina [Ablativo] traducen [(Verbo)] una carta [Dativo] de Cicerón [Genitivo] a su [Ablativo] esposa [Ablativo] Terencia [Ablativo]."
+          "respuesta": "Nominativo|Genitivo|Genitivo|(Verbo)|Acusativo|Genitivo|Dativo|Dativo|Dativo",
+          "comentario": "Los principiantes [Nominativo] de la lengua [Genitivo] latina [Genitivo] traducen [(Verbo)] una carta [Acusativo] de Cicerón [Genitivo] a su [Dativo] esposa [Dativo] Terencia [Dativo]."
         },
         {
           "id": "frase_05",
@@ -106,8 +107,8 @@
           "texto": "Alejandro [caso] Magno [caso] ciñó [caso] su [caso] cabeza [caso] con la corona [caso] de los reyes [caso] persas [caso]",
           "obligatoria": false,
           "puntaje": 1,
-          "respuesta": "Nominativo|Nominativo|(Verbo)|Dativo|Dativo|Ablativo|Ablativo|Ablativo",
-          "comentario": "Alejandro [Nominativo] Magno [Nominativo] ciñó [(Verbo)] su [Dativo] cabeza [Dativo] con la corona [Ablativo] de los reyes [Ablativo] persas [Ablativo]."
+          "respuesta": "Nominativo|Nominativo|(Verbo)|Acusativo|Acusativo|Ablativo|Genitivo|Genitivo",
+          "comentario": "Alejandro [Nominativo] Magno [Nominativo] ciñó [(Verbo)] su [Acusativo] cabeza [Acusativo] con la corona [Ablativo] de los reyes [Genitivo] persas [Genitivo]."
         },
         {
           "id": "frase_06",
@@ -116,8 +117,8 @@
           "texto": "Yo [caso] soy [caso] el dueño [caso] de estos [caso] animales [caso]",
           "obligatoria": false,
           "puntaje": 1,
-          "respuesta": "Nominativo|(Verbo)|Dativo|Genitivo|Genitivo",
-          "comentario": "Yo [Nominativo] soy [(Verbo)] el dueño [Dativo] de estos [Genitivo] animales [Genitivo]."
+          "respuesta": "Nominativo|(Verbo)|Nominativo|Genitivo|Genitivo",
+          "comentario": "Yo [Nominativo] soy [(Verbo)] el dueño [Nominativo] de estos [Genitivo] animales [Genitivo]."
         },
         {
           "id": "frase_07",
@@ -126,8 +127,8 @@
           "texto": "Mi [caso] patria [caso] es [caso] todo [caso] este [caso] mundo [caso]",
           "obligatoria": false,
           "puntaje": 1,
-          "respuesta": "Nominativo|Nominativo|(Verbo)|Acusativo|Acusativo|Acusativo",
-          "comentario": "Mi [Nominativo] patria [Nominativo] es [(Verbo)] todo [Acusativo] este [Acusativo] mundo [Acusativo]."
+          "respuesta": "Nominativo|Nominativo|(Verbo)|Nominativo|Nominativo|Nominativo",
+          "comentario": "Mi [Nominativo] patria [Nominativo] es [(Verbo)] todo [Nominativo] este [Nominativo] mundo [Nominativo]."
         },
         {
           "id": "frase_08",
@@ -136,8 +137,8 @@
           "texto": "Fidias [caso] esculpió [caso] una Minerva [caso] de marfil [caso]",
           "obligatoria": false,
           "puntaje": 1,
-          "respuesta": "Nominativo|(Verbo)|Acusativo|Ablativo",
-          "comentario": "Fidias [Nominativo] esculpió [(Verbo)] una Minerva [Acusativo] de marfil [Ablativo]."
+          "respuesta": "Nominativo|(Verbo)|Acusativo|Genitivo",
+          "comentario": "Fidias [Nominativo] esculpió [(Verbo)] una Minerva [Acusativo] de marfil [Genitivo]."
         },
         {
           "id": "frase_09",
@@ -156,8 +157,8 @@
           "texto": "Ningún [caso] hombre [caso] es [caso] sabio [caso] a todas [caso] horas [caso]",
           "obligatoria": false,
           "puntaje": 1,
-          "respuesta": "Nominativo|Nominativo|(Verbo)|Acusativo|Ablativo|Ablativo",
-          "comentario": "Ningún [Nominativo] hombre [Nominativo] es [(Verbo)] sabio [Acusativo] a todas [Ablativo] horas [Ablativo]."
+          "respuesta": "Nominativo|Nominativo|(Verbo)|Nominativo|Ablativo|Ablativo",
+          "comentario": "Ningún [Nominativo] hombre [Nominativo] es [(Verbo)] sabio [Nominativo] a todas [Ablativo] horas [Ablativo]."
         }
       ]
     }
