@@ -4,7 +4,7 @@ const TOKEN_KEY = "drz-club-token";
 const ADMIN_TOKEN_KEY = "drz-forms-export-token";
 const WORKER_URL = "https://drz-club-portal.drz-academy.workers.dev";
 const FORM_ID_RE = /^[a-z0-9][a-z0-9_-]{0,63}$/;
-const SCHEMA_VERSION = "20261118f";
+const SCHEMA_VERSION = "20261118i";
 const CLASSROOM_REF_KEY = "drz-form-classroom-ref";
 
 function applyFormTheme(schema) {
@@ -807,12 +807,20 @@ function muestraRespuestasOff(schema) {
   return raw === "false" || raw === "no" || raw === "off" || raw === "ninguna" || raw === "0";
 }
 
-function examFeedbackMode(schema) {
-  // El profesor siempre ve claves y comentarios, aunque el form diga "correctas" o false.
+function answerReviewMode(schema) {
+  const raw = String(schema?.muestra_respuestas ?? "").trim().toLowerCase();
+  // "respuestas" = solo lo enviado, sin corrección (también en vista docente).
+  if (raw === "respuestas") return "respuestas";
+  // En el resto de casos el profesor ve claves y comentarios.
   if (teacherMode) return "todas";
   if (muestraRespuestasOff(schema)) return "";
-  const raw = String(schema?.muestra_respuestas || "").trim().toLowerCase();
   if (raw === "correctas" || raw === "todas") return raw;
+  return "";
+}
+
+function examFeedbackMode(schema) {
+  const mode = answerReviewMode(schema);
+  if (mode === "correctas" || mode === "todas") return mode;
   return "";
 }
 
@@ -852,7 +860,7 @@ function formatAnswerValue(question, value, schema) {
 function wantsAnswerSummary(schema) {
   // false en muestra_respuestas oculta el listado (salvo vista docente).
   if (!teacherMode && muestraRespuestasOff(schema)) return false;
-  if (examFeedbackMode(schema)) return true;
+  if (answerReviewMode(schema)) return true;
   const flag = schema?.mostrar_respuestas;
   return flag === true || flag === 1 || String(flag || "").trim().toLowerCase() === "true";
 }
@@ -883,7 +891,8 @@ function renderAnswersSummary(schema, answers, calificacion = null) {
     return;
   }
   const mode = examFeedbackMode(schema);
-  const grade = calificacion || (mode ? gradeExam(schema, answers) : null);
+  // Sin modo de corrección ("respuestas"/false) no aplicar verde/rojo aunque venga calificación.
+  const grade = mode ? (calificacion || gradeExam(schema, answers)) : null;
   const byId = new Map((grade?.detalles || []).map((d) => [d.id, d]));
   const heading = $("done-answers-heading");
   if (heading) {
@@ -1231,7 +1240,10 @@ async function startTeacherReview(schema, formId) {
 function renderScoreBox(status = {}) {
   const box = $("done-score");
   if (!box) return;
-  const show = Boolean(activeSchema?.muestra_puntaje) || teacherMode;
+  // Con "respuestas" no se muestra puntaje (tampoco al profesor).
+  const review = answerReviewMode(activeSchema);
+  const show = review !== "respuestas"
+    && (Boolean(activeSchema?.muestra_puntaje) || teacherMode);
   const puntaje = String(status.puntaje || "").trim();
   if (!show || !puntaje) {
     box.hidden = true;
