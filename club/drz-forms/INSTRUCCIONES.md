@@ -13,6 +13,7 @@ club/drz-forms/
 ├── evaluacion-curso.json      Evaluación que desbloquea certificados
 ├── circulo-latino-c1-a1-casos.json   Actividad 1 (casos)
 ├── circulo-latino-c1-a2-casos.json   Actividad 2 (casos)
+├── circulo-latino-c1-a3-traduccion.json  Actividad 3 (traducción)
 └── *-respuestas.csv           Backup local / CI (no se publica en Pages)
 ```
 
@@ -593,5 +594,6 @@ Repite el setup en otra hoja (u otro proyecto Apps Script) con otro `CLUB_FORM_I
 |---------|-----|
 | [`evaluacion-curso.json`](evaluacion-curso.json) | Evaluación post-curso; desbloquea certificado |
 | [`circulo-latino-c1-a1-casos.json`](circulo-latino-c1-a1-casos.json) | Actividad 1: casos (`completar` + claves) |
-| [`circulo-latino-c1-a2-casos.json`](circulo-latino-c1-a2-casos.json) | Actividad 2: casos (sin claves aún; no muestra puntaje ni respuestas) |
+| [`circulo-latino-c1-a2-casos.json`](circulo-latino-c1-a2-casos.json) | Actividad 2: casos |
+| [`circulo-latino-c1-a3-traduccion.json`](circulo-latino-c1-a3-traduccion.json) | Actividad 3: lectura y traducción (`parrafo`; sin claves aún) |
 | [`sheets-sync.gs`](sheets-sync.gs) | Sync automático a Google Sheets |

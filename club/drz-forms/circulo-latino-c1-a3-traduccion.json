@@ -1,0 +1,190 @@
+{
+  "id": "circulo-latino-c1-a3-traduccion",
+  "etiqueta": "Actividad de Curso",
+  "titulo": "Círculo Latino Ciclo 1\n\nActividad 3: Lectura y traducción",
+  "curso": "circulo-latino",
+  "og_imagen": "/cursos/circulo-latino/images/og-actividades.jpg",
+  "intro": "Lee las oraciones y el relato en latín y **tradúcelos al español**. Usa el [diccionario en línea](https://www.nihilscio.it/Manuali/Lingua%20latina/Verbi/Coniugazione_latino.aspx) y la [tabla de declinaciones](https://drive.google.com/file/d/1IpjJ8pjm8L0iC23gtNrxDRunArQqKglf/view?usp=classroom_web&authuser=0) para identificar cada palabra.\n\nEscribe una traducción completa y clara de cada frase. No hace falta una versión literal palabra por palabra si el sentido en español queda natural, pero procura respetar los casos y el significado de cada forma.\n\n**Importante:** puedes dejar el formulario a medias. Pulsa *Grabar respuestas*, conserva el enlace y vuelve más tarde para continuar.",
+  "fondo": "claro",
+  "token": "seneca",
+  "token_docente": "armavirumquecanotroiaequiprimusaboris",
+  "boton": "Grabar",
+  "titulo_gracias": "¡Gracias por completar tu actividad!",
+  "mensaje_gracias": "Ya registramos tus respuestas. Conserva el enlace para volver a editarlas más tarde.",
+  "mostrar_respuestas": false,
+  "examen": true,
+  "muestra_puntaje": false,
+  "muestra_respuestas": false,
+  "repeticiones": 0,
+  "requiere_curso": false,
+  "revela_certificado": false,
+  "numerar_preguntas": false,
+  "prueba_curso_nombre": "Círculo Latino",
+  "secciones": [
+    {
+      "id": "identificacion",
+      "titulo": "Identificación",
+      "explicacion": "Usaremos estos datos solo para identificar tu actividad.",
+      "preguntas": [
+        {
+          "id": "correo",
+          "enunciado": "Correo electrónico",
+          "explicacion": "El mismo con el que te inscribiste en el curso.",
+          "tipo": "texto",
+          "obligatoria": true,
+          "puntaje": 0
+        },
+        {
+          "id": "cedula",
+          "enunciado": "Cédula",
+          "explicacion": "Número de documento, sin puntos ni espacios.",
+          "tipo": "texto",
+          "obligatoria": true,
+          "puntaje": 0
+        }
+      ]
+    },
+    {
+      "id": "oraciones",
+      "titulo": "Oraciones sueltas",
+      "explicacion": "Traduce cada oración del latín al español. Puedes apoyarte en este vocabulario y en la [tabla de declinaciones](https://drive.google.com/file/d/1IpjJ8pjm8L0iC23gtNrxDRunArQqKglf/view?usp=classroom_web&authuser=0).\n\n**Sustantivos**\n*Aper, apri*, m. Jabalí\n*Ager, agri*, m. Campo\n*Argentum, i*, n. Plata\n*Aurum, i*, n. Oro\n*Cancer, cri*, m. Cangrejo\n*Culter, tri*, m. Cuchillo\n*Dominus, i*, m. Señor\n*Donum, i*, n. Regalo\n*Filius, i*. Hijo\n*Fluvius, ii*, m. Río\n*Gladius, ii*, m. Espada\n*Hortus, i*, m. Jardín\n*Liber, libri*, m. Libro\n*Magister, tri*, m. Maestro\n*Puer, i*, m. Niño\n*Servus, i*, m. Esclavo\n*Templum, i*, n. Templo\n*Vir, i*, m. Varón\n\n**Adjetivos**\n*Animosus, a, um*. Valiente\n*Bonus, a, um*. Bueno\n*Parvus, a, um*. Pequeño\n*Pulcher, cra, crum*. Bello\n\n**Verbos**\n*Capto, as, are, avi, atum*. Ir a la caza de\n*Habeo, es, ere, habui, habitum*. Tener\n*Laudo, as, are, avi, atum*. Alabar\n*Lego, is, ere, legi, lectum*. Leer\n*Monstro, as, are, avi, atum*. Mostrar\n*Sum, es, fui, esse*. Ser\n*Vulnero, as, are, avi, atum*. Herir",
+      "preguntas": [
+        {
+          "id": "frase_01",
+          "enunciado": "**Frase 1**\n\n*Agricola aprum cultro vulnerat in agris et filiis monstrat.*",
+          "explicacion": "Traduce al español.",
+          "tipo": "parrafo",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "frase_02",
+          "enunciado": "**Frase 2**\n\n*Magister bonus vir est et pulchros pueros habet.*",
+          "explicacion": "Traduce al español.",
+          "tipo": "parrafo",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "frase_03",
+          "enunciado": "**Frase 3**\n\n*Pueri agricolae libros legunt et a magistro laudantur, sed apros non captant nam pueri parvi sunt.*",
+          "explicacion": "Traduce al español.",
+          "tipo": "parrafo",
+          "obligatoria": false,
+          "puntaje": 1
+        }
+      ]
+    },
+    {
+      "id": "nasica",
+      "titulo": "El relato de Nasica",
+      "explicacion": "Lee primero el texto completo y luego traduce **frase por frase** (cada oración entre puntos) en las casillas de abajo. Usa el [diccionario en línea](https://www.nihilscio.it/Manuali/Lingua%20latina/Verbi/Coniugazione_latino.aspx) y la [tabla de declinaciones](https://drive.google.com/file/d/1IpjJ8pjm8L0iC23gtNrxDRunArQqKglf/view?usp=classroom_web&authuser=0).\n\n*Rusticus quidam nomine Nasica, stultissimus erat. Habebat equum optimum et velocissimum. Equum maioris pretii nemo inter vecinos habebat. Sed Nasica vidit in vecino agro pulcherrimam vaccam statimque cogitavit: «talis vaccam certe lac uberrimum dat et optimum». Equum igitur pro vacca callidiori vicino offert et vaccam laetissimus adducit in villam.*\n\n*Mox Nasica in proximo agro asellum videt nigerrimum. In fronte aselli macula nitebat lacte candidior et lunae cornibus simillima: «nunquam, exclamavit nasica, venustiorem asellum vidit». Vaccam igitur reddit et asellum cum maximo gaudio adducit. Postea in vicini prato vidit pinguissimam ovem: «nunquam, exclamat, pulchrius vidit vellus. Lana est densissima. Ovis certe potior et melior est asello: asellum reddam». Res facilissima erat. Vicinus providentior quam nasica, ovem libenter dat.*",
+      "preguntas": [
+        {
+          "id": "nasica_01",
+          "enunciado": "**Frase 1**\n\n*Rusticus quidam nomine Nasica, stultissimus erat.*",
+          "explicacion": "Traduce al español.",
+          "tipo": "parrafo",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "nasica_02",
+          "enunciado": "**Frase 2**\n\n*Habebat equum optimum et velocissimum.*",
+          "explicacion": "Traduce al español.",
+          "tipo": "parrafo",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "nasica_03",
+          "enunciado": "**Frase 3**\n\n*Equum maioris pretii nemo inter vecinos habebat.*",
+          "explicacion": "Traduce al español.",
+          "tipo": "parrafo",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "nasica_04",
+          "enunciado": "**Frase 4**\n\n*Sed Nasica vidit in vecino agro pulcherrimam vaccam statimque cogitavit: «talis vaccam certe lac uberrimum dat et optimum».*",
+          "explicacion": "Traduce al español.",
+          "tipo": "parrafo",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "nasica_05",
+          "enunciado": "**Frase 5**\n\n*Equum igitur pro vacca callidiori vicino offert et vaccam laetissimus adducit in villam.*",
+          "explicacion": "Traduce al español.",
+          "tipo": "parrafo",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "nasica_06",
+          "enunciado": "**Frase 6**\n\n*Mox Nasica in proximo agro asellum videt nigerrimum.*",
+          "explicacion": "Traduce al español.",
+          "tipo": "parrafo",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "nasica_07",
+          "enunciado": "**Frase 7**\n\n*In fronte aselli macula nitebat lacte candidior et lunae cornibus simillima: «nunquam, exclamavit nasica, venustiorem asellum vidit».*",
+          "explicacion": "Traduce al español.",
+          "tipo": "parrafo",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "nasica_08",
+          "enunciado": "**Frase 8**\n\n*Vaccam igitur reddit et asellum cum maximo gaudio adducit.*",
+          "explicacion": "Traduce al español.",
+          "tipo": "parrafo",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "nasica_09",
+          "enunciado": "**Frase 9**\n\n*Postea in vicini prato vidit pinguissimam ovem: «nunquam, exclamat, pulchrius vidit vellus.*",
+          "explicacion": "Traduce al español.",
+          "tipo": "parrafo",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "nasica_10",
+          "enunciado": "**Frase 10**\n\n*Lana est densissima.*",
+          "explicacion": "Traduce al español.",
+          "tipo": "parrafo",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "nasica_11",
+          "enunciado": "**Frase 11**\n\n*Ovis certe potior et melior est asello: asellum reddam».*",
+          "explicacion": "Traduce al español.",
+          "tipo": "parrafo",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "nasica_12",
+          "enunciado": "**Frase 12**\n\n*Res facilissima erat.*",
+          "explicacion": "Traduce al español.",
+          "tipo": "parrafo",
+          "obligatoria": false,
+          "puntaje": 1
+        },
+        {
+          "id": "nasica_13",
+          "enunciado": "**Frase 13**\n\n*Vicinus providentior quam nasica, ovem libenter dat.*",
+          "explicacion": "Traduce al español.",
+          "tipo": "parrafo",
+          "obligatoria": false,
+          "puntaje": 1
+        }
+      ]
+    }
+  ]
+}

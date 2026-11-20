@@ -4,7 +4,7 @@ const TOKEN_KEY = "drz-club-token";
 const ADMIN_TOKEN_KEY = "drz-forms-export-token";
 const WORKER_URL = "https://drz-club-portal.drz-academy.workers.dev";
 const FORM_ID_RE = /^[a-z0-9][a-z0-9_-]{0,63}$/;
-const SCHEMA_VERSION = "20261118m";
+const SCHEMA_VERSION = "20261120a";
 const CLASSROOM_REF_KEY = "drz-form-classroom-ref";
 
 function applyFormTheme(schema) {
@@ -119,6 +119,7 @@ function richText(value) {
   html = html.replace(new RegExp(`&lt;(/?)(${ALLOWED_TAGS})\\s*/?&gt;`, "gi"), (m, close, tag) =>
     tag.toLowerCase() === "br" ? "<br>" : `<${close}${tag}>`);
   html = html
+    .replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
     .replace(/(^|[^*])\*(?!\s)(.+?)(?<!\s)\*(?!\*)/g, "$1<em>$2</em>")
     .replace(/`([^`]+)`/g, "<code>$1</code>")
