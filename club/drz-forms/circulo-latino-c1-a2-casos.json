@@ -10,11 +10,11 @@
   "token_docente": "armavirumquecanotroiaequiprimusaboris",
   "boton": "Grabar",
   "titulo_gracias": "¡Gracias por completar tu actividad!",
-  "mensaje_gracias": "Ya registramos tus respuestas. Conserva el enlace para volver a editarlas más tarde.",
-  "mostrar_respuestas": false,
+  "mensaje_gracias": "Ya registramos tus respuestas. Abajo puedes ver tu puntaje y la revisión (correctas en verde; incorrectas en rojo, con la clave).",
+  "mostrar_respuestas": true,
   "examen": true,
-  "muestra_puntaje": false,
-  "muestra_respuestas": "respuestas",
+  "muestra_puntaje": true,
+  "muestra_respuestas": "todas",
   "repeticiones": 0,
   "requiere_curso": false,
   "revela_certificado": false,
@@ -67,7 +67,9 @@
           "tipo": "completar",
           "texto": "Las madres [caso] lavan [caso] a sus [caso] niños [caso] con agua [caso] tibia [caso]",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "Nominativo|(Verbo)|Acusativo|Acusativo|Ablativo|Ablativo",
+          "comentario": "Las madres [Nominativo] lavan [(Verbo)] a sus [Acusativo] niños [Acusativo] con agua [Ablativo] tibia [Ablativo]."
         },
         {
           "id": "frase_02",
@@ -75,7 +77,9 @@
           "tipo": "completar",
           "texto": "La estrella [caso] de los navegantes [caso] señala [caso] el norte [caso]",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "Nominativo|Genitivo|(Verbo)|Acusativo",
+          "comentario": "La estrella [Nominativo] de los navegantes [Genitivo] señala [(Verbo)] el norte [Acusativo]."
         },
         {
           "id": "frase_03",
@@ -83,7 +87,9 @@
           "tipo": "completar",
           "texto": "Hija [caso] mía [caso], la violencia [caso] se [caso] supera [caso] con la paciencia [caso]",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "Vocativo|Vocativo|Nominativo|(Verbo)|(Verbo)|Ablativo",
+          "comentario": "Hija [Vocativo] mía [Vocativo], la violencia [Nominativo] se [(Verbo)] supera [(Verbo)] con la paciencia [Ablativo]."
         },
         {
           "id": "frase_04",
@@ -91,7 +97,9 @@
           "tipo": "completar",
           "texto": "La sabiduría [caso] de los padres [caso] se [caso] transmite [caso] a los hijos [caso]",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "Nominativo|Genitivo|(Verbo)|(Verbo)|Dativo",
+          "comentario": "La sabiduría [Nominativo] de los padres [Genitivo] se [(Verbo)] transmite [(Verbo)] a los hijos [Dativo]."
         },
         {
           "id": "frase_05",
@@ -99,7 +107,9 @@
           "tipo": "completar",
           "texto": "Las acciones [caso] de las personas [caso] buenas [caso] son [caso] un ejemplo [caso]",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "Nominativo|Genitivo|Genitivo|(Verbo)|Nominativo",
+          "comentario": "Las acciones [Nominativo] de las personas [Genitivo] buenas [Genitivo] son [(Verbo)] un ejemplo [Nominativo]."
         },
         {
           "id": "frase_06",
@@ -107,7 +117,9 @@
           "tipo": "completar",
           "texto": "Los turistas [caso] admiran [caso] el anfiteatro [caso] de Tarragona [caso]",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "Nominativo|(Verbo)|Acusativo|Genitivo",
+          "comentario": "Los turistas [Nominativo] admiran [(Verbo)] el anfiteatro [Acusativo] de Tarragona [Genitivo]."
         },
         {
           "id": "frase_07",
@@ -115,7 +127,9 @@
           "tipo": "completar",
           "texto": "Escuchamos [caso] con paciencia [caso] el largo [caso] discurso [caso] del jefe [caso]",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "(Verbo)|Ablativo|Acusativo|Acusativo|Genitivo",
+          "comentario": "Escuchamos [(Verbo)] con paciencia [Ablativo] el largo [Acusativo] discurso [Acusativo] del jefe [Genitivo]."
         },
         {
           "id": "frase_08",
@@ -123,7 +137,9 @@
           "tipo": "completar",
           "texto": "Descansamos [caso] por la tarde [caso] a la sombra [caso] de un árbol [caso]",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "(Verbo)|Ablativo|Ablativo|Genitivo",
+          "comentario": "Descansamos [(Verbo)] por la tarde [Ablativo] a la sombra [Ablativo] de un árbol [Genitivo]."
         },
         {
           "id": "frase_09",
@@ -131,7 +147,9 @@
           "tipo": "completar",
           "texto": "Los atacantes [caso] iban [caso] armados [caso] con puñales [caso] afilados [caso]",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "Nominativo|(Verbo)|Nominativo|Ablativo|Ablativo",
+          "comentario": "Los atacantes [Nominativo] iban [(Verbo)] armados [Nominativo] con puñales [Ablativo] afilados [Ablativo]."
         },
         {
           "id": "frase_10",
@@ -139,7 +157,9 @@
           "tipo": "completar",
           "texto": "De vez en cuando [caso] se [caso] despierta [caso] el león [caso] del zoológico [caso]",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "(Indeclinable)|(Verbo)|(Verbo)|Nominativo|Genitivo",
+          "comentario": "De vez en cuando [(Indeclinable)] se [(Verbo)] despierta [(Verbo)] el león [Nominativo] del zoológico [Genitivo]."
         }
       ]
     }
