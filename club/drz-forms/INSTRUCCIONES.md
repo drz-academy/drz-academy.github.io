@@ -154,11 +154,14 @@ Referencia real: [`circulo-latino-c1-a1-casos.json`](circulo-latino-c1-a1-casos.
 | `enunciado` | sí | Texto de la pregunta |
 | `tipo` | sí | Ver tabla de tipos |
 | `obligatoria` | no | Por defecto `true`. Pon `false` para opcional |
+| `deshabilitada` | no | `true`: no se muestra, no se valida y no suma al examen. Útil para reservar preguntas de una ampliación futura |
 | `explicacion` | no | Texto gris bajo el enunciado |
 | `default` | no | Valor inicial (`lista_desplegable`, `escala_scroll`, `radio`, `opciones`) |
 | `puntaje` | no | Solo con `examen: true`. Puntos; en `completar`, por hueco |
 | `respuesta` | no | Solo con `examen: true`. Clave correcta (ver sección Examen) |
 | `comentario` | no | Solo con `examen: true`. Nota visible con `muestra_respuestas: "todas"` |
+
+En `intro`, `explicacion` o `enunciado` puedes ocultar un bloque con comentario HTML (`<!-- … -->`); el motor lo elimina al pintar. Así puedes dejar texto de ampliación en el JSON sin mostrarlo todavía.
 
 ### Tipos de pregunta (resumen)
 

@@ -98,11 +98,24 @@ async function unlockAdminIfPresent() {
   return candidate;
 }
 
-function formQuestions(schema) {
-  if (Array.isArray(schema?.secciones) && schema.secciones.length) {
-    return schema.secciones.flatMap((section) => section.preguntas || []);
+function isQuestionEnabled(question) {
+  const v = question?.deshabilitada;
+  if (v === true || v === 1) return false;
+  if (typeof v === "string") {
+    const raw = v.trim().toLowerCase();
+    if (raw === "true" || raw === "1" || raw === "si" || raw === "sí" || raw === "yes") return false;
   }
-  return Array.isArray(schema?.preguntas) ? schema.preguntas : [];
+  return true;
+}
+
+function formQuestions(schema) {
+  let list;
+  if (Array.isArray(schema?.secciones) && schema.secciones.length) {
+    list = schema.secciones.flatMap((section) => section.preguntas || []);
+  } else {
+    list = Array.isArray(schema?.preguntas) ? schema.preguntas : [];
+  }
+  return list.filter(isQuestionEnabled);
 }
 
 function formSections(schema) {
@@ -401,6 +414,7 @@ function renderStats(schema, rows, cursos) {
     .map((section) => {
       const title = section.titulo ? `<h2 class="section-title">${escapeHtml(section.titulo)}</h2>` : "";
       const blocks = (section.preguntas || [])
+        .filter(isQuestionEnabled)
         .map((question) => renderQuestion(question, rows, cursos))
         .join("");
       return `${title}${blocks}`;

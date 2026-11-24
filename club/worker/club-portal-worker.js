@@ -365,15 +365,28 @@ async function clientProfile(env, memberId, record) {
   return publicProfile({ ...record, cursos: enriched });
 }
 
+function isQuestionEnabled(question) {
+  const v = question?.deshabilitada;
+  if (v === true || v === 1) return false;
+  if (typeof v === "string") {
+    const raw = v.trim().toLowerCase();
+    if (raw === "true" || raw === "1" || raw === "si" || raw === "sí" || raw === "yes") return false;
+  }
+  return true;
+}
+
 function formQuestions(schema) {
+  let list;
   if (Array.isArray(schema?.secciones) && schema.secciones.length) {
     const out = [];
     for (const section of schema.secciones) {
       if (Array.isArray(section?.preguntas)) out.push(...section.preguntas);
     }
-    return out;
+    list = out;
+  } else {
+    list = Array.isArray(schema?.preguntas) ? schema.preguntas : [];
   }
-  return Array.isArray(schema?.preguntas) ? schema.preguntas : [];
+  return list.filter(isQuestionEnabled);
 }
 
 function isRequired(question) {

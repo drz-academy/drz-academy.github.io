@@ -4,7 +4,7 @@ const TOKEN_KEY = "drz-club-token";
 const ADMIN_TOKEN_KEY = "drz-forms-export-token";
 const WORKER_URL = "https://drz-club-portal.drz-academy.workers.dev";
 const FORM_ID_RE = /^[a-z0-9][a-z0-9_-]{0,63}$/;
-const SCHEMA_VERSION = "20261120a";
+const SCHEMA_VERSION = "20261124a";
 const CLASSROOM_REF_KEY = "drz-form-classroom-ref";
 
 function applyFormTheme(schema) {
@@ -114,8 +114,9 @@ function escapeHtml(value) {
 const ALLOWED_TAGS = "b|i|em|strong|u|br|sub|sup|mark";
 
 // Markdown mínimo (**negrilla**, *itálica*, `código`, saltos de línea) más unas pocas etiquetas HTML seguras.
+// `<!-- … -->` se elimina (sirve para reservar texto del enunciado sin mostrarlo).
 function richText(value) {
-  let html = escapeHtml(value);
+  let html = escapeHtml(String(value ?? "").replace(/<!--[\s\S]*?-->/g, ""));
   html = html.replace(new RegExp(`&lt;(/?)(${ALLOWED_TAGS})\\s*/?&gt;`, "gi"), (m, close, tag) =>
     tag.toLowerCase() === "br" ? "<br>" : `<${close}${tag}>`);
   html = html
@@ -131,11 +132,24 @@ function isRequired(question) {
   return question?.obligatoria !== false;
 }
 
-function formQuestions(schema) {
-  if (Array.isArray(schema?.secciones) && schema.secciones.length) {
-    return schema.secciones.flatMap((section) => section.preguntas || []);
+function isQuestionEnabled(question) {
+  const v = question?.deshabilitada;
+  if (v === true || v === 1) return false;
+  if (typeof v === "string") {
+    const raw = v.trim().toLowerCase();
+    if (raw === "true" || raw === "1" || raw === "si" || raw === "sí" || raw === "yes") return false;
   }
-  return Array.isArray(schema?.preguntas) ? schema.preguntas : [];
+  return true;
+}
+
+function formQuestions(schema) {
+  let list;
+  if (Array.isArray(schema?.secciones) && schema.secciones.length) {
+    list = schema.secciones.flatMap((section) => section.preguntas || []);
+  } else {
+    list = Array.isArray(schema?.preguntas) ? schema.preguntas : [];
+  }
+  return list.filter(isQuestionEnabled);
 }
 
 function formSections(schema) {
@@ -627,6 +641,7 @@ function renderForm(schema, { cursos = [], prefill = {} } = {}) {
       const introText = section.explicacion || section.intro || "";
       const intro = introText ? `<p class="section-intro">${richText(introText)}</p>` : "";
       const questions = (section.preguntas || [])
+        .filter(isQuestionEnabled)
         .map((question) => {
           const numbered = schema.numerar_preguntas !== false && question.numerar !== false;
           if (numbered) number += 1;
@@ -963,6 +978,7 @@ function renderAnswersSummary(schema, answers, calificacion = null) {
   for (const section of formSections(schema)) {
     const items = [];
     for (const question of section.preguntas || []) {
+      if (!isQuestionEnabled(question)) continue;
       const id = String(question.id || "").trim();
       if (!id) continue;
       const val = answers[id];
