@@ -1,5 +1,567 @@
 [
   {
+    "id": "7ad06f96-7594-4450-9d54-982ef861fd3f",
+    "timestampServer": "2026-11-23T22:50:23.234Z",
+    "ip": "2800:800:540:c268:762:9660:c0cd:5b2d",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAafI0e6toj4YKjnbVL7aA85Q98OzK0eKm_5SueKkdneFWccKyLrcznG8VBw4Kw_aem_aTgE89DhgOiU8nrw34Ah0Q",
+    "referrer": "https://l.instagram.com/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 16; SM-S908E Build/BP2A.250605.031.A3; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/158.0.8127.34 Mobile Safari/537.36 Instagram 456.1.0.56.78 Android (36/16; 450dpi; 1080x2316; samsung; SM-S908E; b0q; qcom; es_US; 1117930813; IABMV/1)",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-11-23T22:50:19.504Z"
+  },
+  {
+    "id": "b8168dc9-34f8-4886-b452-2f50396226d7",
+    "timestampServer": "2026-11-23T17:51:11.455Z",
+    "ip": "186.31.12.77",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&respuesta=u9s5rff7s6&edit=true&form=circulo-latino-c1-a3-traduccion",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/p/circulo-latino-c1-a3-traduccion.html?token=seneca&respuesta=u9s5rff7s6&edit=true",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a3-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-23T17:51:19.311Z"
+  },
+  {
+    "id": "5e429184-f576-4e43-ba6f-9c1d75bc0232",
+    "timestampServer": "2026-11-23T17:50:29.837Z",
+    "ip": "186.31.12.77",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&form=circulo-latino-c1-a3-traduccion",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/p/circulo-latino-c1-a3-traduccion.html?token=seneca",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a3-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-23T17:50:37.685Z"
+  },
+  {
+    "id": "2a966912-0ca1-4653-b08f-47d342a97215",
+    "timestampServer": "2026-11-23T11:53:58.782Z",
+    "ip": "116.87.13.76",
+    "country": "SG",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-23T11:53:57.827Z"
+  },
+  {
+    "id": "d457595e-e440-4ce8-9d3f-7a0f83586b15",
+    "timestampServer": "2026-11-22T14:02:28.334Z",
+    "ip": "179.190.148.24",
+    "country": "BR",
+    "eventType": "course_page_view",
+    "page": "/cursos/astropython/",
+    "url": "https://drz-academy.github.io/cursos/astropython/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "astropython",
+      "courseName": "AstroPython"
+    },
+    "timestampClient": "2026-11-22T14:02:24.628Z"
+  },
+  {
+    "id": "0cd1f1ad-757f-4c66-945a-d7ce94e636e0",
+    "timestampServer": "2026-11-22T13:44:41.381Z",
+    "ip": "49.43.35.211",
+    "country": "IN",
+    "eventType": "course_page_view",
+    "page": "/cursos/cambio-climatico/",
+    "url": "https://drz-academy.github.io/cursos/cambio-climatico/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cambio-climatico",
+      "courseName": "Cambio Climático"
+    },
+    "timestampClient": "2026-11-22T13:44:24.272Z"
+  },
+  {
+    "id": "029029af-4956-494c-9234-2685ae003888",
+    "timestampServer": "2026-11-22T12:31:34.794Z",
+    "ip": "2409:40d0:244c:b603:5677:87ff:fed6:bb36",
+    "country": "IN",
+    "eventType": "course_page_view",
+    "page": "/cursos/python-fin-del-mundo/",
+    "url": "https://drz-academy.github.io/cursos/python-fin-del-mundo/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "python-fin-del-mundo",
+      "courseName": "Python para el fin del mundo"
+    },
+    "timestampClient": "2026-11-22T12:31:32.889Z"
+  },
+  {
+    "id": "fbd4ebc8-f70f-48f0-9e40-d7bdd08e4b5c",
+    "timestampServer": "2026-11-22T09:28:22.914Z",
+    "ip": "47.220.155.1",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/cuantica-a-pie/",
+    "url": "https://drz-academy.github.io/cursos/cuantica-a-pie/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "cuantica-a-pie",
+      "courseName": "Cuántica a Pie con Dr. Z"
+    },
+    "timestampClient": "2026-11-22T09:28:20.792Z"
+  },
+  {
+    "id": "f6dffd2e-eced-46e6-b766-c88ae38925a0",
+    "timestampServer": "2026-11-22T08:06:37.540Z",
+    "ip": "92.177.166.125",
+    "country": "ES",
+    "eventType": "course_page_view",
+    "page": "/cursos/astropython/",
+    "url": "https://drz-academy.github.io/cursos/astropython/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "astropython",
+      "courseName": "AstroPython"
+    },
+    "timestampClient": "2026-11-22T08:06:35.973Z"
+  },
+  {
+    "id": "5b6af7a5-0d90-4368-afbf-dcf31446e09a",
+    "timestampServer": "2026-11-22T03:11:58.729Z",
+    "ip": "190.89.209.78",
+    "country": "BR",
+    "eventType": "demo_page_view",
+    "page": "/demos/difraccion/",
+    "url": "https://drz-academy.github.io/demos/difraccion/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "demoId": "difraccion",
+      "demoName": "Difracción y criterio de"
+    },
+    "timestampClient": "2026-11-22T03:11:53.399Z"
+  },
+  {
+    "id": "a8144931-2e42-41f2-9e13-82145e61f49e",
+    "timestampServer": "2026-11-22T02:56:13.073Z",
+    "ip": "27.72.28.17",
+    "country": "VN",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-11-22T02:56:11.826Z"
+  },
+  {
+    "id": "bb59af75-19eb-4667-93db-9c94586ab7ab",
+    "timestampServer": "2026-11-22T00:53:17.984Z",
+    "ip": "2800:e2:b380:2701:637f:1fed:ae9f:5522",
+    "country": "CO",
+    "eventType": "course_enroll_click",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAadaXas-XyO2eebiDMkSfWqOJltegokHaF0QzlbbbcxjZFcZ6w8hJOQF8nizuQ_aem_4qYIDHhL94qI9TFvuRL8RQ",
+    "referrer": "https://l.instagram.com/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 13; 23129RA5FL Build/TKQ1.221114.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/157.0.8103.50 Mobile Safari/537.36 Instagram 455.0.0.51.72 Android (33/13; 440dpi; 1080x2400; Xiaomi/Redmi; 23129RA5FL; sapphire; qcom; es_US; 1110835071; IABMV/1)",
+    "language": "es",
+    "details": {
+      "targetId": "circulo-latino",
+      "targetName": "Círculo Latino",
+      "href": "https://drz.academy/producto/circulo-latino/",
+      "label": "Inscribete ahora →"
+    },
+    "timestampClient": "2026-11-22T00:53:17.775Z"
+  },
+  {
+    "id": "e6e8af3b-a098-49e7-b3dc-fe1689afc247",
+    "timestampServer": "2026-11-22T00:52:41.244Z",
+    "ip": "2800:e2:b380:2701:637f:1fed:ae9f:5522",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA81NjcwNjczNDMzNTI0MjcAAadaXas-XyO2eebiDMkSfWqOJltegokHaF0QzlbbbcxjZFcZ6w8hJOQF8nizuQ_aem_4qYIDHhL94qI9TFvuRL8RQ",
+    "referrer": "https://l.instagram.com/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 13; 23129RA5FL Build/TKQ1.221114.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/157.0.8103.50 Mobile Safari/537.36 Instagram 455.0.0.51.72 Android (33/13; 440dpi; 1080x2400; Xiaomi/Redmi; 23129RA5FL; sapphire; qcom; es_US; 1110835071; IABMV/1)",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-11-22T00:52:40.761Z"
+  },
+  {
+    "id": "f043e4c7-ae09-46fd-8d8e-d14e9ccb9431",
+    "timestampServer": "2026-11-21T21:32:22.231Z",
+    "ip": "205.169.39.189",
+    "country": "US",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-21T21:32:21.812Z"
+  },
+  {
+    "id": "c7d7d215-c13f-42b3-82c0-811f8e8b992b",
+    "timestampServer": "2026-11-21T21:32:19.296Z",
+    "ip": "104.197.69.115",
+    "country": "US",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.6422.60 Safari/537.36 Edge/12.246",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-21T21:32:18.635Z"
+  },
+  {
+    "id": "94ef9379-5b7a-4f10-ba43-b1e3a379590f",
+    "timestampServer": "2026-11-21T21:32:13.278Z",
+    "ip": "205.169.39.44",
+    "country": "US",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "https://bing.com/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.132 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-21T21:32:12.818Z"
+  },
+  {
+    "id": "6937c8c0-2388-4811-a28b-4373da31584f",
+    "timestampServer": "2026-11-21T21:30:52.409Z",
+    "ip": "181.79.149.130",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-11-21T21:30:51.477Z"
+  },
+  {
+    "id": "1e9d00c9-c062-4103-840a-b91576833a43",
+    "timestampServer": "2026-11-21T19:42:42.027Z",
+    "ip": "2603:9001:1f0:9050:654b:9ef4:fcbe:566b",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-11-21T19:42:42.203Z"
+  },
+  {
+    "id": "ecbe9a40-c847-443d-8cb6-c42c292559d1",
+    "timestampServer": "2026-11-21T19:42:41.833Z",
+    "ip": "2603:9001:1f0:9050:654b:9ef4:fcbe:566b",
+    "country": "US",
+    "eventType": "course_click",
+    "page": "/",
+    "url": "https://drz-academy.github.io/#cursos",
+    "referrer": "https://drz-academy.github.io/cursos/circulo-latino/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaebJTIhbx5smUzfQsYQNyKAFToAOarRJbxJAJZVF0dXe-lEGOzOzAyyv4j56w_aem_VjCUCXS1eqi1haUpQ7a2gA",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+    "language": "es",
+    "details": {
+      "targetId": "circulo-latino",
+      "targetName": "Círculo Latino",
+      "href": "cursos/circulo-latino/",
+      "label": "Círculo Latino\n            ¡El latín no es una lengua muerta si sabes cómo leerla!\n            LatínHumanidadesCultura C"
+    },
+    "timestampClient": "2026-11-21T19:42:41.938Z"
+  },
+  {
+    "id": "7a9e9890-0521-43a5-8b67-d48e280af49c",
+    "timestampServer": "2026-11-21T19:40:56.730Z",
+    "ip": "2603:9001:1f0:9050:654b:9ef4:fcbe:566b",
+    "country": "US",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "https://drz-academy.github.io/cursos/circulo-latino/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaebJTIhbx5smUzfQsYQNyKAFToAOarRJbxJAJZVF0dXe-lEGOzOzAyyv4j56w_aem_VjCUCXS1eqi1haUpQ7a2gA",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-21T19:40:56.859Z"
+  },
+  {
+    "id": "80301157-3a5a-4f5d-b346-42d5be644f1e",
+    "timestampServer": "2026-11-21T19:40:40.176Z",
+    "ip": "2603:9001:1f0:9050:654b:9ef4:fcbe:566b",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaebJTIhbx5smUzfQsYQNyKAFToAOarRJbxJAJZVF0dXe-lEGOzOzAyyv4j56w_aem_VjCUCXS1eqi1haUpQ7a2gA",
+    "referrer": "https://l.instagram.com/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-11-21T19:40:40.036Z"
+  },
+  {
+    "id": "dea597a7-5b22-4691-8e1c-b0c21ca0d308",
+    "timestampServer": "2026-11-21T18:58:59.030Z",
+    "ip": "132.255.239.73",
+    "country": "PE",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-21T18:58:56.473Z"
+  },
+  {
+    "id": "49173fb6-d316-4358-a9d8-08118497c330",
+    "timestampServer": "2026-11-21T18:07:14.581Z",
+    "ip": "186.30.75.8",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?form=circulo-latino-c1-a2-casos&token=seneca",
+    "referrer": "https://classroom.google.com/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a2-casos",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-21T18:07:20.982Z"
+  },
+  {
+    "id": "fddbd312-a12d-48b9-b1e2-88fee5504199",
+    "timestampServer": "2026-11-21T17:50:23.938Z",
+    "ip": "186.30.75.8",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?form=circulo-latino-c1-a1-casos&token=seneca",
+    "referrer": "https://classroom.google.com/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a1-casos",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-21T17:50:30.241Z"
+  },
+  {
+    "id": "c8828f2c-ab45-41d1-a32e-b9bcb8ba8501",
+    "timestampServer": "2026-11-21T14:24:20.304Z",
+    "ip": "191.156.48.211",
+    "country": "CO",
+    "eventType": "course_enroll_click",
+    "page": "/cursos/python-fin-del-mundo/",
+    "url": "https://drz-academy.github.io/cursos/python-fin-del-mundo/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6.1 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "targetId": "python-fin-del-mundo",
+      "targetName": "Python para el fin del mundo",
+      "href": "https://drz.academy/producto/python-fin-del-mundo/",
+      "label": "Inscribete ahora →"
+    },
+    "timestampClient": "2026-11-21T14:24:20.141Z"
+  },
+  {
+    "id": "4b1f9f83-0b00-44dc-a1d8-503fbd574bdf",
+    "timestampServer": "2026-11-21T14:23:57.122Z",
+    "ip": "191.156.48.211",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/python-fin-del-mundo/",
+    "url": "https://drz-academy.github.io/cursos/python-fin-del-mundo/",
+    "referrer": "https://drz-academy.github.io/",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6.1 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "python-fin-del-mundo",
+      "courseName": "Python para el fin del mundo"
+    },
+    "timestampClient": "2026-11-21T14:23:57.078Z"
+  },
+  {
+    "id": "2f26307d-801f-424e-9adb-0566ac78261c",
+    "timestampServer": "2026-11-21T14:23:57.046Z",
+    "ip": "191.156.48.211",
+    "country": "CO",
+    "eventType": "course_click",
+    "page": "/",
+    "url": "https://drz-academy.github.io/#cursos",
+    "referrer": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6.1 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "targetId": "python-fin-del-mundo",
+      "targetName": "Python para el fin del mundo",
+      "href": "cursos/python-fin-del-mundo/",
+      "label": "Python para el fin del mundo\n            Aprende Python desde cero con datos reales de asteroides y criterio científico\n"
+    },
+    "timestampClient": "2026-11-21T14:23:56.861Z"
+  },
+  {
+    "id": "9296021f-37ae-436b-bfc5-f1d9ab570c52",
+    "timestampServer": "2026-11-21T14:23:25.389Z",
+    "ip": "191.156.48.211",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6.1 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-21T14:23:25.239Z"
+  },
+  {
+    "id": "7f76ec1c-c22b-406c-bd99-4490cb81a940",
+    "timestampServer": "2026-11-21T14:23:18.449Z",
+    "ip": "191.156.48.211",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/extraterrestres/",
+    "url": "https://drz-academy.github.io/cursos/extraterrestres/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6.1 Mobile/15E148 Safari/604.1",
+    "language": "es",
+    "details": {
+      "courseId": "extraterrestres",
+      "courseName": "Extraterrestres"
+    },
+    "timestampClient": "2026-11-21T14:23:18.059Z"
+  },
+  {
+    "id": "bf495c19-8e97-4bd1-80f7-0a068593a4f8",
+    "timestampServer": "2026-11-21T01:59:55.334Z",
+    "ip": "2a03:2880:30ff:42::",
+    "country": "SE",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/?fbclid=IwZXh0bgNhZW0CMTEAcGRvZgRzcnRjBmFwcF9pZAwyNTYyODEwNDA1NTgAAR-DY1XZO9AVO7OhooQ7cm4VwxRYEZIpEVkxbesSwBDdOpFKp0kvXdwKfErnrg_aem_BHS2JtoxNk90npRXNduhiA",
+    "referrer": "https://www.facebook.com/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-11-21T01:59:54.749Z"
+  },
+  {
+    "id": "6b606733-4798-4e5a-a7b9-d7321622a1c6",
+    "timestampServer": "2026-11-21T01:41:16.325Z",
+    "ip": "181.58.39.227",
+    "country": "CO",
+    "eventType": "club_click_evaluacion",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/drz-form.html?form=circulo-latino-c1-a2-casos&respuesta=reqwttrwh3&token=seneca",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "curso": "Círculo Latino - Ciclo 1",
+      "href": "https://drz-academy.github.io/club/drz-forms/drz-form.html?form=evaluacion-curso&curso=circulo_latino"
+    },
+    "timestampClient": "2026-11-21T01:41:16.230Z"
+  },
+  {
+    "id": "136b55d7-751a-4d8c-9ceb-12da3b830f33",
+    "timestampServer": "2026-11-21T01:41:07.622Z",
+    "ip": "181.58.39.227",
+    "country": "CO",
+    "eventType": "club_visit",
+    "page": "/club/",
+    "url": "https://drz-academy.github.io/club/",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/drz-form.html?form=circulo-latino-c1-a2-casos&respuesta=reqwttrwh3&token=seneca",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "memberName": "Sergio Bernal",
+      "memberEmail": "calavera910@gmail.com",
+      "categoria": "BRONCE"
+    },
+    "timestampClient": "2026-11-21T01:41:07.342Z"
+  },
+  {
+    "id": "f2d2095f-136f-40d0-b38a-432ec0740046",
+    "timestampServer": "2026-11-20T22:05:27.259Z",
+    "ip": "186.121.20.20",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "http://localhost:8000/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-20T22:05:26.872Z"
+  },
+  {
     "id": "1c4cca2a-b204-4a81-913c-2ae9a61ae2ab",
     "timestampServer": "2026-11-20T20:03:53.032Z",
     "ip": "145.223.151.37",
