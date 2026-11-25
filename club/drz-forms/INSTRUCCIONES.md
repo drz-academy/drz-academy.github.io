@@ -14,6 +14,7 @@ club/drz-forms/
 ├── circulo-latino-c1-a1-casos.json   Actividad 1 (casos)
 ├── circulo-latino-c1-a2-casos.json   Actividad 2 (casos)
 ├── circulo-latino-c1-a3-traduccion.json  Actividad 3 (traducción)
+├── circulo-latino-c1-a4-traduccion.json  Actividad 4 (Nasica, continuación)
 └── *-respuestas.csv           Backup local / CI (no se publica en Pages)
 ```
 
@@ -598,5 +599,6 @@ Repite el setup en otra hoja (u otro proyecto Apps Script) con otro `CLUB_FORM_I
 | [`evaluacion-curso.json`](evaluacion-curso.json) | Evaluación post-curso; desbloquea certificado |
 | [`circulo-latino-c1-a1-casos.json`](circulo-latino-c1-a1-casos.json) | Actividad 1: casos (`completar` + claves) |
 | [`circulo-latino-c1-a2-casos.json`](circulo-latino-c1-a2-casos.json) | Actividad 2: casos |
-| [`circulo-latino-c1-a3-traduccion.json`](circulo-latino-c1-a3-traduccion.json) | Actividad 3: lectura y traducción (`parrafo`; sin claves aún) |
+| [`circulo-latino-c1-a3-traduccion.json`](circulo-latino-c1-a3-traduccion.json) | Actividad 3: lectura y traducción (`parrafo`) |
+| [`circulo-latino-c1-a4-traduccion.json`](circulo-latino-c1-a4-traduccion.json) | Actividad 4: continuación de *De Stulto Nasica* (`parrafo`) |
 | [`sheets-sync.gs`](sheets-sync.gs) | Sync automático a Google Sheets |
