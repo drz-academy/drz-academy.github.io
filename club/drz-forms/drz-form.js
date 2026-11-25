@@ -4,7 +4,7 @@ const TOKEN_KEY = "drz-club-token";
 const ADMIN_TOKEN_KEY = "drz-forms-export-token";
 const WORKER_URL = "https://drz-club-portal.drz-academy.workers.dev";
 const FORM_ID_RE = /^[a-z0-9][a-z0-9_-]{0,63}$/;
-const SCHEMA_VERSION = "20261124a";
+const SCHEMA_VERSION = "20261125b";
 const CLASSROOM_REF_KEY = "drz-form-classroom-ref";
 
 function applyFormTheme(schema) {
@@ -1001,11 +1001,11 @@ function renderAnswersSummary(schema, answers, calificacion = null) {
         ));
         answerHtml = `<div class="answer-a">${formatCompletarAnswer(question, val, feedback)}</div>`;
       } else {
-        let body = formatAnswerValue(question, val, schema);
-        if (mode === "todas" && graded && !graded.correct && graded.expected) {
-          body += ` <span class="answer-expected">[${escapeHtml(graded.expected)}]</span>`;
-        }
+        const body = formatAnswerValue(question, val, schema);
         answerHtml = `<div class="answer-a">${body}</div>`;
+        if (mode === "todas" && graded && !graded.correct && graded.expected) {
+          answerHtml += `<div class="answer-expected">[${escapeHtml(graded.expected)}]</div>`;
+        }
       }
       if (mode === "todas" && graded?.comentario) {
         answerHtml += `<div class="answer-comment"><strong>Comentario:</strong> ${escapeHtml(graded.comentario)}</div>`;

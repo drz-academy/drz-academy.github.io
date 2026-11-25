@@ -10,11 +10,11 @@
   "token_docente": "armavirumquecanotroiaequiprimusaboris",
   "boton": "Grabar",
   "titulo_gracias": "¡Gracias por completar tu actividad!",
-  "mensaje_gracias": "Ya registramos tus respuestas. Conserva el enlace para volver a editarlas más tarde.",
-  "mostrar_respuestas": false,
+  "mensaje_gracias": "Ya registramos tus respuestas. Abajo puedes ver tu puntaje y la revisión (correctas en verde; incorrectas en rojo, con la clave).",
+  "mostrar_respuestas": true,
   "examen": true,
-  "muestra_puntaje": false,
-  "muestra_respuestas": false,
+  "muestra_puntaje": true,
+  "muestra_respuestas": "todas",
   "repeticiones": 0,
   "requiere_curso": false,
   "revela_certificado": false,
@@ -55,7 +55,8 @@
           "explicacion": "Traduce al español.",
           "tipo": "parrafo",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "El agricultor hiere a un jabalí con un cuchillo en el campo y lo muestra a los niños"
         },
         {
           "id": "frase_02",
@@ -63,7 +64,8 @@
           "explicacion": "Traduce al español.",
           "tipo": "parrafo",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "El maestro es un buen hombre y tiene niños bellos"
         },
         {
           "id": "frase_03",
@@ -71,7 +73,8 @@
           "explicacion": "Traduce al español.",
           "tipo": "parrafo",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "Los niños campesinos leen libros y son alabados por el maestro, pero no capturan jabalíes porque son niños pequeños"
         }
       ]
     },
@@ -86,7 +89,8 @@
           "explicacion": "Traduce al español.",
           "tipo": "parrafo",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "Un cierto campesino llamado Nasica era muy tonto"
         },
         {
           "id": "nasica_02",
@@ -94,7 +98,8 @@
           "explicacion": "Traduce al español.",
           "tipo": "parrafo",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "Tenía un caballo muy bueno y muy veloz"
         },
         {
           "id": "nasica_03",
@@ -102,7 +107,8 @@
           "explicacion": "Traduce al español.",
           "tipo": "parrafo",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "Ninguno de los vecinos tenía un caballo de mayor precio"
         },
         {
           "id": "nasica_04",
@@ -110,7 +116,8 @@
           "explicacion": "Traduce al español.",
           "tipo": "parrafo",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "Pero Nasica vio en un campo vecino una vaca muy bella y al punto pensó: \"esa vaca seguramente da una leche muy abundante y muy buena\""
         },
         {
           "id": "nasica_05",
@@ -118,7 +125,8 @@
           "explicacion": "Traduce al español.",
           "tipo": "parrafo",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "Por tanto, le ofrece al vecino, que era más astuto, el caballo a cambio de la vaca y, muy contento, se lleva la vaca a su casa de campo"
         },
         {
           "id": "nasica_06",
@@ -126,7 +134,8 @@
           "explicacion": "Traduce al español.",
           "tipo": "parrafo",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "Pronto Nasica ve en el campo vecino un asno muy negro"
         },
         {
           "id": "nasica_07",
@@ -134,7 +143,8 @@
           "explicacion": "Traduce al español.",
           "tipo": "parrafo",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "En la frente del asno brillaba una mancha más blanca que la leche y muy parecida a los cuernos de la Luna: \"Nunca, exclamó Nasica, vi un asno más bello\""
         },
         {
           "id": "nasica_08",
@@ -142,7 +152,8 @@
           "explicacion": "Traduce al español.",
           "tipo": "parrafo",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "Por tanto, devolvió la vaca y se llevó el asno con mucha alegría"
         },
         {
           "id": "nasica_09",
@@ -150,7 +161,8 @@
           "explicacion": "Traduce al español.",
           "tipo": "parrafo",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "Después, en el campo del vecino vio una oveja muy gorda: \"nunca, exclamó, vi un vellón tan hermoso\""
         },
         {
           "id": "nasica_10",
@@ -158,7 +170,8 @@
           "explicacion": "Traduce al español.",
           "tipo": "parrafo",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "La lana es muy compacta"
         },
         {
           "id": "nasica_11",
@@ -166,7 +179,8 @@
           "explicacion": "Traduce al español.",
           "tipo": "parrafo",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "La oveja, ciertamente, es preferible y mejor que el asno. Devolveré el asno"
         },
         {
           "id": "nasica_12",
@@ -174,7 +188,8 @@
           "explicacion": "Traduce al español.",
           "tipo": "parrafo",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "La cosa era muy fácil"
         },
         {
           "id": "nasica_13",
@@ -182,7 +197,8 @@
           "explicacion": "Traduce al español.",
           "tipo": "parrafo",
           "obligatoria": false,
-          "puntaje": 1
+          "puntaje": 1,
+          "respuesta": "El vecino, más previsor que Nasica, de buena gana le da la oveja"
         },
         {
           "id": "nasica_14",
