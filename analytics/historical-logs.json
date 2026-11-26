@@ -1,5 +1,137 @@
 [
   {
+    "id": "57a2ed18-b125-47e4-89a9-dade4ed6dcdd",
+    "timestampServer": "2026-11-26T19:58:55.317Z",
+    "ip": "190.145.72.97",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&respuesta=8kvg93avf8&edit=true&form=circulo-latino-c1-a3-traduccion",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/p/circulo-latino-c1-a3-traduccion.html?token=seneca&respuesta=8kvg93avf8&edit=true",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a3-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-26T19:58:55.160Z"
+  },
+  {
+    "id": "2533398b-cdc6-4864-bbb1-7ddb0b36d09d",
+    "timestampServer": "2026-11-26T16:54:27.226Z",
+    "ip": "2a02:85f:ece2:b101:5cb8:debf:77af:c16d",
+    "country": "GR",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-26T16:54:25.015Z"
+  },
+  {
+    "id": "618d88f5-b095-417d-8fe7-6567b62efad8",
+    "timestampServer": "2026-11-26T10:26:32.517Z",
+    "ip": "41.227.246.62",
+    "country": "TN",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-26T10:26:29.284Z"
+  },
+  {
+    "id": "a7ca4279-d571-413a-ab36-1e0fecab0617",
+    "timestampServer": "2026-11-26T10:14:19.393Z",
+    "ip": "2a03:2880:23ff:50::",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Edg/145.0.0.0 (compatible; meta-webindexer/1.1 (+https://developers.facebook.com/docs/sharing/webmasters/crawler))",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-11-26T10:14:18.269Z"
+  },
+  {
+    "id": "e01db29d-9f59-4203-bb03-a35bac8ff1ff",
+    "timestampServer": "2026-11-26T08:25:46.248Z",
+    "ip": "171.22.230.98",
+    "country": "US",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-26T08:25:37.511Z"
+  },
+  {
+    "id": "e435cb48-2407-480c-a411-2fe139380fab",
+    "timestampServer": "2026-11-26T07:49:01.570Z",
+    "ip": "198.34.177.239",
+    "country": "CA",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-26T07:48:58.656Z"
+  },
+  {
+    "id": "768cc0d8-1bcc-4bbe-9649-8fca5b956d41",
+    "timestampServer": "2026-11-25T22:29:59.557Z",
+    "ip": "2a03:2880:ff:5::",
+    "country": "US",
+    "eventType": "course_page_view",
+    "page": "/cursos/python-fin-del-mundo/",
+    "url": "https://drz-academy.github.io/cursos/python-fin-del-mundo/?fbclid=IwZXh0bgNhZW0CMTEAcGRvZgRzcnRjBmFwcF9pZAwyNTYyODEwNDA1NTgAAR-cVZkK0d_hdcPfEosxnL_mKCDqPXeAS5sJ6hsRIydDXJ5wqPvNYZDi9AkxQQ_aem_eADPHS6tmDNBGUyvmqoyvQ",
+    "referrer": "https://www.facebook.com/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 12; itel A662L Build/SP1A.210812.016; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/131.0.6778.135 Mobile Safari/537.36[FBAN/EMA;FBLC/en_GB;FBAV/435.0.0.5.107;FBCX/modulariab;]",
+    "language": "es",
+    "details": {
+      "courseId": "python-fin-del-mundo",
+      "courseName": "Python para el fin del mundo"
+    },
+    "timestampClient": "2026-11-25T22:29:59.309Z"
+  },
+  {
+    "id": "9679a502-6692-4724-bb46-151af4fc8184",
+    "timestampServer": "2026-11-25T22:29:49.866Z",
+    "ip": "2a03:2880:31ff:40::",
+    "country": "IE",
+    "eventType": "course_page_view",
+    "page": "/cursos/python-fin-del-mundo/",
+    "url": "https://drz-academy.github.io/cursos/python-fin-del-mundo/?fbclid=IwZXh0bgNhZW0CMTEAcGRvZgRzcnRjBmFwcF9pZAwyNTYyODEwNDA1NTgAAR_TJNe29S-MaLyXYdWX6LvHjzNMDXDF8KW7IzaLG9LB7G5F0qQ2qt9KLIZKcw_aem_uF1pFVXpM1eqTEPlqoHjcA",
+    "referrer": "https://www.facebook.com/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 12; A25 Build/SP1A.210812.016; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/155.0.8059.43 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/583.0.0.29.95;]",
+    "language": "es",
+    "details": {
+      "courseId": "python-fin-del-mundo",
+      "courseName": "Python para el fin del mundo"
+    },
+    "timestampClient": "2026-11-25T22:29:49.583Z"
+  },
+  {
     "id": "b0632790-485b-4795-8813-21386c13a599",
     "timestampServer": "2026-11-25T20:50:08.639Z",
     "ip": "145.223.140.126",
