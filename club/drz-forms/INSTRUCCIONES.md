@@ -15,6 +15,7 @@ club/drz-forms/
 ├── circulo-latino-c1-a2-casos.json   Actividad 2 (casos)
 ├── circulo-latino-c1-a3-traduccion.json  Actividad 3 (traducción)
 ├── circulo-latino-c1-a4-traduccion.json  Actividad 4 (Nasica, continuación)
+├── circulo-latino-c1-a5-traduccion.json  Actividad 5 (Cineracula)
 └── *-respuestas.csv           Backup local / CI (no se publica en Pages)
 ```
 
@@ -601,4 +602,5 @@ Repite el setup en otra hoja (u otro proyecto Apps Script) con otro `CLUB_FORM_I
 | [`circulo-latino-c1-a2-casos.json`](circulo-latino-c1-a2-casos.json) | Actividad 2: casos |
 | [`circulo-latino-c1-a3-traduccion.json`](circulo-latino-c1-a3-traduccion.json) | Actividad 3: lectura y traducción (`parrafo`) |
 | [`circulo-latino-c1-a4-traduccion.json`](circulo-latino-c1-a4-traduccion.json) | Actividad 4: continuación de *De Stulto Nasica* (`parrafo`) |
+| [`circulo-latino-c1-a5-traduccion.json`](circulo-latino-c1-a5-traduccion.json) | Actividad 5: *Cineracula* / Cenicienta (`parrafo`) |
 | [`sheets-sync.gs`](sheets-sync.gs) | Sync automático a Google Sheets |

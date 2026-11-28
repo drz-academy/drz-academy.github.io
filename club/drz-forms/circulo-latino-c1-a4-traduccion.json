@@ -4,7 +4,7 @@
   "titulo": "Círculo Latino Ciclo 1\n\nActividad 4: Lectura y traducción",
   "curso": "circulo-latino",
   "og_imagen": "/cursos/circulo-latino/images/og-actividades.jpg",
-  "intro": "Esta actividad tiene dos lecturas: la **continuación** de *De Stulto Nasica* y el **comienzo** de *Cineracula*. Lee cada texto en el enunciado de su sección y **traduce al español** las frases indicadas, frase por frase.\n\nUsa el [diccionario en línea](https://www.nihilscio.it/Manuali/Lingua%20latina/Verbi/Coniugazione_latino.aspx) y la [tabla de declinaciones](https://drive.google.com/file/d/1IpjJ8pjm8L0iC23gtNrxDRunArQqKglf/view?usp=classroom_web&authuser=0).\n\nEscribe una traducción completa y clara de cada frase. No hace falta una versión literal palabra por palabra si el sentido en español queda natural, pero procura respetar los casos y el significado de cada forma.\n\n**Importante:** puedes dejar el formulario a medias. Pulsa *Grabar respuestas*, conserva el enlace y vuelve más tarde para continuar.",
+  "intro": "Continúa el relato *De Stulto Nasica*. Lee el texto completo en el enunciado (incluye lo ya visto en la actividad 3) y **traduce al español** las frases nuevas, frase por frase.\n\nUsa el [diccionario en línea](https://www.nihilscio.it/Manuali/Lingua%20latina/Verbi/Coniugazione_latino.aspx) y la [tabla de declinaciones](https://drive.google.com/file/d/1IpjJ8pjm8L0iC23gtNrxDRunArQqKglf/view?usp=classroom_web&authuser=0).\n\nEscribe una traducción completa y clara de cada frase. No hace falta una versión literal palabra por palabra si el sentido en español queda natural, pero procura respetar los casos y el significado de cada forma.\n\n**Importante:** puedes dejar el formulario a medias. Pulsa *Grabar respuestas*, conserva el enlace y vuelve más tarde para continuar.",
   "fondo": "claro",
   "token": "seneca",
   "token_docente": "armavirumquecanotroiaequiprimusaboris",
@@ -132,85 +132,6 @@
         {
           "id": "nasica_11",
           "enunciado": "**Frase 11**\n\n*Alios ditiores reddunt et ipsi pauperrimi fiunt.*",
-          "explicacion": "Traduce al español.",
-          "tipo": "parrafo",
-          "obligatoria": false,
-          "puntaje": 1
-        }
-      ]
-    },
-    {
-      "id": "cineracula",
-      "titulo": "Cineracula",
-      "explicacion": "Lee primero el **texto completo** de los dos primeros párrafos y luego traduce **frase por frase** en las casillas de abajo. Usa el [diccionario en línea](https://www.nihilscio.it/Manuali/Lingua%20latina/Verbi/Coniugazione_latino.aspx) y la [tabla de declinaciones](https://drive.google.com/file/d/1IpjJ8pjm8L0iC23gtNrxDRunArQqKglf/view?usp=classroom_web&authuser=0).\n\n*Pulchra puella omnibus mitis in remoto regno habitabat. Cum noverca crudelis et immane vivebat quapropter miserrima santiebatur. Coqua erat et tabulatum fricabat et vestes stragulosque lavabat et cineres camini escipiebat. Operta cinerum manebat quapropter Cineracula appelabatur. Noverca duas filias aeque crudeles et immanes habebat et pulchritudo et caeruleos oculos et flava coma Cineraculae invidebant.*\n\n*Dies quídam Rex edictum jussit vocans ad convivio omnes virgines regni filii sui uxorem eligendi. Noverca et suas filias exsultaverunt et confestim inceperunt ad convivium parari. Cotidie invicem capillos componebant et frustra cotidie discolores vestes induebant. Cum interea cineracula tristis erat quia unum tamtum vestem opertam cinerum habebat.*",
-      "preguntas": [
-        {
-          "id": "cineracula_01",
-          "enunciado": "**Frase 1**\n\n*Pulchra puella omnibus mitis in remoto regno habitabat.*",
-          "explicacion": "Traduce al español.",
-          "tipo": "parrafo",
-          "obligatoria": false,
-          "puntaje": 1
-        },
-        {
-          "id": "cineracula_02",
-          "enunciado": "**Frase 2**\n\n*Cum noverca crudelis et immane vivebat quapropter miserrima santiebatur.*",
-          "explicacion": "Traduce al español.",
-          "tipo": "parrafo",
-          "obligatoria": false,
-          "puntaje": 1
-        },
-        {
-          "id": "cineracula_03",
-          "enunciado": "**Frase 3**\n\n*Coqua erat et tabulatum fricabat et vestes stragulosque lavabat et cineres camini escipiebat.*",
-          "explicacion": "Traduce al español.",
-          "tipo": "parrafo",
-          "obligatoria": false,
-          "puntaje": 1
-        },
-        {
-          "id": "cineracula_04",
-          "enunciado": "**Frase 4**\n\n*Operta cinerum manebat quapropter Cineracula appelabatur.*",
-          "explicacion": "Traduce al español.",
-          "tipo": "parrafo",
-          "obligatoria": false,
-          "puntaje": 1
-        },
-        {
-          "id": "cineracula_05",
-          "enunciado": "**Frase 5**\n\n*Noverca duas filias aeque crudeles et immanes habebat et pulchritudo et caeruleos oculos et flava coma Cineraculae invidebant.*",
-          "explicacion": "Traduce al español.",
-          "tipo": "parrafo",
-          "obligatoria": false,
-          "puntaje": 1
-        },
-        {
-          "id": "cineracula_06",
-          "enunciado": "**Frase 6**\n\n*Dies quídam Rex edictum jussit vocans ad convivio omnes virgines regni filii sui uxorem eligendi.*",
-          "explicacion": "Traduce al español.",
-          "tipo": "parrafo",
-          "obligatoria": false,
-          "puntaje": 1
-        },
-        {
-          "id": "cineracula_07",
-          "enunciado": "**Frase 7**\n\n*Noverca et suas filias exsultaverunt et confestim inceperunt ad convivium parari.*",
-          "explicacion": "Traduce al español.",
-          "tipo": "parrafo",
-          "obligatoria": false,
-          "puntaje": 1
-        },
-        {
-          "id": "cineracula_08",
-          "enunciado": "**Frase 8**\n\n*Cotidie invicem capillos componebant et frustra cotidie discolores vestes induebant.*",
-          "explicacion": "Traduce al español.",
-          "tipo": "parrafo",
-          "obligatoria": false,
-          "puntaje": 1
-        },
-        {
-          "id": "cineracula_09",
-          "enunciado": "**Frase 9**\n\n*Cum interea cineracula tristis erat quia unum tamtum vestem opertam cinerum habebat.*",
           "explicacion": "Traduce al español.",
           "tipo": "parrafo",
           "obligatoria": false,
