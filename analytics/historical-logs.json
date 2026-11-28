@@ -1,5 +1,523 @@
 [
   {
+    "id": "e90c5d91-ed15-4592-aef8-be102c9e9ff8",
+    "timestampServer": "2026-11-27T20:14:56.365Z",
+    "ip": "91.132.36.141",
+    "country": "DK",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-27T20:14:53.965Z"
+  },
+  {
+    "id": "d5fd431f-cc00-4cfd-af14-3dfeb4ff666e",
+    "timestampServer": "2026-11-27T18:56:10.854Z",
+    "ip": "186.121.20.20",
+    "country": "CO",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "http://127.0.0.1:8000/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cursor/3.32.4 Chrome/150.0.7871.250 Electron/43.8.9 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-27T18:56:10.445Z"
+  },
+  {
+    "id": "aa0fe612-68ef-4940-af0e-c15e49a10787",
+    "timestampServer": "2026-11-27T17:46:33.793Z",
+    "ip": "186.121.20.20",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&respuesta=9e3kjz44fv&edit=true&form=circulo-latino-c1-a4-traduccion",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/p/circulo-latino-c1-a4-traduccion.html?token=seneca&respuesta=9e3kjz44fv&edit=true",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a4-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-27T17:46:33.511Z"
+  },
+  {
+    "id": "3becaf83-abb9-42c3-8d85-4a10f60cdfbd",
+    "timestampServer": "2026-11-27T17:29:45.000Z",
+    "ip": "186.121.20.20",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&respuesta=9e3kjz44fv&edit=true&form=circulo-latino-c1-a4-traduccion",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/p/circulo-latino-c1-a4-traduccion.html?token=seneca&respuesta=9e3kjz44fv&edit=true",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a4-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-27T17:29:44.698Z"
+  },
+  {
+    "id": "830c07dc-9a1a-4429-93b0-c60719e75570",
+    "timestampServer": "2026-11-27T17:28:49.881Z",
+    "ip": "186.31.12.77",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&form=circulo-latino-c1-a4-traduccion",
+    "referrer": "https://classroom.google.com/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a4-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-27T17:28:49.512Z"
+  },
+  {
+    "id": "f892d83f-8236-4ce9-b44a-c375ea132895",
+    "timestampServer": "2026-11-27T17:06:45.667Z",
+    "ip": "186.121.20.20",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&form=circulo-latino-c1-a4-traduccion",
+    "referrer": "https://classroom.google.com/",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a4-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-27T17:06:45.355Z"
+  },
+  {
+    "id": "75a4ff82-d41b-4180-b9d0-eac346ad9e64",
+    "timestampServer": "2026-11-27T16:51:28.589Z",
+    "ip": "186.31.12.77",
+    "country": "CO",
+    "eventType": "course_page_view",
+    "page": "/cursos/circulo-latino/",
+    "url": "https://drz-academy.github.io/cursos/circulo-latino/",
+    "referrer": "https://classroom.google.com/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "courseId": "circulo-latino",
+      "courseName": "Círculo Latino"
+    },
+    "timestampClient": "2026-11-27T16:51:27.997Z"
+  },
+  {
+    "id": "259a7e61-8278-4ad6-86bd-2c7d5c9d05f1",
+    "timestampServer": "2026-11-27T15:45:29.302Z",
+    "ip": "205.212.98.195",
+    "country": "US",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-27T15:45:26.707Z"
+  },
+  {
+    "id": "c08f84d9-7f9e-4a97-b08d-c5a10c6ea40e",
+    "timestampServer": "2026-11-27T15:36:17.750Z",
+    "ip": "186.169.230.217",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&respuesta=7gr4xxqdu5&edit=true&form=circulo-latino-c1-a4-traduccion",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/p/circulo-latino-c1-a4-traduccion.html?token=seneca&respuesta=7gr4xxqdu5&edit=true",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/29.0 Chrome/136.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a4-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-27T15:36:17.347Z"
+  },
+  {
+    "id": "f5799892-e2e0-4eed-9446-3d90bec668de",
+    "timestampServer": "2026-11-27T15:33:10.378Z",
+    "ip": "186.169.230.217",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&respuesta=7gr4xxqdu5&edit=true&form=circulo-latino-c1-a4-traduccion",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/p/circulo-latino-c1-a4-traduccion.html?token=seneca&respuesta=7gr4xxqdu5&edit=true",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/29.0 Chrome/136.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a4-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-27T15:33:10.093Z"
+  },
+  {
+    "id": "77093861-1222-40de-8bce-5dea91365d1e",
+    "timestampServer": "2026-11-27T15:32:04.405Z",
+    "ip": "186.169.230.217",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&respuesta=7gr4xxqdu5&edit=true&form=circulo-latino-c1-a4-traduccion",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/p/circulo-latino-c1-a4-traduccion.html?token=seneca&respuesta=7gr4xxqdu5&edit=true",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/29.0 Chrome/136.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a4-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-27T15:32:04.139Z"
+  },
+  {
+    "id": "30245fce-43ef-419a-b827-c73f5594acf4",
+    "timestampServer": "2026-11-27T15:31:00.428Z",
+    "ip": "186.169.230.217",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&respuesta=7gr4xxqdu5&edit=true&form=circulo-latino-c1-a4-traduccion",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/p/circulo-latino-c1-a4-traduccion.html?token=seneca&respuesta=7gr4xxqdu5&edit=true",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/29.0 Chrome/136.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a4-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-27T15:31:00.031Z"
+  },
+  {
+    "id": "156b0a5d-1665-4314-8bcd-e5cfeb829cbf",
+    "timestampServer": "2026-11-27T15:28:47.797Z",
+    "ip": "186.169.230.217",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&respuesta=7gr4xxqdu5&edit=true&form=circulo-latino-c1-a4-traduccion",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/p/circulo-latino-c1-a4-traduccion.html?token=seneca&respuesta=7gr4xxqdu5&edit=true",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/29.0 Chrome/136.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a4-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-27T15:28:47.438Z"
+  },
+  {
+    "id": "6b523a10-c904-4741-b126-4bf128a5c2ce",
+    "timestampServer": "2026-11-27T15:27:17.282Z",
+    "ip": "186.169.230.217",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&respuesta=7gr4xxqdu5&edit=true&form=circulo-latino-c1-a4-traduccion",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/p/circulo-latino-c1-a4-traduccion.html?token=seneca&respuesta=7gr4xxqdu5&edit=true",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/29.0 Chrome/136.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a4-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-27T15:27:16.918Z"
+  },
+  {
+    "id": "71a98af4-2fd7-4404-8ed0-7e7e283ae073",
+    "timestampServer": "2026-11-27T15:25:21.139Z",
+    "ip": "186.169.230.217",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&respuesta=7gr4xxqdu5&edit=true&form=circulo-latino-c1-a4-traduccion",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/p/circulo-latino-c1-a4-traduccion.html?token=seneca&respuesta=7gr4xxqdu5&edit=true",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/29.0 Chrome/136.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a4-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-27T15:25:20.649Z"
+  },
+  {
+    "id": "fea5ce7d-4c62-49dc-a424-9651dee93ebf",
+    "timestampServer": "2026-11-27T15:10:19.125Z",
+    "ip": "186.169.230.217",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&respuesta=7gr4xxqdu5&edit=true&form=circulo-latino-c1-a4-traduccion",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/p/circulo-latino-c1-a4-traduccion.html?token=seneca&respuesta=7gr4xxqdu5&edit=true",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/29.0 Chrome/136.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a4-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-27T15:10:18.853Z"
+  },
+  {
+    "id": "ba11b4a4-9d74-48ec-bcb9-936ad1a65503",
+    "timestampServer": "2026-11-27T15:09:47.434Z",
+    "ip": "186.169.230.217",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&respuesta=7gr4xxqdu5&edit=true&form=circulo-latino-c1-a4-traduccion",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/p/circulo-latino-c1-a4-traduccion.html?token=seneca&respuesta=7gr4xxqdu5&edit=true",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/29.0 Chrome/136.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a4-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-27T15:09:47.105Z"
+  },
+  {
+    "id": "a1a9924f-7c64-4783-804f-e2c79ddac2f5",
+    "timestampServer": "2026-11-27T15:08:21.851Z",
+    "ip": "186.169.230.217",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&respuesta=7gr4xxqdu5&edit=true&form=circulo-latino-c1-a4-traduccion",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/p/circulo-latino-c1-a4-traduccion.html?token=seneca&respuesta=7gr4xxqdu5&edit=true",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/29.0 Chrome/136.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a4-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-27T15:08:21.583Z"
+  },
+  {
+    "id": "624f1bb6-da0f-4b8d-a383-0492432c2b6e",
+    "timestampServer": "2026-11-27T15:06:56.819Z",
+    "ip": "186.169.230.217",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&respuesta=7gr4xxqdu5&edit=true&form=circulo-latino-c1-a4-traduccion",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/p/circulo-latino-c1-a4-traduccion.html?token=seneca&respuesta=7gr4xxqdu5&edit=true",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/29.0 Chrome/136.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a4-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-27T15:06:56.544Z"
+  },
+  {
+    "id": "cca88d4c-5a90-4e04-b622-a15aefcea35e",
+    "timestampServer": "2026-11-27T15:05:22.091Z",
+    "ip": "186.169.230.217",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&respuesta=7gr4xxqdu5&edit=true&form=circulo-latino-c1-a4-traduccion",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/p/circulo-latino-c1-a4-traduccion.html?token=seneca&respuesta=7gr4xxqdu5&edit=true",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/29.0 Chrome/136.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a4-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-27T15:05:21.809Z"
+  },
+  {
+    "id": "d4202600-994e-41a1-a1da-4befa7a42211",
+    "timestampServer": "2026-11-27T15:04:11.466Z",
+    "ip": "186.169.230.217",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&form=circulo-latino-c1-a4-traduccion",
+    "referrer": "https://classroom.google.com/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/29.0 Chrome/136.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a4-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-27T15:04:11.031Z"
+  },
+  {
+    "id": "b6350388-9d9d-400f-865f-2a86bb9e71d9",
+    "timestampServer": "2026-11-27T12:38:20.668Z",
+    "ip": "190.145.72.97",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&respuesta=8kvg93avf8&edit=true&form=circulo-latino-c1-a3-traduccion",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/p/circulo-latino-c1-a3-traduccion.html?token=seneca&respuesta=8kvg93avf8&edit=true",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a3-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-27T12:38:20.509Z"
+  },
+  {
+    "id": "71fe9f4d-6356-43ed-b7e9-c8d9d17c3aa2",
+    "timestampServer": "2026-11-27T11:52:40.674Z",
+    "ip": "185.240.128.14",
+    "country": "US",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-27T11:52:38.449Z"
+  },
+  {
+    "id": "9a864035-be80-4030-9fa8-3d05046c326f",
+    "timestampServer": "2026-11-27T09:46:22.624Z",
+    "ip": "2402:800:61cd:9e69:cf0f:3ffa:738b:3012",
+    "country": "VN",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-27T09:46:22.225Z"
+  },
+  {
+    "id": "bf82486d-f3ce-460c-bb35-bfd097fdd365",
+    "timestampServer": "2026-11-27T05:24:27.759Z",
+    "ip": "189.90.235.125",
+    "country": "BR",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-27T05:24:25.660Z"
+  },
+  {
+    "id": "46e5d819-459d-42de-9762-2ccd9206a6f8",
+    "timestampServer": "2026-11-27T05:18:24.157Z",
+    "ip": "217.205.219.217",
+    "country": "DE",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-27T05:18:23.267Z"
+  },
+  {
+    "id": "0f620921-c070-4c6d-a868-3d9b901e49cd",
+    "timestampServer": "2026-11-27T03:58:55.575Z",
+    "ip": "2800:e2:5300:2b2:80fb:8a83:c5ba:772f",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&respuesta=7gr4xxqdu5&edit=true&form=circulo-latino-c1-a4-traduccion",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/p/circulo-latino-c1-a4-traduccion.html?token=seneca&respuesta=7gr4xxqdu5&edit=true",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/29.0 Chrome/136.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a4-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-27T03:58:55.378Z"
+  },
+  {
+    "id": "09cd962f-918b-4825-bdc6-85d2d98f2ba5",
+    "timestampServer": "2026-11-27T03:57:48.754Z",
+    "ip": "2800:e2:5300:2b2:80fb:8a83:c5ba:772f",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&respuesta=7gr4xxqdu5&edit=true&form=circulo-latino-c1-a4-traduccion",
+    "referrer": "https://drz-academy.github.io/club/drz-forms/p/circulo-latino-c1-a4-traduccion.html?token=seneca&respuesta=7gr4xxqdu5&edit=true",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/29.0 Chrome/136.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a4-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-27T03:57:48.541Z"
+  },
+  {
+    "id": "9b6a0136-3536-48d6-bc1c-65fea8f83e78",
+    "timestampServer": "2026-11-27T03:55:08.405Z",
+    "ip": "2800:e2:5300:2b2:80fb:8a83:c5ba:772f",
+    "country": "CO",
+    "eventType": "club_form_submit",
+    "page": "/club/drz-forms/drz-form.html",
+    "url": "https://drz-academy.github.io/club/drz-forms/drz-form.html?token=seneca&form=circulo-latino-c1-a4-traduccion",
+    "referrer": "https://classroom.google.com/",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/29.0 Chrome/136.0.0.0 Mobile Safari/537.36",
+    "language": "es",
+    "details": {
+      "form": "circulo-latino-c1-a4-traduccion",
+      "curso": ""
+    },
+    "timestampClient": "2026-11-27T03:55:08.059Z"
+  },
+  {
+    "id": "3ceac1a4-a6e6-454f-bf5a-bd79cfbacc2c",
+    "timestampServer": "2026-11-27T02:23:18.432Z",
+    "ip": "200.68.190.155",
+    "country": "MX",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/#apps",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-27T02:23:17.631Z"
+  },
+  {
+    "id": "dac7f49f-43c5-4bcf-9e36-47c4122fdf44",
+    "timestampServer": "2026-11-27T00:29:31.610Z",
+    "ip": "162.249.164.167",
+    "country": "US",
+    "eventType": "page_view",
+    "page": "/",
+    "url": "https://drz-academy.github.io/",
+    "referrer": "",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    "language": "es",
+    "details": {
+      "pageName": "home"
+    },
+    "timestampClient": "2026-11-27T00:29:29.765Z"
+  },
+  {
     "id": "57a2ed18-b125-47e4-89a9-dade4ed6dcdd",
     "timestampServer": "2026-11-26T19:58:55.317Z",
     "ip": "190.145.72.97",
